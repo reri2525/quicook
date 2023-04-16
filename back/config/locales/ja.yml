@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    # 追加
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード

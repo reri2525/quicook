@@ -1,0 +1,200 @@
+import Newmodal from "./components/New";
+import Logmodal from "./components/Login";
+import Ccc from "./components/Profile"
+import Loginwarn from "./components/Loginwarn";
+import Rank from "./components/Rank";
+import './App.scss';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
+import axios from'axios';
+import Top from './components/Top'
+import Main from "./components/Main";
+import Home from "./components/Home";
+import Bookmark from './components/Bookmark'; 
+import Profile from "./components/Profile";
+import ProfileEdit from "./components/ProfileEdit";
+import Postform from './components/Postform' 
+import PostShow from "./components/PostShow";  
+import Footer from './components/Footer';
+import Search from './components/Search';
+import Following from './components/Following';
+import {ListUrl} from './components/ListUrl';
+import{
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+function App(props) {
+  const [modal, setModal] = useState(false); 
+  const [loggedInStatus, setLoggedInStatus] = useState("未ログイン")
+  const [user, setUser] = useState({})
+  const [postall, setPostall] = useState({})
+  const [pagecount, setPagecount] = useState({})
+  const [currentPage, setCurrentPage] = useState(1)
+  const [searching, setSearching] = useState("")
+  const history = useHistory();
+  const handleLogin = (data) => {
+    setLoggedInStatus("ログインなう")
+    setUser(data.user)
+  }
+  const handleLogout = () => {
+    axios.delete("http://localhost:3001/logout", { withCredentials: true })
+            .then(response => {
+              setLoggedInStatus("未ログイン")
+              setUser({})
+            }).catch(error => console.log("ログアウトエラー", error))
+  }
+  const checkLoginStatus = () => {
+    axios.get("http://localhost:3001/logged_in",{ withCredentials: true })
+    .then(response => {
+      if (response.data.logged_in && loggedInStatus === "未ログイン") {
+        setLoggedInStatus("ログインなう")
+        setUser(response.data.user)
+      } else if (!response.data.logged_in && loggedInStatus === "ログインなう") {
+        setLoggedInStatus("未ログイン")
+        setUser({})
+      }
+    })
+
+    .catch(error => {
+      console.log("ログインエラー", error)
+   })
+  }
+  // 追加
+  useEffect(() => {
+    checkLoginStatus()
+  }, [])
+  
+
+
+  
+  const bookmarkCreate = (post) =>{
+    axios.post("http://localhost:3001/bookmarks",  { post_id: post.id }, { withCredentials: true })
+    .then(response => {
+      if (response.data.status) {
+        console.log("ブックマーク作成")
+      }
+    })
+    .catch(error => {
+      console.log("b")
+   })
+  }
+  const bookmarkDestroy = (post) =>{
+    axios.delete(`http://localhost:3001/bookmarks/${post.id}`, { withCredentials: true })
+    .then(response => {
+      if (response.data.status) {
+        console.log(response.data.post)
+      }
+    })
+    .catch(error => {
+      console.log("b")
+   })
+  }
+  const heartCreate = (post) =>{
+    axios.post("http://localhost:3001/hearts",  { post_id: post.id },  { withCredentials: true })
+    .then(response => {
+      if (response.data.status) {
+        console.log(response.data.post)
+      }
+    })
+    .catch(error => {
+      console.log("b")
+   })
+  }
+  const heartDestroy = (post) =>{
+    axios.delete(`http://localhost:3001/hearts/${post.id}`, { withCredentials: true })
+    .then(response => {
+      if (response.data.status) {
+        console.log(response.data.post)
+      }
+    })
+    .catch(error => {
+      console.log("b")
+   })
+  }
+
+  return (
+     <Router>
+      <Switch>
+       <Route exact path={"/loginwarn"}>
+         <Loginwarn />
+       </Route>
+        <Route exact path={"/"}
+             render={props => (
+              <Top { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout}/>
+            )}
+          />  
+        <Route exact path={"/home"}
+             render={props => (
+              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
+                                 user={user} postall={postall} handleLogout={handleLogout}   
+                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
+                                 setSearching={setSearching}                
+                                 url={<Home postall={postall} currentPage={currentPage} 
+                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
+                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 user={user} 
+                                 />}/>
+            )}
+          />  
+          <Route exact path={"/follow"}
+             render={props => (
+              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
+                                 user={user} postall={postall} handleLogout={handleLogout}   
+                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
+                                 setSearching={setSearching}                
+                                 url={<Following postall={postall} currentPage={currentPage} 
+                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
+                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 user={user} 
+                                 />}/>
+            )}
+          />  
+          <Route exact path={"/bookmark"}
+             render={props => (
+              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
+                                 user={user} postall={postall} handleLogout={handleLogout}                            
+                                 url={<Bookmark postall={postall} currentPage={currentPage} 
+                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
+                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 />}/>
+            )}
+          />  
+          <Route exact path={"/category/:category_query"}
+             render={props => (
+              <Top { ...props } />
+            )}
+          />  
+          <Route exact path={"/search/:search_query"}
+             render={props => (
+              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
+                                 user={user} postall={postall} handleLogout={handleLogout}   
+                                 setCurrentPage={setCurrentPage} pagecount={pagecount}  
+                                 setSearching={setSearching}                
+                                 url={<Search postall={postall} currentPage={currentPage} 
+                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
+                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 user={user} searching={searching}
+                                 />}/>
+            )}
+          />  
+        <Route exact path={"/profile/:id"}
+             render={props => (
+              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout} user={user} url={<Profile user={user}/>}/>
+            )}
+          />  
+        <Route exact path={"/edit"}
+             render={props => (
+              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout} user={user} url={<ProfileEdit  user={user}/>}/>
+            )}
+          />  
+      </Switch>
+    </Router>
+  );
+}
+
+export default App;
