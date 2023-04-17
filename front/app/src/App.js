@@ -11,12 +11,13 @@ import Top from './components/Top'
 import Main from "./components/Main";
 import Home from "./components/Home";
 import Bookmark from './components/Bookmark'; 
+import Search from './components/Search';
+import Category from './components/Category'
 import Profile from "./components/Profile";
 import ProfileEdit from "./components/ProfileEdit";
 import Postform from './components/Postform' 
 import PostShow from "./components/PostShow";  
 import Footer from './components/Footer';
-import Search from './components/Search';
 import Following from './components/Following';
 import {ListUrl} from './components/ListUrl';
 import{
@@ -165,7 +166,7 @@ function App(props) {
           />  
           <Route exact path={"/category/:category_query"}
              render={props => (
-              <Top { ...props } />
+              <Category { ...props } />
             )}
           />  
           <Route exact path={"/search/:search_query"}

@@ -1055,14 +1055,14 @@ footer {
   top: 30px;
   left: 80px;
   border-radius: 10px;
-  width: calc(100vw - 400px);
-  height: calc(100vh - 100px);
+  width: 500px;
+  min-height: 800px;
   background-color: white;
   .edit_container {
     padding-top: 30px;
     padding-left: 80px;
       input {
-        padding-right: 720px;
+        padding-right: 0px;
         margin-bottom: 30px;
       }
       button {
