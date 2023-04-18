@@ -688,10 +688,15 @@ span {
       width: 470px;
       height: 460px;
       .post_image_display{
-        background-color: #bbb;
+        background-color: #000;
+        background-image: url(https://www.photolibrary.jp/mhd5/img821/450-20210208101554428372.jpg);
         width: 470px;
         height: 410px;
         img {
+          width: 100%;
+          height: 100%;
+        }
+        video {
           width: 100%;
           height: 100%;
         }
@@ -852,9 +857,6 @@ span {
     float: right;
     margin-right: 10px;
    }
-   .material {
-    
-   }
    .material_input {
     padding-right: 5px;
     width: 300px;
@@ -894,7 +896,7 @@ span {
    }
    .video_display{
     border-radius: 10px;
-    height: 400px;
+    height: 100%;
     width: 100%;
    }
    .video_file {
@@ -1061,7 +1063,7 @@ footer {
 }
 .edit {
   margin-top: 30px;
-  margin-left: 300px;
+  margin-left: 220px;
   border-radius: 10px;
   width: 500px;
   min-height: 800px;

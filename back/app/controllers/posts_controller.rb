@@ -46,6 +46,12 @@ class PostsController < ApplicationController
       @post = Post.includes(:user).find(params[:id])
       if @post.present?
         post = @post
+        file_extension = File.extname(post.image.path).downcase
+        if file_extension == ".mp4" || file_extension == ".webm"
+          file_type = "video"
+        else
+          file_type = "image"
+        end
         bookmark = post.bookmarks.find_by(user_id: @current_user.id)
         heart = post.hearts.find_by(user_id: @current_user.id)
         render json: { 
@@ -60,6 +66,7 @@ class PostsController < ApplicationController
             process: post.process,
             coment: post.coment,
             hearts_count: post.hearts.count,
+            file_type: file_type,
             user: { 
               name: post.user.name,
               avatar: post.user.avatar,

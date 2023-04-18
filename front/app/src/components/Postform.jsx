@@ -7,8 +7,8 @@ function Postform(props) {
   const history = useHistory();
   const [title, setTitle] = useState("")
   const titlelength = 30 - title.length
-  const [image, setImage] = useState("")
-  const [imagePreview, setImagePreview] = useState("")
+  const [imageOrVideo, setImageOrVideo] = useState("")
+  const [imageOrVideoPreview, setImageOrVideoPreview] = useState("")
   const [time, setTime] = useState("")
   const [cost, setCost] = useState("")
   const [content, setContent] = useState("")
@@ -20,11 +20,12 @@ function Postform(props) {
   const [process, setProcess] = useState("")
   const [coment, setComent] = useState("")
   const filechange = (event) => {
-    setImage(event.target.files[0])
-    console.log(event.target.files[0])
+    const file = event.target.files[0]
+    setImageOrVideo(file)
+    console.log(file)
     const reader = new FileReader()
          reader.onload = (event) => {
-             setImagePreview(event.target.result)
+             setImageOrVideoPreview(event.target.result)
          };
          reader.readAsDataURL(event.target.files[0])
   }
@@ -60,8 +61,8 @@ function Postform(props) {
   const CloseModal = () => {
     props.setPostmodal(false)
     setTitle("")
-    setImage("")
-    setImagePreview("")
+    setImageOrVideo("")
+    setImageOrVideoPreview("")
     setContent("")
     setCost("")
     setTime("")
@@ -73,10 +74,11 @@ function Postform(props) {
     setMaterialcount(1)
     setMaterialerror("")
   }
-  const onSubmit = () => {
+  const onSubmit = (event) => {
+    event.preventDefault();
     const formData = new FormData();
     formData.append('post[title]', title);
-    formData.append('post[image]', image);
+    formData.append('post[image]', imageOrVideo);
     formData.append('post[content]', content);
     formData.append('post[time]', time);
     formData.append('post[cost]', cost);
@@ -90,13 +92,13 @@ function Postform(props) {
                                               ,{ withCredentials: true })
       .then(response => {
         if (response.data.status) {
-          CloseModal()
-          history.push('/')
+     
         } else if (response.data.status === 'not_created') {
           console.log("失敗")
         }
       })
       .catch((error) => {
+        event.preventDefault()
         console.log("未送信")
       });
   };
@@ -116,18 +118,24 @@ function Postform(props) {
              <div className='postform_modal_content'>
              <h1>レシピ投稿:</h1>
              <form className="form_post" onSubmit={onSubmit}>
-                <label>画像:</label><br></br>
+                <label></label><br></br>
                 <label className='video_file'>
                 <CameraAltIcon />
                 <input className='video'
                     type="file"
-                    accept='image/*'
+                    accept='video/*, image/*' max="240"
                     capture="environment"
                     name="video"
                     onChange={filechange}
                 />
                 </label><br/>
-                { imagePreview && <img src={imagePreview} className='video_display'></img> }<br />
+                { imageOrVideo.type === "video/mp4" || imageOrVideo.type === "video/webm" ? 
+                    <video controls src={imageOrVideoPreview} className='video_display'></video>
+                        :  imageOrVideoPreview ?
+                        <img src={imageOrVideoPreview} className='video_display'></img>
+                         :
+                        <></>
+                }<br />
                  <label>料理名: ※最大30文字</label>{ title && <a className={ titlelength < 0 ? 'title_length_errors' 
                                                                          : ''}>　残り{titlelength}文字</a>}<br></br>
                 <input className='title'
@@ -170,7 +178,6 @@ function Postform(props) {
                 <button type='button' className='material_remove' onClick={materialreset}>ー　行を削除</button>
                 {materialerror && <a className='material_errors'>　{materialerror}</a>}
                 <div className='material'>
-                 
                  {materialfields.map((field, index) => {
                   return (
                    <div>

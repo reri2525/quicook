@@ -29,9 +29,11 @@ end
 image_hamburger = Rails.root.join('public', 'images', 'food-image.jpg')
 image_fish = Rails.root.join('public', 'images', '鯵の干物.jpeg')
 image_salad = Rails.root.join('public', 'images', 'サラダ.webp')
+video_about_me = Rails.root.join('public', 'videos', '[English GUMI] About Me.mp4')
 file1 = File.open(image_hamburger)
 file2 = File.open(image_fish)
 file3 = File.open(image_salad)
+file4 = File.open(video_about_me)
 users = User.order(:created_at).take(5)
 10.times do
   title = "絶品！お肉屋さんのハンバーガーパテ☆"
@@ -66,7 +68,16 @@ end
             焼いている時にフライ返し等で上からギューギュー押さえつけて焼かないこと！ジューシーさとうまみが流れ出しちゃうので。パン粉は必ず生パン粉を使ってください☆"
   users.each { |user| user.posts.create!(title: title, image: file3, content: content, time: time, cost: cost, process: process, coment: coment) }
 end
-150.times do |c|
+10.times do
+  title = "About me"
+  content = "最高の曲です"
+  time = 3
+  cost = 7000
+  process = "神曲"
+  coment = "マジで"
+  users.each { |user| user.posts.create!(title: title, image: file4, content: content, time: time, cost: cost, process: process, coment: coment) }
+end
+200.times do |c|
  6.times do |n|
     Heart.create!(user_id:  n+1, post_id: c+1)
  end
