@@ -1,8 +1,5 @@
-import Header from './Header'
 import React, { Fragment, useState, useEffect } from 'react';
-import List from './List'
 import axios from 'axios'
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
