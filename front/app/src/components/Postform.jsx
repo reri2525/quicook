@@ -3,25 +3,17 @@ import React, { Fragment, useState, useEffect } from 'react';
 import List from './List'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-function Postform(props) {
-  const {
-      register,
-      reset, 
-      watch,
-      handleSubmit,
-      formState: { errors },  
-  } = useForm();   
+function Postform(props) {   
   const history = useHistory();
+  const [title, setTitle] = useState("")
+  const titlelength = 30 - title.length
   const [image, setImage] = useState("")
   const [imagePreview, setImagePreview] = useState("")
   const [time, setTime] = useState("")
   const [cost, setCost] = useState("")
-  const title = watch('title', '')
-  const titlelength = 30 - title.length
   const [content, setContent] = useState("")
   const [materialcount, setMaterialcount] = useState(1)
   const [materialfields, setMaterialfields] = useState([
@@ -39,7 +31,7 @@ function Postform(props) {
          reader.readAsDataURL(event.target.files[0])
   }
   const Contentreset = () => {
-    setContent('');
+    setContent("");
   }
   const materialChange = (e, index) => {
     const newFields = [...materialfields];
@@ -69,7 +61,7 @@ function Postform(props) {
   }
   const CloseModal = () => {
     props.setPostmodal(false)
-    reset();
+    setTitle("")
     setImage("")
     setImagePreview("")
     setContent("")
@@ -125,7 +117,7 @@ function Postform(props) {
             <div className='postform_modal_inner'>
              <div className='postform_modal_content'>
              <h1>レシピ投稿:</h1>
-             <form className="form_post" onSubmit={handleSubmit(onSubmit)}>
+             <form className="form_post" onSubmit={onSubmit}>
                 <label>画像:</label><br></br>
                 <label className='video_file'>
                 <CameraAltIcon />
@@ -144,7 +136,8 @@ function Postform(props) {
                     type="text"
                     required
                     placeholder='料理名'
-                    {...register('title', {  maxLength: 30})}
+                    value={title}
+                    onChange={event => setTitle(event.target.value)}  
                 /><br></br>
                 <label>料理概要:</label><br/>
                 <textarea className='content'
