@@ -112,7 +112,6 @@ function Postform(props) {
   };
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    // コンポーネントがアンマウントされたときに、overflowを戻す
     return () => {
       document.body.style.overflow = 'auto';
     };
