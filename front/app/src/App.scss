@@ -1053,7 +1053,22 @@ footer {
       transition: 0.3s;
       }
     }
-    .follows {
+    .follow {
+     background-color: yellow;
+     height: 30px;
+     line-height: 30px;
+     border-radius: 10px;
+     position: relative;
+     top: 0px;
+     left: 100px;
+     padding: 5px 30px 5px 30px;
+     &:hover {
+      background-color: rgb(255, 213, 0);
+      transition: 0.3s;
+      cursor: pointer;
+     }
+    }
+    .user_data {
       margin-top: 25px;
       a {
         margin-right: 30px;

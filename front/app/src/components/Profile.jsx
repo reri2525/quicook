@@ -24,8 +24,12 @@ function Profile(props) {
       </div>
       <div className='explanation'>
         <a className='user_name'>{user.name}</a>
-        { user.id === props.user.id ? <Link to="/edit" className='edit_profile'>プロフィール編集</Link> : <a>a</a> }
-        <div className='follows'>
+        { user.id === props.user.id ? 
+          <Link to="/edit" className='edit_profile'>プロフィール編集</Link> 
+            : 
+          <a className='follow'>フォローする</a>
+        }
+        <div className='user_data'>
          <a>投稿　149 件</a>
          <a>フォロー 149 人</a>
          <a>フォロワー 149 人</a>

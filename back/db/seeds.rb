@@ -29,7 +29,7 @@ end
 image_hamburger = Rails.root.join('public', 'images', 'food-image.jpg')
 image_fish = Rails.root.join('public', 'images', '鯵の干物.jpeg')
 image_salad = Rails.root.join('public', 'images', 'サラダ.webp')
-video_about_me = Rails.root.join('public', 'videos', '[English GUMI] About Me.mp4')
+video_about_me = Rails.root.join('public', 'videos', 'videoplayback.mp4')
 file1 = File.open(image_hamburger)
 file2 = File.open(image_fish)
 file3 = File.open(image_salad)

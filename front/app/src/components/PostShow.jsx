@@ -73,7 +73,7 @@ function PostShow(props) {
        <div className='icon'>
          <img src={post.user.avatar.url}></img>
        </div>
-       <Link to={`/profile/${post.user_id}`}>{post.user.name}</Link>
+       <Link to={`/profile/${post.user.id}`}>{post.user.name}</Link>
        <div className="follow">フォローする</div>
      </div>
      <div className='middle'>
