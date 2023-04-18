@@ -24,7 +24,7 @@ class PostsController < ApplicationController
            heart_count: post.hearts.count,
            user: { 
              name: post.user.name,
-             avater: post.user.avater,
+             avatar: post.user.avatar,
              id: post.user.id
            },
            bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.includes(:user)
     .joins(:user)
-    .select('posts.*, users.name, COUNT(hearts.id) as hearts_count')
+    .select('posts.*, users.name, users.avatar, COUNT(hearts.id) as hearts_count')
     .left_outer_joins(:hearts)
     .where(id: params[:id])
     .group('posts.id, users.id')
@@ -53,6 +53,7 @@ class PostsController < ApplicationController
      bookmark = Bookmark.find_by(user_id: current_user.id, post_id: @post.id)
      heart = Heart.find_by(user_id: current_user.id, post_id: @post.id)
      render json: { post: @post.as_json.merge(hearts_count: hearts_count, bookmarked: !!bookmark, hearted: !!heart) }
+
   end
 
   def bookmark 
@@ -69,7 +70,7 @@ class PostsController < ApplicationController
            heart_count: post.hearts.count,
            user: { 
              name: post.user.name,
-             avater: post.user.avater
+             avatar: post.user.avatar
            },
            bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
              { id: bookmark.id, user_id: bookmark.user_id } 
@@ -103,7 +104,7 @@ class PostsController < ApplicationController
              heart_count: post.hearts.count,
              user: { 
                name: post.user.name,
-               avater: post.user.avater
+               avatar: post.user.avatar
              },
              bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
                { id: bookmark.id, user_id: bookmark.user_id } 

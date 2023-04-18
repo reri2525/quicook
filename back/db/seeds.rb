@@ -5,17 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(name:  "Example User",
+User.create!(name:  "杉田　裕貴",
+    avatar: File.open(Rails.root.join('public', 'images', '可愛い女の子.jpeg')),
     email: "0831yuuki@i.softbank.jp",
     password:              "111111",
     password_confirmation: "111111",
     )
 
 6.times do |n|
-  name  = Faker::Name.name
+  name  = Faker::Japanese::Name.name
+  avatar = File.open(Rails.root.join('public', 'images', '可愛い女の子.jpeg'))
   email = "083#{n+2}yuuki@i.softbank.jp"
   password = "111111"
   User.create!(name:  name,
+        avatar: avatar,
         email: email,
         password:              password,
         password_confirmation: password,
@@ -23,9 +26,9 @@ User.create!(name:  "Example User",
 end
 
 # マイクロポスト
-image_hamburger = Rails.root.join('public', 'uploads', 'post', 'image', '1', 'food-image.jpg')
-image_fish = Rails.root.join('public', 'uploads', 'post', 'image', '1', '鯵の干物.jpeg')
-image_salad = Rails.root.join('public', 'uploads', 'post', 'image', '2', 'サラダ.webp')
+image_hamburger = Rails.root.join('public', 'images', 'food-image.jpg')
+image_fish = Rails.root.join('public', 'images', '鯵の干物.jpeg')
+image_salad = Rails.root.join('public', 'images', 'サラダ.webp')
 file1 = File.open(image_hamburger)
 file2 = File.open(image_fish)
 file3 = File.open(image_salad)

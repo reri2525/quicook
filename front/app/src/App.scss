@@ -496,7 +496,7 @@ span {
       a {
         font-weight: 700;
         position: relative;
-        top: 12px;
+        top: 10px;
         left: 9px;
         text-decoration: none;
         color: inherit;
@@ -1039,14 +1039,23 @@ footer {
       margin-right: -50px;
     }
     .edit_profile {
+      position: relative;
+      left: 100px;
+      background-color: rgba(187, 187, 187, 0.3);
+      padding: 10px 10px 10px 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #000;
       &:hover {
       background-color: #bbb;
-      border-radius: 10px;
       transition: 0.3s;
       }
     }
     .follows {
-      margin-top: 20px;
+      margin-top: 25px;
+      a {
+        margin-right: 30px;
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
+        @user.avatar = File.open(Rails.root.join('public', 'images', '初期アイコン.jpeg'))
         if @user.save
             login(@user)
             render json: { status: :created, user: @user }

@@ -21,6 +21,7 @@ function Postform(props) {
   const [coment, setComent] = useState("")
   const filechange = (event) => {
     setImage(event.target.files[0])
+    console.log(event.target.files[0])
     const reader = new FileReader()
          reader.onload = (event) => {
              setImagePreview(event.target.result)

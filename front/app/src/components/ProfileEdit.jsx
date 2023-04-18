@@ -31,6 +31,7 @@ function ProfileEdit(props) {
            <input type='file' 
              className='image_input'
              accept='image/*'
+             onChange={filechange}
            />
          </label><br/>
          <label>名前</label><br/>
