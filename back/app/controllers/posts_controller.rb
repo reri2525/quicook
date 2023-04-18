@@ -42,18 +42,37 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user)
-    .joins(:user)
-    .select('posts.*, users.name, users.avatar, COUNT(hearts.id) as hearts_count')
-    .left_outer_joins(:hearts)
-    .where(id: params[:id])
-    .group('posts.id, users.id')
-    .first
-     hearts_count = @post.try(:hearts_count) || 0
-     bookmark = Bookmark.find_by(user_id: current_user.id, post_id: @post.id)
-     heart = Heart.find_by(user_id: current_user.id, post_id: @post.id)
-     render json: { post: @post.as_json.merge(hearts_count: hearts_count, bookmarked: !!bookmark, hearted: !!heart) }
-
+    if current_user
+      @post = Post.includes(:user).find(params[:id])
+      if @post.present?
+        post = @post
+        bookmark = post.bookmarks.find_by(user_id: @current_user.id)
+        heart = post.hearts.find_by(user_id: @current_user.id)
+        render json: { 
+          status: true, 
+          post: {
+            id: post.id,
+            title: post.title, 
+            image: post.image,
+            content: post.content,
+            time: post.time,
+            cost: post.cost,
+            process: post.process,
+            coment: post.coment,
+            hearts_count: post.hearts.count,
+            user: { 
+              name: post.user.name,
+              avatar: post.user.avatar,
+              id: post.user.id
+            },
+            bookmarked: bookmark ? true : false,
+            hearted: heart ? true : false
+          }
+        }
+      else
+        render json: {status: false}
+      end
+    end
   end
 
   def bookmark 
