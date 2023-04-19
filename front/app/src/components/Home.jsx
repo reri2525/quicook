@@ -127,7 +127,8 @@ function Home(props) {
                </div>
            </div>
            <div className='middle'>
-              <img src={postall[key].image.url}></img>
+              { postall[key].file_type === "image" ? <img src={postall[key].image.url}></img> : <></> }
+              { postall[key].file_type === "video" ? <video controls src={postall[key].image.url}></video> : <></>}
            </div>
            <div className='foot'>
              <a>{postall[key].title}</a>

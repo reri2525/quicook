@@ -17,11 +17,18 @@ class PostsController < ApplicationController
       render json: { 
         status: true, 
         post_all: @post_all.map { |post|
+          file_extension = File.extname(post.image.path).downcase
+          if file_extension == ".mp4" || file_extension == ".webm"
+            file_type = "video"
+          else
+            file_type = "image"
+          end
           {
            id: post.id,
            title: post.title, 
            image: post.image,
            heart_count: post.hearts.count,
+           file_type: file_type,
            user: { 
              name: post.user.name,
              avatar: post.user.avatar,
