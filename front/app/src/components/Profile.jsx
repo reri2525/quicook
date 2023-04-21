@@ -12,13 +12,13 @@ function Profile(props) {
   const { id } = useParams();
   useEffect(() => {
     openPlofile(id)
-  }, [])
+  }, [id])
   const openPlofile = (id) => {
     axios.get(`http://localhost:3001/users/${id}`, { withCredentials: true })
     .then(response => {
         const data = response.data
         setUser(data.user)
-        setFollow(data.following_count)
+        setFollow(data.followed_count)
         setFollower(data.follower_count)
         setRelationship(data.relationship)
         console.log(data)
@@ -46,7 +46,9 @@ function Profile(props) {
       <div className='explanation'>
         <a className='user_name'>{user.name}</a>
         { user.id === props.user.id ? 
-          <Link to="/edit" className='edit_profile'>プロフィール編集</Link> 
+          <Link to="/edit" style={{ textDecoration: 'none', cursor: 'pointer' }}>
+            <div className='edit_profile'>プロフィール編集</div>
+          </Link> 
             : 
           relationship ?
               <div className="unfollow" onClick={() => handleRelationship(user.id)}>フォロー中</div>
