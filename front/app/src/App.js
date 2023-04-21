@@ -1,8 +1,4 @@
-import Newmodal from "./components/New";
-import Logmodal from "./components/Login";
-import Ccc from "./components/Profile"
 import Loginwarn from "./components/Loginwarn";
-import Rank from "./components/Rank";
 import './App.scss';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
@@ -15,9 +11,6 @@ import Search from './components/Search';
 import Category from './components/Category'
 import Profile from "./components/Profile";
 import ProfileEdit from "./components/ProfileEdit";
-import Postform from './components/Postform' 
-import PostShow from "./components/PostShow";  
-import Footer from './components/Footer';
 import Following from './components/Following';
 import {ListUrl} from './components/ListUrl';
 import{
@@ -113,7 +106,28 @@ function App(props) {
       console.log("b")
    })
   }
-
+  const relationshipCreate = (id) => {
+    axios.post("http://localhost:3001/relationships",  { user_id: id },  { withCredentials: true })
+    .then(response => {
+      if (response.data.status) {
+        console.log("フォロー")
+      }
+    })
+    .catch(error => {
+      console.log("エラー")
+   })
+  }
+  const relationshipDestroy = (id) => {
+    axios.delete(`http://localhost:3001/relationships/${id}`, { withCredentials: true })
+    .then(response => {
+      if (response.data.status) {
+        console.log(response.data.post)
+      }
+    })
+    .catch(error => {
+      console.log("エラー")
+   })
+  }
   return (
      <Router>
       <Switch>
@@ -135,7 +149,7 @@ function App(props) {
                                  pagecount={pagecount} setCurrentPage={setCurrentPage}
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
                                  heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 user={user} 
+                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
                                  />}/>
             )}
           />  
@@ -185,7 +199,11 @@ function App(props) {
           />  
         <Route exact path={"/profile/:id"}
              render={props => (
-              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout} user={user} url={<Profile user={user}/>}/>
+              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} 
+                                 handleLogout={handleLogout} user={user} 
+                                 url={<Profile user={user} relationshipCreate={relationshipCreate} 
+                                       relationshipDestroy={relationshipDestroy}/>
+                                      }/>
             )}
           />  
         <Route exact path={"/edit"}

@@ -128,7 +128,7 @@ function Home(props) {
            </div>
            <div className='middle'>
               { postall[key].file_type === "image" ? <img src={postall[key].image.url}></img> : <></> }
-              { postall[key].file_type === "video" ? <video controls src={postall[key].image.url}></video> : <></>}
+              { postall[key].file_type === "video" ? <video src={postall[key].image.url} onClick={() => postShow(postall[key].id)}></video> : <></>}
            </div>
            <div className='foot'>
              <a>{postall[key].title}</a>
@@ -184,7 +184,8 @@ function Home(props) {
                                   heartCreate={props.heartCreate} heartDestroy={props.heartDestroy}
                                   bookmarkedPosts={bookmarkedPosts} setBookmarkedPosts={setBookmarkedPosts}
                                   heartedPosts={heartedPosts} setHeartedPosts={setHeartedPosts}
-                                  postall={postall}
+                                  postall={postall} relationshipCreate={props.relationshipCreate} 
+                                  relationshipDestroy={props.relationshipDestroy}
                                   />
                                    : <></>}
    </Fragment>

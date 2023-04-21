@@ -61,6 +61,7 @@ class PostsController < ApplicationController
         end
         bookmark = post.bookmarks.find_by(user_id: @current_user.id)
         heart = post.hearts.find_by(user_id: @current_user.id)
+        relationship = Relationship.find_by(followed_id: post.user.id, follower_id: @current_user.id)
         render json: { 
           status: true, 
           post: {
@@ -70,6 +71,7 @@ class PostsController < ApplicationController
             content: post.content,
             time: post.time,
             cost: post.cost,
+            materials: (1..15).map { |i| { :"material_#{i}" => post.send("material_#{i}") } }.reduce({}, :merge),
             process: post.process,
             coment: post.coment,
             hearts_count: post.hearts.count,
@@ -80,7 +82,8 @@ class PostsController < ApplicationController
               id: post.user.id
             },
             bookmarked: bookmark ? true : false,
-            hearted: heart ? true : false
+            hearted: heart ? true : false,
+            relationship: relationship ? true : false
           }
         }
       else

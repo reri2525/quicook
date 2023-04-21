@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :posts 
   resources :hearts, only: [:create, :destroy]
   resources :bookmarks, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   get '/bookmarks' , to: "posts#bookmark"
   get '/search' , to: "posts#search"
 end

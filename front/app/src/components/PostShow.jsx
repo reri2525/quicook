@@ -8,9 +8,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 function PostShow(props) {
  const ref = useRef(null);
+ const relationshipCreate = props.relationshipCreate
+ const relationshipDestroy = props.relationshipDestroy
  const [post, setPost] = useState([])
  const [bookmarked, setBookmarked] = useState(false)
  const [hearted, setHearted] = useState(false)
+ const [relationship, setRelationship] = useState(false)
  const CloseModal = () => {
   props.setPostShowModal(false)
  }
@@ -23,6 +26,7 @@ function PostShow(props) {
       setPost(data)
       setBookmarked(data.bookmarked)
       setHearted(data.hearted)
+      setRelationship(data.relationship)
       document.body.style.overflow = 'hidden';
     }
    })
@@ -62,6 +66,15 @@ function PostShow(props) {
     a.heart_count = a.heart_count + 1
    }
  }
+ const handleRelationship = (id) => {
+   if (relationship) {
+    setRelationship(false)
+    relationshipDestroy(id)
+   } else {
+    setRelationship(true)
+    relationshipCreate(id)
+   }
+ }
  if (post.image) {
   return (
    <Fragment>
@@ -74,13 +87,17 @@ function PostShow(props) {
          <img src={post.user.avatar.url}></img>
        </div>
        <Link to={`/profile/${post.user.id}`}>{post.user.name}</Link>
-       <div className="follow">フォローする</div>
+       { relationship ?
+         <div className="unfollow" onClick={() => handleRelationship(post.user.id)}>フォロー中</div>
+          :
+         <div className="follow" onClick={() => handleRelationship(post.user.id)}>フォローする</div>
+       }
      </div>
      <div className='middle'>
         <div className='post_display'>
           <div className='post_image_display'>
             { post.file_type === "image" ? <img src={post.image.url} ></img> : <></> }
-            { post.file_type === "video" ? <video controls src={post.image.url} ></video> : <></>}
+            { post.file_type === "video" ? <video autoPlay controls src={post.image.url} ></video> : <></>}
           </div>
           <div className='favorite_container'>
             <div className='bookmark' onClick={ () => handleBookmark(post)}>

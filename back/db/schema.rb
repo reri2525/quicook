@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2023_03_05_142617) do
     t.string "title"
     t.text "content"
     t.string "image"
+    t.string "thumbnail"
     t.integer "time"
     t.integer "cost"
     t.string "material_1"
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 2023_03_05_142617) do
     t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
