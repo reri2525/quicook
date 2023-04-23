@@ -72,6 +72,7 @@ class PostsController < ApplicationController
             time: post.time,
             cost: post.cost,
             materials: (1..15).map { |i| { :"material_#{i}" => post.send("material_#{i}") } }.reduce({}, :merge),
+            amounts: (1..15).map { |i| { :"amount_#{i}" => post.send("amount_#{i}") } }.reduce({}, :merge),
             process: post.process,
             coment: post.coment,
             hearts_count: post.hearts.count,

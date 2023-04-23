@@ -741,6 +741,23 @@ span {
         word-break: break-word;
         width: 440px;
         margin-left: 10px;
+        h2 {
+          margin-left: -3px;
+        }
+        h3 {
+          margin-left: -3px;
+        }
+        a {
+          font-size: 18px;
+        }
+        .material {
+          margin-bottom: 5px;
+          width: 100%;
+          border-bottom: #bbb 1px solid;
+          .amount_detail {
+            float: right;
+          }
+        }
       }
     }
     .favorite_container {

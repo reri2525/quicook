@@ -120,6 +120,16 @@ function PostShow(props) {
             <a>{post.content}</a><br/>
             <p>時間:　{post.time}分</p>
             <p>費用:　{post.cost}円</p>  
+            <h3>材料:</h3>
+            {[...Array(15)].map((_, i) => (
+              post.materials[`material_${i + 1}`] && post.amounts[`amount_${i + 1}`] ?
+               <div key={`material_${i + 1}`} className="material">
+                 <a>{post.materials[`material_${i + 1}`]}</a>
+                 <a className='amount_detail'>{post.amounts[`amount_${i + 1}`]}</a>
+               </div>
+                : 
+              <></>
+            ))}
             <h3>作り方:</h3>
             <a>{post.process}</a>
             <h3>ひとこと:</h3>
