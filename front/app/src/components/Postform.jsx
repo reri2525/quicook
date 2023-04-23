@@ -12,11 +12,11 @@ function Postform(props) {
   const [time, setTime] = useState("")
   const [cost, setCost] = useState("")
   const [content, setContent] = useState("")
-  const [materialcount, setMaterialcount] = useState(1)
-  const [materialfields, setMaterialfields] = useState([
+  const [materialCount, setMaterialCount] = useState(1)
+  const [materialFields, setMaterialFields] = useState([
     { material: "", amount: "" }
   ]);
-  const [materialerror, setMaterialerror] = useState('')
+  const [materialError, setMaterialError] = useState('')
   const [process, setProcess] = useState("")
   const [coment, setComent] = useState("")
   const filechange = (event) => {
@@ -33,29 +33,30 @@ function Postform(props) {
     setContent("");
   }
   const materialChange = (e, index) => {
-    const newFields = [...materialfields];
+    const newFields = [...materialFields];
     newFields[index].material = e.target.value;
-    setMaterialfields(newFields);
+    setMaterialFields(newFields);
   };
   const amountChange = (e, index) => {
-    const newFields = [...materialfields];
+    const newFields = [...materialFields];
     newFields[index].amount = e.target.value;
-    setMaterialfields(newFields);
+    setMaterialFields(newFields);
   };
-  const materialreset = (e) => {
-   if (materialcount > 1) {
-   let a = materialfields.splice(1);
-   setMaterialfields(a);
-   setMaterialcount(materialcount - 1)
-   setMaterialerror(null);
+  const materialRemove = (e) => {
+   if (materialCount > 1) {
+   const newMaterialFields = [...materialFields];
+   newMaterialFields.pop();
+   setMaterialFields(newMaterialFields);
+   setMaterialCount(materialCount - 1)
+   setMaterialError(null);
    }
   };
-  const MaterialInputCount = () => {
-    if (materialcount < 15){
-     setMaterialcount(materialcount + 1)
-     setMaterialfields([...materialfields, { value: "" }]);
+  const MaterialAdd = () => {
+    if (materialCount < 15){
+     setMaterialCount(materialCount + 1)
+     setMaterialFields([...materialFields, { value: "" }]);
     } else {
-     setMaterialerror('※これ以上追加できません')
+     setMaterialError('※これ以上追加できません')
     }
   }
   const CloseModal = () => {
@@ -68,11 +69,11 @@ function Postform(props) {
     setTime("")
     setComent("")
     setProcess("")
-    setMaterialfields([
+    setMaterialFields([
       { material: "", amount: "" }
     ])
-    setMaterialcount(1)
-    setMaterialerror("")
+    setMaterialCount(1)
+    setMaterialError("")
   }
   const onSubmit = (event) => {
     event.preventDefault();
@@ -84,9 +85,9 @@ function Postform(props) {
     formData.append('post[cost]', cost);
     formData.append('post[process]', process);
     formData.append('post[coment]', coment);
-    for (let i = 0; i < materialfields.length; i++) {
-      formData.append(`post[material_${i + 1}]`, materialfields[i].material);
-      formData.append(`post[amount_${i + 1}]`, materialfields[i].amount);
+    for (let i = 0; i < materialFields.length; i++) {
+      formData.append(`post[material_${i + 1}]`, materialFields[i].material);
+      formData.append(`post[amount_${i + 1}]`, materialFields[i].amount);
     }
     axios.post("http://localhost:3001/posts", formData
                                               ,{ withCredentials: true })
@@ -175,11 +176,11 @@ function Postform(props) {
                     value={cost} 
                     onChange={event => setCost(event.target.value)}
                 />　円<br/>
-                <button type='button' className='material_add' onClick={MaterialInputCount}>＋　行を追加</button>
-                <button type='button' className='material_remove' onClick={materialreset}>ー　行を削除</button>
-                {materialerror && <a className='material_errors'>　{materialerror}</a>}
+                <button type='button' className='material_add' onClick={MaterialAdd}>＋　行を追加</button>
+                <button type='button' className='material_remove' onClick={materialRemove}>ー　行を削除</button>
+                {materialError && <a className='material_errors'>　{materialError}</a>}
                 <div className='material'>
-                 {materialfields.map((field, index) => {
+                 {materialFields.map((field, index) => {
                   return (
                    <div>
                     <label>材料:</label>
