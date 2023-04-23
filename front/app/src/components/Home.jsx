@@ -65,7 +65,7 @@ function Home(props) {
   }
   const postGo = (currentPage) => {
     if (currentPage !== pagecount) {
-      setCurrentPage(currentPage)
+      setCurrentPage(currentPage + 1)
     }
     window.scrollTo(0, 0);
   }
@@ -112,6 +112,7 @@ function Home(props) {
   const handleMouseEnter = (event) => {
     event.target.play();
     event.target.controls = true;
+    event.target.muted = true;
   };
 
   const handleMouseLeave = (event) => {
