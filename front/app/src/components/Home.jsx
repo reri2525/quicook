@@ -109,6 +109,16 @@ function Home(props) {
       }
     });
   }
+  const handleMouseEnter = (event) => {
+    event.target.play();
+    event.target.controls = true;
+  };
+
+  const handleMouseLeave = (event) => {
+    event.target.pause();
+    event.target.currentTime = 0;
+    event.target.controls = false;
+  };
   return (
     <Fragment> 
       { postall[0] ? 
@@ -128,7 +138,11 @@ function Home(props) {
            </div>
            <div className='middle'>
               { postall[key].file_type === "image" ? <img src={postall[key].image.url}></img> : <></> }
-              { postall[key].file_type === "video" ? <video src={postall[key].image.url} onClick={() => postShow(postall[key].id)}></video> : <></>}
+              { postall[key].file_type === "video" ? <video
+                                                       onMouseEnter={handleMouseEnter}
+                                                       onMouseLeave={handleMouseLeave}
+                                                       src={postall[key].image.url} onClick={() => postShow(postall[key].id)}>
+                                                     </video> : <></>}
            </div>
            <div className='foot'>
              <a>{postall[key].title}</a>
