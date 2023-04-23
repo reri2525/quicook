@@ -8,6 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 function PostShow(props) {
  const ref = useRef(null);
+ const currentUser = props.user
  const relationshipCreate = props.relationshipCreate
  const relationshipDestroy = props.relationshipDestroy
  const [post, setPost] = useState([])
@@ -27,12 +28,12 @@ function PostShow(props) {
       setBookmarked(data.bookmarked)
       setHearted(data.hearted)
       setRelationship(data.relationship)
-      document.body.style.overflow = 'hidden';
     }
    })
    .catch(error => {
     console.log("b")
    })
+   document.body.style.overflow = 'hidden';
    return () => {
     document.body.style.overflow = 'auto';
    };
@@ -87,10 +88,13 @@ function PostShow(props) {
          <img src={post.user.avatar.url}></img>
        </div>
        <Link to={`/profile/${post.user.id}`}>{post.user.name}</Link>
-       { relationship ?
-         <div className="unfollow" onClick={() => handleRelationship(post.user.id)}>フォロー中</div>
-          :
-         <div className="follow" onClick={() => handleRelationship(post.user.id)}>フォローする</div>
+       { currentUser.id === post.user.id ?
+          <></> 
+           :
+          relationship ?
+           <div className="unfollow" onClick={() => handleRelationship(post.user.id)}>フォロー中</div>
+            :
+           <div className="follow" onClick={() => handleRelationship(post.user.id)}>フォローする</div>
        }
      </div>
      <div className='middle'>

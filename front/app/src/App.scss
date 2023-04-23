@@ -669,6 +669,7 @@ span {
    }
    .follow {
     background-color: yellow;
+    border: #bbb 1px solid;
     height: 30px;
     line-height: 30px;
     width: 150px;
@@ -919,9 +920,12 @@ span {
      display:none;
    }
    .video_display{
+    background-color: #000;
+    border: #bbb 1px solid;
     border-radius: 10px;
-    height: 100%;
-    width: 100%;
+    height: 421px;
+    width: 750px;
+    object-fit: fill;
    }
    .video_file {
     opacity: 0.6;

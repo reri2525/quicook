@@ -9,6 +9,7 @@ function Profile(props) {
   const [relationship, setRelationship] = useState([])
   const [follow, setFollow] = useState([])
   const [follower, setFollower] = useState([])
+  const [postsCount, setPostsCount] = useState([])
   const { id } = useParams();
   useEffect(() => {
     openPlofile(id)
@@ -21,6 +22,7 @@ function Profile(props) {
         setFollow(data.followed_count)
         setFollower(data.follower_count)
         setRelationship(data.relationship)
+        setPostsCount(data.posts_count)
         console.log(data)
     }).catch(error => console.log("ユーザーいない"))
   }
@@ -56,7 +58,7 @@ function Profile(props) {
               <div className="follow" onClick={() => handleRelationship(user.id)}>フォローする</div>
         }
         <div className='user_data'>
-         <a>投稿　149 件</a>
+         <a>投稿  {postsCount ? postsCount : 0 } 件</a>
          <a>フォロー {follow ? follow : 0 } 人</a>
          <a>フォロワー {follower ? follower : 0 } 人</a>
         </div>

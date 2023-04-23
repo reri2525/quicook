@@ -55,7 +55,7 @@ return (
         >
         </input>
         <a onClick={() => setSearchQuery("")}><CloseIcon /></a>
-        <button className='sarch_btn' onClick={() => postSearch(searchQuery) }><SearchIcon /></button>
+        <button className='sarch_btn' onClick={() => searchQuery && postSearch(searchQuery)}><SearchIcon /></button>
       </form>
       <a className="log" onClick={() => props.handleLogout()}>ログアウト</a>
       <a className='postbutton' onClick={() => ShowPostModal()}>投稿する</a>
