@@ -112,7 +112,6 @@ function Home(props) {
   const handleMouseEnter = (event) => {
     event.target.play();
     event.target.controls = true;
-    event.target.muted = true;
   };
 
   const handleMouseLeave = (event) => {

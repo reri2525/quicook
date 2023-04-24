@@ -2,18 +2,18 @@ import axios from 'axios'
 import React, { useState } from 'react'
 function ProfileEdit(props) {
  const user = props.user
- const [name, setName] = useState("")
- const [email, setEmail] = useState("")
- const [image, setImage] = useState("")
- const [imagePreview, setImagePreview] = useState("")
+ const [name, setName] = useState(user.name)
+ const [email, setEmail] = useState(user.email)
+ const [avatar, setAvatar] = useState(user.avatar)
+ const [avatarPreview, setAvatarPreview] = useState(user.avatar.url)
  const onSubmit = (event) => {
   axios.get(`http://localhost:3005/users/${props.user.id}/edit`)
  }
  const filechange = (event) => {
-  setImage(event.target.files[0])
+  setAvatar(event.target.files[0])
   const reader = new FileReader()
        reader.onload = (event) => {
-           setImagePreview(event.target.result)
+           setAvatarPreview(event.target.result)
        };
        reader.readAsDataURL(event.target.files[0])
  }
@@ -23,8 +23,8 @@ function ProfileEdit(props) {
         <form onSubmit={onSubmit}>
          <div className='icon'>
          <img className='image'
-           src={user.avatar.url}>
-           </img>
+           src={avatarPreview}>
+         </img>
          </div>
          <h3>{user.name}</h3>
          <label className='icon_edit'>
@@ -37,7 +37,7 @@ function ProfileEdit(props) {
          </label><br/>
          <label>名前</label><br/>
          <input className='name'
-          
+          value={user.name}
          /><br/>
          <label>自己紹介</label><br/>
          <textarea className='self_introduction'
@@ -45,7 +45,7 @@ function ProfileEdit(props) {
          /><br/>
          <label>メールアドレス</label><br/>
          <input className='email'
-          
+          value={user.email}
          /><br/>
          <label>パスワード</label><br/>
          <input className='password'
@@ -55,7 +55,7 @@ function ProfileEdit(props) {
          <input className='password'
           
          /><br/>
-         <button type='button'>パスワードを変える</button>
+         <button type='button'>保存する</button>
         </form>
       </div>
     </div>

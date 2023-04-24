@@ -10,7 +10,9 @@ class UsersController < ApplicationController
         end
     end
     def edit 
-        
+      if current_user
+        render json: { user: @current_user }
+      end
     end
     def show 
         @user = User.find(params[:id])

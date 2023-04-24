@@ -29,9 +29,6 @@ function Postform(props) {
          };
          reader.readAsDataURL(event.target.files[0])
   }
-  const Contentreset = () => {
-    setContent("");
-  }
   const materialChange = (e, index) => {
     const newFields = [...materialFields];
     newFields[index].material = e.target.value;
@@ -157,7 +154,7 @@ function Postform(props) {
                     value={content}
                     onChange={event => setContent(event.target.value)}       
                 /><br/>
-                <button type="button" className='content_button' onClick={Contentreset}>取り消し</button>
+                <button type="button" className='content_button' onClick={() => setContent("")}>取り消し</button>
                 <label>時間　</label>
                 <input className='input_time'
                     maxLength="1"
