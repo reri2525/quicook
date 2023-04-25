@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2023_03_05_142617) do
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
+    t.string "introduction"
     t.string "email"
     t.string "password_digest"
     t.string "avatar"

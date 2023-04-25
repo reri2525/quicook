@@ -91,7 +91,7 @@ function Postform(props) {
       .then(response => {
         if (response.data.status) {
           CloseModal()
-          history.push("/home")
+          history.push("/")
         } else if (response.data.status === 'not_created') {
           console.log("失敗")
         }
