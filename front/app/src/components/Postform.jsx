@@ -72,6 +72,9 @@ function Postform(props) {
     setMaterialCount(1)
     setMaterialError("")
   }
+  const postRequired = () => {
+    return title&&imageOrVideo&&content&&time&&cost&&process&&coment&&materialFields[0].material&&materialFields[0].amount;
+  }
   const onSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -139,7 +142,6 @@ function Postform(props) {
                                                                          : ''}>　残り{titlelength}文字</a>}<br></br>
                 <input className='title'
                     type="text"
-                    required
                     placeholder='料理名'
                     value={title}
                     onChange={event => setTitle(event.target.value)}  
@@ -222,7 +224,9 @@ function Postform(props) {
                     value={coment}
                     onChange={event => setComent(event.target.value)}       
                  /><br/>
-                <button className='post_button' type="submit">投稿する</button><br></br>
+                 <button className='post_button' type="submit" disabled={!postRequired()}>
+                   投稿する
+                 </button>
             </form>
              </div>
            </div>
