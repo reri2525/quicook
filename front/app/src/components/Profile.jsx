@@ -49,13 +49,13 @@ function Profile(props) {
         <a className='user_name'>{user.name}</a>
         { user.id === props.user.id ? 
           <Link to="/edit" style={{ textDecoration: 'none', cursor: 'pointer' }}>
-            <div className='edit_profile'>プロフィール編集</div>
+            <a className='edit_profile'>プロフィール編集</a>
           </Link> 
             : 
           relationship ?
-              <div className="unfollow" onClick={() => handleRelationship(user.id)}>フォロー中</div>
+              <a className="unfollow" onClick={() => handleRelationship(user.id)}>フォロー中</a>
                 :
-              <div className="follow" onClick={() => handleRelationship(user.id)}>フォローする</div>
+              <a className="follow" onClick={() => handleRelationship(user.id)}>フォローする</a>
         }
         <div className='user_data'>
          <a>投稿  {postsCount ? postsCount : 0 } 件</a>

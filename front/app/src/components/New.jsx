@@ -80,7 +80,7 @@ return (
                   <div className='errors'>※メールアドレスが入力されていません</div>
                 )}
                 <label>パスワード</label><br></br>
-                <input className={errors.name ? 'input_errors' : 'input'}
+                <input className={errors.password ? 'input_errors' : 'input'}
                     type="password"
                     {...register('password', { required: true, minLength: 6})}                     
                 /><br></br>
@@ -91,7 +91,7 @@ return (
                   <div className='errors'>※パスワードが短すぎます!</div>
                 )}
                 <label>パスワード確認</label><br></br>
-                <input className={errors.name ? 'input_errors' : 'input'}
+                <input className={errors.passwordConfirmation ? 'input_errors' : 'input'}
                     type="password"
                     {...register('passwordConfirmation', { required: true, minLength: 6})}                     
                 /><br></br>

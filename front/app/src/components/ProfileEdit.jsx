@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import axios from 'axios'
 function ProfileEdit(props) {
  const user = props.user
+ const [update, setUpdate] = useState(false)
+ const [errors, setErrors] = useState(null)
  const [name, setName] = useState(user.name)
+ const [nameChange, setNameChange]= useState(user.name)
  const [introduction, setIntroduction] = useState(user.introduction)
  const [email, setEmail] = useState(user.email)
- const [avatar, setAvatar] = useState(user.avatar)
+ const [avatar, setAvatar] = useState(null)
  const [avatarPreview, setAvatarPreview] = useState(user.avatar.url)
  const [password, setPassword] = useState("")
  const [passwordConfirmation, setPasswordConfirmation] = useState("")
@@ -13,6 +16,7 @@ function ProfileEdit(props) {
   event.preventDefault()
   const formData = new FormData();
   formData.append('user[name]', name);
+  if (avatar) {formData.append('user[avatar]', avatar)}
   formData.append('user[introduction]', introduction);
   formData.append('user[email]', email);
   formData.append('user[password]', password);
@@ -21,14 +25,28 @@ function ProfileEdit(props) {
     .then(response => {
       if (response.data.status) {
         const data = response.data
-        setName(data.name)
-        setIntroduction(data.introduction)
-        setEmail(data.email)
+        user.name = data.user.name
+        user.introduction = data.user.introduction
+        user.email = data.user.email
+        user.avatar = data.user.avatar
+        setNameChange(data.user.name)
+        setErrors(false)
+        setUpdate(true)
+        setTimeout(function() {
+          setUpdate(false);
+        }, 8000);
+        window.scrollTo(0, 0);
       } else {
         console.log("error")
+        setErrors(true)
+        setUpdate(false)
+        window.scrollTo(0, 0);
       }
       }).catch(error => {
         console.log("error")
+        setErrors(true)
+        setUpdate(false)
+        window.scrollTo(0, 0);
       })
  }
  const filechange = (event) => {
@@ -43,12 +61,14 @@ function ProfileEdit(props) {
     <div className='edit'>
       <div className='edit_container'>
         <form onSubmit={onSubmit}>
+         { update ? <h3 className='update'>変更されました。</h3> : <></> }
+         { errors ? <h3 className='errors'></h3> : <></> }
          <div className='icon'>
          <img className='image'
            src={avatarPreview}>
          </img>
          </div>
-         <h3>{name}</h3>
+         <h3>{nameChange}</h3>
          <label className='icon_edit'>
            プロフィール写真の編集
            <input type='file' 
