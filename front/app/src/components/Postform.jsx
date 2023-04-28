@@ -5,6 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 function Postform(props) {   
   const history = useHistory();
+  const [posted, setPosted] = useState(false)
   const [title, setTitle] = useState("")
   const titlelength = 30 - title.length
   const [imageOrVideo, setImageOrVideo] = useState("")
@@ -73,10 +74,14 @@ function Postform(props) {
     setMaterialError("")
   }
   const postRequired = () => {
-    return title&&imageOrVideo&&content&&time&&cost&&process&&coment&&materialFields[0].material&&materialFields[0].amount;
+    if (posted) {
+      return false;
+    } 
+    return title&&imageOrVideo&&imageOrVideoPreview&&content&&time&&cost&&process&&coment&&materialFields[0].material&&materialFields[0].amount;
   }
   const onSubmit = (event) => {
     event.preventDefault();
+    setPosted(true)
     const formData = new FormData();
     formData.append('post[title]', title);
     formData.append('post[image]', imageOrVideo);
@@ -131,16 +136,18 @@ function Postform(props) {
                     onChange={filechange}
                 />
                 </label><br/>
-                { imageOrVideo.type === "video/mp4" || imageOrVideo.type === "video/webm" ? 
-                    <video controls src={imageOrVideoPreview} className='video_display'></video>
-                        :  imageOrVideoPreview ?
-                        <img src={imageOrVideoPreview} className='video_display'></img>
-                         :
-                        <></>
-                }<br />
-                 <label>料理名: ※最大30文字</label>{ title && <a className={ titlelength < 0 ? 'title_length_errors' 
+                {imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("video/") ? (
+                 <video controls src={imageOrVideoPreview} className='video_display'></video>
+                 ) : imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("image/") ? (
+                 <img src={imageOrVideoPreview} className='video_display'></img>
+                 ) : (
+                 <></>
+                 )}
+                <br />
+                <label>料理名: ※最大30文字</label>{ title && <a className={ titlelength === 0 ? 'title_length_errors' 
                                                                          : ''}>　残り{titlelength}文字</a>}<br></br>
                 <input className='title'
+                    maxLength='30'
                     type="text"
                     placeholder='料理名'
                     value={title}
@@ -148,7 +155,7 @@ function Postform(props) {
                 /><br></br>
                 <label>料理概要:</label><br/>
                 <textarea className='content'
-                    maxLength="500"
+                    maxLength="300"
                     type="text"
                     name="content"
                 
@@ -161,19 +168,17 @@ function Postform(props) {
                 <input className='input_time'
                     maxLength="1"
                     type="text"
-               
                     name="time"
                     value={time}
-                    onChange={event => setTime(event.target.value)}
+                    onChange={event => setTime(event.target.value.replace(/[^0-9]/g, ""))}
                 />　分
                 <label>　　　　　費用　</label>
                 <input className='input_cost'
                     maxLength="5"
                     type="text"
-                 
                     name="cost"
                     value={cost} 
-                    onChange={event => setCost(event.target.value)}
+                    onChange={event => setCost(event.target.value.replace(/[^0-9]/g, ""))}
                 />　円<br/>
                 <button type='button' className='material_add' onClick={MaterialAdd}>＋　行を追加</button>
                 <button type='button' className='material_remove' onClick={materialRemove}>ー　行を削除</button>
@@ -206,7 +211,7 @@ function Postform(props) {
                 </div>
                  <label>作業工程:</label><br/>
                  <textarea className='process'
-                    maxLength="500"
+                    maxLength="300"
                     type="text"
                     name="process"
              
@@ -224,7 +229,7 @@ function Postform(props) {
                     value={coment}
                     onChange={event => setComent(event.target.value)}       
                  /><br/>
-                 <button className='post_button' type="submit" disabled={!postRequired()}>
+                 <button className={ posted ?  'posted_button' : 'post_button' } type="submit" disabled={!postRequired()}>
                    投稿する
                  </button>
             </form>

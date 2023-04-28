@@ -12,6 +12,7 @@ import Category from './components/Category'
 import Profile from "./components/Profile";
 import ProfileEdit from "./components/ProfileEdit";
 import Following from './components/Following';
+import WarnModal from "./components/WarnModal";
 import {ListUrl} from './components/ListUrl';
 import{
   BrowserRouter as Router,
@@ -133,6 +134,9 @@ function App(props) {
       <Switch>
        <Route exact path={"/loginwarn"}>
          <Loginwarn />
+       </Route>
+       <Route exact path={"/warn"}>
+         <WarnModal />
        </Route>
         <Route exact path={"/"}
              render={props => (

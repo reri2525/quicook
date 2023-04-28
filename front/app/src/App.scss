@@ -964,6 +964,13 @@ span {
       transition: 0.3s;
     }
    }
+   .posted_button {
+    background-color: khaki;
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    cursor: not-allowed;
+   }
 }
 
 
@@ -1176,11 +1183,23 @@ footer {
         border: #bbb 1px solid;
         border-radius: 10px;
       }
-      button {
+      .save_button {
         &:hover {
           transition: 0.3s;
           border-radius: 10px;
           background-color: #bbb;
+        }
+      }
+      .acount_destroy_button {
+        float: right;
+        position: relative;
+        border-radius: 3px;
+        left: 5px;
+        background-color: rgba(255, 0, 0, 0.5);
+        &:hover {
+          transition: 0.3s;
+          border-radius: 10px;
+          background-color: rgba(255, 0, 0, 0.8);
         }
       }
       .icon {

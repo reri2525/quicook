@@ -102,7 +102,8 @@ function ProfileEdit(props) {
            value={passwordConfirmation}
            onChange={event => setPasswordConfirmation(event.target.value)}
          /><br/>
-         <button type='submit'>保存する</button>
+         <button type='submit' className='save_button'>保存する</button>
+         <button type='button' className='acount_destroy_button'>アカウント削除</button>
         </form>
       </div>
     </div>

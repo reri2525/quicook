@@ -141,6 +141,7 @@ function Home(props) {
               { postall[key].file_type === "video" ? <video
                                                        onMouseEnter={handleMouseEnter}
                                                        onMouseLeave={handleMouseLeave}
+                                                       volume="0.5"
                                                        src={postall[key].image.url} onClick={() => postShow(postall[key].id)}>
                                                      </video> : <></>}
            </div>

@@ -101,7 +101,7 @@ function PostShow(props) {
         <div className='post_display'>
           <div className='post_image_display'>
             { post.file_type === "image" ? <img src={post.image.url} ></img> : <></> }
-            { post.file_type === "video" ? <video autoPlay controls src={post.image.url} ></video> : <></>}
+            { post.file_type === "video" ? <video autoPlay controls src={post.image.url} volume="0.1"></video> : <></>}
           </div>
           <div className='favorite_container'>
             <div className='bookmark' onClick={ () => handleBookmark(post)}>
