@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
+import '../ScssFile/ProfileEdit.scss'
+import WarnModal from './WarnModal'
 import axios from 'axios'
 function ProfileEdit(props) {
  const user = props.user
@@ -12,6 +14,8 @@ function ProfileEdit(props) {
  const [avatarPreview, setAvatarPreview] = useState(user.avatar.url)
  const [password, setPassword] = useState("")
  const [passwordConfirmation, setPasswordConfirmation] = useState("")
+ const [warnModal, setWarnModal] = useState(false)
+ const [warnType, setWarnType] = useState("acountDestroy")
  const onSubmit = (event) => {
   event.preventDefault()
   const formData = new FormData();
@@ -57,7 +61,18 @@ function ProfileEdit(props) {
        };
        reader.readAsDataURL(event.target.files[0])
  }
+ const handleDestroy = () => {
+  setWarnModal(true)
+ }
+ useEffect(() => {
+   if (warnModal) {
+     document.body.style.overflow = 'hidden';
+   } else {
+     document.body.style.overflow = 'auto';
+   }
+ }, [warnModal])
  return (
+  <Fragment>
     <div className='edit'>
       <div className='edit_container'>
         <form onSubmit={onSubmit}>
@@ -103,10 +118,12 @@ function ProfileEdit(props) {
            onChange={event => setPasswordConfirmation(event.target.value)}
          /><br/>
          <button type='submit' className='save_button'>保存する</button>
-         <button type='button' className='acount_destroy_button'>アカウント削除</button>
+         <button type='button' className='acount_destroy_button' onClick={() => handleDestroy()}>アカウント削除</button>
         </form>
       </div>
     </div>
+    { warnModal ? <WarnModal setWarnModal={setWarnModal} warnType={warnType} user={user}/> : <></> }
+  </Fragment>
   )
 }
 

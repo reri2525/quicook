@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import '/usr/src/app/app/src/App.scss';
+import '../ScssFile/Footer.scss'
 function Footer() {
   return (
     <Fragment>

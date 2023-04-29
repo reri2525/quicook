@@ -1,0 +1,106 @@
+.edit {
+  margin-top: 30px;
+  margin-left: 220px;
+  border-radius: 10px;
+  width: 500px;
+  min-height: 800px;
+  background-color: white;
+  .edit_container {
+    position: relative;
+    top: 30px; 
+    form {
+      width: 335px;
+      margin: 0 auto;
+      .update {
+        background-color: rgba(187, 187, 187, 0.286);
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        border: #bbb 1px solid;
+        border-radius: 10px;
+      }
+      .errors {
+        background-color: rgba(255, 0, 0, 0.237);
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        border: #bbb 1px solid;
+        border-radius: 10px;
+      }
+      .save_button {
+        &:hover {
+          transition: 0.3s;
+          border-radius: 10px;
+          background-color: #bbb;
+        }
+      }
+      .acount_destroy_button {
+        float: right;
+        width: 120px;
+        height: 30px;
+        border: #bbb 1px solid;
+        border-radius: 10px;
+        color: white;
+        position: relative;
+        left: 9px;
+        background-color: rgba(250, 0, 0);
+        &:hover {
+          transition: 0.3s;
+          cursor: pointer;
+          background-color: rgba(200, 0, 0);
+        }
+      }
+      .icon {
+        position: relative;
+        left: 118px;
+        width: 100px;
+        height: 100px;
+       .image {
+         width: 100%;
+         height: 100%;
+         border-radius: 50px;
+         border: #bbb 1px solid;
+        }
+      }
+      h3 {
+        text-align: center;
+      }
+      .icon_edit {
+       position: relative;
+       left: 80px;
+       color: rgba(0, 0, 255, 0.8);
+       border-bottom: 1px solid rgba(0, 0, 255, 0.8);
+       &:hover {
+        color: blue;
+        border-bottom: 1px solid blue;
+        cursor: pointer;
+       }
+       .image_input {
+        display: none;
+       }
+      } 
+      .name {
+        width: 100%;
+        margin-bottom: 30px;
+        font-size: 18px;
+      }
+      .self_introduction {
+        width: 100%;
+        padding-bottom: 60px;
+        margin-bottom: 30px;
+      }
+      .email {
+        width: 100%;
+        margin-bottom: 30px;
+        font-size: 18px;
+      }
+      .password {
+        width: 100%;
+        margin-bottom: 30px;
+        font-size: 18px;
+      }
+    }
+  }
+}

@@ -1,10 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import '/usr/src/app/app/src/App.scss';
-import { Link } from "react-router-dom";
 import Header from './Header';
-import Postform from './Postform';
+import '../ScssFile/Top.scss'
 import Footer from './Footer';
-import List from './List';
 import Logmodal from './Login';
 import Newmodal from './New';
 function Top(props) {

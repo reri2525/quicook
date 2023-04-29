@@ -1,6 +1,6 @@
 import Loginwarn from "./components/Loginwarn";
-import './App.scss';
 import React, { useState, useEffect } from 'react';
+import './ScssFile/Share.scss'
 import { useHistory } from "react-router-dom";
 import axios from'axios';
 import Top from './components/Top'

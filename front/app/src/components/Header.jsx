@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import axios from 'axios';
-import '/usr/src/app/app/src/App.scss';
 import '/usr/src/app/app/src/Responsive.scss';
+import '../ScssFile/Header.scss'
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';

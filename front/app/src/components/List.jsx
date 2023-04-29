@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import '/usr/src/app/app/src/App.scss';
+import '../ScssFile/List.scss'
 import { Link } from "react-router-dom";
 import Header from './Header';
 import { ListData1 } from './ListData';

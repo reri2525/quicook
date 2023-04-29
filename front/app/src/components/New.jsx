@@ -1,8 +1,6 @@
 import React, { Fragment, useState } from 'react';
-import '/usr/src/app/app/src/App.scss';
+import '../ScssFile/New.scss'
 import axios from 'axios'
-import Top from './Top'
-import Header from './Header'
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -101,7 +99,7 @@ return (
                 {errors.passwordConfirmation?.type === 'minLength' && (
                   <div className='errors'>※パスワードが短すぎます!</div>
                 )}
-                <button className='btn-primary' type="button" onClick={handleSubmit(onSubmit)}>送信</button><br></br>
+                <button className='btn' type="button" onClick={handleSubmit(onSubmit)}>送信</button><br></br>
                 <c>パスワードは英文字または数字で6桁以上入力してください</c><br></br>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
             </form>

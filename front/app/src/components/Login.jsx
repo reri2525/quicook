@@ -1,10 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import '/usr/src/app/app/src/App.scss';
+import '../ScssFile/Login.scss'
 import axios from 'axios'
-import Top from './Top'
-import Header from './Header'
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 function Logmodal(props) {
@@ -70,7 +67,7 @@ return (
                     value={password}
                     onChange={event => setPassword(event.target.value)}
                 /><br></br>
-                <button className='btn-primary' type="submit">送信</button><br></br>
+                <button className='btn' type="submit">送信</button><br></br>
                 <span>{errors_m}</span>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
             </form>

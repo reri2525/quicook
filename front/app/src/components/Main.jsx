@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import '/usr/src/app/app/src/App.scss';
+import '../ScssFile/Main.scss'
 import Header from './Header';
 import Postform from './Postform';
 import List from './List';

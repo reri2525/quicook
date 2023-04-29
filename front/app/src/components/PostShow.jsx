@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState, useRef } from 'react';
+import '../ScssFile/PostShow.scss'
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
@@ -6,6 +7,8 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import DeleteIcon from '@mui/icons-material/Delete';
+import WarnModal from './WarnModal'
 function PostShow(props) {
  const ref = useRef(null);
  const currentUser = props.user
@@ -15,6 +18,8 @@ function PostShow(props) {
  const [bookmarked, setBookmarked] = useState(false)
  const [hearted, setHearted] = useState(false)
  const [relationship, setRelationship] = useState(false)
+ const [warnModal, setWarnModal] = useState(false)
+ const [warnType, setWarnType] = useState("postDelete")
  const CloseModal = () => {
   props.setPostShowModal(false)
  }
@@ -79,7 +84,7 @@ function PostShow(props) {
  if (post.image) {
   return (
    <Fragment>
-    <div className='back_display'>
+    <div className='back_display2'>
 
     </div>
     <div className='post_show_container' ref={ref}>
@@ -137,8 +142,14 @@ function PostShow(props) {
          </div>
         </div>
      </div>
+     { currentUser.id === post.user.id ?
+       <div className='delete' onClick={() => setWarnModal(true)}><DeleteIcon style={{ fontSize: '30px', cursor: 'pointer' }} /></div>
+         : 
+       <></> 
+     }
      <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
     </div>
+    { warnModal ? <WarnModal setWarnModal={setWarnModal} warnType={warnType} /> : <></> }
   </Fragment>
   )
  }

@@ -39,6 +39,18 @@ class UsersController < ApplicationController
             render json: { status: :false}
         end
     end
+
+    def destroy
+        if current_user
+            reset_session
+            if @current_user.destroy
+                render json: { status: :true}
+            else
+                render json: { status: :false}
+            end
+        end
+    end
+
     private
 
         def user_params
