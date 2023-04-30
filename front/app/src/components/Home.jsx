@@ -14,11 +14,12 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import PostShow from './PostShow';
 function Home(props) {
   const { id } = useParams();
+  const numericId = parseInt(id);
   const history = useHistory();
   const [postall, setPostall] = useState([])
   const [postDestroy, setPostDestroy] = useState(false)
-  const [pagecount, setPagecount] = useState(props.pagecount)
-  const [currentPage, setCurrentPage] = useState(id)
+  const [pagecount, setPagecount] = useState()
+  const [currentPage, setCurrentPage] = useState(numericId)
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
   const [heartedPosts, setHeartedPosts] = useState([]);

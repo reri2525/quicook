@@ -44,10 +44,6 @@ function PostShow(props) {
    .catch(error => {
     console.log("b")
    })
-   document.body.style.overflow = 'hidden';
-   return () => {
-    document.body.style.overflow = 'auto';
-   };
  }
  const handleBookmark = (post) => {
    console.log("ハンドルブックマーク")
