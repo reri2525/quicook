@@ -22,7 +22,7 @@ import{
 } from "react-router-dom";
 function App(props) {
   const [modal, setModal] = useState(false); 
-  const [loggedInStatus, setLoggedInStatus] = useState("未ログイン")
+  const [loggedInStatus, setLoggedInStatus] = useState({})
   const [user, setUser] = useState({})
   const [postall, setPostall] = useState({})
   const [pagecount, setPagecount] = useState({})
@@ -38,17 +38,19 @@ function App(props) {
             .then(response => {
               setLoggedInStatus("未ログイン")
               setUser({})
-              console.log(loggedInStatus)
-            }).catch(error => console.log("ログアウトエラー"))
+              window.location.reload();
+            }).catch(error => console.log("ログアウトエラー", error))
   }
   const checkLoginStatus = () => {
     axios.get("http://localhost:3001/logged_in",{ withCredentials: true })
     .then(response => {
-      if (response.data.logged_in && loggedInStatus === "未ログイン") {
+      if (response.data.logged_in) {
         setLoggedInStatus("ログインなう")
+        console.log(loggedInStatus)
         setUser(response.data.user)
-      } else if (!response.data.logged_in && loggedInStatus === "ログインなう") {
+      } else if (!response.data.logged_in) {
         setLoggedInStatus("未ログイン")
+        console.log(loggedInStatus)
         setUser({})
       }
     })
@@ -162,7 +164,7 @@ function App(props) {
                                  />}/>
             )}
           />  
-          <Route exact path={"/post/:id"}
+          <Route exact path={"/posts/:id/show"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
