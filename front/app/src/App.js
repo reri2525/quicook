@@ -171,7 +171,11 @@ function App(props) {
                                  user={user} postall={postall} handleLogout={handleLogout}   
                                  setCurrentPage={setCurrentPage} pagecount={pagecount}    
                                  setSearching={setSearching}                
-                                 url={<PostShow user={user}/>}/>
+                                 url={<PostShow user={user} relationshipCreate={relationshipCreate} 
+                                                relationshipDestroy={relationshipDestroy}  bookmarkCreate={bookmarkCreate} 
+                                                bookmarkDestroy={bookmarkDestroy} heartCreate={heartCreate} 
+                                                heartDestroy={heartDestroy}
+                                                />}/>
             )}
           />  
           <Route exact path={"/follow"}
