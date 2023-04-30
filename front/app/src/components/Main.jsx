@@ -27,7 +27,7 @@ const [postmodal, setPostmodal] = useState(false);
      </body>
     </Fragment>
     )
- } else if (props.loggedInStatus === '未ログイン') {
+  } else if (props.loggedInStatus === '未ログイン') {
     props.history.push("/")
  }
 }

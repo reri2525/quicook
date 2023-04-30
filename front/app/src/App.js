@@ -38,7 +38,8 @@ function App(props) {
             .then(response => {
               setLoggedInStatus("未ログイン")
               setUser({})
-            }).catch(error => console.log("ログアウトエラー", error))
+              console.log(loggedInStatus)
+            }).catch(error => console.log("ログアウトエラー"))
   }
   const checkLoginStatus = () => {
     axios.get("http://localhost:3001/logged_in",{ withCredentials: true })
@@ -148,6 +149,20 @@ function App(props) {
             )}
           />  
         <Route exact path={"/home"}
+             render={props => (
+              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
+                                 user={user} postall={postall} handleLogout={handleLogout}   
+                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
+                                 setSearching={setSearching}                
+                                 url={<Home postall={postall} currentPage={currentPage} 
+                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
+                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
+                                 />}/>
+            )}
+          />  
+          <Route exact path={"/post/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
