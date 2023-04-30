@@ -16,6 +16,7 @@ function Home(props) {
   const [postShowNumber, setPostShowNumber] = useState("")
   const history = useHistory();
   const [postall, setPostall] = useState([])
+  const [postDestroy, setPostDestroy] = useState(false)
   const [pagecount, setPagecount] = useState(props.pagecount)
   const [currentPage, setCurrentPage] = useState(props.currentPage)
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
@@ -29,6 +30,12 @@ function Home(props) {
     window.scrollTo(0, 0);
     postAllGet();
   }, [currentPage])
+
+  useEffect(() => {
+    setPostall([])
+    postAllGet();
+  }, [postDestroy])
+  
   const postShow = (e) => {
     setPostShowModal(true)
     setPostShowNumber(e)
@@ -195,6 +202,7 @@ function Home(props) {
       {postShowModal ?  <PostShow postShowModal={postShowModal} 
                                   setPostShowModal={setPostShowModal} 
                                   postShowNumber={postShowNumber} 
+                                  setPostDestroy={setPostDestroy}
                                   user={props.user}
                                   bookmarkCreate={props.bookmarkCreate} bookmarkDestroy={props.bookmarkDestroy}
                                   heartCreate={props.heartCreate} heartDestroy={props.heartDestroy}

@@ -12,7 +12,8 @@ import Category from './components/Category'
 import Profile from "./components/Profile";
 import ProfileEdit from "./components/ProfileEdit";
 import Following from './components/Following';
-import WarnModal from "./components/WarnModal";
+import WarnModal from './components/WarnModal';
+import FollowerIndex from './components/FollowerIndex'
 import {ListUrl} from './components/ListUrl';
 import{
   BrowserRouter as Router,
@@ -138,6 +139,9 @@ function App(props) {
        <Route exact path={"/warn"}>
          <WarnModal />
        </Route>
+       <Route exact path={"/follower"}>
+         <FollowerIndex />
+       </Route>
         <Route exact path={"/"}
              render={props => (
               <Top { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout}/>
@@ -175,7 +179,7 @@ function App(props) {
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}                            
-                                 url={<Bookmark postall={postall} currentPage={currentPage} 
+                                 url={<Home postall={postall} currentPage={currentPage} 
                                  pagecount={pagecount} setCurrentPage={setCurrentPage}
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
                                  heartCreate={heartCreate} heartDestroy={heartDestroy}

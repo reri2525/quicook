@@ -19,7 +19,7 @@ function PostShow(props) {
  const [hearted, setHearted] = useState(false)
  const [relationship, setRelationship] = useState(false)
  const [warnModal, setWarnModal] = useState(false)
- const [warnType, setWarnType] = useState("postDelete")
+ const [warnType, setWarnType] = useState("postDestroy")
  const CloseModal = () => {
   props.setPostShowModal(false)
  }
@@ -149,7 +149,10 @@ function PostShow(props) {
      }
      <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
     </div>
-    { warnModal ? <WarnModal setWarnModal={setWarnModal} warnType={warnType} /> : <></> }
+    { warnModal ? <WarnModal setWarnModal={setWarnModal} warnType={warnType} post={post} 
+                             setPostShowModal={props.setPostShowModal}
+                             setPostDestroy={props.setPostDestroy}
+                             /> : <></> }
   </Fragment>
   )
  }

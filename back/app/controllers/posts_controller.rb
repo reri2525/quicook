@@ -122,6 +122,7 @@ class PostsController < ApplicationController
      end
     end
   end
+
   def search
     if current_user
       @search = params[:search]
@@ -154,6 +155,15 @@ class PostsController < ApplicationController
       else
           render json: {status: false}
       end
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      render json: {status: true}
+    else
+      render json: {status: false}
     end
   end
 

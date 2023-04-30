@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
+import '../ScssFile/Home.scss'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
@@ -15,6 +16,7 @@ function Home(props) {
   const [postShowNumber, setPostShowNumber] = useState("")
   const history = useHistory();
   const [postall, setPostall] = useState([])
+  const [postDestroy, setPostDestroy] = useState(false)
   const [pagecount, setPagecount] = useState(props.pagecount)
   const [currentPage, setCurrentPage] = useState(props.currentPage)
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
@@ -28,30 +30,36 @@ function Home(props) {
     window.scrollTo(0, 0);
     postAllGet();
   }, [currentPage])
+
+  useEffect(() => {
+    setPostall([])
+    postAllGet();
+  }, [postDestroy])
+  
   const postShow = (e) => {
     setPostShowModal(true)
     setPostShowNumber(e)
   }
   const postAllGet = () =>{
-    axios.get("http://localhost:3001/bookmarks", { params: { page: currentPage }, withCredentials: true })
+     axios.get("http://localhost:3001/posts", { params: { page: currentPage }, withCredentials: true })
     .then(response => {
-     if (response.data.status) {
-       const data = response.data.post_all
-       setPostall(data)
-       setPagecount(response.data.total_pages)
-       console.log(data)
-       for (let i = 0; i < data.length; i++) {
-         bookmarkExist(data[i]);
-       }
-       for (let i = 0; i < data.length; i++) {
-         heartExist(data[i]);
-       }
-       setPostExist(true)
-     } else {
-       setPostExist(false)
-       console.log("aswsawsasaw")
-     }
-   })
+      if (response.data.status) {
+        const data = response.data.post_all
+        setPostall(data)
+        setPagecount(response.data.total_pages)
+        console.log(data)
+        for (let i = 0; i < data.length; i++) {
+          bookmarkExist(data[i]);
+        }
+        for (let i = 0; i < data.length; i++) {
+          heartExist(data[i]);
+        }
+        setPostExist(true)
+      } else {
+        setPostExist(false)
+        console.log("失敗")
+      }
+    })
   }
   const postAdd = (page) => {
     setCurrentPage(page)
@@ -65,7 +73,7 @@ function Home(props) {
   }
   const postGo = (currentPage) => {
     if (currentPage !== pagecount) {
-      setCurrentPage(currentPage)
+      setCurrentPage(currentPage + 1)
     }
     window.scrollTo(0, 0);
   }
@@ -109,6 +117,16 @@ function Home(props) {
       }
     });
   }
+  const handleMouseEnter = (event) => {
+    event.target.play();
+    event.target.controls = true;
+  };
+
+  const handleMouseLeave = (event) => {
+    event.target.pause();
+    event.target.currentTime = 0;
+    event.target.controls = false;
+  };
   return (
     <Fragment> 
       { postall[0] ? 
@@ -127,7 +145,13 @@ function Home(props) {
                </div>
            </div>
            <div className='middle'>
-              <img src={postall[key].image.url}></img>
+              { postall[key].file_type === "image" ? <img src={postall[key].image.url}></img> : <></> }
+              { postall[key].file_type === "video" ? <video
+                                                       onMouseEnter={handleMouseEnter}
+                                                       onMouseLeave={handleMouseLeave}
+                                                       volume="0.5"
+                                                       src={postall[key].image.url} onClick={() => postShow(postall[key].id)}>
+                                                     </video> : <></>}
            </div>
            <div className='foot'>
              <a>{postall[key].title}</a>
@@ -143,7 +167,7 @@ function Home(props) {
       : <></> }
       { postall.length === 0 && postExist ? 
                <div className='post_skeleton_container'>
-                 {[...Array(0).keys()].map(i =>
+                 {[...Array(20).keys()].map(i =>
                     <div className='post_skeleton'></div>
                  )}
                </div> :
@@ -178,12 +202,14 @@ function Home(props) {
       {postShowModal ?  <PostShow postShowModal={postShowModal} 
                                   setPostShowModal={setPostShowModal} 
                                   postShowNumber={postShowNumber} 
+                                  setPostDestroy={setPostDestroy}
                                   user={props.user}
                                   bookmarkCreate={props.bookmarkCreate} bookmarkDestroy={props.bookmarkDestroy}
                                   heartCreate={props.heartCreate} heartDestroy={props.heartDestroy}
                                   bookmarkedPosts={bookmarkedPosts} setBookmarkedPosts={setBookmarkedPosts}
                                   heartedPosts={heartedPosts} setHeartedPosts={setHeartedPosts}
-                                  postall={postall}
+                                  postall={postall} relationshipCreate={props.relationshipCreate} 
+                                  relationshipDestroy={props.relationshipDestroy}
                                   />
                                    : <></>}
    </Fragment>

@@ -10,6 +10,7 @@ User.create!(name:  "杉田　裕貴",
     email: "0831yuuki@i.softbank.jp",
     password:              "111111",
     password_confirmation: "111111",
+    introduction: "aws",
     )
 
 20.times do |n|
@@ -17,11 +18,13 @@ User.create!(name:  "杉田　裕貴",
   avatar = File.open(Rails.root.join('public', 'images', '可愛い女の子.jpeg'))
   email = "083#{n+2}yuuki@i.softbank.jp"
   password = "111111"
+  introduction = "aws"
   User.create!(name:  name,
         avatar: avatar,
         email: email,
         password:              password,
         password_confirmation: password,
+        introduction: introduction,
         )
 end
 

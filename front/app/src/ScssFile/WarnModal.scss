@@ -30,6 +30,22 @@
             transition: 0.3s;
         }
     }
+    .destroying {
+        margin-top: 5px;
+        margin-left: 38px;
+        background-color: red;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        text-align: center;
+        width: 200px;
+        height: 40px;
+        &:hover {
+            background-color: rgb(200, 0, 0);
+            transition: 0.3s;
+            cursor: not-allowed;
+        }
+    }
     .cancel {
         margin-top: 5px;
         margin-left: 38px;
