@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState, useRef } from 'react';
 import '../ScssFile/PostShow.scss'
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -20,11 +21,16 @@ function PostShow(props) {
  const [relationship, setRelationship] = useState(false)
  const [warnModal, setWarnModal] = useState(false)
  const [warnType, setWarnType] = useState("postDestroy")
+ const { id } = useParams();
  const CloseModal = () => {
   props.setPostShowModal(false)
  }
  useEffect(() => {
-   axios.get(`http://localhost:3001/posts/${props.postShowNumber}`, { withCredentials: true })
+  openPostShow(id)
+ }, [id])
+
+ const openPostShow = (id) => {
+   axios.get(`http://localhost:3001/posts/${id}`, { withCredentials: true })
    .then(response => {
     if (response.data.post) {
       const data = response.data.post
@@ -42,7 +48,7 @@ function PostShow(props) {
    return () => {
     document.body.style.overflow = 'auto';
    };
- }, [])
+ }
  const handleBookmark = (post) => {
    console.log("ハンドルブックマーク")
    if (bookmarked) {

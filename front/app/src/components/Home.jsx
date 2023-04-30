@@ -3,6 +3,7 @@ import '../ScssFile/Home.scss'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -12,13 +13,12 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ReplayIcon from '@mui/icons-material/Replay';
 import PostShow from './PostShow';
 function Home(props) {
-  const [postShowModal, setPostShowModal] = useState(false); 
-  const [postShowNumber, setPostShowNumber] = useState("")
+  const { id } = useParams();
   const history = useHistory();
   const [postall, setPostall] = useState([])
   const [postDestroy, setPostDestroy] = useState(false)
   const [pagecount, setPagecount] = useState(props.pagecount)
-  const [currentPage, setCurrentPage] = useState(props.currentPage)
+  const [currentPage, setCurrentPage] = useState(id)
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
   const [heartedPosts, setHeartedPosts] = useState([]);
@@ -33,12 +33,11 @@ function Home(props) {
 
   useEffect(() => {
     setPostall([])
-    postAllGet();
+    postAllGet(id);
   }, [postDestroy])
   
-  const postShow = (e) => {
-    setPostShowModal(true)
-    setPostShowNumber(e)
+  const postShow = (id) => {
+    history.push(`/posts/${id}`)
   }
   const postAllGet = () =>{
      axios.get("http://localhost:3001/posts", { params: { page: currentPage }, withCredentials: true })
@@ -199,19 +198,6 @@ function Home(props) {
         <button className='page_move' onClick={() => postGo(currentPage)}><NavigateNextIcon/></button><nav className='next'>next</nav>
        </div> : <></> }
       </div>}
-      {postShowModal ?  <PostShow postShowModal={postShowModal} 
-                                  setPostShowModal={setPostShowModal} 
-                                  postShowNumber={postShowNumber} 
-                                  setPostDestroy={setPostDestroy}
-                                  user={props.user}
-                                  bookmarkCreate={props.bookmarkCreate} bookmarkDestroy={props.bookmarkDestroy}
-                                  heartCreate={props.heartCreate} heartDestroy={props.heartDestroy}
-                                  bookmarkedPosts={bookmarkedPosts} setBookmarkedPosts={setBookmarkedPosts}
-                                  heartedPosts={heartedPosts} setHeartedPosts={setHeartedPosts}
-                                  postall={postall} relationshipCreate={props.relationshipCreate} 
-                                  relationshipDestroy={props.relationshipDestroy}
-                                  />
-                                   : <></>}
    </Fragment>
   )
 } 

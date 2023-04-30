@@ -6,6 +6,7 @@ import axios from'axios';
 import Top from './components/Top'
 import Main from "./components/Main";
 import Home from "./components/Home";
+import PostShow from "./components/PostShow";
 import Bookmark from './components/Bookmark'; 
 import Search from './components/Search';
 import Category from './components/Category'
@@ -150,7 +151,7 @@ function App(props) {
               <Top { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout}/>
             )}
           />  
-        <Route exact path={"/home"}
+        <Route exact path={"/home/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
@@ -164,18 +165,13 @@ function App(props) {
                                  />}/>
             )}
           />  
-          <Route exact path={"/posts/:id/show"}
+          <Route exact path={"/posts/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
                                  setCurrentPage={setCurrentPage} pagecount={pagecount}    
                                  setSearching={setSearching}                
-                                 url={<Home postall={postall} currentPage={currentPage} 
-                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
-                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
-                                 />}/>
+                                 url={<PostShow user={user}/>}/>
             )}
           />  
           <Route exact path={"/follow"}
