@@ -63,17 +63,20 @@ function Home(props) {
   }
   const postAdd = (page) => {
     setCurrentPage(page)
+    history.push(`/home/page/${page}`)
     window.scrollTo(0, 0);
   }
   const postBack = (currentPage) => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1)
+      history.push(`/home/page/${currentPage - 1}`)
       }
     window.scrollTo(0, 0);
   }
   const postGo = (currentPage) => {
     if (currentPage !== pagecount) {
       setCurrentPage(currentPage + 1)
+      history.push(`/home/page/${currentPage + 1}`)
     }
     window.scrollTo(0, 0);
   }
@@ -196,7 +199,11 @@ function Home(props) {
               {page}
          </button>
          ))}
-        <button className='page_move' onClick={() => postGo(currentPage)}><NavigateNextIcon/></button><nav className='next'>next</nav>
+        <button className='page_move' 
+           onClick={() => postGo(currentPage)}>
+            <NavigateNextIcon/>
+        </button>
+        <nav className='next'>next</nav>
        </div> : <></> }
       </div>}
    </Fragment>

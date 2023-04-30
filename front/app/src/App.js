@@ -151,7 +151,7 @@ function App(props) {
               <Top { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout}/>
             )}
           />  
-        <Route exact path={"/home/page/:id"}
+         <Route exact path={"/home/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
