@@ -83,7 +83,6 @@ function PostShow(props) {
  if (post.image) {
   return (
    <Fragment>
-   
     <div className='post_show_container' ref={ref}>
      <div className='head'>
        <div className='icon'>
@@ -147,8 +146,6 @@ function PostShow(props) {
      <div className='close' onClick={() => history.goBack()}><a><ArrowBackIcon /></a></div>
     </div>
     { warnModal ? <WarnModal setWarnModal={setWarnModal} warnType={warnType} post={post} 
-                             setPostShowModal={props.setPostShowModal}
-                             setPostDestroy={props.setPostDestroy}
                              /> : <></> }
   </Fragment>
   )

@@ -4,8 +4,6 @@ import '../ScssFile/WarnModal.scss'
 import axios from 'axios'
 function WarnModal(props) {
   const setWarnModal = props.setWarnModal
-  const setPostShowModal = props.setPostShowModal
-  const setPostDestroy = props.setPostDestroy
   const warnType = props.warnType
   const user = props.user
   const post = props.post
@@ -26,10 +24,6 @@ function WarnModal(props) {
       .then(response => {
         if (response.data.status) {
           history.goBack();
-          setPostDestroy(true)
-          setTimeout(() => {
-            setPostDestroy(false);
-          }, 100);
         }
       })
     }

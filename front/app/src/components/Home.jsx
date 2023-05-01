@@ -17,7 +17,6 @@ function Home(props) {
   const numericId = parseInt(id);
   const history = useHistory();
   const [postall, setPostall] = useState([])
-  const [postDestroy, setPostDestroy] = useState(false)
   const [pagecount, setPagecount] = useState()
   const [currentPage, setCurrentPage] = useState(numericId)
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
@@ -32,11 +31,6 @@ function Home(props) {
     postAllGet();
   }, [id])
 
-  useEffect(() => {
-    setPostall([])
-    postAllGet(id);
-  }, [postDestroy])
-  
   const postShow = (id) => {
     history.push(`/posts/${id}`)
   }
