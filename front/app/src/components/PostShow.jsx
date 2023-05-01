@@ -3,7 +3,8 @@ import '../ScssFile/PostShow.scss'
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
-import CloseIcon from '@mui/icons-material/Close';
+import { useHistory } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -12,9 +13,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import WarnModal from './WarnModal'
 function PostShow(props) {
  const ref = useRef(null);
+ const history = useHistory();
  const currentUser = props.user
  const relationshipCreate = props.relationshipCreate
  const relationshipDestroy = props.relationshipDestroy
+ const bookmarkCreate = props.bookmarkCreate
+ const bookmarkDestroy = props.bookmarkDestroy
+ const heartCreate = props.heartCreate
+ const heartDestroy = props.heartDestroy
  const [post, setPost] = useState([])
  const [bookmarked, setBookmarked] = useState(false)
  const [hearted, setHearted] = useState(false)
@@ -22,9 +28,7 @@ function PostShow(props) {
  const [warnModal, setWarnModal] = useState(false)
  const [warnType, setWarnType] = useState("postDestroy")
  const { id } = useParams();
- const CloseModal = () => {
-  props.setPostShowModal(false)
- }
+
  useEffect(() => {
   openPostShow(id)
  }, [id])
@@ -49,29 +53,22 @@ function PostShow(props) {
    console.log("ハンドルブックマーク")
    if (bookmarked) {
       setBookmarked(false)
-      props.bookmarkDestroy(post)
-      props.setBookmarkedPosts(props.bookmarkedPosts.filter(id => id !== post.id));
+      bookmarkDestroy(post)
    } else {
       setBookmarked(true)
-      props.bookmarkCreate(post)
-      props.setBookmarkedPosts([...props.bookmarkedPosts, post.id]);
+      bookmarkCreate(post)
    }
  }
  const handleHeart = (post) => {
    console.log("ハンドルハート")
-   let a = props.postall.find(p => p.id === post.id)
    if (hearted) {
     setHearted(false)
-    props.heartDestroy(post)
-    props.setHeartedPosts(props.heartedPosts.filter(id => id !== post.id));
+    heartDestroy(post)
     post.hearts_count = post.hearts_count - 1
-    a.heart_count = a.heart_count - 1
    } else {
     setHearted(true)
-    props.heartCreate(post)
-    props.setHeartedPosts([...props.heartedPosts, post.id]);
+    heartCreate(post)
     post.hearts_count = post.hearts_count + 1
-    a.heart_count = a.heart_count + 1
    }
  }
  const handleRelationship = (id) => {
@@ -149,7 +146,7 @@ function PostShow(props) {
          : 
        <></> 
      }
-     <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
+     <div className='close' onClick={() => history.goBack()}><a><ArrowBackIcon /></a></div>
     </div>
     { warnModal ? <WarnModal setWarnModal={setWarnModal} warnType={warnType} post={post} 
                              setPostShowModal={props.setPostShowModal}
