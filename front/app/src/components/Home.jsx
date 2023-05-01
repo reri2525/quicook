@@ -142,7 +142,10 @@ function Home(props) {
              <div className='icon'>
              <img src={postall[key].user.avatar.url}></img>
              </div>
-             <Link to={`/profile/${postall[key].user.id}`}>{postall[key].user.name}</Link>
+               <Link to={`/profile/${postall[key].user.id}`}
+                  onClick={(e) => {e.stopPropagation();} }>
+                     {postall[key].user.name}
+               </Link>
                <div className='bookmark' onClick={(e) => {e.stopPropagation(); handleBookmark(postall[key]); } }>
                     {bookmarkedPosts.includes(postall[key].id) ? <BookmarkIcon/> : <BookmarkBorderIcon/>}
                </div>
@@ -153,7 +156,7 @@ function Home(props) {
                                                        onMouseEnter={handleMouseEnter}
                                                        onMouseLeave={handleMouseLeave}
                                                        volume="0.5"
-                                                       src={postall[key].image.url} onClick={() => postShow(postall[key].id)}>
+                                                       src={postall[key].image.url}>
                                                      </video> : <></>}
            </div>
            <div className='foot'>

@@ -22,7 +22,7 @@ export const ListData1 = [
     {
         title: "ホーム",
         icon: <HomeIcon  style={{ fontSize: '20px' }}/>,
-        link: "/home"
+        link: "/home/page/1"
     },
     {
         title: "フォロー中",
