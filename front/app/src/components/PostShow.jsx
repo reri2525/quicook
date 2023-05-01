@@ -83,9 +83,7 @@ function PostShow(props) {
  if (post.image) {
   return (
    <Fragment>
-    <div className='back_display2'>
-
-    </div>
+   
     <div className='post_show_container' ref={ref}>
      <div className='head'>
        <div className='icon'>

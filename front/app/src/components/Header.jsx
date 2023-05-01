@@ -58,7 +58,7 @@ return (
         <button className='sarch_btn' onClick={() => searchQuery && postSearch(searchQuery)}><SearchIcon /></button>
       </form>
       <a className="log" onClick={() => props.handleLogout()}>ログアウト</a>
-      <a className='postbutton' onClick={() => ShowPostModal()}>投稿する</a>
+      <a className='post_button' onClick={() => ShowPostModal()}>投稿する</a>
     </header>
 );
 }

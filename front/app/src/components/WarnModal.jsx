@@ -25,7 +25,7 @@ function WarnModal(props) {
       axios.delete(`http://localhost:3001/posts/${post.id}`, { withCredentials: true })
       .then(response => {
         if (response.data.status) {
-          setPostShowModal(false)
+          history.goBack();
           setPostDestroy(true)
           setTimeout(() => {
             setPostDestroy(false);

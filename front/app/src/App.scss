@@ -994,7 +994,7 @@ body::-webkit-scrollbar-track{
   text-decoration: none;
   color: black;
   }
-  .postbutton {
+  .post_button {
    background-color: hsl(186, 95%, 68%);
    float: right;
    position: absolute;
@@ -1003,7 +1003,6 @@ body::-webkit-scrollbar-track{
    padding: 10px 50px 10px 50px;
    text-align: center;
    border-radius: 20px;
-   
    margin-left: -5px;
     &:hover {
      background-color:  hsl(207, 95%, 68%);

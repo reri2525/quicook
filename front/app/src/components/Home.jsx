@@ -30,7 +30,7 @@ function Home(props) {
     setPostall([])
     window.scrollTo(0, 0);
     postAllGet();
-  }, [currentPage])
+  }, [id])
 
   useEffect(() => {
     setPostall([])
