@@ -134,31 +134,31 @@ function Home(props) {
          <div className='post' key={key} onClick={() => postShow(postall[key].id)}>
            <div className='head'>
              <div className='icon'>
-             <img src={postall[key].user.avatar.url}></img>
+             <img src={value.user.avatar.url}></img>
              </div>
                <Link to={`/profile/${postall[key].user.id}`}
                   onClick={(e) => {e.stopPropagation();} }>
-                     {postall[key].user.name}
+                     {value.user.name}
                </Link>
                <div className='bookmark' onClick={(e) => {e.stopPropagation(); handleBookmark(postall[key]); } }>
-                    {bookmarkedPosts.includes(postall[key].id) ? <BookmarkIcon/> : <BookmarkBorderIcon/>}
+                    {bookmarkedPosts.includes(value.id) ? <BookmarkIcon/> : <BookmarkBorderIcon/>}
                </div>
            </div>
            <div className='middle'>
-              { postall[key].file_type === "image" ? <img src={postall[key].image.url}></img> : <></> }
-              { postall[key].file_type === "video" ? <video
+              { value.file_type === "image" ? <img src={value.image.url}></img> : <></> }
+              { value.file_type === "video" ? <video
                                                        onMouseEnter={handleMouseEnter}
                                                        onMouseLeave={handleMouseLeave}
                                                        volume="0.5"
-                                                       src={postall[key].image.url}>
+                                                       src={value.image.url}>
                                                      </video> : <></>}
            </div>
            <div className='foot'>
-             <a>{postall[key].title}</a>
-             <div className='favorite' onClick={(e) => {e.stopPropagation(); handleHeart(postall[key]); }}>
-                  {heartedPosts.includes(postall[key].id) ? <FavoriteIcon style={{ color: 'red' }}/> : <FavoriteBorder/>}
+             <a>{value.title}</a>
+             <div className='favorite' onClick={(e) => {e.stopPropagation(); handleHeart(value); }}>
+                  {heartedPosts.includes(value.id) ? <FavoriteIcon style={{ color: 'red' }}/> : <FavoriteBorder/>}
              </div>
-             <a className='heart_count'>{postall[key].heart_count}</a>
+             <a className='heart_count'>{value.heart_count}</a>
            </div>
          </div>
          )
