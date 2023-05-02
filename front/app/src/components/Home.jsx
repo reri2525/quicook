@@ -136,11 +136,11 @@ function Home(props) {
              <div className='icon'>
              <img src={value.user.avatar.url}></img>
              </div>
-               <Link to={`/profile/${postall[key].user.id}`}
+               <Link to={`/profile/${value.user.id}`}
                   onClick={(e) => {e.stopPropagation();} }>
                      {value.user.name}
                </Link>
-               <div className='bookmark' onClick={(e) => {e.stopPropagation(); handleBookmark(postall[key]); } }>
+               <div className='bookmark' onClick={(e) => {e.stopPropagation(); handleBookmark(value); } }>
                     {bookmarkedPosts.includes(value.id) ? <BookmarkIcon/> : <BookmarkBorderIcon/>}
                </div>
            </div>
