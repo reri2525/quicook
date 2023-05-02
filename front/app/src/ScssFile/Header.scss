@@ -121,6 +121,23 @@ header {
   a {
     cursor: pointer;
   }  
+
+  .post_button {
+    background-color: hsl(186, 95%, 68%);
+    float: right;
+    position: absolute;
+    top: 10px;
+    left: 1000px;
+    padding: 10px 50px 10px 50px;
+    text-align: center;
+    border-radius: 20px;
+    margin-left: -5px;
+     &:hover {
+      background-color:  hsl(207, 95%, 68%);
+      transition: 0.3s;
+    }
+   }
+
 }
 
 .main_title {
@@ -148,18 +165,3 @@ header {
   }
 }
 
-.post_button {
-  background-color: hsl(186, 95%, 68%);
-  float: right;
-  position: absolute;
-  top: 10px;
-  left: 1000px;
-  padding: 10px 50px 10px 50px;
-  text-align: center;
-  border-radius: 20px;
-  margin-left: -5px;
-   &:hover {
-    background-color:  hsl(207, 95%, 68%);
-    transition: 0.3s;
-  }
- }

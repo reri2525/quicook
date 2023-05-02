@@ -31,7 +31,7 @@ function Top(props) {
  </Fragment>
   );
  } else if (props.loggedInStatus === 'ログインなう') {
-  props.history.push("/home")
+  props.history.push("/home/page/1")
  }
 }
  export default Top;

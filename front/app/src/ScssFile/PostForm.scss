@@ -1,0 +1,151 @@
+.postform_modal {
+    background-color: white;
+    position: fixed;
+    top: 80px;
+    left: calc(100vw / 5 + 40px);
+    height: 600px;
+    width: 800px;
+    z-index: 100;
+    border-radius: 12px;
+    padding: 10px 10px 10px 10px;
+    .close { 
+      z-index: 100;
+      position: fixed;
+      top: 90px;
+      left: 1050px;
+      border-radius: 30px;
+      padding: 15px 17px;
+      width:fit-content;
+      color: black;
+      &:hover {
+       background-color: #bbb;
+      }
+      a {
+        position: relative;
+        top: 0px;
+        left: 0px;
+      }
+    }
+  }
+  .postform_modal_content {
+    min-height: 100vh;
+    h1 {
+      color: khaki;
+    }
+  }
+  .postform_modal_inner {
+    overflow-y: scroll;
+    height: 600px;
+    }
+  .form_post {
+    margin-left: 15px;
+    width: 750px;
+     input {
+       width: calc(100% - 18px);
+       padding: 5px 0px 5px 5px;
+       border: 1px solid rgba(187, 187, 187, 0.803);
+       margin-bottom: 20px;
+       border-radius: 5px;
+     }
+     .title_length_errors {
+      color: red;
+     }
+     textarea {
+       opacity: 0.8;
+       width: calc(100% - 18px);
+       font-size: 20px;
+       height: 200px;
+       padding: 5px 0px 5px 5px;
+       border: 1px solid rgb(187, 187, 187);
+       margin-bottom: 20px;
+       border-radius: 5px;
+     }
+     .input_time {
+       text-align: center;
+       padding-right: 5px;
+       width: 20px;
+       height: 10px; 
+     }
+     .input_cost {
+      text-align: center;
+      padding-right: 5px;
+      width: 40px;
+      height: 10px; 
+     }
+     .content_button {
+      float: right;
+      margin-right: 10px;
+     }
+     .material_input {
+      padding-right: 5px;
+      width: 300px;
+      height: 10px; 
+     }
+     .amount_label {
+      margin-left: 37px;
+     }
+     .material_add {
+       cursor: pointer;
+       width: fit-content;
+       padding: 5px 10px;
+       margin-bottom: 20px;
+       &:hover {
+        background-color: #bbb;
+        transition: 0.3s;
+        border-radius: 10px;
+       }
+     }
+     .material_remove {
+       cursor: pointer;
+       width: fit-content;
+       padding: 5px 10px;
+       margin-left: 530px;
+       margin-bottom: 20px;
+       &:hover {
+        background-color: #bbb;
+        transition: 0.3s;
+        border-radius: 10px;
+       }
+     }
+     .material_errors {
+      color: red;
+     }
+     .video {
+       display:none;
+     }
+     .video_display{
+      background-color: #000;
+      border: #bbb 1px solid;
+      border-radius: 10px;
+      height: 421px;
+      width: 750px;
+      object-fit: fill;
+     }
+     .video_file {
+      opacity: 0.6;
+      cursor:pointer;
+      &:hover {
+        opacity: 1;
+      }
+     }
+     .coment {
+      height: 100px;
+     }
+     .post_button {
+        background-color: khaki;
+        width: 100px;
+        height: 40px;
+        font-size: 15px;
+       &:hover {
+         background-color: yellow;
+         transition: 0.3s;
+       }
+      }
+      .posted_button {
+       background-color: khaki;
+       width: 100px;
+       height: 40px;
+       font-size: 15px;
+       cursor: not-allowed;
+      }
+}

@@ -41,7 +41,7 @@ return (
 } else if (props.loggedInStatus === 'ログインなう') {
 return (
     <header className="header_login">
-      <Link to="/home" className="main_title title_link">Quicook</Link>
+      <Link to="/home/page/1" className="main_title title_link">Quicook</Link>
       <Link to={`/profile/${user.id}`} className={window.location.pathname == `/profile/${user.id}` ? 'onprofile' : 'profile'}>
       <img className='image'
         src={user.avatar.url}>

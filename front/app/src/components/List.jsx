@@ -20,11 +20,18 @@ function Set(props) {
        {ListData1.map((value, key) => {
         return (
          <Link to={value.link} className="list_link">
-         <li key={key} className = {window.location.pathname === value.link ? "list_active" : "list"}>
+         <li key={key} className = {window.location.pathname === value.link 
+                                     || 
+                                    window.location.pathname.startsWith("/home/page") && value.link.startsWith("/home/page")
+                                      ? 
+                                      "list_active" 
+                                       : 
+                                      "list"
+                                    }>
             <a className='icon'> 
                {window.location.pathname === value.link  && value.icon2? value.icon2 : value.icon}
             </a>
-            <a className='list_title'>
+            <a className='list_title'> 
                {value.title}
             </a>
          </li>
