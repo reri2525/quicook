@@ -21,7 +21,7 @@
   }
   .explanation {
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 350px;
     .user_name {
       font-size: 20px;
@@ -80,9 +80,21 @@
       }
      }
     .user_data {
-      margin-top: 20px;
+      margin-top: 10px;
       a {
         margin-right: 30px;
+      }
+      .follow_modal {
+        &:hover {
+          &:hover {
+            opacity: 0.8;
+            border-bottom: black 1px solid;
+            cursor: pointer;
+          }
+        }
+      }
+      p {
+        margin-top: 0px;
       }
     }
   }

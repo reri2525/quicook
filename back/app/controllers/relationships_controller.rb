@@ -15,4 +15,10 @@ class RelationshipsController < ApplicationController
         render json: {status: true }
       end
     end
+
+    def followers
+      @user = User.find(params[:id])
+      @followers = @user.followers
+      render json: {followers: @followers }
+    end
 end

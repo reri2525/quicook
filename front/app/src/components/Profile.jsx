@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import '../ScssFile/Profile.scss'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
+import FollowingIndex from './FollowingIndex';
+import FollowersIndex from './FollowersIndex';
 function Profile(props) {
   const relationshipCreate = props.relationshipCreate
   const relationshipDestroy = props.relationshipDestroy
@@ -11,6 +13,8 @@ function Profile(props) {
   const [follow, setFollow] = useState([])
   const [follower, setFollower] = useState([])
   const [postsCount, setPostsCount] = useState([])
+  const [followingIndexModal, setFollowingIndexModal] = useState(false)
+  const [followersIndexModal, setFollowersIndexModal] = useState(false)
   const { id } = useParams();
   useEffect(() => {
     openPlofile(id)
@@ -40,6 +44,7 @@ function Profile(props) {
   }
   if (user.name) {
   return (
+   <Fragment>
     <div className='profile_container'>
       <div className='icon'>
        <img className='image'
@@ -60,11 +65,15 @@ function Profile(props) {
         }
         <div className='user_data'>
          <a>投稿  {postsCount ? postsCount : 0 } 件</a>
-         <a>フォロー {follow ? follow : 0 } 人</a>
-         <a>フォロワー {follower ? follower : 0 } 人</a>
+         <a className='follow_modal' onClick={() => setFollowingIndexModal(true)}>フォロー {follow ? follow : 0 } 人</a>
+         <a className='follow_modal' onClick={() => setFollowersIndexModal(true)}>フォロワー {follower ? follower : 0 } 人</a>
+         <p>{user.introduction}</p>
         </div>
       </div>
     </div>
+    { followingIndexModal ? <FollowingIndex user={user} /> : <></>}
+    { followersIndexModal ? <FollowersIndex user={user} /> : <></>}
+   </Fragment>
   )
   }
 }
