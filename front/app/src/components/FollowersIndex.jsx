@@ -4,6 +4,7 @@ import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
 function FollowersIndex(props) {
   const user = props.user
+  const currentUser = props.currentUser
   const setFollowersIndexModal = props.setFollowersIndexModal
   const [followers, setFollowers] = useState([])
   const [relationship, setRelationship] = useState([])
@@ -88,7 +89,7 @@ function FollowersIndex(props) {
                  <img src={value.avatar.url}></img>
                 </div>
                 <a key={key}>{value.name}</a>
-                { user.id === value.id ? 
+                { currentUser.id === value.id ? 
                   <></>
                   : 
                   relationship[key] ?

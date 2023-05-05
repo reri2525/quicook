@@ -30,6 +30,7 @@ class RelationshipsController < ApplicationController
       render json: {followers: 
                     @followers.map { |follower| 
                       { name: follower.name, 
+                        id: follower.id,
                         avatar: follower.avatar,
                         following: @user.following.include?(follower)
                       }
