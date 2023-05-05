@@ -71,8 +71,8 @@ function Profile(props) {
         </div>
       </div>
     </div>
-    { followingIndexModal ? <FollowingIndex user={user} /> : <></>}
-    { followersIndexModal ? <FollowersIndex user={user} /> : <></>}
+    { followingIndexModal ? <FollowingIndex user={user} setFollowingIndexModal={setFollowingIndexModal} /> : <></>}
+    { followersIndexModal ? <FollowersIndex user={user} setFollowersIndexModal={setFollowersIndexModal} /> : <></>}
    </Fragment>
   )
   }

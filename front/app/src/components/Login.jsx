@@ -29,7 +29,7 @@ function Logmodal(props) {
     ).then(response => {
         if (response.data.logged_in) {
             props.handleLogin(response.data)
-            history.push("/home")
+            history.push("/home/page/1")
         } else if (response.data.status === 401) {
             setErrors_m(response.data.errors)
             console.log("registration errorrrrr")

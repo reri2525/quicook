@@ -14,7 +14,7 @@ import Profile from "./components/Profile";
 import ProfileEdit from "./components/ProfileEdit";
 import Following from './components/Following';
 import WarnModal from './components/WarnModal';
-import FollowerIndex from './components/FollowerIndex'
+import FollowersIndex from './components/FollowersIndex'
 import {ListUrl} from './components/ListUrl';
 import{
   BrowserRouter as Router,
@@ -144,7 +144,7 @@ function App(props) {
          <WarnModal />
        </Route>
        <Route exact path={"/follower"}>
-         <FollowerIndex />
+         <FollowersIndex />
        </Route>
         <Route exact path={"/"}
              render={props => (

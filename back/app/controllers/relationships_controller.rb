@@ -16,9 +16,25 @@ class RelationshipsController < ApplicationController
       end
     end
 
+    def following
+      @user = User.find(params[:id])
+      @following = @user.following
+      @count = @following.count
+      render json: {following: @following, count: @count }
+    end
+
     def followers
       @user = User.find(params[:id])
       @followers = @user.followers
-      render json: {followers: @followers }
+      @count = @followers.count
+      render json: {followers: 
+                    @followers.map { |follower| 
+                      { name: follower.name, 
+                        avatar: follower.avatar,
+                        following: @user.following.include?(follower)
+                      }
+                    },
+                    count: @count 
+                   }
     end
 end

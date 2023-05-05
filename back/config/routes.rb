@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :bookmarks, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   get '/followers/:id', to: "relationships#followers"
+  get '/following/:id', to: "relationships#following"
   get '/bookmarks' , to: "posts#bookmark"
   get '/search' , to: "posts#search"
 end
