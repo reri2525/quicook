@@ -227,7 +227,9 @@ function App(props) {
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} 
                                  handleLogout={handleLogout} user={user} 
                                  url={<Profile user={user} relationshipCreate={relationshipCreate} 
-                                       relationshipDestroy={relationshipDestroy}/>
+                                       relationshipDestroy={relationshipDestroy} bookmarkCreate={bookmarkCreate} 
+                                       bookmarkDestroy={bookmarkDestroy} heartCreate={heartCreate} 
+                                       heartDestroy={heartDestroy}/>
                                       }/>
             )}
           />  
