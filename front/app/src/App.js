@@ -222,7 +222,7 @@ function App(props) {
                                  />}/>
             )}
           />  
-        <Route exact path={"/profile/:id"}
+        <Route exact path={"/profile/:id/page/:number"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} 
                                  handleLogout={handleLogout} user={user} 

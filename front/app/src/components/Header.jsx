@@ -42,7 +42,7 @@ return (
 return (
     <header className="header_login">
       <Link to="/home/page/1" className="main_title title_link">Quicook</Link>
-      <Link to={`/profile/${user.id}`} className={window.location.pathname == `/profile/${user.id}` ? 'onprofile' : 'profile'}>
+      <Link to={`/profile/${user.id}/page/1`} className={window.location.pathname == `/profile/${user.id}/page/1` ? 'onprofile' : 'profile'}>
       <img className='image'
         src={user.avatar.url}>
       </img>
