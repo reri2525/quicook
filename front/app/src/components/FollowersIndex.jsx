@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import '../ScssFile/FollowersIndex.scss'
 import axios from 'axios';
+import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 function FollowersIndex(props) {
   const user = props.user
   const currentUser = props.currentUser
   const setFollowersIndexModal = props.setFollowersIndexModal
   const [followers, setFollowers] = useState([])
-  const [relationship, setRelationship] = useState([])
   useEffect(() => {
     openFollowModal(user.id)
   }, [])
@@ -16,21 +16,16 @@ function FollowersIndex(props) {
     .then(response => {
       const data = response.data
       setFollowers(data.followers)
-      setRelationship(true)
-      setRelationship(new Array(data.count).fill(true));
-      setTimeout(() => {
-        console.log(relationship);
-      }, 6000);
       console.log(data.followers)
       console.log(data.count)
     })
   }
 
-  const handleRelationship = (id, key) => {
-    if (relationship[key]) {
-     relationshipDestroy(id, key)
+  const handleRelationship = (value, key) => {
+    if (value.following) {
+     relationshipDestroy(value.id, key)
     } else {
-     relationshipCreate(id, key)
+     relationshipCreate(value.id, key)
     }
   }
 
@@ -40,11 +35,9 @@ function FollowersIndex(props) {
     .then(response => {
       if (response.data.status) {
         console.log("フォロー")
-        setRelationship(prevState => {
-          return { ...prevState, [key]: true };
-        });
+        openFollowModal(user.id)
         setTimeout(() => {
-          console.log(relationship);
+          console.log(followers);
         }, 6000);
       }
     })
@@ -58,11 +51,9 @@ function FollowersIndex(props) {
     .then(response => {
       if (response.data.status) {
         console.log(response.data.post)
-        setRelationship(prevState => {
-          return { ...prevState, [key]: false };
-        });
+        openFollowModal(user.id)
         setTimeout(() => {
-          console.log(relationship);
+          console.log(followers);
         }, 6000);
       }
     })
@@ -88,14 +79,14 @@ function FollowersIndex(props) {
                 <div className='icon'>
                  <img src={value.avatar.url}></img>
                 </div>
-                <a key={key}>{value.name}</a>
+                <Link to={`/profile/${value.id}`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link>
                 { currentUser.id === value.id ? 
                   <></>
                   : 
-                  relationship[key] ?
-                    <a className="unfollow" onClick={() => handleRelationship(value.id, key)}>フォロー中</a>
+                  value.following ?
+                    <a className="unfollow" onClick={() => handleRelationship(value, key)}>フォロー中</a>
                       :
-                    <a className="follow" onClick={() => handleRelationship(value.id, key)}>フォローする</a>
+                    <a className="follow" onClick={() => handleRelationship(value, key)}>フォローする</a>
                 }
                </div>
              </Fragment>

@@ -6,19 +6,36 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!(name:  "杉田　裕貴",
-    avatar: File.open(Rails.root.join('public', 'images', '可愛い女の子.jpeg')),
+    avatar: File.open(Rails.root.join('public', 'images', '可愛い女の子1.jpeg')),
     email: "0831yuuki@i.softbank.jp",
     password:              "111111",
     password_confirmation: "111111",
-    introduction: "aws",
+    introduction: "私はリーバルです。",
     )
+
+
+
+3.times do |n|
+  name  = Faker::Japanese::Name.name
+  avatar = File.open(Rails.root.join('public', 'images', "可愛い女の子#{n+1}.jpeg"))
+  email = "083#{n+100}yuuki@i.softbank.jp"
+  password = "111111"
+  introduction = "私は#{Faker::Name.name}です。"
+  User.create!(name:  name,
+        avatar: avatar,
+        email: email,
+        password:              password,
+        password_confirmation: password,
+        introduction: introduction,
+        )
+end
 
 20.times do |n|
   name  = Faker::Japanese::Name.name
-  avatar = File.open(Rails.root.join('public', 'images', '可愛い女の子.jpeg'))
+  avatar = File.open(Rails.root.join('public', 'images', "可愛い女の子2.jpeg"))
   email = "083#{n+2}yuuki@i.softbank.jp"
   password = "111111"
-  introduction = "aws"
+  introduction = "私は#{Faker::Name.name}です"
   User.create!(name:  name,
         avatar: avatar,
         email: email,

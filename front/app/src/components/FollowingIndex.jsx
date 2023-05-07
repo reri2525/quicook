@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import '../ScssFile/FollowingIndex.scss'
 import axios from 'axios';
+import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 function FollowingIndex(props) {
   const user = props.user
@@ -86,7 +87,7 @@ function FollowingIndex(props) {
                 <div className='icon'>
                  <img src={value.avatar.url}></img>
                 </div>
-                <a key={key}>{value.name}</a>
+                <Link to={`/profile/${value.id}`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link>
                 { currentUser.id === value.id ? 
                   <></>
                   : 
