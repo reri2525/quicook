@@ -32,6 +32,7 @@
     }
     .followers_innner {
         overflow-y: scroll;
+        overscroll-behavior: none;
         height: 300px;
         .followers_content {
             display: flex;

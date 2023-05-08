@@ -79,7 +79,7 @@ function FollowersIndex(props) {
                 <div className='icon'>
                  <img src={value.avatar.url}></img>
                 </div>
-                <Link to={`/profile/${value.id}`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link>
+                <Link to={`/profile/${value.id}/page/1`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link>
                 { currentUser.id === value.id ? 
                   <></>
                   : 

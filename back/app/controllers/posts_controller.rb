@@ -48,6 +48,44 @@ class PostsController < ApplicationController
     end
   end
 
+  def user_posts_index
+    if current_user
+      @posts = Post.includes(:user).where(user_id: params[:id]).paginate(page: params[:page], per_page: 20)
+     if @posts.exists?
+       render json: { 
+         status: true, 
+         post_all: @posts.map { |post|
+           file_extension = File.extname(post.image.path).downcase
+           if file_extension == ".mp4" || file_extension == ".webm"
+             file_type = "video"
+           else
+             file_type = "image"
+           end
+           {
+            id: post.id,
+            title: post.title, 
+            image: post.image,
+            heart_count: post.hearts.count,
+            file_type: file_type,
+            user: { 
+              name: post.user.name,
+              avatar: post.user.avatar,
+              id: post.user.id
+            },
+            bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
+              { id: bookmark.id, user_id: bookmark.user_id } 
+            },
+            hearts: post.hearts.where(user_id: @current_user.id).map { |heart| 
+             { id: heart.id, user_id: heart.user_id } 
+            }
+           } 
+       },total_pages:@posts.total_pages}
+      else
+         render json: {status: false}
+      end
+    end
+  end
+
   def show
     if current_user
       @post = Post.includes(:user).find(params[:id])

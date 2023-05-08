@@ -136,7 +136,7 @@ function Home(props) {
              <div className='icon'>
              <img src={value.user.avatar.url}></img>
              </div>
-               <Link to={`/profile/${value.user.id}`}
+               <Link to={`/profile/${value.user.id}/page/1`}
                   onClick={(e) => {e.stopPropagation();} }>
                      {value.user.name}
                </Link>

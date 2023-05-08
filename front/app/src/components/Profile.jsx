@@ -32,7 +32,6 @@ function Profile(props) {
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
   const [heartedPosts, setHeartedPosts] = useState([]);
-  const [heartcount, setHeartcount] = useState(0)
   const [postExist, setPostExist] = useState(true)
 
   useEffect(() => {
@@ -42,8 +41,8 @@ function Profile(props) {
 
   useEffect(() => {
     setPostall([])
-    postAllGet(number)
-  }, [number])
+    postAllGet(id)
+  }, [number, id])
 
   const openPlofile = (id) => {
     axios.get(`http://localhost:3001/users/${id}`, { withCredentials: true })
@@ -74,8 +73,8 @@ function Profile(props) {
     history.push(`/posts/${id}`)
   }
 
-  const postAllGet = () =>{
-     axios.get("http://localhost:3001/posts", { params: { page: currentPage }, withCredentials: true })
+  const postAllGet = (id) =>{
+     axios.get(`http://localhost:3001/user/${id}/posts`, { params: { page: currentPage }, withCredentials: true })
     .then(response => {
       if (response.data.status) {
         const data = response.data.post_all
@@ -194,7 +193,7 @@ function Profile(props) {
       </div>
     </div>
     { postall[0] ? 
-      <div className='post_container'>
+      <div className='post_container_profile'>
        {postExist ? <></> : <h1>誰も投稿してないの！？まじ？</h1>} 
        {postall.map((value, key) => {
          return (
@@ -203,7 +202,7 @@ function Profile(props) {
              <div className='icon'>
              <img src={value.user.avatar.url}></img>
              </div>
-               <Link to={`/profile/${value.user.id}`}
+               <Link to={`/profile/${value.user.id}/page/1`}
                   onClick={(e) => {e.stopPropagation();} }>
                      {value.user.name}
                </Link>
@@ -233,7 +232,7 @@ function Profile(props) {
       </div>
       : <></> }
       { postall.length === 0 && postExist ? 
-               <div className='post_skeleton_container'>
+               <div className='post_skeleton_container_profile'>
                  {[...Array(20).keys()].map(i =>
                     <div className='post_skeleton'></div>
                  )}

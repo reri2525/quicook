@@ -1,11 +1,10 @@
 .profile_container {
-  position: fixed;
-  top: 62px;
-  z-index: 2;
+  position: relative;
+  z-index: 1;
   background-color: rgb(250,250,250);
   border-bottom: 1px solid #bbb;
   height: 175px;
-  width: calc(100% - 231px);
+  width: calc(100%);
   .icon {
     position: relative;
     top: 30px;
@@ -102,8 +101,7 @@
   }
 }
 
-.post_container {
-  margin-top: 160px;
+.post_container_profile {
   width: calc(100vw - 300px);
   display: flex;
   flex-wrap: wrap;
@@ -115,7 +113,7 @@
   }
   .post {
     background-color: white;
-    margin: 50px 15px 50px 120px;
+    margin: 50px 15px 0px 120px;
     height: 350px;
     width: 300px;
     border-radius: 8px;
@@ -221,14 +219,13 @@
   }
 }
 
-.post_skeleton_container {
-  margin-top: 160px;
+.post_skeleton_container_profile {
   width: calc(100vw - 300px);
   display: flex;
   flex-wrap: wrap;
   .post_skeleton {
     background-color: rgba(187, 187, 187, 0.574);
-    margin: 50px 15px 50px 120px;
+    margin: 50px 15px 0px 120px;
     height: 350px;
     width: 300px;
     border-radius: 8px;
