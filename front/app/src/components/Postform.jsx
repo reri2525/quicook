@@ -2,6 +2,9 @@ import React, { Fragment, useState, useEffect } from 'react';
 import '../ScssFile/PostForm.scss'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
+import { CategoryData } from './ListData';
+import { DishData } from './ListData';
+import { ListData3 } from './ListData';
 import CloseIcon from '@mui/icons-material/Close';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 function Postform(props) {   
@@ -127,10 +130,10 @@ function Postform(props) {
              <div className='postform_modal_content'>
              { categoryModal &&
                   <div className='category_modal_inner'>
+                    <div className='category_close'><a><CloseIcon onClick={() => setCategoryModal(false)}/></a></div>
                     <div className='category_modal_content'>
 
                     </div>
-                    <div className='category_close'><a><CloseIcon onClick={() => setCategoryModal(false)}/></a></div>
                   </div>
              }
              <h1>レシピ投稿:</h1>
