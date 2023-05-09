@@ -17,7 +17,9 @@ class PostsController < ApplicationController
       render json: { 
         status: true, 
         post_all: @post_all.map { |post|
+        if post.image
           file_extension = File.extname(post.image.path).downcase
+        end
           if file_extension == ".mp4" || file_extension == ".webm"
             file_type = "video"
           else

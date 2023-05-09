@@ -9,6 +9,7 @@ function Postform(props) {
   const [posted, setPosted] = useState(false)
   const [title, setTitle] = useState("")
   const titlelength = 30 - title.length
+  const [categoryModal, setCategoryModal] = useState(false)
   const [imageOrVideo, setImageOrVideo] = useState("")
   const [imageOrVideoPreview, setImageOrVideoPreview] = useState("")
   const [time, setTime] = useState("")
@@ -124,6 +125,14 @@ function Postform(props) {
            <div className='postform_modal'>
             <div className='postform_modal_inner'>
              <div className='postform_modal_content'>
+             { categoryModal &&
+                  <div className='category_modal_inner'>
+                    <div className='category_modal_content'>
+
+                    </div>
+                    <div className='category_close'><a><CloseIcon onClick={() => setCategoryModal(false)}/></a></div>
+                  </div>
+             }
              <h1>レシピ投稿:</h1>
              <form className="form_post" onSubmit={onSubmit}>
                 <label></label><br></br>
@@ -145,8 +154,16 @@ function Postform(props) {
                  <></>
                  )}
                 <br />
-                <label>料理名: ※最大30文字</label>{ title && <a className={ titlelength === 0 ? 'title_length_errors' 
-                                                                         : ''}>　残り{titlelength}文字</a>}<br></br>
+                <label>料理名: ※最大30文字</label>
+                { title && <a className={ titlelength === 0 ? 'title_length_errors' 
+                                                                 :
+                                                               ''
+                                         }
+                            >　残り{titlelength}文字
+                            </a>
+                }
+                <button type='button' className='category_button' onClick={() => setCategoryModal(true)}>カテゴリ:　なし</button>
+                <br></br>
                 <input className='title'
                     maxLength='30'
                     type="text"
@@ -233,7 +250,7 @@ function Postform(props) {
                  <button className={ posted ?  'posted_button' : 'post_button' } type="submit" disabled={!postRequired()}>
                    投稿する
                  </button>
-            </form>
+             </form>
              </div>
            </div>
            <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
