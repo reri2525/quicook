@@ -7,12 +7,16 @@ import { DishData } from './ListData';
 import { ListData3 } from './ListData';
 import CloseIcon from '@mui/icons-material/Close';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ExpandLess from '@mui/icons-material/ExpandLess';
 function Postform(props) {   
   const history = useHistory();
   const [posted, setPosted] = useState(false)
   const [title, setTitle] = useState("")
   const titlelength = 30 - title.length
   const [categoryModal, setCategoryModal] = useState(false)
+  const [categoryExpand, setCategoryExpand] = useState(false)
+  const [dishExpand, setDishExpand] = useState([])
   const [imageOrVideo, setImageOrVideo] = useState("")
   const [imageOrVideoPreview, setImageOrVideoPreview] = useState("")
   const [time, setTime] = useState("")
@@ -129,12 +133,41 @@ function Postform(props) {
             <div className='postform_modal_inner'>
              <div className='postform_modal_content'>
              { categoryModal &&
+                <Fragment>
                   <div className='category_modal_inner'>
-                    <div className='category_close'><a><CloseIcon onClick={() => setCategoryModal(false)}/></a></div>
+                  <div className='category_close' onClick={() => setCategoryModal(false)}><a><CloseIcon /></a></div>
                     <div className='category_modal_content'>
-
+                      { CategoryData.map((value, key) => {
+                         return (
+                          <li className='category'>
+                           <img src={value.icon}></img>
+                           <a>{value.title}</a>
+                           { dishExpand[key] ?
+                             <Fragment>
+                              <ExpandLess
+                                style={{ position: 'relative', top: '7px', left: '6px', cursor: 'pointer' }} 
+                                onClick={() =>
+                                setDishExpand(prevState => ({ ...prevState, [key]: false }))} 
+                              />
+                              <ul>
+                               { DishData[key].dish1 ? <li className='dish'>{DishData[key].dish1}</li> : <></> }
+                               { DishData[key].dish2 ? <li className='dish'>{DishData[key].dish2}</li> : <></> }
+                               { DishData[key].dish3 ? <li className='dish'>{DishData[key].dish3}</li> : <></> }
+                               { DishData[key].dish4 ? <li className='dish'>{DishData[key].dish4}</li> : <></> }
+                               { DishData[key].dish5 ? <li className='dish'>{DishData[key].dish5}</li> : <></> }
+                              </ul> 
+                             </Fragment> :
+                               <ExpandMore 
+                                 style={{ position: 'relative', top: '7px', left: '6px', cursor: 'pointer' }} 
+                                 onClick={() =>
+                                 setDishExpand(prevState => ({ ...prevState, [key]: true }))} 
+                               /> }
+                          </li>
+                         )
+                      })}
                     </div>
                   </div>
+                </Fragment>
              }
              <h1>レシピ投稿:</h1>
              <form className="form_post" onSubmit={onSubmit}>
