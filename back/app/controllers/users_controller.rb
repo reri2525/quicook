@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     end
 
     def update
-        @user = User.find{params[:id]}
+        @user = User.find(params[:id])
         @user.update(user_params)
         if @user.save
             render json: { status: :true, user: @user }

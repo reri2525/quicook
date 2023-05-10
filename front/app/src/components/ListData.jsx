@@ -53,7 +53,7 @@ export const CategoryData = [
     {title: "麺", icon: "https://assets.cpcdn.com/assets/themes/top/category_icons/9.png?8c6aac8c49299e9250bc43b01ebf7f848c3f670382590331667c18792693bc06"},
     {title: "スープ・汁物", icon: "https://assets.cpcdn.com/assets/themes/top/category_icons/15.png?6a2f9e30bf1a07d14c9deb7ed8cbda0f56fbe6cb01c6b9f25750a522a64e623b"},
     {title: "お菓子", icon: "https://assets.cpcdn.com/assets/themes/top/category_icons/19.png?5a90fcff6a4e526b5059a6bb130e4f398e8a8fb155d979ee861c04c5fecb8a75"},
-    {title: "パン", icon: "https://assets.cpcdn.com/assets/themes/top/category_icons/17.png?bf52407160de012a8208ca3cb424a4976dc9d4cb18ee66e031b249d5e8da41dd"}
+    {title: "パン", icon: "https://assets.cpcdn.com/assets/themes/top/category_icons/17.png?bf52407160de012a8208ca3cb424a4976dc9d4cb18ee66e031b249d5e8da41dd"},
 ]
 export const DishData = [
     {dish1: "牛肉", dish2: "豚肉"},

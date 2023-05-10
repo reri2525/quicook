@@ -17,6 +17,7 @@ function ProfileEdit(props) {
  const [warnModal, setWarnModal] = useState(false)
  const [warnType, setWarnType] = useState("acountDestroy")
  const onSubmit = (event) => {
+  console.log(user.id)
   event.preventDefault()
   const formData = new FormData();
   formData.append('user[name]', name);

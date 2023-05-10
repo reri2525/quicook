@@ -14,6 +14,7 @@ function Postform(props) {
   const [posted, setPosted] = useState(false)
   const [title, setTitle] = useState("")
   const titlelength = 30 - title.length
+  const [category, setCategory] = useState("なし")
   const [categoryModal, setCategoryModal] = useState(false)
   const [categoryExpand, setCategoryExpand] = useState(false)
   const [dishExpand, setDishExpand] = useState([])
@@ -69,6 +70,7 @@ function Postform(props) {
   const CloseModal = () => {
     props.setPostmodal(false)
     setTitle("")
+    setCategory("なし")
     setImageOrVideo("")
     setImageOrVideoPreview("")
     setContent("")
@@ -93,6 +95,7 @@ function Postform(props) {
     setPosted(true)
     const formData = new FormData();
     formData.append('post[title]', title);
+    formData.append('post[category]', category);
     formData.append('post[image]', imageOrVideo);
     formData.append('post[content]', content);
     formData.append('post[time]', time);
@@ -137,11 +140,12 @@ function Postform(props) {
                   <div className='category_modal_inner'>
                   <div className='category_close' onClick={() => setCategoryModal(false)}><a><CloseIcon /></a></div>
                     <div className='category_modal_content'>
+                     <button className='reset' onClick={() => setCategory("なし")}>なし</button>
                       { CategoryData.map((value, key) => {
                          return (
                           <li className='category'>
                            <img src={value.icon}></img>
-                           <a>{value.title}</a>
+                           <a onClick={() => setCategory(value.title)}>{value.title}</a>
                            { dishExpand[key] ?
                              <Fragment>
                               <ExpandLess
@@ -150,11 +154,9 @@ function Postform(props) {
                                 setDishExpand(prevState => ({ ...prevState, [key]: false }))} 
                               />
                               <ul>
-                               { DishData[key].dish1 ? <li className='dish'>{DishData[key].dish1}</li> : <></> }
-                               { DishData[key].dish2 ? <li className='dish'>{DishData[key].dish2}</li> : <></> }
-                               { DishData[key].dish3 ? <li className='dish'>{DishData[key].dish3}</li> : <></> }
-                               { DishData[key].dish4 ? <li className='dish'>{DishData[key].dish4}</li> : <></> }
-                               { DishData[key].dish5 ? <li className='dish'>{DishData[key].dish5}</li> : <></> }
+                               {Object.values(DishData[key]).map((dish) => (
+                                 dish ? <li className='dish' onClick={() => setCategory(dish)}>{dish}</li> : null
+                               ))}
                               </ul> 
                              </Fragment> :
                                <ExpandMore 
@@ -165,6 +167,7 @@ function Postform(props) {
                           </li>
                          )
                       })}
+                      
                     </div>
                   </div>
                 </Fragment>
@@ -198,7 +201,7 @@ function Postform(props) {
                             >　残り{titlelength}文字
                             </a>
                 }
-                <button type='button' className='category_button' onClick={() => setCategoryModal(true)}>カテゴリ:　なし</button>
+                <button type='button' className='category_button' onClick={() => setCategoryModal(true)}>カテゴリ:　{category}</button>
                 <br></br>
                 <input className='title'
                     maxLength='30'

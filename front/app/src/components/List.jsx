@@ -84,22 +84,6 @@ function Set(props) {
           })
           : <></> }
       </ul>
-      <ul>
-       {ListData3.map((value, key) => {
-        return (
-         <Link to={value.link} className="list_link">
-         <li key={key} className = {window.location.pathname === value.link ? "list_active" : "list"}>
-            <a className='icon'> 
-               {window.location.pathname === value.link  && value.icon2? value.icon2 : value.icon}
-            </a>
-            <a className='title_list'>
-               {value.title}
-            </a>
-         </li>
-         </Link>
-        )
-       })}
-      </ul>
       </div>
     </div>
   </Fragment> 
