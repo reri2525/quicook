@@ -155,7 +155,7 @@ function Postform(props) {
                               />
                               <ul>
                                {Object.values(DishData[key]).map((dish) => (
-                                 dish ? <li className='dish' onClick={() => setCategory(dish)}>{dish}</li> : null
+                                 dish ? <li className='dish' onClick={() => setCategory(`${value.title}／${dish}`)}>{dish}</li> : null
                                ))}
                               </ul> 
                              </Fragment> :

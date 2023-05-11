@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import '../ScssFile/List.scss'
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import { ListData1 } from './ListData';
 import { ListData2 } from './ListData';
@@ -10,6 +11,7 @@ import { ListData3 } from './ListData';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 function Set(props) {
+ const history = useHistory();
  const [categoryExpand, setCategoryExpand] = useState(false)
  const [dishExpand, setDishExpand] = useState([])
  return (
@@ -57,7 +59,7 @@ function Set(props) {
           return (
            <li className='category'>
             <img src={value.icon}></img>
-            <a>{value.title}</a>
+            <a onClick={() => history.push(`/category/${value.title}/page/1`)}>{value.title}</a>
             { dishExpand[key] ?
              <Fragment>
               <ExpandLess
@@ -66,11 +68,9 @@ function Set(props) {
                setDishExpand(prevState => ({ ...prevState, [key]: false }))} 
               />
                <ul>
-                { DishData[key].dish1 ? <li className='dish'>{DishData[key].dish1}</li> : <></> }
-                { DishData[key].dish2 ? <li className='dish'>{DishData[key].dish2}</li> : <></> }
-                { DishData[key].dish3 ? <li className='dish'>{DishData[key].dish3}</li> : <></> }
-                { DishData[key].dish4 ? <li className='dish'>{DishData[key].dish4}</li> : <></> }
-                { DishData[key].dish5 ? <li className='dish'>{DishData[key].dish5}</li> : <></> }
+                {Object.values(DishData[key]).map((dish) => (
+                  dish ? <li className='dish' onClick={() => history.push(`/category/${value.title}／${dish}/page/1`)}>{dish}</li> : null
+                ))}
                </ul> 
              </Fragment> :
               <ExpandMore 

@@ -56,14 +56,14 @@ export const CategoryData = [
     {title: "パン", icon: "https://assets.cpcdn.com/assets/themes/top/category_icons/17.png?bf52407160de012a8208ca3cb424a4976dc9d4cb18ee66e031b249d5e8da41dd"},
 ]
 export const DishData = [
-    {dish1: "牛肉", dish2: "豚肉"},
-    {dish1: "干物"},
-    {dish1: "サラダ", dish2: "d", dish3: "s", dish4: "a", dish5: "a"},
-    {dish1: "牛肉", dish2: "豚肉"},
-    {dish1: "牛肉", dish2: "豚肉"},
-    {dish1: "牛肉", dish2: "豚肉"},
-    {dish1: "牛肉", dish2: "豚肉"},
-    {dish1: "牛肉", dish2: "豚肉"}
+    {dish1: "牛肉", dish2: "豚肉", dish3: "鶏肉"},
+    {dish1: "干物", dish2: "イカ", dish3: "海老"},
+    {dish1: "サラダ", dish2: "野菜炒め"},
+    {dish1: "おにぎり", dish2: "どんぶり"},
+    {dish1: "パスタ", dish2: "ラーメン", dish3: "そば"},
+    {dish1: "中華スープ", dish2: "味噌汁"},
+    {dish1: "クッキー", dish2: "チョコ"},
+    {dish1: "ケーキ", dish2: "サンドイッチ"}
 ]
 export const ListData3 = [
     { title: "設定", icon: <SettingsIcon />, icon2: <SettingsSuggestIcon /> },

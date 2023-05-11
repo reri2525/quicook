@@ -58,6 +58,7 @@ users = User.order(:created_at).take(5)
 
 10.times do
   title = "絶品！お肉屋さんのハンバーガーパテ☆"
+  category = "お肉"
   content = "専門店のハンバーグスパイスの種類を調べ、ハンバーガーパテ用に独自にミックスしたら、絶品のジューシーパテになりました！"
   time = 3
   cost = 10000
@@ -65,11 +66,12 @@ users = User.order(:created_at).take(5)
              肉の食感を重視の人は粘りがでたらすぐ手を止めます。ふんわりジューシーが好みの人はよく混ぜましょう。（でも混ぜすぎに注意！"
   coment = "お肉屋さんで粗めに挽いてもらうと美味しさUP！　混ぜ過ぎ、焼き過ぎに注意。
             焼いている時にフライ返し等で上からギューギュー押さえつけて焼かないこと！ジューシーさとうまみが流れ出しちゃうので。パン粉は必ず生パン粉を使ってください☆"
-  users.each { |user| user.posts.create!(title: title, image: file1, content: content, time: time, cost: cost, process: process, coment: coment) }
+  users.each { |user| user.posts.create!(title: title, category: category, image: file1, content: content, time: time, cost: cost, process: process, coment: coment) }
 end
 
 10.times do
   title = "めちゃくちゃ美味しい鯵の干物☆"
+  category = "魚介／干物"
   content = "専門店のハンバーグスパイスの種類を調べ、ハンバーガーパテ用に独自にミックスしたら、絶品のジューシーパテになりました！"
   time = 3
   cost = 3000
@@ -77,11 +79,12 @@ end
              肉の食感を重視の人は粘りがでたらすぐ手を止めます。ふんわりジューシーが好みの人はよく混ぜましょう。（でも混ぜすぎに注意！"
   coment = "お肉屋さんで粗めに挽いてもらうと美味しさUP！　混ぜ過ぎ、焼き過ぎに注意。
             焼いている時にフライ返し等で上からギューギュー押さえつけて焼かないこと！ジューシーさとうまみが流れ出しちゃうので。パン粉は必ず生パン粉を使ってください☆"
-  users.each { |user| user.posts.create!(title: title, image: file2, content: content, time: time, cost: cost, process: process, coment: coment) }
+  users.each { |user| user.posts.create!(title: title, category: category, image: file2, content: content, time: time, cost: cost, process: process, coment: coment) }
 end
 
 10.times do
   title = "新鮮で美味しいサラダ☆"
+  category = "野菜／サラダ"
   content = "専門店のハンバーグスパイスの種類を調べ、ハンバーガーパテ用に独自にミックスしたら、絶品のジューシーパテになりました！"
   time = 3
   cost = 7000
@@ -89,17 +92,20 @@ end
              肉の食感を重視の人は粘りがでたらすぐ手を止めます。ふんわりジューシーが好みの人はよく混ぜましょう。（でも混ぜすぎに注意！"
   coment = "お肉屋さんで粗めに挽いてもらうと美味しさUP！　混ぜ過ぎ、焼き過ぎに注意。
             焼いている時にフライ返し等で上からギューギュー押さえつけて焼かないこと！ジューシーさとうまみが流れ出しちゃうので。パン粉は必ず生パン粉を使ってください☆"
-  users.each { |user| user.posts.create!(title: title, image: file3, content: content, time: time, cost: cost, process: process, coment: coment) }
+  users.each { |user| user.posts.create!(title: title, category: category, image: file3, content: content, time: time, cost: cost, process: process, coment: coment) }
 end
-
+ 
 10.times do
-  title = "About me"
-  content = "最高の曲です"
+  title = "牛肉"
+  category = "お肉／牛肉"
+  content = "専門店のハンバーグスパイスの種類を調べ、ハンバーガーパテ用に独自にミックスしたら、絶品のジューシーパテになりました！"
   time = 3
-  cost = 7000
-  process = "神曲"
-  coment = "マジで"
-  users.each { |user| user.posts.create!(title: title, image: file4, content: content, time: time, cost: cost, process: process, coment: coment) }
+  cost = 10000
+  process = "溶き卵に生パン粉を入れて混ぜ、ふやかしておきます。冷蔵庫から出したばかりの冷たい牛ひき肉に①の卵パン粉と全てのスパイスと調味料を入れて粘りが出るまで混ぜます。
+             肉の食感を重視の人は粘りがでたらすぐ手を止めます。ふんわりジューシーが好みの人はよく混ぜましょう。（でも混ぜすぎに注意！"
+  coment = "お肉屋さんで粗めに挽いてもらうと美味しさUP！　混ぜ過ぎ、焼き過ぎに注意。
+            焼いている時にフライ返し等で上からギューギュー押さえつけて焼かないこと！ジューシーさとうまみが流れ出しちゃうので。パン粉は必ず生パン粉を使ってください☆"
+  users.each { |user| user.posts.create!(title: title, category: category, image: file1, content: content, time: time, cost: cost, process: process, coment: coment) }
 end
 
 200.times do |c|

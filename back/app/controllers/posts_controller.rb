@@ -198,6 +198,51 @@ class PostsController < ApplicationController
     end
   end
 
+  def category
+    if current_user
+     if params[:query].include?("／")
+       category_query = params[:query].split("／").last
+     else
+       category_query = params[:query]
+     end
+     @post_all = Post.includes(:user).where("category LIKE ?", "%#{category_query}%").paginate(page: params[:page], per_page: 20)
+     if @post_all.exists?
+       render json: { 
+         status: true, 
+         post_all: @post_all.map { |post|
+         if post.image
+           file_extension = File.extname(post.image.path).downcase
+         end
+           if file_extension == ".mp4" || file_extension == ".webm"
+             file_type = "video"
+           else
+             file_type = "image"
+           end
+           {
+            id: post.id,
+            title: post.title, 
+            image: post.image,
+            heart_count: post.hearts.count,
+            file_type: file_type,
+            user: { 
+              name: post.user.name,
+              avatar: post.user.avatar,
+              id: post.user.id
+            },
+            bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
+              { id: bookmark.id, user_id: bookmark.user_id } 
+            },
+            hearts: post.hearts.where(user_id: @current_user.id).map { |heart| 
+             { id: heart.id, user_id: heart.user_id } 
+            }
+           } 
+       },total_pages:@post_all.total_pages}
+      else
+         render json: {status: false}
+      end
+    end
+  end
+
   def destroy
     @post = Post.find(params[:id])
     if @post.destroy

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/followers/:id', to: "relationships#followers"
   get '/following/:id', to: "relationships#following"
   get '/user/:id/posts', to: "posts#user_posts_index"
-  get '/bookmarks' , to: "posts#bookmark"
+  get '/bookmarks', to: "posts#bookmark"
+  get '/following', to: "posts#following" 
   get '/search' , to: "posts#search"
+  get '/category/:query', to: "posts#category"
 end

@@ -203,9 +203,18 @@ function App(props) {
                                  />}/>
             )}
           />  
-          <Route exact path={"/category/:category_query"}
+          <Route exact path={"/category/:query/page/:id"}
              render={props => (
-              <Category { ...props } />
+              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
+                                 user={user} postall={postall} handleLogout={handleLogout}   
+                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
+                                 setSearching={setSearching}                
+                                 url={<Category postall={postall} currentPage={currentPage} 
+                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
+                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
+                                 />}/>
             )}
           />  
           <Route exact path={"/search/:search_query"}
