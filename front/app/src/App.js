@@ -29,7 +29,6 @@ function App(props) {
   const [pagecount, setPagecount] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
   const [searching, setSearching] = useState("")
-  const history = useHistory();
   const handleLogin = (data) => {
     setLoggedInStatus("ログインなう")
     setUser(data.user)
@@ -178,7 +177,7 @@ function App(props) {
                                                 />}/>
             )}
           />  
-          <Route exact path={"/follow"}
+          <Route exact path={"/following/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
@@ -192,11 +191,13 @@ function App(props) {
                                  />}/>
             )}
           />  
-          <Route exact path={"/bookmark"}
+          <Route exact path={"/bookmark/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} postall={postall} handleLogout={handleLogout}                            
-                                 url={<Home postall={postall} currentPage={currentPage} 
+                                 user={user} postall={postall} handleLogout={handleLogout}   
+                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
+                                 setSearching={setSearching}                
+                                 url={<Bookmark postall={postall} currentPage={currentPage} 
                                  pagecount={pagecount} setCurrentPage={setCurrentPage}
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
                                  heartCreate={heartCreate} heartDestroy={heartDestroy}

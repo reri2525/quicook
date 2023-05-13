@@ -140,10 +140,19 @@ class PostsController < ApplicationController
       render json: { 
         status: true, 
         post_all: @bookmark_posts.map { |post|
+          if post.image
+            file_extension = File.extname(post.image.path).downcase
+          end
+            if file_extension == ".mp4" || file_extension == ".webm"
+              file_type = "video"
+            else
+              file_type = "image"
+            end
           {
            id: post.id,
            title: post.title, 
            image: post.image,
+           file_type: file_type,
            heart_count: post.hearts.count,
            user: { 
              name: post.user.name,
@@ -157,6 +166,45 @@ class PostsController < ApplicationController
            }
           } 
       },total_pages: @bookmark_posts.total_pages}
+     else
+        render json: {status: false}
+     end
+    end
+  end
+
+  def following
+    if current_user
+      @following_posts = @current_user.following_posts.paginate(page: params[:page], per_page: 30)
+     if @following_posts.exists?
+      render json: { 
+        status: true, 
+        post_all: @following_posts.map { |post|
+          if post.image
+            file_extension = File.extname(post.image.path).downcase
+          end
+            if file_extension == ".mp4" || file_extension == ".webm"
+              file_type = "video"
+            else
+              file_type = "image"
+            end
+          {
+           id: post.id,
+           title: post.title, 
+           image: post.image,
+           file_type: file_type,
+           heart_count: post.hearts.count,
+           user: { 
+             name: post.user.name,
+             avatar: post.user.avatar
+           },
+           bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
+             { id: bookmark.id, user_id: bookmark.user_id } 
+           },
+           hearts: post.hearts.map { |heart| 
+            { id: heart.id, user_id: heart.user_id } 
+           }
+          } 
+      },total_pages: @following_posts.total_pages}
      else
         render json: {status: false}
      end

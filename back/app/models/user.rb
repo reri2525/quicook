@@ -11,6 +11,7 @@ class User < ApplicationRecord
     has_many :followers, through: :passive_relationships, source: :follower
     has_many :hearts, dependent: :destroy
     has_many :bookmarks, dependent: :destroy
+    has_many :following_posts, through: :following, source: :posts
     has_many :bookmarks_posts, through: :bookmarks, source: :post
     mount_uploader :avatar, AvatarUploader
     validates :name,  presence: true, length: { maximum: 10 }

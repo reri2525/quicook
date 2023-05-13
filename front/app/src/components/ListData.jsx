@@ -28,13 +28,13 @@ export const ListData1 = [
     {
         title: "フォロー中",
         icon:  <PersonAddAlt1Icon  style={{ fontSize: '20px' }}/>,
-        link: "/follow"
+        link: "/following/page/1"
     },
     {
         title: "ブックマーク",
         icon:  <BookmarkBorderIcon  style={{ fontSize: '20px' }}/>,
         icon2: <BookmarkIcon  style={{ fontSize: '20px' }}/>,
-        link: "/bookmark"
+        link: "/bookmark/page/1"
     },
     
 ]

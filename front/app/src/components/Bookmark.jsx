@@ -3,6 +3,7 @@ import '../ScssFile/Home.scss'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -11,14 +12,13 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ReplayIcon from '@mui/icons-material/Replay';
 import PostShow from './PostShow';
-function Home(props) {
-  const [postShowModal, setPostShowModal] = useState(false); 
-  const [postShowNumber, setPostShowNumber] = useState("")
+function Bookmark(props) {
+  const { id } = useParams();
+  const numericId = parseInt(id);
   const history = useHistory();
   const [postall, setPostall] = useState([])
-  const [postDestroy, setPostDestroy] = useState(false)
-  const [pagecount, setPagecount] = useState(props.pagecount)
-  const [currentPage, setCurrentPage] = useState(props.currentPage)
+  const [pagecount, setPagecount] = useState()
+  const [currentPage, setCurrentPage] = useState(numericId)
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
   const [heartedPosts, setHeartedPosts] = useState([]);
@@ -29,19 +29,13 @@ function Home(props) {
     setPostall([])
     window.scrollTo(0, 0);
     postAllGet();
-  }, [currentPage])
+  }, [id])
 
-  useEffect(() => {
-    setPostall([])
-    postAllGet();
-  }, [postDestroy])
-  
-  const postShow = (e) => {
-    setPostShowModal(true)
-    setPostShowNumber(e)
+  const postShow = (id) => {
+    history.push(`/posts/${id}`)
   }
   const postAllGet = () =>{
-     axios.get("http://localhost:3001/posts", { params: { page: currentPage }, withCredentials: true })
+    axios.get("http://localhost:3001/bookmarks", { params: { page: currentPage }, withCredentials: true })
     .then(response => {
       if (response.data.status) {
         const data = response.data.post_all
@@ -63,17 +57,20 @@ function Home(props) {
   }
   const postAdd = (page) => {
     setCurrentPage(page)
+    history.push(`/bookmark/page/${page}`)
     window.scrollTo(0, 0);
   }
   const postBack = (currentPage) => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1)
+      history.push(`/bookmark/page/${currentPage - 1}`)
       }
     window.scrollTo(0, 0);
   }
   const postGo = (currentPage) => {
     if (currentPage !== pagecount) {
       setCurrentPage(currentPage + 1)
+      history.push(`/bookmark/page/${currentPage + 1}`)
     }
     window.scrollTo(0, 0);
   }
@@ -137,28 +134,31 @@ function Home(props) {
          <div className='post' key={key} onClick={() => postShow(postall[key].id)}>
            <div className='head'>
              <div className='icon'>
-             <img src={postall[key].user.avatar.url}></img>
+             <img src={value.user.avatar.url}></img>
              </div>
-             <Link to={`/profile/${postall[key].user.id}`}>{postall[key].user.name}</Link>
-               <div className='bookmark' onClick={(e) => {e.stopPropagation(); handleBookmark(postall[key]); } }>
-                    {bookmarkedPosts.includes(postall[key].id) ? <BookmarkIcon/> : <BookmarkBorderIcon/>}
+               <Link to={`/profile/${value.user.id}/page/1`}
+                  onClick={(e) => {e.stopPropagation();} }>
+                     {value.user.name}
+               </Link>
+               <div className='bookmark' onClick={(e) => {e.stopPropagation(); handleBookmark(value); } }>
+                    {bookmarkedPosts.includes(value.id) ? <BookmarkIcon/> : <BookmarkBorderIcon/>}
                </div>
            </div>
            <div className='middle'>
-              { postall[key].file_type === "image" ? <img src={postall[key].image.url}></img> : <></> }
-              { postall[key].file_type === "video" ? <video
+              { value.file_type === "image" ? <img src={value.image.url}></img> : <></> }
+              { value.file_type === "video" ? <video
                                                        onMouseEnter={handleMouseEnter}
                                                        onMouseLeave={handleMouseLeave}
                                                        volume="0.5"
-                                                       src={postall[key].image.url} onClick={() => postShow(postall[key].id)}>
+                                                       src={value.image.url}>
                                                      </video> : <></>}
            </div>
            <div className='foot'>
-             <a>{postall[key].title}</a>
-             <div className='favorite' onClick={(e) => {e.stopPropagation(); handleHeart(postall[key]); }}>
-                  {heartedPosts.includes(postall[key].id) ? <FavoriteIcon style={{ color: 'red' }}/> : <FavoriteBorder/>}
+             <a>{value.title}</a>
+             <div className='favorite' onClick={(e) => {e.stopPropagation(); handleHeart(value); }}>
+                  {heartedPosts.includes(value.id) ? <FavoriteIcon style={{ color: 'red' }}/> : <FavoriteBorder/>}
              </div>
-             <a className='heart_count'>{postall[key].heart_count}</a>
+             <a className='heart_count'>{value.heart_count}</a>
            </div>
          </div>
          )
@@ -196,24 +196,15 @@ function Home(props) {
               {page}
          </button>
          ))}
-        <button className='page_move' onClick={() => postGo(currentPage)}><NavigateNextIcon/></button><nav className='next'>next</nav>
+        <button className='page_move' 
+           onClick={() => postGo(currentPage)}>
+            <NavigateNextIcon/>
+        </button>
+        <nav className='next'>next</nav>
        </div> : <></> }
       </div>}
-      {postShowModal ?  <PostShow postShowModal={postShowModal} 
-                                  setPostShowModal={setPostShowModal} 
-                                  postShowNumber={postShowNumber} 
-                                  setPostDestroy={setPostDestroy}
-                                  user={props.user}
-                                  bookmarkCreate={props.bookmarkCreate} bookmarkDestroy={props.bookmarkDestroy}
-                                  heartCreate={props.heartCreate} heartDestroy={props.heartDestroy}
-                                  bookmarkedPosts={bookmarkedPosts} setBookmarkedPosts={setBookmarkedPosts}
-                                  heartedPosts={heartedPosts} setHeartedPosts={setHeartedPosts}
-                                  postall={postall} relationshipCreate={props.relationshipCreate} 
-                                  relationshipDestroy={props.relationshipDestroy}
-                                  />
-                                   : <></>}
    </Fragment>
   )
 } 
 
-export default Home
+export default Bookmark
