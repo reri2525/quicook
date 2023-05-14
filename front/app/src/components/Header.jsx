@@ -21,13 +21,6 @@ function Header(props) {
  const ShowPostModal = () => {
   props.setPostmodal(true)
  }
- const postSearch = (search) => {
-    props.setSearching(search)
-    props.setCurrentPage(1)
-    setTimeout(() => {
-      history.push(`/search/${search}`)
-    }, 0)
-}
 if (props.loggedInStatus === '未ログイン') {
 return (
     <header>
@@ -55,7 +48,7 @@ return (
         >
         </input>
         <a onClick={() => setSearchQuery("")}><CloseIcon /></a>
-        <button className='sarch_btn' onClick={() => searchQuery && postSearch(searchQuery)}><SearchIcon /></button>
+        <button className='sarch_btn' onClick={() => searchQuery && history.push(`/search/${searchQuery}/page/1`)}><SearchIcon /></button>
       </form>
       <a className="log" onClick={() => props.handleLogout()}>ログアウト</a>
       <a className='post_button' onClick={() => ShowPostModal()}>投稿する</a>

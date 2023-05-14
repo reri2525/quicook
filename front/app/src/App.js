@@ -28,7 +28,6 @@ function App(props) {
   const [postall, setPostall] = useState({})
   const [pagecount, setPagecount] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
-  const [searching, setSearching] = useState("")
   const handleLogin = (data) => {
     setLoggedInStatus("ログインなう")
     setUser(data.user)
@@ -155,7 +154,7 @@ function App(props) {
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
                                  setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                 setSearching={setSearching}                
+                                
                                  url={<Home postall={postall} currentPage={currentPage} 
                                  pagecount={pagecount} setCurrentPage={setCurrentPage}
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
@@ -169,7 +168,7 @@ function App(props) {
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
                                  setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                 setSearching={setSearching}                
+                                          
                                  url={<PostShow user={user} relationshipCreate={relationshipCreate} 
                                                 relationshipDestroy={relationshipDestroy}  bookmarkCreate={bookmarkCreate} 
                                                 bookmarkDestroy={bookmarkDestroy} heartCreate={heartCreate} 
@@ -182,7 +181,7 @@ function App(props) {
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
                                  setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                 setSearching={setSearching}                
+                                             
                                  url={<Following postall={postall} currentPage={currentPage} 
                                  pagecount={pagecount} setCurrentPage={setCurrentPage}
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
@@ -196,7 +195,7 @@ function App(props) {
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
                                  setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                 setSearching={setSearching}                
+                                              
                                  url={<Bookmark postall={postall} currentPage={currentPage} 
                                  pagecount={pagecount} setCurrentPage={setCurrentPage}
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
@@ -209,7 +208,7 @@ function App(props) {
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
                                  setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                 setSearching={setSearching}                
+                                     
                                  url={<Category postall={postall} currentPage={currentPage} 
                                  pagecount={pagecount} setCurrentPage={setCurrentPage}
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
@@ -218,17 +217,17 @@ function App(props) {
                                  />}/>
             )}
           />  
-          <Route exact path={"/search/:search_query"}
+          <Route exact path={"/search/:query/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} postall={postall} handleLogout={handleLogout}   
                                  setCurrentPage={setCurrentPage} pagecount={pagecount}  
-                                 setSearching={setSearching}                
+                                          
                                  url={<Search postall={postall} currentPage={currentPage} 
                                  pagecount={pagecount} setCurrentPage={setCurrentPage}
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
                                  heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 user={user} searching={searching}
+                                 user={user} 
                                  />}/>
             )}
           />  

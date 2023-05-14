@@ -213,8 +213,7 @@ class PostsController < ApplicationController
 
   def search
     if current_user
-      @search = params[:search]
-      search_query = "%#{@search.downcase}%"
+      search_query = "%#{params[:query].downcase}%"
       @post_all = Post.includes(:user, :hearts).where("LOWER(title) LIKE ? OR LOWER(content) LIKE ?", search_query, search_query)
                                                .left_joins(:hearts)
                                                .group(:id).order('COUNT(hearts.id) DESC', 'MAX(hearts.created_at) DESC')
@@ -223,14 +222,24 @@ class PostsController < ApplicationController
         render json: { 
           status: true, 
           post_all: @post_all.map { |post|
+            if post.image
+              file_extension = File.extname(post.image.path).downcase
+            end
+              if file_extension == ".mp4" || file_extension == ".webm"
+                file_type = "video"
+              else
+                file_type = "image"
+              end
             {
              id: post.id,
              title: post.title, 
              image: post.image,
+             file_type: file_type,
              heart_count: post.hearts.count,
              user: { 
                name: post.user.name,
-               avatar: post.user.avatar
+               avatar: post.user.avatar,
+               id: post.user.id
              },
              bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
                { id: bookmark.id, user_id: bookmark.user_id } 

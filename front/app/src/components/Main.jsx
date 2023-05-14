@@ -12,7 +12,7 @@ const [postmodal, setPostmodal] = useState(false);
        <Header loggedInStatus={props.loggedInStatus} handleLogout={props.handleLogout} 
                                                         setPostmodal={setPostmodal}  user={props.user}
                                                         setCurrentPage={props.setCurrentPage} pagecount={props.pagecount} 
-                                                        postSearch={props.postSearch} setSearching={props.setSearching}/>
+                                                        />
      
         <List />
         <div className='center'>
