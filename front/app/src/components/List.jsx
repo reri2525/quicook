@@ -19,7 +19,7 @@ function Set(props) {
     <div className="list_area">
       <div className='list_inner'>
       <ul>
-       {ListData1.map((value, key) => {
+      { ListData1.map((value, key) => {
         return (
          <Link to={value.link} className="list_link">
          <li key={key} className = {window.location.pathname === value.link 
@@ -31,7 +31,7 @@ function Set(props) {
                                       "list"
                                     }>
             <a className='icon'> 
-               {window.location.pathname === value.link  && value.icon2? value.icon2 : value.icon}
+               {window.location.pathname === value.link  && value.icon2 ? value.icon2 : value.icon}
             </a>
             <a className='list_title'> 
                {value.title}
@@ -39,7 +39,8 @@ function Set(props) {
          </li>
          </Link>
         )
-       })}
+       })
+      }
       </ul>
       <ul>
          <li  className="list2">

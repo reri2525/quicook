@@ -1,13 +1,58 @@
 header {
   background-color: white;
   height: 60px;
-  width: 100vw;
+  width: calc(100vw - 19px);
   position: fixed;
   top: 0px;
   left: 0px;
   z-index: 3;
   border-bottom: 2px solid #bbb;
+  .search {
+    position: absolute;
+    top: 13px;
+    left: 525px;
+    height: 30px;
+    input {
+      height: 32px;
+      width: 330px;
+      border-radius: 20px 0 0 20px;
+      border: solid 1px #bbb;
+      padding-left: 10px;
+    }
+    a {
+      width: 30px;
+      height: 30px;
+      margin-left: -35px;
+      padding: 14px 4px 2px 4px;
+      position: relative;
+      top: 7px;
+      border-radius: 26px;
 
+      &:hover {
+        background-color: #bbb;
+        opacity: 0.6;
+      }
+    }
+    select {
+      height: 36px;
+      border: solid 1px #bbb;
+
+      &:hover {
+        background-color: rgba(248, 255, 255, 1);
+      }
+    }
+    button {
+      position: absolute;
+      top: 2px;
+      border-radius: 0 20px 20px 0;
+      height: 36px;
+      border: solid 1px #bbb;
+
+      &:hover {
+        background-color: rgba(248, 255, 255, 1);
+      }
+    }
+  }
   a {
     cursor: pointer;
   }

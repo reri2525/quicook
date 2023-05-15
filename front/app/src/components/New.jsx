@@ -21,7 +21,7 @@ function Newmodal(props) {
   const passwordConfirmation = watch('passwordConfirmation', '')
   const ref = document.referrer
   const CloseModal = () => {
-    props.setNewmodal(false)
+    props.setNewModal(false)
     props.setModal(false)
     reset();
   }
@@ -50,7 +50,7 @@ function Newmodal(props) {
 }
 
 return ( 
-  <>{props.newmodal ? (
+  <>{props.newModal ? (
     <Fragment>
         <div className="back_display">
           

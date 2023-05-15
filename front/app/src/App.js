@@ -2,6 +2,7 @@ import Loginwarn from "./components/Loginwarn";
 import React, { useState, useEffect } from 'react';
 import './ScssFile/Share.scss'
 import axios from'axios';
+import { useHistory } from 'react-router-dom';
 import Top from './components/Top'
 import Main from "./components/Main";
 import Home from "./components/Home";
@@ -26,12 +27,14 @@ function App(props) {
   const handleLogin = (data) => {
     setLoggedInStatus("ログインなう")
     setUser(data.user)
+    window.location.pathname = "/";
   }
   const handleLogout = () => {
     axios.delete("http://localhost:3001/logout", { withCredentials: true })
             .then(response => {
               setLoggedInStatus("未ログイン")
               setUser({})
+              window.location.pathname = "/";
             }).catch(error => 
               console.log("ログアウトエラー", error)
             )
@@ -131,7 +134,7 @@ function App(props) {
       <Switch>
         <Route exact path={"/"}
              render={props => (
-              <Top { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout}/>
+              props.history.push('/home/page/1')
             )}
           />  
          <Route exact path={"/home/page/:id"}

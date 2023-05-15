@@ -13,10 +13,9 @@ function Logmodal(props) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors_m, setErrors_m] = useState("")
-  const ref = document.referrer
   const history = useHistory();
   const CloseModal = () => {
-    props.setLogmodal(false)
+    props.setLogModal(false)
     props.setModal(false)
     setErrors_m("")
   }
@@ -42,7 +41,7 @@ function Logmodal(props) {
 }
 if (props.loggedInStatus === "未ログイン") {
 return ( 
-  <>{props.logmodal ? (
+  <>{props.logModal ? (
     <Fragment>
         <div className="back_display">
           
