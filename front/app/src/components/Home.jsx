@@ -10,8 +10,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import ReplayIcon from '@mui/icons-material/Replay';
-import PostShow from './PostShow';
 function Home(props) {
   const { id } = useParams();
   const numericId = parseInt(id);
@@ -41,7 +39,7 @@ function Home(props) {
         const data = response.data.post_all
         setPostall(data)
         setPagecount(response.data.total_pages)
-        console.log(data)
+        console.log("投稿取得成功")
         for (let i = 0; i < data.length; i++) {
           bookmarkExist(data[i]);
         }
@@ -51,8 +49,11 @@ function Home(props) {
         setPostExist(true)
       } else {
         setPostExist(false)
-        console.log("失敗")
+        console.log("投稿なし")
       }
+    })
+    .catch(error => {
+      console.log("投稿取得エラー", error)
     })
   }
   const postAdd = (page) => {
@@ -78,7 +79,6 @@ function Home(props) {
    if  (bookmarkedPosts.includes(post.id)) {
     props.bookmarkDestroy(post)
     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
-    console.log(bookmarkedPosts)
    } else {
     props.bookmarkCreate(post)
     setBookmarkedPosts([...bookmarkedPosts, post.id]);
@@ -98,7 +98,6 @@ function Home(props) {
      props.heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
-     console.log(heartedPosts)
     } else {
      props.heartCreate(post)
      setHeartedPosts([...heartedPosts, post.id]);

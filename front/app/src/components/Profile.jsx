@@ -53,8 +53,9 @@ function Profile(props) {
         setFollower(data.follower_count)
         setRelationship(data.relationship)
         setPostsCount(data.posts_count)
-        console.log(data)
-    }).catch(error => console.log("ユーザーいない"))
+        console.log()
+    })
+    .catch(error => console.log("ユーザーいない"))
   }
 
   const handleRelationship = (id) => {
@@ -80,7 +81,7 @@ function Profile(props) {
         const data = response.data.post_all
         setPostall(data)
         setPagecount(response.data.total_pages)
-        console.log(data)
+        console.log("投稿取得成功")
         for (let i = 0; i < data.length; i++) {
           bookmarkExist(data[i]);
         }
@@ -90,8 +91,11 @@ function Profile(props) {
         setPostExist(true)
       } else {
         setPostExist(false)
-        console.log("失敗")
+        console.log("投稿なし")
       }
+    })
+    .catch(error => {
+      console.log("投稿取得エラー", error)
     })
   }
   const postAdd = (page) => {
@@ -117,7 +121,6 @@ function Profile(props) {
    if  (bookmarkedPosts.includes(post.id)) {
     props.bookmarkDestroy(post)
     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
-    console.log(bookmarkedPosts)
    } else {
     props.bookmarkCreate(post)
     setBookmarkedPosts([...bookmarkedPosts, post.id]);
@@ -137,7 +140,6 @@ function Profile(props) {
      props.heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
-     console.log(heartedPosts)
     } else {
      props.heartCreate(post)
      setHeartedPosts([...heartedPosts, post.id]);

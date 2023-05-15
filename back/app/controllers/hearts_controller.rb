@@ -10,9 +10,13 @@ class HeartsController < ApplicationController
         end
     end
     def destroy
-      if current_user 
-        @post_heart = Heart.find_by(user_id: @current_user.id, post_id: params[:id])
-        @post_heart.destroy
+     if current_user 
+      @post_heart = Heart.find_by(user_id: @current_user.id, post_id: params[:id])
+      if @post_heart.destroy
+        render json: { status: true }
+      else
+        render json: { status: false }
       end
+     end
     end
 end

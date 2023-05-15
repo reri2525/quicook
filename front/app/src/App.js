@@ -1,7 +1,6 @@
 import Loginwarn from "./components/Loginwarn";
 import React, { useState, useEffect } from 'react';
 import './ScssFile/Share.scss'
-import { useHistory } from "react-router-dom";
 import axios from'axios';
 import Top from './components/Top'
 import Main from "./components/Main";
@@ -13,16 +12,12 @@ import Category from './components/Category'
 import Profile from "./components/Profile";
 import ProfileEdit from "./components/ProfileEdit";
 import Following from './components/Following';
-import WarnModal from './components/WarnModal';
-import FollowersIndex from './components/FollowersIndex'
-import {ListUrl} from './components/ListUrl';
 import{
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
 function App(props) {
-  const [modal, setModal] = useState(false); 
   const [loggedInStatus, setLoggedInStatus] = useState({})
   const [user, setUser] = useState({})
   const [postall, setPostall] = useState({})
@@ -37,19 +32,20 @@ function App(props) {
             .then(response => {
               setLoggedInStatus("未ログイン")
               setUser({})
-              window.location.reload();
-            }).catch(error => console.log("ログアウトエラー", error))
+            }).catch(error => 
+              console.log("ログアウトエラー", error)
+            )
   }
   const checkLoginStatus = () => {
     axios.get("http://localhost:3001/logged_in",{ withCredentials: true })
     .then(response => {
       if (response.data.logged_in) {
         setLoggedInStatus("ログインなう")
-        console.log(loggedInStatus)
+        console.log("ログイン")
         setUser(response.data.user)
       } else if (!response.data.logged_in) {
         setLoggedInStatus("未ログイン")
-        console.log(loggedInStatus)
+        console.log("未ログイン")
         setUser({})
       }
     })
@@ -63,9 +59,6 @@ function App(props) {
     checkLoginStatus()
   }, [])
   
-
-
-  
   const bookmarkCreate = (post) =>{
     axios.post("http://localhost:3001/bookmarks",  { post_id: post.id }, { withCredentials: true })
     .then(response => {
@@ -74,40 +67,41 @@ function App(props) {
       }
     })
     .catch(error => {
-      console.log("b")
+      console.log("ブックマーク作成エラー", error)
    })
   }
   const bookmarkDestroy = (post) =>{
     axios.delete(`http://localhost:3001/bookmarks/${post.id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
-        console.log(response.data.post)
+        console.log("ブックマーク削除")
       }
     })
     .catch(error => {
-      console.log("b")
+      console.log("ブックマーク削除エラー", error)
    })
   }
+
   const heartCreate = (post) =>{
     axios.post("http://localhost:3001/hearts",  { post_id: post.id },  { withCredentials: true })
     .then(response => {
       if (response.data.status) {
-        console.log(response.data.post)
+        console.log("いいね作成")
       }
     })
     .catch(error => {
-      console.log("b")
+      console.log("いいね削除エラー", error)
    })
   }
   const heartDestroy = (post) =>{
     axios.delete(`http://localhost:3001/hearts/${post.id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
-        console.log(response.data.post)
+        console.log("いいね削除")
       }
     })
     .catch(error => {
-      console.log("b")
+      console.log("いいね削除エラー", error)
    })
   }
   const relationshipCreate = (id) => {
@@ -118,32 +112,23 @@ function App(props) {
       }
     })
     .catch(error => {
-      console.log("エラー")
+      console.log("フォローエラー", error)
    })
   }
   const relationshipDestroy = (id) => {
     axios.delete(`http://localhost:3001/relationships/${id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
-        console.log(response.data.post)
+        console.log("フォロー解除")
       }
     })
     .catch(error => {
-      console.log("エラー")
+      console.log("フォロー解除エラー", error)
    })
   }
   return (
      <Router>
       <Switch>
-       <Route exact path={"/loginwarn"}>
-         <Loginwarn />
-       </Route>
-       <Route exact path={"/warn"}>
-         <WarnModal />
-       </Route>
-       <Route exact path={"/follower"}>
-         <FollowersIndex />
-       </Route>
         <Route exact path={"/"}
              render={props => (
               <Top { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout}/>

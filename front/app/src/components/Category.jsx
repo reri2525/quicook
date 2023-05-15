@@ -21,7 +21,6 @@ function Category(props) {
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
   const [heartedPosts, setHeartedPosts] = useState([]);
-  const [heartcount, setHeartcount] = useState(0)
   const [postExist, setPostExist] = useState(true)
 
   useEffect(() => {
@@ -50,7 +49,7 @@ function Category(props) {
         const data = response.data.post_all
         setPostall(data)
         setPagecount(response.data.total_pages)
-        console.log(data)
+        console.log("投稿取得成功")
         for (let i = 0; i < data.length; i++) {
           bookmarkExist(data[i]);
         }
@@ -61,8 +60,11 @@ function Category(props) {
       } else {
         setPagecount(0)
         setPostExist(false)
-        console.log("ない")
+        console.log("投稿なし")
       }
+    })
+    .catch(error => {
+      console.log("投稿取得エラー", error)
     })
   }
   const postAdd = (page) => {
@@ -88,7 +90,6 @@ function Category(props) {
    if  (bookmarkedPosts.includes(post.id)) {
     props.bookmarkDestroy(post)
     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
-    console.log(bookmarkedPosts)
    } else {
     props.bookmarkCreate(post)
     setBookmarkedPosts([...bookmarkedPosts, post.id]);
@@ -108,7 +109,6 @@ function Category(props) {
      props.heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
-     console.log(heartedPosts)
     } else {
      props.heartCreate(post)
      setHeartedPosts([...heartedPosts, post.id]);

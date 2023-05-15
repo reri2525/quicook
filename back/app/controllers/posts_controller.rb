@@ -294,9 +294,9 @@ class PostsController < ApplicationController
             }
            } 
        },total_pages:@post_all.total_pages}
-      else
+     else
          render json: {status: false}
-      end
+     end
     end
   end
 

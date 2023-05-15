@@ -14,9 +14,13 @@ class BookmarksController < ApplicationController
         end
     end
     def destroy
-        if current_user
-           @post = Bookmark.find_by(user_id: @current_user.id, post_id: params[:id])
-           @post.destroy
+     if current_user
+        @post = Bookmark.find_by(user_id: @current_user.id, post_id: params[:id])
+        if @post.destroy
+            render json: { status: true }
+        else
+            render json: { status: false }
         end
+     end
     end
 end
