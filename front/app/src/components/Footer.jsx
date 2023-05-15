@@ -4,7 +4,6 @@ function Footer() {
   return (
     <Fragment>
       <footer>
-        
       </footer>
     </Fragment>
   );
