@@ -21,9 +21,6 @@ import{
 function App(props) {
   const [loggedInStatus, setLoggedInStatus] = useState({})
   const [user, setUser] = useState({})
-  const [postall, setPostall] = useState({})
-  const [pagecount, setPagecount] = useState({})
-  const [currentPage, setCurrentPage] = useState(1)
   const handleLogin = (data) => {
     setLoggedInStatus("ログインなう")
     setUser(data.user)
@@ -140,11 +137,8 @@ function App(props) {
          <Route exact path={"/home/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} postall={postall} handleLogout={handleLogout}   
-                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                
-                                 url={<Home checkLoginStatus={checkLoginStatus} postall={postall} currentPage={currentPage} 
-                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
+                                 user={user} handleLogout={handleLogout}   
+                                 url={<Home loggedInStatus={loggedInStatus} 
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
                                  heartCreate={heartCreate} heartDestroy={heartDestroy}
                                  user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
@@ -154,9 +148,7 @@ function App(props) {
           <Route exact path={"/posts/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} postall={postall} handleLogout={handleLogout}   
-                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                          
+                                 user={user} handleLogout={handleLogout}   
                                  url={<PostShow user={user} relationshipCreate={relationshipCreate} 
                                                 relationshipDestroy={relationshipDestroy}  bookmarkCreate={bookmarkCreate} 
                                                 bookmarkDestroy={bookmarkDestroy} heartCreate={heartCreate} 
@@ -167,56 +159,40 @@ function App(props) {
           <Route exact path={"/following/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} postall={postall} handleLogout={handleLogout}   
-                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                             
-                                 url={<Following postall={postall} currentPage={currentPage} 
-                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
-                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 user={user} 
-                                 />}/>
+                                 user={user} handleLogout={handleLogout}      
+                                 url={<Following bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                                 user={user} 
+                                                 />}/>
             )}
           />  
           <Route exact path={"/bookmark/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} postall={postall} handleLogout={handleLogout}   
-                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                              
-                                 url={<Bookmark postall={postall} currentPage={currentPage} 
-                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
-                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 />}/>
+                                 user={user} handleLogout={handleLogout}             
+                                 url={<Bookmark bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                                heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                                />}/>
             )}
           />  
           <Route exact path={"/category/:query/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} postall={postall} handleLogout={handleLogout}   
-                                 setCurrentPage={setCurrentPage} pagecount={pagecount}    
-                                     
-                                 url={<Category postall={postall} currentPage={currentPage} 
-                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
-                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
-                                 />}/>
+                                 user={user} handleLogout={handleLogout}     
+                                 url={<Category bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                                heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                                user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
+                                                />}/>
             )}
           />  
           <Route exact path={"/search/:query/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} postall={postall} handleLogout={handleLogout}   
-                                 setCurrentPage={setCurrentPage} pagecount={pagecount}  
-                                          
-                                 url={<Search postall={postall} currentPage={currentPage} 
-                                 pagecount={pagecount} setCurrentPage={setCurrentPage}
-                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 user={user} 
-                                 />}/>
+                                 user={user} handleLogout={handleLogout}                           
+                                 url={<Search bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                              heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                              user={user} 
+                                              />}/>
             )}
           />  
         <Route exact path={"/profile/:id/page/:number"}

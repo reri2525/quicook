@@ -11,7 +11,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 function Home(props) {
-  const checkLoginStatus = props.checkLoginStatus
+  const loggedInStatus = props.loggedInStatus
   const { id } = useParams();
   const numericId = parseInt(id);
   const history = useHistory();

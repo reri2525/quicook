@@ -3,9 +3,11 @@ import '../ScssFile/Main.scss'
 import Header from './Header';
 import Postform from './Postform';
 import List from './List';
+import Footer from './Footer';
 import Logmodal from './Login';
 import Newmodal from './New';
 function Main(props) {
+  const loggedInStatus = props.loggedInStatus
   const [postModal, setPostModal] = useState(false); 
   const [logModal, setLogModal] = useState(false);
   const [newModal, setNewModal] = useState(false);
@@ -15,7 +17,6 @@ function Main(props) {
       <body>
        <Header loggedInStatus={props.loggedInStatus} handleLogout={props.handleLogout} 
                                                         setPostModal={setPostModal}  user={props.user}
-                                                        setCurrentPage={props.setCurrentPage} pagecount={props.pagecount} 
                                                         setLogModal={setLogModal} setNewModal={setNewModal} setModal={setModal} 
                                                         />
      
@@ -45,6 +46,7 @@ function Main(props) {
                       /> :
                       <></>
          }
+         { loggedInStatus === "未ログイン" ? <Footer /> : <></> }
      </body>
     </Fragment>
     )

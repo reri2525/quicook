@@ -1,11 +1,11 @@
 .center {
-    margin-left: 230px;
     margin-top: 60px;
+    margin-left: 230px;
     width: calc(100% - 231px);
     min-height: calc(100vh - 60px);
     z-index: 1;
     .center_inner {
-     min-height: calc(100vh);
+     min-height: calc(100vh - 60px);
     }
     .center_container{
       background-color: rgb(250,250,250);
