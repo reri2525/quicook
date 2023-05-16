@@ -11,7 +11,6 @@ class PostsController < ApplicationController
   end
 
   def index
-   if current_user
     @post_all = Post.includes(:user).paginate(page: params[:page], per_page: 20)
     if @post_all.exists?
       render json: { 
@@ -36,18 +35,17 @@ class PostsController < ApplicationController
              avatar: post.user.avatar,
              id: post.user.id
            },
-           bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
+           bookmarks: current_user ? post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
              { id: bookmark.id, user_id: bookmark.user_id } 
-           },
-           hearts: post.hearts.where(user_id: @current_user.id).map { |heart| 
+           } : nil,
+           hearts: current_user ? post.hearts.where(user_id: @current_user.id).map { |heart| 
             { id: heart.id, user_id: heart.user_id } 
-           }
+           } : nil,
           } 
       },total_pages:@post_all.total_pages}
      else
         render json: {status: false}
      end
-    end
   end
 
   def user_posts_index
@@ -89,7 +87,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    if current_user
       @post = Post.includes(:user).find(params[:id])
       if @post.present?
         post = @post
@@ -99,9 +96,9 @@ class PostsController < ApplicationController
         else
           file_type = "image"
         end
-        bookmark = post.bookmarks.find_by(user_id: @current_user.id)
-        heart = post.hearts.find_by(user_id: @current_user.id)
-        relationship = Relationship.find_by(followed_id: post.user.id, follower_id: @current_user.id)
+        bookmark = current_user ? post.bookmarks.find_by(user_id: @current_user.id) : nil
+        heart = current_user ? post.hearts.find_by(user_id: @current_user.id) : nil
+        relationship = current_user ? Relationship.find_by(followed_id: post.user.id, follower_id: @current_user.id) : nil  
         render json: { 
           status: true, 
           post: {
@@ -130,7 +127,6 @@ class PostsController < ApplicationController
       else
         render json: {status: false}
       end
-    end
   end
 
   def bookmark 
@@ -212,7 +208,6 @@ class PostsController < ApplicationController
   end
 
   def search
-    if current_user
       search_query = "%#{params[:query].downcase}%"
       @post_all = Post.includes(:user, :hearts).where("LOWER(title) LIKE ? OR LOWER(content) LIKE ?", search_query, search_query)
                                                .left_joins(:hearts)
@@ -241,18 +236,17 @@ class PostsController < ApplicationController
                avatar: post.user.avatar,
                id: post.user.id
              },
-             bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
-               { id: bookmark.id, user_id: bookmark.user_id } 
-             },
-             hearts: post.hearts.where(user_id: @current_user.id).map { |heart| 
-              { id: heart.id, user_id: heart.user_id } 
-             }
+             bookmarks: current_user ? post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
+               { id: bookmark.id, user_id: bookmark.user_id }
+             } : nil,
+             hearts: current_user ? post.hearts.where(user_id: @current_user.id).map { |heart| 
+              { id: heart.id, user_id: heart.user_id }
+             } : nil,
             } 
         },total_pages:@post_all.total_pages}
       else
           render json: {status: false}
       end
-    end
   end
 
   def category

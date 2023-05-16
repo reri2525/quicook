@@ -11,6 +11,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 function Home(props) {
+  const checkLoginStatus = props.checkLoginStatus
   const { id } = useParams();
   const numericId = parseInt(id);
   const history = useHistory();
@@ -40,6 +41,7 @@ function Home(props) {
         setPostall(data)
         setPagecount(response.data.total_pages)
         console.log("投稿取得成功")
+        console.log(data)
         for (let i = 0; i < data.length; i++) {
           bookmarkExist(data[i]);
         }
@@ -86,7 +88,7 @@ function Home(props) {
   }
   const bookmarkExist = (post) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
-      if (post.bookmarks[0]) {
+      if (post.bookmarks && post.bookmarks[0]) {
         return [...prevBookmarkedPosts, post.id];
       } else {
         return prevBookmarkedPosts.filter(id => id !== post.id);
@@ -106,7 +108,7 @@ function Home(props) {
    }
   const heartExist = (post) => {
     setHeartedPosts((prevHeartedPosts) => {
-      if (post.hearts[0]) {
+      if (post.hearts && post.hearts[0]) {
         return [...prevHeartedPosts, post.id];
       } else {
         return prevHeartedPosts.filter(id => id !== post.id);

@@ -143,7 +143,7 @@ function App(props) {
                                  user={user} postall={postall} handleLogout={handleLogout}   
                                  setCurrentPage={setCurrentPage} pagecount={pagecount}    
                                 
-                                 url={<Home postall={postall} currentPage={currentPage} 
+                                 url={<Home checkLoginStatus={checkLoginStatus} postall={postall} currentPage={currentPage} 
                                  pagecount={pagecount} setCurrentPage={setCurrentPage}
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
                                  heartCreate={heartCreate} heartDestroy={heartDestroy}
