@@ -1,11 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import '../ScssFile/New.scss'
 import axios from 'axios'
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 function Newmodal(props) {
-    
   const {
       register,
       reset,
@@ -20,11 +19,13 @@ function Newmodal(props) {
   const password = watch('password', '')
   const passwordConfirmation = watch('passwordConfirmation', '')
   const ref = document.referrer
+
   const CloseModal = () => {
     props.setNewModal(false)
     props.setModal(false)
     reset();
   }
+
   const onSubmit = (event) => {
     axios.post("http://localhost:3001/users",
         {
@@ -49,8 +50,14 @@ function Newmodal(props) {
     event.preventDefault()
 }
 
+useEffect(() => {
+  document.body.style.overflow = 'hidden';
+  return () => {
+    document.body.style.overflow = 'auto';
+  };
+},[])
+
 return ( 
-  <>{props.newModal ? (
     <Fragment>
         <div className="back_display">
           
@@ -107,10 +114,6 @@ return (
 
           
     </Fragment>
-    ) : (
-      <></>
-  )}
-  </>
-  )
+)
 }
 export default Newmodal;

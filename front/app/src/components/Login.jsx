@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import '../ScssFile/Login.scss'
 import axios from 'axios'
 import CloseIcon from '@mui/icons-material/Close';
@@ -14,11 +14,13 @@ function Logmodal(props) {
   const [password, setPassword] = useState("")
   const [errors_m, setErrors_m] = useState("")
   const history = useHistory();
+
   const CloseModal = () => {
     props.setLogModal(false)
     props.setModal(false)
     setErrors_m("")
   }
+
   const onSubmit = (event) => {
     const formData = new FormData();
     formData.append('user[email]', email);
@@ -37,8 +39,15 @@ function Logmodal(props) {
         console.log("registration error", error)
         event.preventDefault()
     })
-   
-}
+  }
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  },[])
+
 if (props.loggedInStatus === "未ログイン") {
 return ( 
   <>{props.logModal ? (

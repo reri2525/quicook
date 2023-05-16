@@ -1,5 +1,6 @@
 .center {
     margin-left: 230px;
+    margin-top: 60px;
     width: calc(100% - 231px);
     min-height: calc(100vh - 60px);
     z-index: 1;
@@ -8,7 +9,6 @@
     }
     .center_container{
       background-color: rgb(250,250,250);
-      padding-top: 60px;
       min-height: calc(100vh - 60px);
       z-index: 1;
       width: calc(100vw - 249px);

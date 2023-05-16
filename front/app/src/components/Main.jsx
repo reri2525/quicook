@@ -27,21 +27,25 @@ function Main(props) {
           </div>
          </div>
         </div>
-        { postModal ? <Postform setPostmodal={setPostModal} user={props.user}
-         postAllGet={props.postAllGet}/> : <></> }
+         { postModal ? <Postform 
+                        setPostmodal={setPostModal} user={props.user}
+                        postAllGet={props.postAllGet}
+                      /> : 
+                      <></> 
+         }
+         { logModal ? <Logmodal 
+                        handleLogin={props.handleLogin} logModal={logModal} 
+                        setLogModal={setLogModal} setModal={setModal} loggedInStatus={props.loggedInStatus}
+                      /> : 
+                      <></>
+         }
+         { newModal ? <Newmodal 
+                        handleLogin={props.handleLogin} newModal={newModal} 
+                        setNewModal={setNewModal} setModal={setModal} loggedInStatus={props.loggedInStatus}
+                      /> :
+                      <></>
+         }
      </body>
-     { logModal ? <Logmodal 
-                     handleLogin={props.handleLogin} logModal={logModal} 
-                     setLogModal={setLogModal} setModal={setModal} loggedInStatus={props.loggedInStatus}
-                  /> : 
-                  <></>
-     }
-     { newModal ? <Newmodal 
-                     handleLogin={props.handleLogin} newModal={newModal} 
-                     setNewModal={setNewModal} setModal={setModal} loggedInStatus={props.loggedInStatus}
-                  /> :
-                  <></>
-     }
     </Fragment>
     )
 }
