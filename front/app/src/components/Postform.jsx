@@ -4,7 +4,6 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 import { CategoryData } from './ListData';
 import { DishData } from './ListData';
-import { ListData3 } from './ListData';
 import CloseIcon from '@mui/icons-material/Close';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ExpandMore from '@mui/icons-material/ExpandMore';
