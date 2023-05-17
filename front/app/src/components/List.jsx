@@ -20,7 +20,8 @@ function List(props) {
     <div className="list_area">
       <div className='list_inner'>
       <ul>
-      { ListData1.map((value, key) => {
+      { loggedInStatus === "ログインなう" ?
+        ListData1.map((value, key) => {
         return (
          <Link to={value.link} className="list_link">
          <li key={key} className = {window.location.pathname === value.link 
@@ -41,6 +42,24 @@ function List(props) {
          </Link>
         )
        })
+       : 
+       <Link to={ListData1[0].link} className="list_link">
+         <li className = {window.location.pathname === ListData1[0].link 
+                                     || 
+                                    window.location.pathname.startsWith("/home/page") && ListData1[0].link.startsWith("/home/page")
+                                      ? 
+                                      "list_active" 
+                                       : 
+                                      "list"
+                                    }>
+            <a className='icon'> 
+               {window.location.pathname === ListData1[0].link  && ListData1[0].icon2 ? ListData1[0].icon2 : ListData1[0].icon}
+            </a>
+            <a className='list_title'> 
+               {ListData1[0].title}
+            </a>
+         </li>
+       </Link>
       }
       </ul>
       <ul>

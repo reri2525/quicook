@@ -97,7 +97,7 @@ function Category(props) {
   }
   const bookmarkExist = (post) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
-      if (post.bookmarks[0]) {
+      if (post.bookmarks && post.bookmarks[0]) {
         return [...prevBookmarkedPosts, post.id];
       } else {
         return prevBookmarkedPosts.filter(id => id !== post.id);
@@ -117,7 +117,7 @@ function Category(props) {
    }
   const heartExist = (post) => {
     setHeartedPosts((prevHeartedPosts) => {
-      if (post.hearts[0]) {
+      if (post.hearts && post.hearts[0]) {
         return [...prevHeartedPosts, post.id];
       } else {
         return prevHeartedPosts.filter(id => id !== post.id);

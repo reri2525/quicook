@@ -250,7 +250,6 @@ class PostsController < ApplicationController
   end
 
   def category
-    if current_user
      if params[:query].include?("／")
        category_query = params[:query].split("／").last
      else
@@ -280,18 +279,17 @@ class PostsController < ApplicationController
               avatar: post.user.avatar,
               id: post.user.id
             },
-            bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
-              { id: bookmark.id, user_id: bookmark.user_id } 
-            },
-            hearts: post.hearts.where(user_id: @current_user.id).map { |heart| 
-             { id: heart.id, user_id: heart.user_id } 
-            }
+            bookmarks: current_user ? post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
+              { id: bookmark.id, user_id: bookmark.user_id }
+            } : nil,
+            hearts: current_user ? post.hearts.where(user_id: @current_user.id).map { |heart| 
+             { id: heart.id, user_id: heart.user_id }
+            } : nil,
            } 
        },total_pages:@post_all.total_pages}
      else
          render json: {status: false}
      end
-    end
   end
 
   def destroy
