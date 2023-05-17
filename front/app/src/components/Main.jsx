@@ -6,6 +6,7 @@ import List from './List';
 import Footer from './Footer';
 import Logmodal from './Login';
 import Newmodal from './New';
+import PromptingAccountCreation from './PromptingAccountCreation';
 function Main(props) {
   const loggedInStatus = props.loggedInStatus
   const [postModal, setPostModal] = useState(false); 
@@ -31,8 +32,8 @@ function Main(props) {
          { postModal ? <Postform 
                         setPostmodal={setPostModal} user={props.user}
                         postAllGet={props.postAllGet}
-                      /> : 
-                      <></> 
+                       /> : 
+                       <></> 
          }
          { logModal ? <Logmodal 
                         handleLogin={props.handleLogin} logModal={logModal} 
@@ -46,7 +47,7 @@ function Main(props) {
                       /> :
                       <></>
          }
-         { loggedInStatus === "未ログイン" ? <Footer /> : <></> }
+         { loggedInStatus === "未ログイン" ? <Footer setLogModal={setLogModal} setNewModal={setNewModal}/> : <></> }
      </body>
     </Fragment>
     )

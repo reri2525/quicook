@@ -21,16 +21,13 @@ import{
 function App(props) {
   const [loggedInStatus, setLoggedInStatus] = useState({})
   const [user, setUser] = useState({})
+  const [promptingAccountCreation, setPromptingAccountCreation] = useState({})
   const handleLogin = (data) => {
-    setLoggedInStatus("ログインなう")
-    setUser(data.user)
     window.location.pathname = "/";
   }
   const handleLogout = () => {
     axios.delete("http://localhost:3001/logout", { withCredentials: true })
             .then(response => {
-              setLoggedInStatus("未ログイン")
-              setUser({})
               window.location.pathname = "/";
             }).catch(error => 
               console.log("ログアウトエラー", error)
@@ -129,6 +126,12 @@ function App(props) {
   return (
      <Router>
       <Switch>
+        <Route exact path={"/top"}
+             render={props => (
+              <Top { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
+                                user={user} handleLogout={handleLogout}/>
+            )}
+          />  
         <Route exact path={"/"}
              render={props => (
               props.history.push('/home/page/1')
@@ -138,6 +141,7 @@ function App(props) {
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} handleLogout={handleLogout}   
+                                 promptingAccountCreation={promptingAccountCreation}
                                  url={<Home loggedInStatus={loggedInStatus} 
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
                                  heartCreate={heartCreate} heartDestroy={heartDestroy}

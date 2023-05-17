@@ -83,7 +83,9 @@ function Home(props) {
     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
    } else {
     props.bookmarkCreate(post)
-    setBookmarkedPosts([...bookmarkedPosts, post.id]);
+    if (loggedInStatus === "ログインなう") {
+     setBookmarkedPosts([...bookmarkedPosts, post.id]);
+    }
    }
   }
   const bookmarkExist = (post) => {
@@ -102,8 +104,10 @@ function Home(props) {
      post.heart_count = post.heart_count - 1
     } else {
      props.heartCreate(post)
-     setHeartedPosts([...heartedPosts, post.id]);
-     post.heart_count = post.heart_count + 1
+     if (loggedInStatus === "ログインなう") {
+      setHeartedPosts([...heartedPosts, post.id]);
+      post.heart_count = post.heart_count + 1
+     }
     }
    }
   const heartExist = (post) => {

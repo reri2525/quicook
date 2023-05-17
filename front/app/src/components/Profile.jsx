@@ -91,6 +91,8 @@ function Profile(props) {
         setPostExist(true)
       } else {
         setPostExist(false)
+        setPagecount(0)
+        setCurrentPage(1)
         console.log("投稿なし")
       }
     })

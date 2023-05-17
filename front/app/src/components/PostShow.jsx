@@ -89,7 +89,7 @@ function PostShow(props) {
        <div className='icon'>
          <img src={post.user.avatar.url}></img>
        </div>
-       <Link to={`/profile/${post.user.id}`}>{post.user.name}</Link>
+       <Link to={`/profile/${post.user.id}/page/1`}>{post.user.name}</Link>
        { currentUser.id === post.user.id ?
           <></> 
            :
