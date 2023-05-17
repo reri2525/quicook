@@ -49,7 +49,10 @@ function Main(props) {
                       /> :
                       <></>
          }
-         { promptingAccountCreation ? <PromptingAccountCreation setPromptingAccountCreation={setPromptingAccountCreation}/> : <></> } 
+         { promptingAccountCreation ? <PromptingAccountCreation setPromptingAccountCreation={setPromptingAccountCreation}
+                                                                setLogModal={setLogModal}
+                                                                setNewModal={setNewModal}
+                                                                /> : <></> } 
          { loggedInStatus === "未ログイン" ? <Footer setLogModal={setLogModal} setNewModal={setNewModal}/> : <></> }
      </body>
     </Fragment>

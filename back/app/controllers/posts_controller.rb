@@ -49,7 +49,6 @@ class PostsController < ApplicationController
   end
 
   def user_posts_index
-    if current_user
       @posts = Post.includes(:user).where(user_id: params[:id]).paginate(page: params[:page], per_page: 20)
      if @posts.exists?
        render json: { 
@@ -72,18 +71,17 @@ class PostsController < ApplicationController
               avatar: post.user.avatar,
               id: post.user.id
             },
-            bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
+            bookmarks: current_user ? post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
               { id: bookmark.id, user_id: bookmark.user_id } 
-            },
-            hearts: post.hearts.where(user_id: @current_user.id).map { |heart| 
+            } : nil,
+            hearts: current_user ? post.hearts.where(user_id: @current_user.id).map { |heart| 
              { id: heart.id, user_id: heart.user_id } 
-            }
+            } : nil,
            } 
        },total_pages:@posts.total_pages}
       else
          render json: {status: false}
       end
-    end
   end
 
   def show
@@ -209,7 +207,7 @@ class PostsController < ApplicationController
 
   def search
       search_query = "%#{params[:query].downcase}%"
-      @post_all = Post.includes(:user, :hearts).where("LOWER(title) LIKE ? OR LOWER(content) LIKE ?", search_query, search_query)
+      @post_all = Post.includes(:user, :hearts).where("LOWER(title) LIKE ?", search_query)
                                                .left_joins(:hearts)
                                                .group(:id).order('COUNT(hearts.id) DESC', 'MAX(hearts.created_at) DESC')
                                                .paginate(page: params[:page], per_page: 30)

@@ -59,7 +59,7 @@ useEffect(() => {
 
 return ( 
     <Fragment>
-        <div className="back_display">
+        <div className="back_display2">
           
         </div>
         <div className="form_modal">

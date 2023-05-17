@@ -11,6 +11,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 function Category(props) {
+  const loggedInStatus = props.loggedInStatus
   const { id } = useParams();
   const { query } = useParams();
   const numericId = parseInt(id);
@@ -87,14 +88,16 @@ function Category(props) {
     window.scrollTo(0, 0);
   }
   const handleBookmark = (post) => {
-   if  (bookmarkedPosts.includes(post.id)) {
-    props.bookmarkDestroy(post)
-    setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
-   } else {
-    props.bookmarkCreate(post)
-    setBookmarkedPosts([...bookmarkedPosts, post.id]);
+    if  (bookmarkedPosts.includes(post.id)) {
+     props.bookmarkDestroy(post)
+     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
+    } else {
+     props.bookmarkCreate(post)
+     if (loggedInStatus === "ログインなう") {
+      setBookmarkedPosts([...bookmarkedPosts, post.id]);
+     }
+    }
    }
-  }
   const bookmarkExist = (post) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
       if (post.bookmarks && post.bookmarks[0]) {
@@ -111,10 +114,12 @@ function Category(props) {
      post.heart_count = post.heart_count - 1
     } else {
      props.heartCreate(post)
-     setHeartedPosts([...heartedPosts, post.id]);
-     post.heart_count = post.heart_count + 1
+     if (loggedInStatus === "ログインなう") {
+      setHeartedPosts([...heartedPosts, post.id]);
+      post.heart_count = post.heart_count + 1
+     }
     }
-   }
+  }
   const heartExist = (post) => {
     setHeartedPosts((prevHeartedPosts) => {
       if (post.hearts && post.hearts[0]) {

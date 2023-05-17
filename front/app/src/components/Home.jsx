@@ -109,7 +109,7 @@ function Home(props) {
       post.heart_count = post.heart_count + 1
      }
     }
-   }
+  }
   const heartExist = (post) => {
     setHeartedPosts((prevHeartedPosts) => {
       if (post.hearts && post.hearts[0]) {

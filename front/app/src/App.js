@@ -197,32 +197,40 @@ function App(props) {
           <Route exact path={"/category/:query/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} handleLogout={handleLogout}     
-                                 url={<Category bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                                heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                                user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
-                                                />}/>
+                                 user={user} handleLogout={handleLogout}   
+                                 promptingAccountCreation={promptingAccountCreation}
+                                 setPromptingAccountCreation={setPromptingAccountCreation}
+                                 url={<Category loggedInStatus={loggedInStatus} 
+                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
+                                 />}/>
             )}
           />  
           <Route exact path={"/search/:query/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} handleLogout={handleLogout}                           
-                                 url={<Search bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                              heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                              user={user} 
-                                              />}/>
+                                 user={user} handleLogout={handleLogout}   
+                                 promptingAccountCreation={promptingAccountCreation}
+                                 setPromptingAccountCreation={setPromptingAccountCreation}
+                                 url={<Search loggedInStatus={loggedInStatus} 
+                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
+                                 />}/>
             )}
           />  
         <Route exact path={"/profile/:id/page/:number"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} 
                                  handleLogout={handleLogout} user={user} 
-                                 url={<Profile user={user} relationshipCreate={relationshipCreate} 
-                                       relationshipDestroy={relationshipDestroy} bookmarkCreate={bookmarkCreate} 
-                                       bookmarkDestroy={bookmarkDestroy} heartCreate={heartCreate} 
-                                       heartDestroy={heartDestroy}/>
-                                      }/>
+                                 promptingAccountCreation={promptingAccountCreation}
+                                 setPromptingAccountCreation={setPromptingAccountCreation}
+                                 url={<Profile loggedInStatus={loggedInStatus} 
+                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
+                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
+                                 />}/>
             )}
           />  
         <Route exact path={"/edit"}

@@ -13,6 +13,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ReplayIcon from '@mui/icons-material/Replay';
 import PostShow from './PostShow';
 function Search(props) {
+  const loggedInStatus = props.loggedInStatus
   const { id } = useParams();
   const { query } = useParams();
   const numericId = parseInt(id);
@@ -76,15 +77,16 @@ function Search(props) {
     window.scrollTo(0, 0);
   }
   const handleBookmark = (post) => {
-   if  (bookmarkedPosts.includes(post.id)) {
-    props.bookmarkDestroy(post)
-    setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
-    console.log(bookmarkedPosts)
-   } else {
-    props.bookmarkCreate(post)
-    setBookmarkedPosts([...bookmarkedPosts, post.id]);
+    if  (bookmarkedPosts.includes(post.id)) {
+     props.bookmarkDestroy(post)
+     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
+    } else {
+     props.bookmarkCreate(post)
+     if (loggedInStatus === "ログインなう") {
+      setBookmarkedPosts([...bookmarkedPosts, post.id]);
+     }
+    }
    }
-  }
   const bookmarkExist = (post) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
       if (post.bookmarks && post.bookmarks[0]) {
@@ -99,13 +101,14 @@ function Search(props) {
      props.heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
-     console.log(heartedPosts)
     } else {
      props.heartCreate(post)
-     setHeartedPosts([...heartedPosts, post.id]);
-     post.heart_count = post.heart_count + 1
+     if (loggedInStatus === "ログインなう") {
+      setHeartedPosts([...heartedPosts, post.id]);
+      post.heart_count = post.heart_count + 1
+     }
     }
-   }
+  }
   const heartExist = (post) => {
     setHeartedPosts((prevHeartedPosts) => {
       if (post.hearts && post.hearts[0]) {

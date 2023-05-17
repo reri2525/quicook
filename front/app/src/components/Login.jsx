@@ -52,7 +52,7 @@ if (props.loggedInStatus === "未ログイン") {
 return ( 
   <>{props.logModal ? (
     <Fragment>
-        <div className="back_display">
+        <div className="back_display2">
           
         </div>
         <div className="form_modal">

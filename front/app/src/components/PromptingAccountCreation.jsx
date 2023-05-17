@@ -3,6 +3,16 @@ import '../ScssFile/PromptingAccountCreation.scss'
 import CloseIcon from '@mui/icons-material/Close';
 function PromptingAccountCreation(props) {
   const setPromptingAccountCreation = props.setPromptingAccountCreation
+  const setLogModal = props.setLogModal
+  const setNewModal = props.setNewModal
+  const openLogModal = () => {
+    setLogModal(true)
+    setPromptingAccountCreation(false)
+  }
+  const openNewModal = () => {
+    setNewModal(true)
+    setPromptingAccountCreation(false)
+  }
   useEffect(() => {
      document.body.style.overflow = 'hidden';
      setPromptingAccountCreation(true)
@@ -17,8 +27,8 @@ function PromptingAccountCreation(props) {
       <div className='prompting_login'>
         <div className='container'>
             <h2>この操作を行うにはログインする必要があります。アカウントを持ってない場合は新規登録をしてください。</h2>
-            <button className='login'>ログイン</button>
-            <button className='new'>新規登録</button>
+            <button className='login' onClick={() => openLogModal()}>ログイン</button>
+            <button className='new' onClick={() => openNewModal()}>新規登録</button>
             <div className='close' onClick={() => setPromptingAccountCreation(false)}><a><CloseIcon /></a></div>
         </div>
       </div>

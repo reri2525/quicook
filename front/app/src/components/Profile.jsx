@@ -13,6 +13,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import FollowingIndex from './FollowingIndex';
 import FollowersIndex from './FollowersIndex';
 function Profile(props) {
+  const loggedInStatus = props.loggedInStatus
   const relationshipCreate = props.relationshipCreate
   const relationshipDestroy = props.relationshipDestroy
   const [user, setUser] = useState([])
@@ -64,8 +65,10 @@ function Profile(props) {
      setFollower(follower - 1)
      relationshipDestroy(id)
     } else {
-     setRelationship(true)
-     setFollower(follower + 1)
+     if (loggedInStatus === "ログインなう") {
+       setRelationship(true)
+       setFollower(follower + 1)
+     }
      relationshipCreate(id)
     }
   }
@@ -120,17 +123,19 @@ function Profile(props) {
     window.scrollTo(0, 0);
   }
   const handleBookmark = (post) => {
-   if  (bookmarkedPosts.includes(post.id)) {
-    props.bookmarkDestroy(post)
-    setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
-   } else {
-    props.bookmarkCreate(post)
-    setBookmarkedPosts([...bookmarkedPosts, post.id]);
+    if  (bookmarkedPosts.includes(post.id)) {
+     props.bookmarkDestroy(post)
+     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
+    } else {
+     props.bookmarkCreate(post)
+     if (loggedInStatus === "ログインなう") {
+      setBookmarkedPosts([...bookmarkedPosts, post.id]);
+     }
+    }
    }
-  }
   const bookmarkExist = (post) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
-      if (post.bookmarks[0]) {
+      if (post.bookmarks && post.bookmarks[0]) {
         return [...prevBookmarkedPosts, post.id];
       } else {
         return prevBookmarkedPosts.filter(id => id !== post.id);
@@ -144,13 +149,15 @@ function Profile(props) {
      post.heart_count = post.heart_count - 1
     } else {
      props.heartCreate(post)
-     setHeartedPosts([...heartedPosts, post.id]);
-     post.heart_count = post.heart_count + 1
+     if (loggedInStatus === "ログインなう") {
+      setHeartedPosts([...heartedPosts, post.id]);
+      post.heart_count = post.heart_count + 1
+     }
     }
-   }
+  }
   const heartExist = (post) => {
     setHeartedPosts((prevHeartedPosts) => {
-      if (post.hearts[0]) {
+      if (post.hearts && post.hearts[0]) {
         return [...prevHeartedPosts, post.id];
       } else {
         return prevHeartedPosts.filter(id => id !== post.id);
