@@ -10,7 +10,8 @@ import { DishData } from './ListData';
 import { ListData3 } from './ListData';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
-function Set(props) {
+function List(props) {
+ const loggedInStatus = props.loggedInStatus
  const history = useHistory();
  const [categoryExpand, setCategoryExpand] = useState(false)
  const [dishExpand, setDishExpand] = useState([])
@@ -90,4 +91,4 @@ function Set(props) {
   </Fragment> 
  );
 }
-export default Set;
+export default List;

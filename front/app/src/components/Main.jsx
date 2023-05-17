@@ -8,6 +8,8 @@ import Logmodal from './Login';
 import Newmodal from './New';
 import PromptingAccountCreation from './PromptingAccountCreation';
 function Main(props) {
+  const promptingAccountCreation = props.promptingAccountCreation
+  const setPromptingAccountCreation = props.setPromptingAccountCreation
   const loggedInStatus = props.loggedInStatus
   const [postModal, setPostModal] = useState(false); 
   const [logModal, setLogModal] = useState(false);
@@ -21,7 +23,7 @@ function Main(props) {
                                                         setLogModal={setLogModal} setNewModal={setNewModal} setModal={setModal} 
                                                         />
      
-        <List />
+        <List loggedInStatus={loggedInStatus}/>
         <div className='center'>
          <div className='center_inner'>
           <div className='center_container'>
@@ -47,6 +49,7 @@ function Main(props) {
                       /> :
                       <></>
          }
+         { promptingAccountCreation ? <PromptingAccountCreation setPromptingAccountCreation={setPromptingAccountCreation}/> : <></> } 
          { loggedInStatus === "未ログイン" ? <Footer setLogModal={setLogModal} setNewModal={setNewModal}/> : <></> }
      </body>
     </Fragment>

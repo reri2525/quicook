@@ -21,7 +21,7 @@ import{
 function App(props) {
   const [loggedInStatus, setLoggedInStatus] = useState({})
   const [user, setUser] = useState({})
-  const [promptingAccountCreation, setPromptingAccountCreation] = useState({})
+  const [promptingAccountCreation, setPromptingAccountCreation] = useState(false)
   const handleLogin = (data) => {
     window.location.pathname = "/";
   }
@@ -57,6 +57,7 @@ function App(props) {
   }, [])
   
   const bookmarkCreate = (post) =>{
+   if (loggedInStatus === "ログインなう") {
     axios.post("http://localhost:3001/bookmarks",  { post_id: post.id }, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -65,7 +66,10 @@ function App(props) {
     })
     .catch(error => {
       console.log("ブックマーク作成エラー", error)
-   })
+    })
+   } else {
+    setPromptingAccountCreation(true)
+   }
   }
   const bookmarkDestroy = (post) =>{
     axios.delete(`http://localhost:3001/bookmarks/${post.id}`, { withCredentials: true })
@@ -80,6 +84,7 @@ function App(props) {
   }
 
   const heartCreate = (post) =>{
+   if (loggedInStatus === "ログインなう") {
     axios.post("http://localhost:3001/hearts",  { post_id: post.id },  { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -88,7 +93,10 @@ function App(props) {
     })
     .catch(error => {
       console.log("いいね削除エラー", error)
-   })
+    })
+   } else {
+    setPromptingAccountCreation(true)
+   }
   }
   const heartDestroy = (post) =>{
     axios.delete(`http://localhost:3001/hearts/${post.id}`, { withCredentials: true })
@@ -102,6 +110,7 @@ function App(props) {
    })
   }
   const relationshipCreate = (id) => {
+   if (loggedInStatus === "ログインなう") {
     axios.post("http://localhost:3001/relationships",  { user_id: id },  { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -110,7 +119,10 @@ function App(props) {
     })
     .catch(error => {
       console.log("フォローエラー", error)
-   })
+    })
+   } else {
+    setPromptingAccountCreation(true)
+   }
   }
   const relationshipDestroy = (id) => {
     axios.delete(`http://localhost:3001/relationships/${id}`, { withCredentials: true })
@@ -142,6 +154,7 @@ function App(props) {
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} handleLogout={handleLogout}   
                                  promptingAccountCreation={promptingAccountCreation}
+                                 setPromptingAccountCreation={setPromptingAccountCreation}
                                  url={<Home loggedInStatus={loggedInStatus} 
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
                                  heartCreate={heartCreate} heartDestroy={heartDestroy}
@@ -153,10 +166,12 @@ function App(props) {
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} handleLogout={handleLogout}   
+                                 promptingAccountCreation={promptingAccountCreation}
+                                 setPromptingAccountCreation={setPromptingAccountCreation}
                                  url={<PostShow user={user} relationshipCreate={relationshipCreate} 
                                                 relationshipDestroy={relationshipDestroy}  bookmarkCreate={bookmarkCreate} 
                                                 bookmarkDestroy={bookmarkDestroy} heartCreate={heartCreate} 
-                                                heartDestroy={heartDestroy}
+                                                heartDestroy={heartDestroy} loggedInStatus={loggedInStatus}
                                                 />}/>
             )}
           />  

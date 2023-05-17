@@ -21,6 +21,7 @@ function PostShow(props) {
  const bookmarkDestroy = props.bookmarkDestroy
  const heartCreate = props.heartCreate
  const heartDestroy = props.heartDestroy
+ const loggedInStatus = props.loggedInStatus
  const [post, setPost] = useState([])
  const [bookmarked, setBookmarked] = useState(false)
  const [hearted, setHearted] = useState(false)
@@ -55,7 +56,9 @@ function PostShow(props) {
       setBookmarked(false)
       bookmarkDestroy(post)
    } else {
+     if (loggedInStatus === "ログインなう") {
       setBookmarked(true)
+     }
       bookmarkCreate(post)
    }
  }
@@ -66,9 +69,11 @@ function PostShow(props) {
     heartDestroy(post)
     post.hearts_count = post.hearts_count - 1
    } else {
-    setHearted(true)
     heartCreate(post)
-    post.hearts_count = post.hearts_count + 1
+    if (loggedInStatus === "ログインなう") {
+     setHearted(true)
+     post.hearts_count = post.hearts_count + 1
+    }
    }
  }
  const handleRelationship = (id) => {
@@ -76,7 +81,9 @@ function PostShow(props) {
     setRelationship(false)
     relationshipDestroy(id)
    } else {
-    setRelationship(true)
+    if (loggedInStatus === "ログインなう") {
+      setRelationship(true)
+    }
     relationshipCreate(id)
    }
  }
