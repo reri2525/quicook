@@ -26,7 +26,8 @@ class UsersController < ApplicationController
              render json: { status: :true, user: @user, relationship: relationship ? true : false,
                             followed_count: @followed_count, follower_count: @follower_count, posts_count: @posts_count }
          else
-             render json: { status: :false, user: @user }
+             render json: { status: :false, user: @user, followed_count: @followed_count, 
+                            follower_count: @follower_count, posts_count: @posts_count  }
          end
     end
 
