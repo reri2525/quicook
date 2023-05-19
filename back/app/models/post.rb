@@ -11,10 +11,4 @@ class Post < ApplicationRecord
   validates :process,  presence: true, length: { maximum: 300 }
   validates :coment,  presence: true, length: { maximum: 200 }
   default_scope { order(created_at: :desc) }
-  def hearts?(user)
-    hearts.where(user_id: user.id).exists?
-  end
-  def bookmarks?(user)
-    favorites.where(user_id: user.id).exists?
- end
 end
