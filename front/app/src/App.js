@@ -19,6 +19,7 @@ import{
   Route,
 } from "react-router-dom";
 function App(props) {
+  const url = process.env.REACT_APP_API_URL
   const [loggedInStatus, setLoggedInStatus] = useState({})
   const [user, setUser] = useState({})
   const [promptingAccountCreation, setPromptingAccountCreation] = useState(false)
@@ -34,7 +35,7 @@ function App(props) {
             )
   }
   const checkLoginStatus = () => {
-    axios.get("http://localhost:3001/logged_in",{ withCredentials: true })
+    axios.get(`http://${url}/logged_in`,{ withCredentials: true })
     .then(response => {
       if (response.data.logged_in) {
         setLoggedInStatus("ログインなう")
