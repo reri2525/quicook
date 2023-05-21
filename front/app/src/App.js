@@ -34,7 +34,7 @@ function App(props) {
             )
   }
   const checkLoginStatus = () => {
-    axios.get(`/logged_in`,{ withCredentials: true })
+    axios.get(`http://localhost:3001/logged_in`,{ withCredentials: true })
     .then(response => {
       if (response.data.logged_in) {
         setLoggedInStatus("ログインなう")
