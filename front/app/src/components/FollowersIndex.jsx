@@ -83,7 +83,7 @@ function FollowersIndex(props) {
                 { currentUser.id === value.id ? 
                   <></>
                   : 
-                  value.following ?
+                  value.following && currentUser.id ?
                     <a className="unfollow" onClick={() => handleRelationship(value, key)}>フォロー中</a>
                       :
                     <a className="follow" onClick={() => handleRelationship(value, key)}>フォローする</a>
