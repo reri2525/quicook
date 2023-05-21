@@ -11,6 +11,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 function Category(props) {
+  const url = process.env.REACT_APP_API_URL
   const loggedInStatus = props.loggedInStatus
   const { id } = useParams();
   const { query } = useParams();

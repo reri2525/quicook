@@ -1,4 +1,3 @@
-import Loginwarn from "./components/Loginwarn";
 import React, { useState, useEffect } from 'react';
 import './ScssFile/Share.scss'
 import axios from'axios';
@@ -27,7 +26,7 @@ function App(props) {
     window.location.pathname = "/";
   }
   const handleLogout = () => {
-    axios.delete("http://localhost:3001/logout", { withCredentials: true })
+    axios.delete(`${url}/logout`, { withCredentials: true })
             .then(response => {
               window.location.pathname = "/";
             }).catch(error => 
@@ -35,7 +34,7 @@ function App(props) {
             )
   }
   const checkLoginStatus = () => {
-    axios.get(`http://${url}/logged_in`,{ withCredentials: true })
+    axios.get(`${url}/logged_in`,{ withCredentials: true })
     .then(response => {
       if (response.data.logged_in) {
         setLoggedInStatus("ログインなう")
@@ -59,7 +58,7 @@ function App(props) {
   
   const bookmarkCreate = (post) =>{
    if (loggedInStatus === "ログインなう") {
-    axios.post("http://localhost:3001/bookmarks",  { post_id: post.id }, { withCredentials: true })
+    axios.post(`${url}/bookmarks`,  { post_id: post.id }, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
         console.log("ブックマーク作成")
@@ -73,7 +72,7 @@ function App(props) {
    }
   }
   const bookmarkDestroy = (post) =>{
-    axios.delete(`http://localhost:3001/bookmarks/${post.id}`, { withCredentials: true })
+    axios.delete(`${url}/bookmarks/${post.id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
         console.log("ブックマーク削除")
@@ -86,7 +85,7 @@ function App(props) {
 
   const heartCreate = (post) =>{
    if (loggedInStatus === "ログインなう") {
-    axios.post("http://localhost:3001/hearts",  { post_id: post.id },  { withCredentials: true })
+    axios.post(`${url}/hearts`,  { post_id: post.id },  { withCredentials: true })
     .then(response => {
       if (response.data.status) {
         console.log("いいね作成")
@@ -100,7 +99,7 @@ function App(props) {
    }
   }
   const heartDestroy = (post) =>{
-    axios.delete(`http://localhost:3001/hearts/${post.id}`, { withCredentials: true })
+    axios.delete(`${url}/hearts/${post.id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
         console.log("いいね削除")
@@ -112,7 +111,7 @@ function App(props) {
   }
   const relationshipCreate = (id) => {
    if (loggedInStatus === "ログインなう") {
-    axios.post("http://localhost:3001/relationships",  { user_id: id },  { withCredentials: true })
+    axios.post(`${url}/relationships`,  { user_id: id },  { withCredentials: true })
     .then(response => {
       if (response.data.status) {
         console.log("フォロー")
@@ -126,7 +125,7 @@ function App(props) {
    }
   }
   const relationshipDestroy = (id) => {
-    axios.delete(`http://localhost:3001/relationships/${id}`, { withCredentials: true })
+    axios.delete(`${url}/relationships/${id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
         console.log("フォロー解除")

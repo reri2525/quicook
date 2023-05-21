@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 function FollowersIndex(props) {
+  const url = process.env.REACT_APP_API_URL
   const user = props.user
   const currentUser = props.currentUser
   const setFollowersIndexModal = props.setFollowersIndexModal
