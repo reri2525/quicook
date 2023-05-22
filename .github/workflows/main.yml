@@ -16,7 +16,7 @@ jobs:
           ls     
 
       - name: Stop Local Containers
-        working-directory: ${{ github.workspace }}
+        working-directory: ../../Quicook_private
         run: |
           docker-compose down
 
