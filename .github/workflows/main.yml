@@ -13,10 +13,9 @@ jobs:
       - name: Show current working directory
         run: |
           pwd
-          
+
       - name: Start Rails and React servers
         run: |
-          cd ../../
           ls
 
       - name: Stop Local Containers
