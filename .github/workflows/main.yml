@@ -16,7 +16,6 @@ jobs:
 
       - name: Start Rails and React servers
         run: |
-          cd ../
           docker-compose up
 
       - name: Stop Local Containers
