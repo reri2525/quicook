@@ -79,7 +79,7 @@ function Profile(props) {
   }
 
   const postAllGet = (id) =>{
-     axios.get(`http://localhost:3001/user/${id}/posts`, { params: { page: currentPage }, withCredentials: true })
+     axios.get(`${url}/user/${id}/posts`, { params: { page: currentPage }, withCredentials: true })
     .then(response => {
       if (response.data.status) {
         const data = response.data.post_all

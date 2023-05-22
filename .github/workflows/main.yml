@@ -1,0 +1,41 @@
+name: Auto Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Run RSpec
+        run: |
+          docker-compose run back rspec
+
+      - name: Start Rails and React servers
+        run: |
+          docker-compose up 
+          
+      - name: Stop Local Containers
+        run: docker-compose down
+
+      - name: SSH to EC2 instance
+        run: |
+          ssh -i ~/.ssh/Quicook-key.pem ec2-user@ec2-54-152-15-192.compute-1.amazonaws.com
+
+          cd Quicook_after
+
+          git pull private main
+
+          cp ./front/app/src/config.production.js ./front/app/src/config.js
+
+          cp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb
+
+          docker-compose up -d
