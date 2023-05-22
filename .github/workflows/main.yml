@@ -10,11 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Show current working directory
+        run: |
+          pwd
+          
       - name: Start Rails and React servers
         run: |
           cd ../../
           ls
-
 
       - name: Stop Local Containers
         working-directory: ../../Quicook_private
