@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+        - name: Start Rails and React servers
+        run: |
+          cd  
+
       - name: Start Rails and React servers
         run: |
           docker-compose up 
