@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Start Rails and React servers
         run: |
-          cd ../
+          cd ../../
           ls
           cd Quicook_private
           ls    
