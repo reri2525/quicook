@@ -10,6 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { url } from "../config";
 function Home(props) {
   const loggedInStatus = props.loggedInStatus
   const { id } = useParams();
@@ -34,7 +35,7 @@ function Home(props) {
     history.push(`/posts/${id}`)
   }
   const postAllGet = () =>{
-     axios.get("http://localhost:3001/posts", { params: { page: currentPage }, withCredentials: true })
+     axios.get(`${url}/posts`, { params: { page: currentPage }, withCredentials: true })
     .then(response => {
       if (response.data.status) {
         const data = response.data.post_all

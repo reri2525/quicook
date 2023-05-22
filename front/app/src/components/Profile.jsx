@@ -12,6 +12,7 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import FollowingIndex from './FollowingIndex';
 import FollowersIndex from './FollowersIndex';
+import { url } from "../config";
 function Profile(props) {
   const loggedInStatus = props.loggedInStatus
   const relationshipCreate = props.relationshipCreate
@@ -46,7 +47,7 @@ function Profile(props) {
   }, [number, id])
 
   const openPlofile = (id) => {
-    axios.get(`http://localhost:3001/users/${id}`, { withCredentials: true })
+    axios.get(`${url}/users/${id}`, { withCredentials: true })
     .then(response => {
         const data = response.data
         setUser(data.user)

@@ -3,6 +3,7 @@ import '../ScssFile/FollowingIndex.scss'
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
+import { url } from "../config";
 function FollowingIndex(props) {
   const user = props.user
   const currentUser = props.currentUser
@@ -13,7 +14,7 @@ function FollowingIndex(props) {
     openFollowModal(user.id)
   }, [])
   const openFollowModal = (id) => {
-    axios.get(`http://localhost:3001/following/${id}`)
+    axios.get(`${url}/following/${id}`)
     .then(response => {
       const data = response.data
       setFollowing(data.following)

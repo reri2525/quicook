@@ -10,8 +10,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { url } from "../config";
 function Bookmark(props) {
-  const url = process.env.REACT_APP_API_URL
   const { id } = useParams();
   const numericId = parseInt(id);
   const history = useHistory();
@@ -33,7 +33,7 @@ function Bookmark(props) {
     history.push(`/posts/${id}`)
   }
   const postAllGet = () =>{
-    axios.get("http://localhost:3001/bookmarks", { params: { page: currentPage }, withCredentials: true })
+    axios.get(`${url}/bookmarks`, { params: { page: currentPage }, withCredentials: true })
     .then(response => {
       if (response.data.status) {
         const data = response.data.post_all

@@ -10,6 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { url } from "../config";
 function Following(props) {
   const { id } = useParams();
   const numericId = parseInt(id);
@@ -32,7 +33,7 @@ function Following(props) {
     history.push(`/posts/${id}`)
   }
   const postAllGet = () =>{
-     axios.get("http://localhost:3001/following", { params: { page: currentPage }, withCredentials: true })
+     axios.get(`${url}/following`, { params: { page: currentPage }, withCredentials: true })
     .then(response => {
       if (response.data.status) {
         const data = response.data.post_all

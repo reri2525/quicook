@@ -11,6 +11,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import WarnModal from './WarnModal'
+import { url } from "../config";
 function PostShow(props) {
  const ref = useRef(null);
  const history = useHistory();
@@ -35,7 +36,7 @@ function PostShow(props) {
  }, [id])
 
  const openPostShow = (id) => {
-   axios.get(`http://localhost:3001/posts/${id}`, { withCredentials: true })
+   axios.get(`${url}/posts/${id}`, { withCredentials: true })
    .then(response => {
     if (response.data.post) {
       const data = response.data.post

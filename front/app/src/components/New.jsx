@@ -4,6 +4,7 @@ import axios from 'axios'
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { url } from "../config";
 function Newmodal(props) {
   const {
       register,
@@ -27,7 +28,7 @@ function Newmodal(props) {
   }
 
   const onSubmit = (event) => {
-    axios.post("http://localhost:3001/users",
+    axios.post(`${url}/users`,
         {
             user: {
                 name: name,

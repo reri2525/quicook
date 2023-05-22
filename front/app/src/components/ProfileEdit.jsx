@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react'
 import '../ScssFile/ProfileEdit.scss'
 import WarnModal from './WarnModal'
 import axios from 'axios'
+import { url } from "../config";
 function ProfileEdit(props) {
  const user = props.user
  const [update, setUpdate] = useState(false)
@@ -26,7 +27,7 @@ function ProfileEdit(props) {
   formData.append('user[email]', email);
   formData.append('user[password]', password);
   formData.append('user[password_confirmation]', passwordConfirmation);
-  axios.put(`http://localhost:3001/users/${user.id}`, formData)
+  axios.put(`${url}/users/${user.id}`, formData)
     .then(response => {
       if (response.data.status) {
         const data = response.data

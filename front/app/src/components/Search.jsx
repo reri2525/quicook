@@ -12,6 +12,7 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ReplayIcon from '@mui/icons-material/Replay';
 import PostShow from './PostShow';
+import { url } from "../config";
 function Search(props) {
   const loggedInStatus = props.loggedInStatus
   const { id } = useParams();
@@ -37,7 +38,7 @@ function Search(props) {
     history.push(`/posts/${id}`)
   }
   const postAllGet = () =>{
-    axios.get(`http://localhost:3001/search/${query}`, { params: { page: currentPage}, withCredentials: true})
+    axios.get(`${url}/search/${query}`, { params: { page: currentPage}, withCredentials: true})
     .then(response => {
       if (response.data.status) {
         const data = response.data.post_all

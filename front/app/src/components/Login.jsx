@@ -4,6 +4,7 @@ import axios from 'axios'
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { url } from "../config";
 function Logmodal(props) {
   const {
      register,
@@ -25,7 +26,7 @@ function Logmodal(props) {
     const formData = new FormData();
     formData.append('user[email]', email);
     formData.append('user[password]', password);
-    axios.post("http://localhost:3001/login",formData,
+    axios.post(`${url}/login`,formData,
         { withCredentials: true }
     ).then(response => {
         if (response.data.logged_in) {

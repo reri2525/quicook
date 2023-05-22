@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
+import { url } from "../config";
 function Postform(props) {   
   const history = useHistory();
   const [posted, setPosted] = useState(false)
@@ -105,7 +106,7 @@ function Postform(props) {
       formData.append(`post[material_${i + 1}]`, materialFields[i].material);
       formData.append(`post[amount_${i + 1}]`, materialFields[i].amount);
     }
-    axios.post("http://localhost:3001/posts", formData
+    axios.post(`${url}/posts`, formData
                                               ,{ withCredentials: true })
       .then(response => {
         if (response.data.status) {

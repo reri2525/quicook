@@ -3,8 +3,8 @@ import '../ScssFile/FollowersIndex.scss'
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
+import { url } from "../config";
 function FollowersIndex(props) {
-  const url = process.env.REACT_APP_API_URL
   const user = props.user
   const currentUser = props.currentUser
   const setFollowersIndexModal = props.setFollowersIndexModal
@@ -13,7 +13,7 @@ function FollowersIndex(props) {
     openFollowModal(user.id)
   }, [])
   const openFollowModal = (id) => {
-    axios.get(`http://localhost:3001/followers/${id}`)
+    axios.get(`${url}/followers/${id}`)
     .then(response => {
       const data = response.data
       setFollowers(data.followers)
