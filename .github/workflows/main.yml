@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Start Rails and React servers
-        working-directory: ${{ github.workspace }}
+        working-directory: Quicook_private
         run: |
           ls     
 
