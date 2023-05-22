@@ -14,9 +14,9 @@ jobs:
         working-directory: ../../Quicook_private
         run: |
           cd ../
-
+          ls
           cd Quicook_private
-
+          ls
           docker-compose up     
 
       - name: Stop Local Containers
