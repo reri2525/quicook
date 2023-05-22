@@ -11,9 +11,8 @@ jobs:
 
     steps:
       - name: Start Rails and React servers
-        working-directory: ${{ github.workspace }}
         run: |
-          docker-compose up
+          ls
 
       - name: Stop Local Containers
         working-directory: ${{ github.workspace }}
