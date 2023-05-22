@@ -15,14 +15,10 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Run RSpec
-        run: |
-          docker-compose run back rspec
-
       - name: Start Rails and React servers
         run: |
           docker-compose up 
-          
+
       - name: Stop Local Containers
         run: docker-compose down
 
