@@ -10,16 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
       - name: Start Rails and React servers
         run: |
           docker-compose up 
 
-      
+      - name: Stop Local Containers
+        run: |
+          docker-compose down
 
       - name: SSH to EC2 instance
         run: |
