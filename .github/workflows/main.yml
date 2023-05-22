@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Start Rails and React servers
         run: |
-          docker-compose u
+          docker-compose up
 
       - name: Stop Local Containers
         run: |
