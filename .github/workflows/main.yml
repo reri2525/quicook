@@ -14,8 +14,7 @@ jobs:
         run: |
           cd ../../
           ls
-          cd Quicook_private
-          ls    
+
 
       - name: Stop Local Containers
         working-directory: ../../Quicook_private
