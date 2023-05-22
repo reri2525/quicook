@@ -10,9 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - name: Start Rails and React servers
+      - name: Start Rails and React servers
         run: |
           cd  
+      - name: Start Rails and React servers
+        run: |
+          cd Quicook_after
 
       - name: Start Rails and React servers
         run: |
