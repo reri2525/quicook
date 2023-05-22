@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Start Rails and React servers
-        working-directory: Quicook_after
+        working-directory: Quicook_private
         run: |
           docker-compose up 
 
       - name: Stop Local Containers
-        working-directory: Quicook_after
+        working-directory: Quicook_private
         run: |
           docker-compose down
 
