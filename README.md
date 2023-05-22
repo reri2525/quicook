@@ -8,4 +8,4 @@
 7: docker-compose up
 本番環境の場合は
 git pull origin mainした後にcp ./front/app/src/config.production.js ./front/app/src/config.js
-でapiurlを変える
+でapiurlを変えてcp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb
