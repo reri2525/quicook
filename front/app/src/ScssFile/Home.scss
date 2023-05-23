@@ -1,3 +1,16 @@
+.post_not_exist {
+  position: relative;
+  top: 60px;
+  text-align: center;
+  h1 {
+    font-size: 40px;
+  }
+  .highlight_off_icon {
+    position: relative;
+    bottom: 30px;
+  }
+}
+
 .post_container {
   width: calc(100vw - 300px);
   display: flex;

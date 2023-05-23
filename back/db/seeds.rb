@@ -15,12 +15,13 @@ User.create!(name:  "杉田　裕貴",
 
 
 
-5.times do |n|
+4.times do |m|
+ 5.times do |n|
   name  = Faker::Japanese::Name.name
   avatar = File.open(Rails.root.join('public', 'images', "可愛い女の子#{n+1}.jpeg"))
-  email = "083#{n+100}yuuki@i.softbank.jp"
+  email = "083#{n+1}#{m+1}yuuki@i.softbank.jp"
   password = "111111"
-  introduction = "私は#{Faker::Name.name}です。"
+  introduction = "私は#{name}です。"
   User.create!(name:  name,
         avatar: avatar,
         email: email,
@@ -28,21 +29,7 @@ User.create!(name:  "杉田　裕貴",
         password_confirmation: password,
         introduction: introduction,
         )
-end
-
-20.times do |n|
-  name  = Faker::Japanese::Name.name
-  avatar = File.open(Rails.root.join('public', 'images', "可愛い女の子2.jpeg"))
-  email = "083#{n+2}yuuki@i.softbank.jp"
-  password = "111111"
-  introduction = "私は#{Faker::Name.name}です"
-  User.create!(name:  name,
-        avatar: avatar,
-        email: email,
-        password:              password,
-        password_confirmation: password,
-        introduction: introduction,
-        )
+ end
 end
 
 # マイクロポスト
@@ -54,7 +41,7 @@ file1 = File.open(image_hamburger)
 file2 = File.open(image_fish)
 file3 = File.open(image_salad)
 file4 = File.open(video_about_me)
-users = User.order(:created_at).take(5)
+users = User.order(:created_at).take(6)
 
 10.times do
   title = "絶品！お肉屋さんのハンバーガーパテ☆"
@@ -108,9 +95,9 @@ end
   users.each { |user| user.posts.create!(title: title, category: category, image: file1, content: content, time: time, cost: cost, process: process, coment: coment) }
 end
 
-200.times do |c|
- 6.times do |n|
-    Heart.create!(user_id:  n+1, post_id: c+1)
+240.times do |m|
+ 10.times do |n|
+    Heart.create!(user_id:  n+1, post_id: m+1)
  end
 end
 

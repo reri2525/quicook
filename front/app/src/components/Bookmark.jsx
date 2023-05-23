@@ -10,6 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { url } from "../config";
 function Bookmark(props) {
   const { id } = useParams();
@@ -125,9 +126,18 @@ function Bookmark(props) {
   };
   return (
     <Fragment> 
+      { postExist ? 
+         <></> 
+           : 
+         <Fragment>
+           <div className='post_not_exist'>
+             <h1>保存してないですよ？</h1>
+             <HighlightOffIcon className='highlight_off_icon' style={{fontSize: '60px'}}/>
+           </div>
+         </Fragment>
+      } 
       { postall[0] ? 
       <div className='post_container'>
-       {postExist ? <></> : <h1>誰も投稿してないの！？まじ？</h1>} 
        {postall.map((value, key) => {
          return (
          <div className='post' key={key} onClick={() => postShow(postall[key].id)}>

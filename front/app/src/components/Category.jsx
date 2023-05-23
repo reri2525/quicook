@@ -10,6 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { url } from "../config";
 function Category(props) {
   const loggedInStatus = props.loggedInStatus
@@ -142,6 +143,16 @@ function Category(props) {
   };
   return (
     <Fragment>  
+      { postExist ? 
+         <></> 
+           : 
+         <Fragment>
+           <div className='post_not_exist'>
+             <h1>見つかんねわこのカテゴリ人気なくて草</h1>
+             <HighlightOffIcon className='highlight_off_icon' style={{fontSize: '60px'}}/>
+           </div>
+         </Fragment>
+      } 
       { postall[0] ? 
       <div className='post_container'>
        {postall.map((value, key) => {

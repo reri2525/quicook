@@ -179,7 +179,7 @@ function Postform(props) {
                 <CameraAltIcon />
                 <input className='video'
                     type="file"
-                    accept='video/*, image/*' max="240"
+                    accept='video/*, image/*'
                     capture="environment"
                     name="video"
                     onChange={filechange}
