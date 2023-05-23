@@ -30,6 +30,8 @@ function Search(props) {
 
   useEffect(() => {
     setPostall([])
+    setPagecount(1)
+    setCurrentPage(1)
     window.scrollTo(0, 0);
     postAllGet();
   }, [id, query])

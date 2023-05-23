@@ -15,7 +15,7 @@ User.create!(name:  "杉田　裕貴",
 
 
 
-3.times do |n|
+5.times do |n|
   name  = Faker::Japanese::Name.name
   avatar = File.open(Rails.root.join('public', 'images', "可愛い女の子#{n+1}.jpeg"))
   email = "083#{n+100}yuuki@i.softbank.jp"
