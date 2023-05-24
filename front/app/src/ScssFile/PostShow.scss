@@ -73,12 +73,12 @@
       display: flex;
       .post_display {
         background-color: white;
-        width: 470px;
+        width: 520px;
         height: 460px;
         .post_image_display{
           background-color: #000;
           background-image: url(https://www.photolibrary.jp/mhd5/img821/450-20210208101554428372.jpg);
-          width: 470px;
+          width: 520px;
           height: 410px;
           img {
             width: 100%;
@@ -93,7 +93,7 @@
       }
       .post_detail {
         background-color: white;
-        width: 470px;
+        width: 420px;
         height: 460px;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -103,7 +103,6 @@
         }
         .post_detail_content {
           word-break: break-word;
-          width: 440px;
           margin-left: 10px;
           h2 {
             margin-left: -3px;
@@ -116,7 +115,6 @@
           }
           .material {
             margin-bottom: 5px;
-            width: 100%;
             border-bottom: #bbb 1px solid;
             .amount_detail {
               float: right;
@@ -148,7 +146,7 @@
         .heart {
           position: relative;
           top: 7px;
-          left: 280px;
+          left: 360px;
           padding: 7px 8px 0px 5px;
           border-radius: 18px;
           &:hover {
