@@ -133,8 +133,8 @@ function Following(props) {
            : 
          <Fragment>
            <div className='post_not_exist'>
-             <h1>本当にフォローしてる？？？？</h1>
-             <HighlightOffIcon className='highlight_off_icon' style={{fontSize: '60px'}}/>
+             <h1>好きなユーザーをフォローしましょう!</h1>
+             <img className='highlight_off_icon' src='/パンダ.png'/>
            </div>
          </Fragment>
       } 

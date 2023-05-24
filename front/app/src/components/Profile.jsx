@@ -210,7 +210,7 @@ function Profile(props) {
            : 
          <Fragment>
            <div className='post_not_exist'>
-             <h1>なんか投稿しろよwwwwww</h1>
+             <h1>おっとこのユーザーにはコンテンツがありません...</h1>
              <HighlightOffIcon className='highlight_off_icon' style={{fontSize: '60px'}}/>
            </div>
          </Fragment>

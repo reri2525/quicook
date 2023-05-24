@@ -137,7 +137,7 @@ function Search(props) {
            : 
          <Fragment>
            <div className='post_not_exist'>
-             <h1>頑張って探したんだけど.....</h1>
+             <h1>投稿が見つかりませんでした。</h1>
              <HighlightOffIcon className='highlight_off_icon' style={{fontSize: '60px'}}/>
            </div>
          </Fragment>

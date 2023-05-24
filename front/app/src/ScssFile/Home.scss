@@ -2,12 +2,18 @@
   position: relative;
   top: 60px;
   text-align: center;
+  width: calc(100vw - 300px);
   h1 {
-    font-size: 40px;
+    font-size: 36px;
   }
   .highlight_off_icon {
     position: relative;
-    bottom: 30px;
+    bottom: 20px;
+  }
+  img {
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
   }
 }
 
