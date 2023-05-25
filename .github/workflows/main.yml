@@ -14,7 +14,7 @@ jobs:
         run: |    
           echo "これはシェルコマンドです"
 
-      - name: Start Rails and React servers
+      - name: Current Directory
         run: |
           pwd
 
@@ -28,10 +28,13 @@ jobs:
       - name: Docker-compose build
         run: |
           docker-compose build
+          docker-compose run back bundle install
 
       - name: Backend Test
         run: |
           docker-compose run back rails db:create RAILS_ENV=test
+          docker-compose run back rails db:create
+          docker-compose run back rails db:migrate
           docker-compose run back rspec
 
       - name: Start Rails, React servers and Docker-compose up
