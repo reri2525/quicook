@@ -11,21 +11,16 @@ jobs:
 
     steps:
       - name: Show current working directory
-        working-directory: Quicook_after
         run: |    
           pwd
 
       - name: Start Rails and React servers
         run: |
-          ls 
+          tree
 
       - name: Stop Local Containers
         run: |
-          cd ../
-
-          cd Quicook_after
-          
-          docker-compose down
+          ls -R
 
       - name: SSH to EC2 instance
         run: |
