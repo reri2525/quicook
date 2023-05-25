@@ -22,6 +22,10 @@ jobs:
         run: |
           ls -R
 
+      - name: Stop Local Containers
+        run: |
+          docker-compose up
+
       - name: SSH to EC2 instance
         run: |
           ssh -i ~/.ssh/Quicook-key.pem ec2-user@ec2-54-152-15-192.compute-1.amazonaws.com
