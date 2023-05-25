@@ -24,7 +24,6 @@ jobs:
       - name: Tree Check
         run: |
           pwd
-          docker -v
 
       - name: Docker-compose build
         run: |
