@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show current working directory
+      - name: Ubuntu Check
         run: |    
           echo "これはシェルコマンドです"
 
@@ -18,28 +18,24 @@ jobs:
         run: |
           pwd
 
-      - name: Start Rails and React servers
+      - name: Repository Checkout
         uses: actions/checkout@v2
 
 
-      - name: Stop Local Containers
+      - name: Tree Check
         run: |
           ls -R
 
-      - name: Stop Local Containers
+      - name: Backend Test
+        run: |
+          docker-compose run back rspec
+
+      - name: Start Rails, React servers and Docker-compose up
         run: |
           docker-compose up
-
-      - name: SSH to EC2 instance
+      
+      - name: Stop Local Containers
         run: |
-          ssh -i ~/.ssh/Quicook-key.pem ec2-user@ec2-54-152-15-192.compute-1.amazonaws.com
+          docker-compose down
 
-          cd Quicook_after
-
-          git pull private main
-
-          cp ./front/app/src/config.production.js ./front/app/src/config.js
-
-          cp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb
-
-          docker-compose up -d
+      
