@@ -19,7 +19,7 @@ jobs:
           pwd
 
       - name: Start Rails and React servers
-      - uses: actions/some-action@v2
+        uses: actions/some-action@v2
 
 
       - name: Stop Local Containers
