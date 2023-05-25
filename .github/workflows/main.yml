@@ -21,12 +21,10 @@ jobs:
       - name: Repository Checkout
         uses: actions/checkout@v2
 
-      - name: Docker Install
-        uses: actions/setup-docker@v2
-
       - name: Tree Check
         run: |
           pwd
+          docker -v
 
       - name: Docker-compose build
         run: |
