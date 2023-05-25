@@ -32,8 +32,7 @@ jobs:
 
       - name: Backend Test
         run: |
-          docker-compose up -d
-          docker-compose run back bundle clean --force
+
           docker-compose run back rails db:create
           docker-compose run back rails db:migrate
           docker-compose run back rspec
