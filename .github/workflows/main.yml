@@ -35,7 +35,7 @@ jobs:
         run: |
           docker-compose up -d
           docker-compose ps
-          docker-compose logs
+          docker-compose logs db
           docker-compose run back rails db:create RAILS_ENV=test
           docker-compose run back rails db:create
           docker-compose run back rails db:migrate
