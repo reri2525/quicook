@@ -43,12 +43,12 @@ class UsersController < ApplicationController
 
     def destroy
         if current_user
-            reset_session
-            if @current_user.destroy
-                render json: { status: :true}
-            else
-                render json: { status: :false}
-            end
+          reset_session
+        end
+        if User.find(params[:id]).destroy
+            render json: { status: :true}
+        else
+            render json: { status: :false}
         end
     end
 

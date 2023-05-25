@@ -10,6 +10,7 @@ RSpec.describe UsersController, type: :controller do
         end
       end
     end
+
     describe "DELETE #destroy" do
       context "with valid attributes" do
         before(:each) do
@@ -18,7 +19,7 @@ RSpec.describe UsersController, type: :controller do
       
         it "deletes the user" do
           expect {
-            @user.destroy
+            delete :destroy, params: { id: @user.id }
           }.to change(User, :count).by(-1)
         end
       end

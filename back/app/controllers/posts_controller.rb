@@ -300,13 +300,13 @@ class PostsController < ApplicationController
   end
 
   private
-  def post_params
-    params.require(:post).permit(:title, :category, :content,  :image, :time, :cost, 
+   def post_params
+     params.require(:post).permit(:title, :category, :content,  :image, :time, :cost, 
       :material_1,:material_2,:material_3,:material_4,:material_5,:material_6,:material_7,
       :material_8,:material_9,:material_10,:material_11,:material_12,:material_13,:material_14,
       :material_15,
       :amount_1,:amount_2,:amount_3,:amount_4,:amount_5,:amount_6,:amount_7,:amount_8,
       :amount_9,:amount_10,:amount_11,:amount_12,:amount_13,:amount_14,:amount_15,
       :process, :coment)
-  end
+   end
 end
