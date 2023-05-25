@@ -21,11 +21,14 @@ jobs:
       - name: Repository Checkout
         uses: actions/checkout@v2
 
+      - name: Docker Install
+        uses: actions/setup-docker
 
       - name: Tree Check
         run: |
           pwd
           ls 
+
       - name: Docker-compose build
         run: |
           docker-compose build
@@ -33,7 +36,6 @@ jobs:
 
       - name: Backend Test
         run: |
-          docker-compose run back bundle install
           docker-compose up -d
           docker-compose ps
           docker-compose logs db
