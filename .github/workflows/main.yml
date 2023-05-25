@@ -29,10 +29,11 @@ jobs:
         run: |
           docker-compose build
           docker-compose run back bundle install
+          docker-compose up
 
       - name: Backend Test
         run: |
-
+          docker-compose run back bundle clean --force
           docker-compose run back rails db:create
           docker-compose run back rails db:migrate
           docker-compose run back rspec
