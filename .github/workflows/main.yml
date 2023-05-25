@@ -25,9 +25,13 @@ jobs:
       - name: Tree Check
         run: |
           ls 
+      - name: Docker-compose build
+        run: |
+          docker-compose build
 
       - name: Backend Test
         run: |
+          docker-compose run back rails db:create RAILS_ENV=test
           docker-compose run back rspec
 
       - name: Start Rails, React servers and Docker-compose up
