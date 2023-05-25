@@ -11,8 +11,8 @@ jobs:
 
     steps:
       - name: Show current working directory
-        run: |
-          cd Quicook_after
+        working-directory: Quicook_after
+        run: |    
           pwd
 
       - name: Start Rails and React servers
