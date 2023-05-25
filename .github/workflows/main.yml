@@ -22,7 +22,7 @@ jobs:
         run: |
           cd ../
 
-          cd Quicook_private
+          cd Quicook_after
           
           docker-compose down
 
