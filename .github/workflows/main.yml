@@ -34,6 +34,7 @@ jobs:
       - name: Backend Test
         run: |
           docker-compose up -d
+          docker-compose ps
           docker-compose run back rails db:create RAILS_ENV=test
           docker-compose run back rails db:create
           docker-compose run back rails db:migrate
