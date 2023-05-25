@@ -13,6 +13,7 @@ jobs:
       - name: Show current working directory
         run: |
           pwd
+          ls
 
       - name: Start Rails and React servers
         run: |
