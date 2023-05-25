@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Show current working directory
         run: |
-          cd path/to/Quicook_after
+          cd Quicook_after
           pwd
 
       - name: Start Rails and React servers
