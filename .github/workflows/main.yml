@@ -18,6 +18,10 @@ jobs:
         run: |
           pwd
 
+      - name: Start Rails and React servers
+      - uses: actions/some-action@v2
+
+
       - name: Stop Local Containers
         run: |
           ls -R
