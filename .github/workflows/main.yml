@@ -12,11 +12,11 @@ jobs:
     steps:
       - name: Show current working directory
         run: |    
-          pwd
+          echo "これはシェルコマンドです"
 
       - name: Start Rails and React servers
         run: |
-          tree
+          pwd
 
       - name: Stop Local Containers
         run: |
