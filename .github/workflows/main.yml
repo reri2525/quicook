@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Docker Install
-        uses: actions/setup-docker
+        uses: actions/setup-docker@v2
 
       - name: Tree Check
         run: |
