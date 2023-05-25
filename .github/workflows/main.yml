@@ -11,11 +11,12 @@ jobs:
 
     steps:
       - name: Show current working directory
-      - uses: actions/checkout@v2
-      - run: |    
+        uses: actions/checkout@v2
+        run: |    
           pwd
 
       - name: Start Rails and React servers
+        uses: actions/checkout@v2
         run: |
           tree
 
