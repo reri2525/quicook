@@ -13,13 +13,11 @@ jobs:
       - name: Show current working directory
         run: |
           pwd
-          ls
 
       - name: Start Rails and React servers
         run: |
-          cd ../
-          docker-compose up
-
+          ls 
+          
       - name: Stop Local Containers
         run: |
           cd ../
