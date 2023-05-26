@@ -30,7 +30,7 @@ jobs:
         run: |
           docker-compose build
           docker-compose run back bundle install
-          docker-compose up -d
+          docker-compose up
 
       - name: Backend Test
         run: |
