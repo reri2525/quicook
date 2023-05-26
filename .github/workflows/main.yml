@@ -24,6 +24,7 @@ jobs:
       - name: Tree Check
         run: |
           ls
+          docker -v
 
       - name: Docker-compose build
         run: |
