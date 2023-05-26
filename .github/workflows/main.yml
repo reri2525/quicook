@@ -35,8 +35,8 @@ jobs:
       - name: Backend Test
         run: |
           docker-compose logs
-          docker-compose run back rails db:create
-          docker-compose run back rails db:migrate
+          docker-compose run back rake db:create
+          docker-compose run back rake db:migrate
           docker-compose run back rspec
 
       - name: Start Rails, React servers and Docker-compose up
