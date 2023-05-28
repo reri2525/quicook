@@ -9,6 +9,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest 
 
+    services:
+      db:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        ports:
+          - 4350:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        volumes:
+          - db:/var/lib/mysql
+
     steps:
       - name: Ubuntu Check
         run: |    
