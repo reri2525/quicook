@@ -3,7 +3,7 @@ name: Auto Deploy
 on:
   push:
     branches:
-      - 
+      - main
 
 jobs:
   deploy:
@@ -52,14 +52,14 @@ jobs:
 
       - name: SSH to EC2 instance
         run: |
-          ssh -i ~/.ssh/Quicook-key.pem ec2-user@ec2-54-152-15-192.compute-1.amazonaws.com
+          ssh -i ~/.ssh/Quicook-key.pem ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com
 
           cd Quicook_after
 
-          git pull private main
+          git pull origin main
 
           cp ./front/app/src/config.production.js ./front/app/src/config.js
 
           cp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb
 
-          docker-compose up -d
+          docker-compose up 
