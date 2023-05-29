@@ -3,13 +3,11 @@ name: Auto Deploy
 on:
   push:
     branches:
-      - main
+      - 
 
 jobs:
   deploy:
     runs-on: ubuntu-latest 
-
-  
 
     steps:
       - name: Ubuntu Check
@@ -32,6 +30,9 @@ jobs:
         run: |
           docker-compose build
           docker-compose run back bundle install
+
+      - name: Start Rails, React servers and Docker-compose up
+        run: |
           docker-compose up -d
 
       - name: Wait for services to start
@@ -44,11 +45,6 @@ jobs:
           docker-compose run back rake db:create
           docker-compose run back rake db:migrate
           docker-compose run back rspec
-
-      - name: Start Rails, React servers and Docker-compose up
-        run: |
-          docker-compose down
-          docker-compose up
       
       - name: Stop Local Containers
         run: |
