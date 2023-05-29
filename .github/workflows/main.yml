@@ -52,13 +52,13 @@ jobs:
       
       - name: Configure SSH
         env:
-        PRIVATE_KEY: ${{ secrets.SECRET_KEY }}
+          PRIVATE_KEY: ${{ secrets.SECRET_KEY }}
         run: |
           mkdir -p ~/.ssh
           echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 44.201.153.171 >> ~/.ssh/known_hosts
-
+          
       - name: SSH to EC2 instance
         run: |
           ssh -i ~/.ssh/id_rsa ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com 
