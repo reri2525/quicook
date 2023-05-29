@@ -58,6 +58,9 @@ jobs:
           echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 44.201.153.171 >> ~/.ssh/known_hosts
+          ls -a 
+          cd .ssh
+          ls
 
       - name: SSH to EC2 instance
         run: |
