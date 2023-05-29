@@ -49,10 +49,15 @@ jobs:
       - name: Stop Local Containers
         run: |
           docker-compose down
+      
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.SECRET_KEY }}
 
       - name: SSH to EC2 instance
         run: |
-          ssh -i ~/.ssh/Quicook-key.pem ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com
+          ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/Quicook-key.pem ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com 
 
           cd Quicook_after
 
