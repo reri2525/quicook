@@ -61,9 +61,9 @@ jobs:
 
       - name: SSH to EC2 instance
         run: |
-          ssh -i ~/.ssh/id_rsa ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com &&
+          ssh -i ~/.ssh/id_rsa ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com 
 
-          cd Quicook_after &&
+          "cd Quicook_after &&
 
           git pull origin main &&
 
@@ -71,4 +71,4 @@ jobs:
 
           cp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb &&
 
-          docker-compose up 
+          docker-compose up"
