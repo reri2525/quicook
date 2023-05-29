@@ -23,7 +23,7 @@ jobs:
 
       - name: Tree Check
         run: |
-          ls
+          ls -a
           docker -v
 
       - name: Docker-compose build
@@ -58,7 +58,7 @@ jobs:
           echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 44.201.153.171 >> ~/.ssh/known_hosts
-          
+
       - name: SSH to EC2 instance
         run: |
           ssh -i ~/.ssh/id_rsa ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com 
