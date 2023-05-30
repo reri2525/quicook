@@ -61,14 +61,9 @@ jobs:
 
       - name: Ec2 to SSH
         run: |
-          ssh -o StrictHostKeyChecking=no -i key ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com -t
-
-          "cd Quicook_after &&
-
-          git pull origin main &&
-
-          cp ./front/app/src/config.production.js ./front/app/src/config.js &&
-
-          cp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb &&
-
-          docker-compose up"
+          ssh -o StrictHostKeyChecking=no -i key ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com \
+          "cd Quicook_after && \
+           git pull origin main && \
+           cp ./front/app/src/config.production.js ./front/app/src/config.js && \
+           cp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb && \
+           docker-compose up"
