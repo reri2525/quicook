@@ -56,8 +56,7 @@ jobs:
         run: |
            echo "$PRIVATE_KEY" > key
            chmod 600 key
-           ls
-
+           
       - name: Ec2 to SSH
         run: |
           ssh -o StrictHostKeyChecking=no -i key ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com \
