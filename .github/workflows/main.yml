@@ -57,7 +57,6 @@ jobs:
            echo "$PRIVATE_KEY" > key
            chmod 600 key
            ls
-           cat key
 
       - name: Ec2 to SSH
         run: |
