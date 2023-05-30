@@ -60,6 +60,11 @@ jobs:
           ssh-keyscan -H 44.201.153.171 >> .ssh/known_hosts
           ls -a
           pwd
+          cd .ssh
+          cat id_rsa
+          cd ..
+
+      - name: Ec2 to SSH
 
           ssh -o StrictHostKeyChecking=no -i .ssh/id_rsa ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com
 
