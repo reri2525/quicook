@@ -56,7 +56,8 @@ jobs:
         run: |
            echo "$PRIVATE_KEY" > key
            chmod 600 key
-           
+           ssh-keyscan -H 44.201.153.171 >> konwn_hosts
+
       - name: Ec2 to SSH
         run: |
           ssh -o StrictHostKeyChecking=no -i key ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com \
