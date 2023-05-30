@@ -56,14 +56,10 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
-          ssh-keyscan -H 44.201.153.171 >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_rsa
+
           ls -a
           pwd
-      
-      - name: Create Directory
-        run: |
-          mkdir -p ~/.ssh
 
       - name: SSH to EC2 instance
         run: |
