@@ -65,7 +65,7 @@ jobs:
           cd ..
 
       - name: Ec2 to SSH
-
+        run: |
           ssh -o StrictHostKeyChecking=no -i .ssh/id_rsa ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com
 
           "cd Quicook_after &&
