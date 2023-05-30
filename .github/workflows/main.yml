@@ -54,13 +54,13 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.SECRET_KEY }}
         run: |
-           echo "$PRIVATE_KEY" > key
-           chmod 600 key
+           echo "$PRIVATE_KEY" > key.pem
+           chmod 600 key.pem
            ssh-keyscan -H 44.201.153.171 >> konwn_hosts
 
       - name: Ec2 to SSH
         run: |
-          ssh -o StrictHostKeyChecking=no -i key ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com \
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com \
           "cd Quicook_after && \
            git pull origin main && \
            cp ./front/app/src/config.production.js ./front/app/src/config.js && \
