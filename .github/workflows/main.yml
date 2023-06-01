@@ -40,8 +40,6 @@ jobs:
 
       - name: Backend Test
         run: |
-          docker ps
-          docker-compose logs
           docker-compose run back rake db:create
           docker-compose run back rake db:migrate
           docker-compose run back rspec
