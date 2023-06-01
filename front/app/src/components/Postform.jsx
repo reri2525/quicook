@@ -292,7 +292,7 @@ function Postform(props) {
              </form>
              </div>
            </div>
-           <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
+           <button className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></button>
          </div>
        <div className='back_display'>
 
