@@ -55,14 +55,14 @@ jobs:
           PRIVATE_KEY: ${{ secrets.SECRET_KEY }}
         run: |
            echo "$PRIVATE_KEY" > key.pem
-           chmod 700 key.pem
+           chmod 400 key.pem
            ssh-keyscan -H 44.201.153.171 >> konwn_hosts
 
       - name: Ec2 to SSH
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com \
-          "cd Quicook_after && \
-           git pull origin main && \
-           cp ./front/app/src/config.production.js ./front/app/src/config.js && \
-           cp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb && \
-           docker-compose up"
+           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-44-201-153-171.compute-1.amazonaws.com \
+           "cd Quicook_after && \
+            git pull origin main && \
+            cp ./front/app/src/config.production.js ./front/app/src/config.js && \
+            cp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb && \
+            docker-compose up"
