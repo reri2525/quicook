@@ -73,12 +73,12 @@
       display: flex;
       .post_display {
         background-color: white;
-        width: 520px;
+        width: 510px;
         height: 430px;
         .post_image_display{
           background-color: #000;
           background-image: url(https://www.photolibrary.jp/mhd5/img821/450-20210208101554428372.jpg);
-          width: 520px;
+          width: 510px;
           height: 380px;
           img {
             width: 100%;
@@ -93,7 +93,7 @@
       }
       .post_detail {
         background-color: white;
-        width: 420px;
+        width: 430px;
         height: 430px;
         overflow-y: scroll;
         overflow-x: hidden;
