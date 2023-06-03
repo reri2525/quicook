@@ -22,6 +22,9 @@
            padding: 10px 178px 10px 178px;
            border-radius: 30px;
            margin-top: 90px;
+           &:hover {
+            cursor: pointer;
+           }
         }
        .new {
            border: 1px #bbb solid;
@@ -31,6 +34,9 @@
            padding: 10px 178px 10px 178px;
            border-radius: 30px;
            margin-top: 20px;
+           &:hover {
+            cursor: pointer;
+           }
         }
        .close { 
            position: absolute;
@@ -42,6 +48,7 @@
            color: black;
            &:hover {
              background-color: #bbb;
+             cursor: pointer;
            }
            a {
              position: relative;
