@@ -194,7 +194,7 @@ function Profile(props) {
           </Link> 
             : 
           relationship ?
-              <a className="unfollow" onClick={() => { handleRelationship(user.id); setPromptingAccountCreation(true)} }>フォロー中</a>
+              <a className="unfollow" onClick={() => handleRelationship(user.id)}>フォロー中</a>
                 :
               <a className="follow" onClick={() => handleRelationship(user.id)}>フォローする</a>
         }
@@ -293,8 +293,18 @@ function Profile(props) {
         <nav className='next'>next</nav>
        </div> : <></> }
       </div>}
-    { followingIndexModal ? <FollowingIndex user={user} currentUser={props.user} setFollowingIndexModal={setFollowingIndexModal} /> : <></>}
-    { followersIndexModal ? <FollowersIndex user={user} currentUser={props.user} setFollowersIndexModal={setFollowersIndexModal} /> : <></>}
+    { followingIndexModal ? <FollowingIndex user={user} currentUser={props.user} setFollowingIndexModal={setFollowingIndexModal} 
+                                            setPromptingAccountCreation={setPromptingAccountCreation}
+                                            loggedInStatus={loggedInStatus}/>
+                                             : 
+                                            <></>
+    }
+    { followersIndexModal ? <FollowersIndex user={user} currentUser={props.user} setFollowersIndexModal={setFollowersIndexModal} 
+                                            setPromptingAccountCreation={setPromptingAccountCreation}
+                                            loggedInStatus={loggedInStatus}/>
+                                             :
+                                            <></>
+    }
    </Fragment>
   )
   }

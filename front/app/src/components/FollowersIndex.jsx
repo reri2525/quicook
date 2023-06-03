@@ -5,15 +5,17 @@ import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 import { url } from "../config";
 function FollowersIndex(props) {
+  const loggedInStatus = props.loggedInStatus
   const user = props.user
   const currentUser = props.currentUser
   const setFollowersIndexModal = props.setFollowersIndexModal
+  const setPromptingAccountCreation = props.setPromptingAccountCreation
   const [followers, setFollowers] = useState([])
   useEffect(() => {
     openFollowModal(user.id)
   }, [])
   const openFollowModal = (id) => {
-    axios.get(`${url}/followers/${id}`)
+    axios.get(`${url}/followers/${id}`, { withCredentials: true })
     .then(response => {
       const data = response.data
       setFollowers(data.followers)
@@ -32,6 +34,7 @@ function FollowersIndex(props) {
 
 
   const relationshipCreate = (id, key) => {
+   if (loggedInStatus === "ログインなう") {
     axios.post("http://localhost:3001/relationships",  { user_id: id },  { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -44,7 +47,10 @@ function FollowersIndex(props) {
     })
     .catch(error => {
       console.log("エラー")
-   })
+    })
+   } else {
+      setPromptingAccountCreation(true)
+   }
   }
 
   const relationshipDestroy = (id, key) => {
