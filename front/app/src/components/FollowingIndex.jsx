@@ -42,7 +42,7 @@ function FollowingIndex(props) {
       }
     })
     .catch(error => {
-      console.log("エラー")
+      console.log(error, "エラー")
     })
    } else {
     setPromptingAccountCreation(true)
@@ -52,12 +52,12 @@ function FollowingIndex(props) {
     axios.delete(`http://localhost:3001/relationships/${id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
-        console.log(response.data.post)
+        console.log("フォロー解除")
         openFollowModal(user.id)
       }
     })
     .catch(error => {
-      console.log("エラー")
+      console.log(error, "エラー")
    })
   }
 
