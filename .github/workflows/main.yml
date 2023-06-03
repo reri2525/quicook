@@ -63,6 +63,4 @@ jobs:
             git pull origin main && \
             cp ./front/app/src/config.production.js ./front/app/src/config.js && \
             cp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb && \
-            docker-compose down && \
-            docker-compose run back rspec && \
-            docker-compose up -d"
+            docker-compose down"

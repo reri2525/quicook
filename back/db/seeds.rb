@@ -13,7 +13,13 @@ User.create!(name:  "杉田　裕貴",
     introduction: "私はリーバルです。",
     )
 
-
+User.create!(name:  "test user",
+    avatar: File.open(Rails.root.join('public', 'images', '可愛い女の子1.jpeg')),
+    email: "1111test@i.test.jp",
+    password:              "111111",
+    password_confirmation: "111111",
+    introduction: "私はテストユーザーです。",
+    )
 
 4.times do |m|
  5.times do |n|
@@ -33,11 +39,11 @@ User.create!(name:  "杉田　裕貴",
 end
 
 # マイクロポスト
-image_hamburger = Rails.root.join('public', 'images', 'food-image.jpg')
+video_hamburger = Rails.root.join('public', 'videos', '【美味ハンバーガーの作り方】シェイクシャックバーガーを手軽に作る再現レシピ！ぜひ、作って欲しい！How to make shackburgar by Noli\'s cooking.mp4')
 image_fish = Rails.root.join('public', 'images', '鯵の干物.jpeg')
 image_salad = Rails.root.join('public', 'images', 'サラダ.webp')
 video_about_me = Rails.root.join('public', 'videos', 'Kenshi Yonezu - Melancholy Kitchen  [RUS SUB] (【米津玄篩】メランコリーキッチン).mp4')
-file1 = File.open(image_hamburger)
+file1 = File.open(video_hamburger)
 file2 = File.open(image_fish)
 file3 = File.open(image_salad)
 file4 = File.open(video_about_me)

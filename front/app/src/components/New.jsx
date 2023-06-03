@@ -80,10 +80,13 @@ return (
                 <label>メールアドレス</label><br></br>
                 <input className={errors.email ? 'input_errors' : 'input'}
                     type="email"   
-                    {...register('email', { required: true})}                     
+                    {...register('email', { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i})}                     
                 /><br></br>
                 {errors.email?.type === 'required' && (
                   <div className='errors'>※メールアドレスが入力されていません</div>
+                )}
+                {errors.email?.type === 'pattern' && (
+                  <div className='errors'>※有効なメールアドレスを入力してください</div>
                 )}
                 <label>パスワード</label><br></br>
                 <input className={errors.password ? 'input_errors' : 'input'}
@@ -99,13 +102,21 @@ return (
                 <label>パスワード確認</label><br></br>
                 <input className={errors.passwordConfirmation ? 'input_errors' : 'input'}
                     type="password"
-                    {...register('passwordConfirmation', { required: true, minLength: 6})}                     
+                    {...register('passwordConfirmation', { 
+                      required: true, 
+                      minLength: 6,
+                      validate: (value) =>
+                      value === watch('password'),
+                    })}                     
                 /><br></br>
                 {errors.passwordConfirmation?.type === 'required' && (
                   <div className='errors'>※パスワードが入力されていません</div>
                 )}
                 {errors.passwordConfirmation?.type === 'minLength' && (
                   <div className='errors'>※パスワードが短すぎます!</div>
+                )}
+                {errors.passwordConfirmation?.type === 'validate' && (
+                  <div className='errors'>※パスワードが一致しません</div>
                 )}
                 <button className='btn' type="button" onClick={handleSubmit(onSubmit)}>送信</button><br></br>
                 <c>パスワードは英文字または数字で6桁以上入力してください</c><br></br>
