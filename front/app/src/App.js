@@ -229,6 +229,7 @@ function App(props) {
                                  url={<Profile loggedInStatus={loggedInStatus} 
                                  bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
                                  heartCreate={heartCreate} heartDestroy={heartDestroy}
+                                 setPromptingAccountCreation={setPromptingAccountCreation}
                                  user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
                                  />}/>
             )}

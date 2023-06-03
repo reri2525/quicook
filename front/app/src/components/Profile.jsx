@@ -18,6 +18,7 @@ function Profile(props) {
   const loggedInStatus = props.loggedInStatus
   const relationshipCreate = props.relationshipCreate
   const relationshipDestroy = props.relationshipDestroy
+  const setPromptingAccountCreation = props.setPromptingAccountCreation
   const [user, setUser] = useState([])
   const [relationship, setRelationship] = useState([])
   const [follow, setFollow] = useState([])
@@ -193,7 +194,7 @@ function Profile(props) {
           </Link> 
             : 
           relationship ?
-              <a className="unfollow" onClick={() => handleRelationship(user.id)}>フォロー中</a>
+              <a className="unfollow" onClick={() => { handleRelationship(user.id); setPromptingAccountCreation(true)} }>フォロー中</a>
                 :
               <a className="follow" onClick={() => handleRelationship(user.id)}>フォローする</a>
         }
