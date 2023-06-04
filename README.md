@@ -10,4 +10,4 @@
 本番環境の場合は
 git pull origin mainした後にcp ./front/app/src/config.production.js ./front/app/src/config.js
 でapiurlを変えてcp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb
-:pushする前にcors.rbの設定とconfig.production.jsとcarrierwave.production.rbの設定をするpush
+:pushする前にcors.rbの設定とconfig.production.jsとcarrierwave.production.rbの設定をする
