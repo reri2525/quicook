@@ -80,7 +80,7 @@ function List(props) {
           return (
            <li className='category'>
             <img src={value.icon}></img>
-            <a onClick={() => history.push(`/category/${value.title}/page/1`)}>{value.title}</a>
+            <a onClick={() =>  window.location.href = `/category/${value.title}/page/1`}>{value.title}</a>
             { dishExpand[key] ?
              <Fragment>
               <ExpandLess
@@ -90,7 +90,7 @@ function List(props) {
               />
                <ul>
                 {Object.values(DishData[key]).map((dish) => (
-                  dish ? <li className='dish' onClick={() => history.push(`/category/${value.title}／${dish}/page/1`)}>{dish}</li> : null
+                  dish ? <li className='dish' onClick={() => window.location.href = `/category/${value.title}／${dish}/page/1`}>{dish}</li> : null
                 ))}
                </ul> 
              </Fragment> :

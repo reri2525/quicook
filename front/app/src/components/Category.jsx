@@ -11,6 +11,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { url } from "../config";
 function Category(props) {
   const loggedInStatus = props.loggedInStatus

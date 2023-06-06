@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @post_all = Post.includes(:user).paginate(page: params[:page], per_page: 20)
+    @post_all = Post.includes(:user).paginate(page: params[:page], per_page: 50)
     if @post_all.exists?
       render json: { 
         status: true, 
@@ -207,10 +207,12 @@ class PostsController < ApplicationController
 
   def search
       search_query = "%#{params[:query].downcase}%"
-      @post_all = Post.includes(:user, :hearts).where("LOWER(title) LIKE ?", search_query)
-                                               .left_joins(:hearts)
-                                               .group(:id).order('COUNT(hearts.id) DESC', 'MAX(hearts.created_at) DESC')
-                                               .paginate(page: params[:page], per_page: 30)
+      @post_all = Post.includes(:user, :hearts)
+                .where("category LIKE ?", "%#{category_query}%")
+                .left_joins(:hearts)
+                .group(:id)
+                .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
+                .paginate(page: params[:page], per_page: 20)
       if @post_all.exists?
         render json: { 
           status: true, 
@@ -253,7 +255,12 @@ class PostsController < ApplicationController
      else
        category_query = params[:query]
      end
-     @post_all = Post.includes(:user).where("category LIKE ?", "%#{category_query}%").paginate(page: params[:page], per_page: 20)
+     @post_all = Post.includes(:user, :hearts)
+                .where("category LIKE ?", "%#{category_query}%")
+                .left_joins(:hearts)
+                .group(:id)
+                .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
+                .paginate(page: params[:page], per_page: 20)
      if @post_all.exists?
        render json: { 
          status: true, 

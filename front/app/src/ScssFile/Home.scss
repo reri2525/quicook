@@ -18,9 +18,10 @@
 }
 
 .post_container {
-  width: calc(100vw - 300px);
+  width: calc(100vw - 380px);
   display: flex;
   flex-wrap: wrap;
+  margin-left: 80px;
   h1 {
     position: fixed;
     left: 400px;
@@ -29,9 +30,9 @@
   }
   .post {
     background-color: white;
-    margin: 50px 15px 50px 120px;
-    height: 350px;
-    width: 300px;
+    margin: 50px 20px 50px 0px;
+    height: 300px;
+    width: 250px;
     border-radius: 8px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     &:active {
@@ -61,6 +62,7 @@
         }
       }
       a {
+        font-size: 15px;
         font-weight: 700;
         position: relative;
         top: 10px;
@@ -76,7 +78,7 @@
       .bookmark {
         position: absolute;
         top: 9px;
-        left: 270px;
+        left: 220px;
         &:hover {
           cursor: pointer;
           color: #bbb;
@@ -86,7 +88,7 @@
     }
     .middle {
       width: 100%;
-      height: 230px;
+      height: 200px;
       background-color: #000;
       img {
         width: 100%;
@@ -100,13 +102,13 @@
     }
     .foot {
       width: 100%;
-      height: 80px;
+      height: 60px;
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
       position: relative;
       a {
         display: block;
-        width: 290px;
+        width: 230px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -114,11 +116,11 @@
         top: 5px;
         left: 10px;
         font-weight: 500;
-        font-size: 20px;
+        font-size: 17px;
       }
       .favorite {
         position: absolute;
-        top: 50px;
+        top: 35px;
         left: 10px;
         &:hover {
           cursor: pointer;
@@ -128,7 +130,7 @@
       }
       .heart_count {
         position: absolute;
-        top: 50px;
+        top: 36px;
         left: 40px;
       }
     }
@@ -136,14 +138,15 @@
 }
 
 .post_skeleton_container {
-  width: calc(100vw - 300px);
+  width: calc(100vw - 430px);
   display: flex;
   flex-wrap: wrap;
+  margin-left: 80px;
   .post_skeleton {
     background-color: rgba(187, 187, 187, 0.574);
-    margin: 50px 15px 50px 120px;
-    height: 350px;
-    width: 300px;
+    margin: 50px 15px 50px 0px;
+    height: 300px;
+    width: 250px;
     border-radius: 8px;
  }
 }

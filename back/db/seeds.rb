@@ -79,9 +79,10 @@ coments = [
   "お肉屋さんで粗めに挽いてもらうと美味しさUP！\n混ぜ過ぎ、焼き過ぎに注意。\n焼いている時にフライ返し等で上からギューギュー押さえつけて焼かないこと！ジューシーさとうまみが流れ出しちゃうので。パン粉は必ず生パン粉を使ってください☆",
   "お肉屋さんで粗めに挽いてもらうと美味しさUP！\n混ぜ過ぎ、焼き過ぎに注意。\n焼いている時にフライ返し等で上からギューギュー押さえつけて焼かないこと！ジューシーさとうまみが流れ出しちゃうので。パン粉は必ず生パン粉を使ってください☆"
 ]
-
+50.times do
 3.times do |n|
   users[n].posts.create!(title: titles[n], category: categories[n], image: files[n], content: contents[n], time: times[n], cost: costs[n], process: processes[n], coment: coments[n])
+end
 end
  
 
