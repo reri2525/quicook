@@ -15,7 +15,7 @@ class User < ApplicationRecord
     has_many :bookmarks_posts, through: :bookmarks, source: :post
     mount_uploader :avatar, AvatarUploader
     validates :name,  presence: true, length: { maximum: 10 }
-    validates :introduction, length: { maximum: 50 }
+    validates :introduction, length: { maximum: 130 }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email, presence: true, length: { maximum: 255 },
                       format: { with: VALID_EMAIL_REGEX },

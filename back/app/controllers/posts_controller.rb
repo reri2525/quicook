@@ -11,7 +11,11 @@ class PostsController < ApplicationController
   end
 
   def index
-    @post_all = Post.includes(:user).paginate(page: params[:page], per_page: 50)
+    @post_all = Post.includes(:user, :hearts)
+                .left_joins(:hearts)
+                .group(:id)
+                .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
+                .paginate(page: params[:page], per_page: 20)
     if @post_all.exists?
       render json: { 
         status: true, 
@@ -208,11 +212,11 @@ class PostsController < ApplicationController
   def search
       search_query = "%#{params[:query].downcase}%"
       @post_all = Post.includes(:user, :hearts)
-                .where("category LIKE ?", "%#{category_query}%")
-                .left_joins(:hearts)
-                .group(:id)
-                .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
-                .paginate(page: params[:page], per_page: 20)
+                  .where("title LIKE ?", "%#{search_query}%")
+                  .left_joins(:hearts)
+                  .group(:id)
+                  .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
+                  .paginate(page: params[:page], per_page: 20)
       if @post_all.exists?
         render json: { 
           status: true, 

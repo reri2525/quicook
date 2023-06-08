@@ -97,11 +97,13 @@ function ProfileEdit(props) {
          <label>名前</label><br/>
          <input className='name'
           value={name}
+          maxLength='10'
           onChange={event => setName(event.target.value)}
          /><br/>
          <label>自己紹介</label><br/>
          <textarea className='self_introduction'
           value={introduction}
+          maxLength='130'
           onChange={event => setIntroduction(event.target.value)}
          /><br/>
          <label>メールアドレス</label><br/>

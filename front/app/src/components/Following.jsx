@@ -11,6 +11,8 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import StarIcon from '@mui/icons-material/Star';
+import { amber, grey, brown } from '@mui/material/colors';
 import { url } from "../config";
 function Following(props) {
   const { id } = useParams();
@@ -141,11 +143,26 @@ function Following(props) {
       { postall[0] ? 
       <div className='post_container'>
        {postall.map((value, key) => {
+         let iconColor;
+
+         if (key === 0) {
+           iconColor = amber[500]; // 金色
+         } else if (key === 1) {
+           iconColor = grey[500]; // 銀色
+         } else if (key === 2) {
+           iconColor = brown[500]; // 銅色
+         }
          return (
          <div className='post' key={key} onClick={() => postShow(postall[key].id)}>
            <div className='head'>
              <div className='icon'>
-             <img src={value.user.avatar.url}></img>
+               <img src={value.user.avatar.url}></img>
+               {key <= 2 && (
+                <Fragment>
+                 <StarIcon style={{ color: iconColor, fontSize: '60px', position: 'relative', top: '33px', right: '36px'}} />
+                 <h2>{key +1}</h2>
+                </Fragment>
+               )}
              </div>
                <Link to={`/profile/${value.user.id}/page/1`}
                   onClick={(e) => {e.stopPropagation();} }>
