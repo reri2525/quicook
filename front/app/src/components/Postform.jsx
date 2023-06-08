@@ -135,12 +135,33 @@ function Postform(props) {
            <div className='postform_modal'>
             <div className='postform_modal_inner'>
              <div className='postform_modal_content'>
-             { categoryModal &&
+             <h1>レシピ投稿:</h1>
+             <form className="form_post" onSubmit={onSubmit}>
+                <label></label><br></br>
+                <label className='video_file'>
+                <CameraAltIcon />
+                <input className='video'
+                    type="file"
+                    accept='video/*, image/*'
+                    capture="environment"
+                    name="video"
+                    onChange={filechange}
+                />
+                </label><br/>
+                {imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("video/") ? (
+                 <video controls src={imageOrVideoPreview} className='video_display'></video>
+                 ) : imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("image/") ? (
+                 <img src={imageOrVideoPreview} className='video_display'></img>
+                 ) : (
+                 <></>
+                 )}
+                <br />
+                { categoryModal &&
                 <Fragment>
                   <div className='category_modal_inner'>
-                  <div className='category_close' onClick={() => setCategoryModal(false)}><a><CloseIcon /></a></div>
                     <div className='category_modal_content'>
                      <button className='reset' onClick={() => setCategory("なし")}>なし</button>
+                     <div className='category_close' onClick={() => setCategoryModal(false)}><a><CloseIcon /></a></div>
                       { CategoryData.map((value, key) => {
                          return (
                           <li className='category'>
@@ -166,33 +187,11 @@ function Postform(props) {
                                /> }
                           </li>
                          )
-                      })}
-                      
+                      })}        
                     </div>
                   </div>
                 </Fragment>
-             }
-             <h1>レシピ投稿:</h1>
-             <form className="form_post" onSubmit={onSubmit}>
-                <label></label><br></br>
-                <label className='video_file'>
-                <CameraAltIcon />
-                <input className='video'
-                    type="file"
-                    accept='video/*, image/*'
-                    capture="environment"
-                    name="video"
-                    onChange={filechange}
-                />
-                </label><br/>
-                {imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("video/") ? (
-                 <video controls src={imageOrVideoPreview} className='video_display'></video>
-                 ) : imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("image/") ? (
-                 <img src={imageOrVideoPreview} className='video_display'></img>
-                 ) : (
-                 <></>
-                 )}
-                <br />
+                }
                 <label>料理名: ※最大30文字</label>
                 { title && <a className={ titlelength === 0 ? 'title_length_errors' 
                                                                  :
