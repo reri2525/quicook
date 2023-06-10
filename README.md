@@ -6,7 +6,8 @@
 5: docker-compose run back rails db:create<br />
 6: docker-compose run back rails db:create RAILS_ENV=test<br />
 7: docker-compose run back rails db:migrate<br />
-8: docker-compose up
+8: touch front/app/src/config.js<br />
+9: docker-compose up<br />
 本番環境の場合は
 git pull origin mainした後にcp ./front/app/src/config.production.js ./front/app/src/config.js
 でapiurlを変えてcp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb
