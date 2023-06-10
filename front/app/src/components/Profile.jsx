@@ -202,7 +202,7 @@ function Profile(props) {
          <a>投稿  {postsCount ? postsCount : 0 } 件</a>
          <a className='follow_modal' onClick={() => setFollowingIndexModal(true)}>フォロー {follow ? follow : 0 } 人</a>
          <a className='follow_modal' onClick={() => setFollowersIndexModal(true)}>フォロワー {follower ? follower : 0 } 人</a>
-         <p>{user.introduction}</p>
+         <pre>{user.introduction}</pre>
         </div>
       </div>
     </div>

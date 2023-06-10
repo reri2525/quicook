@@ -2,8 +2,8 @@
   position: relative;
   z-index: 1;
   background-color: rgb(250,250,250);
-  border-bottom: 1px solid #bbb;
-  height: 175px;
+  border-bottom: #bbb 1px solid;
+  min-height: 175px;
   width: calc(100%);
   .icon {
     position: relative;
@@ -21,9 +21,10 @@
     }
   }
   .explanation {
-    position: absolute;
-    top: 40px;
-    left: 350px;
+    position: relative;
+    width: fit-content;
+    bottom: 60px;
+    left: 330px;
     .user_name {
       font-size: 20px;
       font-weight: 800;
@@ -94,8 +95,12 @@
           }
         }
       }
-      p {
-        margin-top: 0px;
+      pre {
+        font-size: 15px;
+        margin-top: 15px;
+        margin-bottom: -30px;
+        width: 800px;
+        word-wrap: break-word;
       }
     }
   }

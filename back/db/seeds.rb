@@ -18,7 +18,7 @@ User.create!(name:  "test user",
     email: "1111test@i.test.jp",
     password:              "111111",
     password_confirmation: "111111",
-    introduction: "私はテストユーザーです。",
+    introduction: "言語・使用技術インフラAWS(ECS-FARGATE/ALB/Route53/VPC/RDS)",
     )
 
 4.times do |m|
@@ -81,12 +81,12 @@ coments = [
 ]
 50.times do
 3.times do |n|
-  users[n].posts.create!(title: titles[n], category: categories[n], image: files[n], content: contents[n], time: times[n], cost: costs[n], process: processes[n], coment: coments[n])
+  test_user.posts.create!(title: titles[n], category: categories[n], image: files[n], content: contents[n], time: times[n], cost: costs[n], process: processes[n], coment: coments[n])
 end
 end
  
 
-3.times do |m|
+150.times do |m|
  14.times do |n|
     Heart.create!(user_id:  n+1, post_id: m+1)
  end

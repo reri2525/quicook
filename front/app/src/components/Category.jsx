@@ -156,6 +156,8 @@ function Category(props) {
          </Fragment>
       } 
       { postall[0] ? 
+      <Fragment>
+      <h2 className='saerch_or_category_query'>カテゴリ「{query}」</h2>
       <div className='post_container'>
        {postall.map((value, key) => {
          let iconColor;
@@ -209,6 +211,7 @@ function Category(props) {
          )
        })}
       </div>
+      </Fragment>
       : <></> }
       { postall.length === 0 && postExist ? 
                <div className='post_skeleton_container'>
