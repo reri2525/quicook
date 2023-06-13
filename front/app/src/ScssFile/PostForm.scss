@@ -206,10 +206,10 @@
      .material_errors {
       color: red;
      }
-     .video {
+     .image {
        display:none;
      }
-     .video_display{
+     .image_display{
       background-color: #000;
       border: #bbb 1px solid;
       border-radius: 10px;
@@ -217,7 +217,7 @@
       width: 750px;
       object-fit: fill;
      }
-     .video_file {
+     .image_file {
       opacity: 0.6;
       cursor:pointer;
       &:hover {

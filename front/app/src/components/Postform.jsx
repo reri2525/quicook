@@ -137,25 +137,25 @@ function Postform(props) {
              <div className='postform_modal_content'>
              <h1>レシピ投稿:</h1>
              <form className="form_post" onSubmit={onSubmit}>
-                <label></label><br></br>
-                <label className='video_file'>
-                <CameraAltIcon />
-                <input className='video'
+               <div className='image_border'>
+                <label className='image_file'>
+                 <CameraAltIcon />
+                  <input className='image'
                     type="file"
                     accept='video/*, image/*'
                     capture="environment"
-                    name="video"
+                    name="image"
                     onChange={filechange}
-                />
-                </label><br/>
+                  />
+                </label>
+               </div>
                 {imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("video/") ? (
-                 <video controls src={imageOrVideoPreview} className='video_display'></video>
+                 <video controls src={imageOrVideoPreview} className='image_display'></video>
                  ) : imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("image/") ? (
-                 <img src={imageOrVideoPreview} className='video_display'></img>
+                 <img src={imageOrVideoPreview} className='image_display'></img>
                  ) : (
                  <></>
                  )}
-                <br />
                 { categoryModal &&
                 <Fragment>
                   <div className='category_modal_inner'>
