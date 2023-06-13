@@ -208,7 +208,10 @@
       color: red;
      }
      .image_container {
-      height: 200px;
+       height: 200px;
+       display: grid;
+       grid-template-columns: auto auto;
+       grid-gap: 10px; 
      }
      .image_border {
        border: khaki 3px solid;
@@ -216,7 +219,7 @@
        height: 197px;
        display: inline-block;
        position: relative;
-       left: 132px;
+       left: 55px;
        .image_file {
           position: relative;
           top: 60px;
@@ -269,7 +272,7 @@
       width: 297px;
       object-fit: fill;
       position: relative;
-      left: 132px;
+      left: 55px;
      }
      .thumbnail_display{
       display: inline-block;
