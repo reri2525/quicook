@@ -23,7 +23,7 @@ User.create!(name:  "test user",
 
 4.times do |m|
  5.times do |n|
-  name  = Faker::Japanese::Name.name
+  name = Faker::Japanese::Name.name[0, 10]
   avatar = File.open(Rails.root.join('public', 'images', "可愛い女の子#{n+1}.jpeg"))
   email = "083#{n+1}#{m+1}yuuki@i.softbank.jp"
   password = "111111"

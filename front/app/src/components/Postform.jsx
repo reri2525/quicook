@@ -160,7 +160,7 @@ function Postform(props) {
                 <Fragment>
                   <div className='category_modal_inner'>
                     <div className='category_modal_content'>
-                     <button className='reset' onClick={() => setCategory("なし")}>なし</button>
+                     <button className='reset' type='button' onClick={() => setCategory("なし")}>なし</button>
                      <div className='category_close' onClick={() => setCategoryModal(false)}><a><CloseIcon /></a></div>
                       { CategoryData.map((value, key) => {
                          return (

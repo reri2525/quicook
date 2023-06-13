@@ -31,6 +31,7 @@ function Search(props) {
 
   useEffect(() => {
     setPostall([])
+    setPostExist(true)
     setPagecount(1)
     setCurrentPage(1)
     window.scrollTo(0, 0);

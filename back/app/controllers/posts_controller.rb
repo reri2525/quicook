@@ -15,7 +15,7 @@ class PostsController < ApplicationController
                 .left_joins(:hearts)
                 .group(:id)
                 .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
-                .paginate(page: params[:page], per_page: 20)
+                .paginate(page: params[:page], per_page: 15)
     if @post_all.exists?
       render json: { 
         status: true, 
@@ -133,7 +133,7 @@ class PostsController < ApplicationController
 
   def bookmark 
     if current_user
-      @bookmark_posts = @current_user.bookmarks_posts.paginate(page: params[:page], per_page: 30)
+      @bookmark_posts = @current_user.bookmarks_posts.paginate(page: params[:page], per_page: 60)
      if @bookmark_posts.exists?
       render json: { 
         status: true, 
@@ -172,7 +172,7 @@ class PostsController < ApplicationController
 
   def following
     if current_user
-      @following_posts = @current_user.following_posts.paginate(page: params[:page], per_page: 30)
+      @following_posts = @current_user.following_posts.paginate(page: params[:page], per_page: 60)
      if @following_posts.exists?
       render json: { 
         status: true, 
@@ -216,7 +216,7 @@ class PostsController < ApplicationController
                   .left_joins(:hearts)
                   .group(:id)
                   .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
-                  .paginate(page: params[:page], per_page: 20)
+                  .paginate(page: params[:page], per_page: 15)
       if @post_all.exists?
         render json: { 
           status: true, 
@@ -264,7 +264,7 @@ class PostsController < ApplicationController
                 .left_joins(:hearts)
                 .group(:id)
                 .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
-                .paginate(page: params[:page], per_page: 20)
+                .paginate(page: params[:page], per_page: 15)
      if @post_all.exists?
        render json: { 
          status: true, 
