@@ -120,6 +120,7 @@
   }
   .postform_modal_inner {
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 600px;
     }
   .form_post {
@@ -206,23 +207,78 @@
      .material_errors {
       color: red;
      }
-     .image {
-       display:none;
+     .image_container {
+      height: 200px;
+     }
+     .image_border {
+       border: khaki 3px solid;
+       width: 297px;
+       height: 197px;
+       display: inline-block;
+       position: relative;
+       left: 132px;
+       .image_file {
+          position: relative;
+          top: 60px;
+          left: 115px;
+          opacity: 0.6;
+          cursor:pointer;
+          &:hover {
+            opacity: 1;
+          }
+          .image {
+            display: none;
+          }
+          h3 {
+            position: relative;
+            bottom: 30px;
+            right: 10px;
+          }
+       }
+     }
+     .thumbnail_border {
+       border: khaki 3px solid;
+       width: 297px;
+       height: 197px;
+       display: inline-block;
+       margin-bottom: 20px;
+       .thumbnail_file {
+         position: relative;
+         top: 60px;
+         left: 115px;
+         opacity: 0.6;
+         cursor:pointer;
+         &:hover {
+           opacity: 1;
+         }
+         .thumbnail {
+           display: none;
+         }
+         h3 {
+           position: relative;
+           bottom: 30px;
+           right: 10px;
+         }
+      }
      }
      .image_display{
+      display: inline-block;
       background-color: #000;
-      border: #bbb 1px solid;
-      border-radius: 10px;
-      height: 421px;
-      width: 750px;
+      border: khaki 3px solid;
+      height: 197px;
+      width: 297px;
       object-fit: fill;
+      position: relative;
+      left: 132px;
      }
-     .image_file {
-      opacity: 0.6;
-      cursor:pointer;
-      &:hover {
-        opacity: 1;
-      }
+     .thumbnail_display{
+      display: inline-block;
+      background-color: #000;
+      border: khaki 3px solid;
+      height: 197px;
+      width: 297px;
+      object-fit: fill;
+      margin-bottom: 20px;
      }
      .coment {
       height: 100px;

@@ -20,6 +20,8 @@ function Postform(props) {
   const [dishExpand, setDishExpand] = useState([])
   const [imageOrVideo, setImageOrVideo] = useState("")
   const [imageOrVideoPreview, setImageOrVideoPreview] = useState("")
+  const [thumbnail, setThumbnail] = useState("")
+  const [thumbnailPreview, setThumbnailPreview] = useState("")
   const [time, setTime] = useState("")
   const [cost, setCost] = useState("")
   const [content, setContent] = useState("")
@@ -30,13 +32,23 @@ function Postform(props) {
   const [materialError, setMaterialError] = useState('')
   const [process, setProcess] = useState("")
   const [coment, setComent] = useState("")
-  const filechange = (event) => {
-    const file = event.target.files[0]
+  const imageOrVideoFile = (event) => {
+    let file = event.target.files[0]
     setImageOrVideo(file)
     console.log(file)
     const reader = new FileReader()
          reader.onload = (event) => {
              setImageOrVideoPreview(event.target.result)
+         };
+         reader.readAsDataURL(event.target.files[0])
+  }
+  const thumbnailFile = (event) => {
+    let file = event.target.files[0]
+    setThumbnail(file)
+    console.log(file)
+    const reader = new FileReader()
+         reader.onload = (event) => {
+             setThumbnailPreview(event.target.result)
          };
          reader.readAsDataURL(event.target.files[0])
   }
@@ -137,18 +149,47 @@ function Postform(props) {
              <div className='postform_modal_content'>
              <h1>レシピ投稿:</h1>
              <form className="form_post" onSubmit={onSubmit}>
+             <div className='image_container'>
+             {thumbnail ? (
+                <></>
+             ) : (
+             <div className='thumbnail_border'>
+               <label className='thumbnail_file'>
+                 <CameraAltIcon style={{ fontSize: '67px' }} />
+                   <input
+                     className='thumbnail'
+                     type="file"
+                     accept='image/*'
+                     capture="environment"
+                     name="thumbnail"
+                     onChange={thumbnailFile}
+                   />
+                   <h3>サムネイル</h3>
+               </label>
+             </div>
+             )}
+               {thumbnail && thumbnail.type && typeof thumbnail.type === 'string' && thumbnail.type.startsWith("video/") ? (
+                  <video controls src={thumbnailPreview} className='thumbnail_display'></video>
+               ) : thumbnail && thumbnail.type && typeof thumbnail.type === 'string' && thumbnail.type.startsWith("image/") ? (
+                  <img src={thumbnailPreview} className='thumbnail_display'></img>
+               ) : (
+                 <></>
+               )}
+               {imageOrVideo ? <></> : 
                <div className='image_border'>
                 <label className='image_file'>
-                 <CameraAltIcon />
+                <CameraAltIcon style={{ fontSize: '67px' }} />
                   <input className='image'
                     type="file"
                     accept='video/*, image/*'
                     capture="environment"
                     name="image"
-                    onChange={filechange}
+                    onChange={imageOrVideoFile}
                   />
+                  <h3>コンテンツ</h3>
                 </label>
                </div>
+               }
                 {imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("video/") ? (
                  <video controls src={imageOrVideoPreview} className='image_display'></video>
                  ) : imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("image/") ? (
@@ -156,6 +197,8 @@ function Postform(props) {
                  ) : (
                  <></>
                  )}
+             </div>
+                 <br />
                 { categoryModal &&
                 <Fragment>
                   <div className='category_modal_inner'>
