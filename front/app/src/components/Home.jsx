@@ -162,12 +162,13 @@ function Home(props) {
            <div className='head'>
              <div className='icon'>
                <img src={value.user.avatar.url}></img>
-               {key <= 2 && (
+               {key <= 2 && currentPage < 2 ? (
                 <Fragment>
                  <StarIcon style={{ color: iconColor, fontSize: '60px', position: 'relative', top: '33px', right: '36px'}} />
                  <h2>{key +1}</h2>
                 </Fragment>
-               )}
+               ) : <></>
+               }
              </div>
                <Link to={`/profile/${value.user.id}/page/1`}
                   onClick={(e) => {e.stopPropagation();} }>

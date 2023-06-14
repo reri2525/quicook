@@ -32,6 +32,7 @@ class PostsController < ApplicationController
            id: post.id,
            title: post.title, 
            image: post.image,
+           thumbnail: post.thumbnail,
            heart_count: post.hearts.count,
            file_type: file_type,
            user: { 

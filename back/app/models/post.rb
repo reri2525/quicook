@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarks_user, through: :bookmarks, source: :post
   mount_uploader :image, ImageUploader
+  mount_uploader :thumbnail, ThumbnailUploader
   validates :title,  presence: true, length: { maximum: 30 }
   validates :content,  presence: true, length: { maximum: 300 }
   validates :time,  presence: true, length: { maximum: 1 }
