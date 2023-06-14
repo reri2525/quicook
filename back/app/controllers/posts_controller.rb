@@ -312,7 +312,7 @@ class PostsController < ApplicationController
 
   private
    def post_params
-     params.require(:post).permit(:title, :category, :content,  :image, :time, :cost, 
+     params.require(:post).permit(:title, :category, :content,  :image, :thumbnail, :time, :cost, 
       :material_1,:material_2,:material_3,:material_4,:material_5,:material_6,:material_7,
       :material_8,:material_9,:material_10,:material_11,:material_12,:material_13,:material_14,
       :material_15,

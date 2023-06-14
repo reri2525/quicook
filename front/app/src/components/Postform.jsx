@@ -109,6 +109,7 @@ function Postform(props) {
     formData.append('post[title]', title);
     formData.append('post[category]', category);
     formData.append('post[image]', imageOrVideo);
+    formData.append('post[thumbnail]', thumbnail);
     formData.append('post[content]', content);
     formData.append('post[time]', time);
     formData.append('post[cost]', cost);
