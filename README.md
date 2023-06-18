@@ -1,3 +1,9 @@
+![UNADJUSTEDNONRAW_thumb_1](https://user-images.githubusercontent.com/49737864/84769305-94c31680-b010-11ea-8e82-f0d925e6e9f9.jpg)
+
+
+
+
+
 環境構築手順:<br />
 1: git clone git@github.com:reri2525/Quicook_private.git<br />
 2: docker-compose build<br />

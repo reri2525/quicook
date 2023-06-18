@@ -69,6 +69,7 @@ class PostsController < ApplicationController
             id: post.id,
             title: post.title, 
             image: post.image,
+            thumbnail: post.thumbnail,
             heart_count: post.hearts.count,
             file_type: file_type,
             user: { 
@@ -151,6 +152,7 @@ class PostsController < ApplicationController
            id: post.id,
            title: post.title, 
            image: post.image,
+           thumbnail: post.thumbnail,
            file_type: file_type,
            heart_count: post.hearts.count,
            user: { 
@@ -190,6 +192,7 @@ class PostsController < ApplicationController
            id: post.id,
            title: post.title, 
            image: post.image,
+           thumbnail: post.thumbnail,
            file_type: file_type,
            heart_count: post.hearts.count,
            user: { 
@@ -234,6 +237,7 @@ class PostsController < ApplicationController
              id: post.id,
              title: post.title, 
              image: post.image,
+             thumbnail: post.thumbnail,
              file_type: file_type,
              heart_count: post.hearts.count,
              user: { 
@@ -282,6 +286,7 @@ class PostsController < ApplicationController
             id: post.id,
             title: post.title, 
             image: post.image,
+            thumbnail: post.thumbnail,
             heart_count: post.hearts.count,
             file_type: file_type,
             user: { 
