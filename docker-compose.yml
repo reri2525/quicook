@@ -5,7 +5,7 @@ services:
     image: mysql:8.0  
     command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "4350:3306"
+      - "3306:3306"
     volumes:
       - db:/var/lib/mysql
     environment:
@@ -21,12 +21,13 @@ services:
     volumes:
       - ./back:/myapp
       - bundle:/usr/local/bundle
-    command: bash -c "rm -rf tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     depends_on:
       - db
     ports:
-      - "3001:3000"
+      - "3001:3001"
     environment:
+      DB_HOST: db
+      DB_USERNAME: root
       TZ: Asia/Tokyo
   front:
     build:
@@ -34,7 +35,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./front:/usr/src/app
-    command: sh -c "cd app && npm start"
     ports:
       - "3000:3000"
 volumes:

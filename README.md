@@ -14,6 +14,19 @@
 7: docker-compose run back rails db:migrate<br />
 8: touch front/app/src/config.js<br />
 9: docker-compose up<br />
+ECSへのデプロイ:<br />
+1: docker-compose buildで作られた三つのコンテナをecrにpush<br/>
+   aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v2y9n7g3<br/>
+   docker tag mysql:8.0 public.ecr.aws/v2y9n7g3/mysql:8.0<br/>
+   docker push public.ecr.aws/v2y9n7g3/mysql:8.0<br/>
+   docker tag quicook-back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest<br/>
+   docker push public.ecr.aws/v2y9n7g3/quicook-back:latest<br/>
+   docker tag quicook-front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest<br/>
+   docker push public.ecr.aws/v2y9n7g3/quicook-front:latest<br/>
+2: ecs作る<br/>
+更新手順: <br/>
+1: docker-compose buildした後にecr用のコマンドで三つのコンテナをecrにpush<br/>
+2: ecs<br/>
 本番環境の場合は
 git pull origin mainした後にcp ./front/app/src/config.production.js ./front/app/src/config.js
 でapiurlを変えてcp ./back/config/initializers/carrierwave_production.rb ./back/config/initializers/carrierwave.rb
