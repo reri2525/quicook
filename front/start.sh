@@ -1,3 +1,8 @@
 #!/bin/bash
 cd app
-npm start
+if [ "$REACT_APP_ENV" = "production" ]; then
+    npm run build
+    npm start
+else
+    npm start
+fi

@@ -15,7 +15,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
    end
 
    allow do
-     origins 'http://52.91.239.168:3000'
+     origins 'https://quicook.online'
 
      resource '*',
        headers: :any,

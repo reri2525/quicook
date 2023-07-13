@@ -14,6 +14,7 @@
 7: docker-compose run back rails db:migrate<br />
 8: touch front/app/src/config.js<br />
 9: docker-compose up<br />
+新しいgem入れるときはdocker-compose run back bundle install --without productionでまずローカルに入れる
 ECSへのデプロイ:<br />
 1: docker-compose buildで作られた三つのコンテナをecrにpush<br/>
    aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v2y9n7g3<br/>
