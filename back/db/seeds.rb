@@ -5,12 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(name:  "杉田　裕貴",
-    avatar: File.open(Rails.root.join('public', 'images', '可愛い女の子1.jpeg')),
+User.create!(name:  "Quicook",
+    avatar: File.open(Rails.root.join('public', 'images', 'Q.jpeg')),
     email: "0831yuuki@i.softbank.jp",
     password:              "111111",
     password_confirmation: "111111",
-    introduction: "私はリーバルです。",
+    introduction: "クイクック公式アカウントです。",
     )
 
 User.create!(name:  "test user",
@@ -46,7 +46,7 @@ file1 = File.open(image_hamburger)
 file2 = File.open(image_fish)
 file3 = File.open(image_salad)
 users = User.order(:created_at).take(4)
-test_user = User.find_by(name: "test user")
+user = User.find_by(name: "Quicook")
 titles = [
   "絶品！お肉屋さんのハンバーガーパテ☆",
   "めちゃくちゃ美味しい鯵の干物☆",
@@ -81,7 +81,7 @@ coments = [
 ]
 2.times do
 3.times do |n|
-  test_user.posts.create!(title: titles[n], category: categories[n], image: files[n], thumbnail: files[n], content: contents[n], time: times[n], cost: costs[n], process: processes[n], coment: coments[n])
+  user.posts.create!(title: titles[n], category: categories[n], image: files[n], thumbnail: files[n], content: contents[n], time: times[n], cost: costs[n], process: processes[n], coment: coments[n])
 end
 end
  
