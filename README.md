@@ -1,4 +1,4 @@
-<h2>Quicook</h2>
+<h1>Quicook</h1>
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
 <img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1">
 <h2>クラウドアーキテクチャ</h2>
