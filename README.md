@@ -1,5 +1,6 @@
-<img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1" style="border: 1px solid #000000;">
-
+<img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1">
+<h1>クラウドアーキテクチャ</h1>
+<img src="back/public/images/クラウドアーキテクチャ.jpg" alt="cloud">
 
 
 
