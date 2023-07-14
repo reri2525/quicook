@@ -1,5 +1,5 @@
 <img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1">
-<h1>クラウドアーキテクチャ</h1>
+<h2>クラウドアーキテクチャ</h2>
 <img src="back/public/images/クラウドアーキテクチャ.jpg" alt="cloud">
 
 
