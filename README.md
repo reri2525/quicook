@@ -1,4 +1,5 @@
-![UNADJUSTEDNONRAW_thumb_1](back/public/images/app.png)
+<img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1" style="border: 1px solid #000000;">
+
 
 
 
