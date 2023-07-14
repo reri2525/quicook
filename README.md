@@ -1,4 +1,4 @@
-![UNADJUSTEDNONRAW_thumb_1](https://user-images.githubusercontent.com/49737864/84769305-94c31680-b010-11ea-8e82-f0d925e6e9f9.jpg)
+![UNADJUSTEDNONRAW_thumb_1](back/public/images/app.png)
 
 
 
