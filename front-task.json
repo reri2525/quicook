@@ -1,0 +1,55 @@
+{
+    "family": "quicook-front",
+    "containerDefinitions": [
+        {
+            "name": "quicook-front",
+            "image": "public.ecr.aws/v2y9n7g3/quicook-front:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "quicook-front-3000-tcp",
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "REACT_APP_API_URL",
+                    "value": "https://apiquicook.net"
+                },
+                {
+                    "name": "REACT_APP_ENV",
+                    "value": "production"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/quicook-task",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::038836664586:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::038836664586:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "8192",
+    "memory": "24576",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    }
+}

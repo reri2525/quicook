@@ -1,0 +1,75 @@
+{
+    "family": "quicook-back",
+    "containerDefinitions": [
+        {
+            "name": "quicook-back",
+            "image": "public.ecr.aws/v2y9n7g3/quicook-back:latest",
+            "cpu": 3072,
+            "portMappings": [
+                {
+                    "name": "quicook-back-3001-tcp",
+                    "containerPort": 3001,
+                    "hostPort": 3001,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "RAILS_ENV",
+                    "value": "production"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "value": "admin"
+                },
+                {
+                    "name": "TZ",
+                    "value": "Asia/Tokyo"
+                },
+                {
+                    "name": "S3_SECRET_ACCESS_KEY",
+                    "value": "Si2al1PfyM9PS/WugONYaBx+mGw/kZJvNiAUk6dr"
+                },
+                {
+                    "name": "S3_ACCESS_KEY",
+                    "value": "AKIAQSCWYPEFITRHDE4F"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "quicook-rds.cjmwbjjcqcoi.us-east-1.rds.amazonaws.com"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "value": "ARMSyuuki0831"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/quicook-task",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::038836664586:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::038836664586:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "4096",
+    "memory": "10240",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    }
+}

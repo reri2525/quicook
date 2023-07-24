@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(name:  "Quicook",
+User.create!(name:  "クイクック公式",
     avatar: File.open(Rails.root.join('public', 'images', 'Q.jpeg')),
     email: "0831yuuki@i.softbank.jp",
     password:              "111111",
@@ -46,7 +46,7 @@ file1 = File.open(image_hamburger)
 file2 = File.open(image_fish)
 file3 = File.open(image_salad)
 users = User.order(:created_at).take(4)
-user = User.find_by(name: "Quicook")
+user = User.find(1)
 titles = [
   "絶品！お肉屋さんのハンバーガーパテ☆",
   "めちゃくちゃ美味しい鯵の干物☆",
@@ -79,18 +79,20 @@ coments = [
   "お肉屋さんで粗めに挽いてもらうと美味しさUP！\n混ぜ過ぎ、焼き過ぎに注意。\n焼いている時にフライ返し等で上からギューギュー押さえつけて焼かないこと！ジューシーさとうまみが流れ出しちゃうので。パン粉は必ず生パン粉を使ってください☆",
   "お肉屋さんで粗めに挽いてもらうと美味しさUP！\n混ぜ過ぎ、焼き過ぎに注意。\n焼いている時にフライ返し等で上からギューギュー押さえつけて焼かないこと！ジューシーさとうまみが流れ出しちゃうので。パン粉は必ず生パン粉を使ってください☆"
 ]
-2.times do
-3.times do |n|
+30.times do
+ 3.times do |n|
   user.posts.create!(title: titles[n], category: categories[n], image: files[n], thumbnail: files[n], content: contents[n], time: times[n], cost: costs[n], process: processes[n], coment: coments[n])
+ end
 end
-end
+
  
 
-6.times do |m|
+90.times do |m|
  14.times do |n|
     Heart.create!(user_id:  n+1, post_id: m+1)
  end
 end
+
 
 users = User.all
 user  = users.first
