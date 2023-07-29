@@ -30,7 +30,6 @@ jobs:
 
       - name: Tree Check
         run: |
-          ls -a
           docker -v
 
       - name: Configure AWS credentials
