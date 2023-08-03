@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2023_03_05_142617) do
     t.string "thumbnail"
     t.integer "time"
     t.integer "cost"
+    t.string "number_of_people"
     t.string "material_1"
     t.string "material_2"
     t.string "material_3"

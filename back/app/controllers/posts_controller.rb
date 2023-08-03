@@ -11,83 +11,27 @@ class PostsController < ApplicationController
   end
 
   def index
-    @post_all = Post.includes(:user, :hearts)
-                .left_joins(:hearts)
-                .group(:id)
-                .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
-                .paginate(page: params[:page], per_page: 15)
-    if @post_all.exists?
-      render json: { 
-        status: true, 
-        post_all: @post_all.map { |post|
-        if post.image
-          file_extension = File.extname(post.image.path).downcase
-        end
-          if file_extension == ".mp4" || file_extension == ".webm"
-            file_type = "video"
-          else
-            file_type = "image"
-          end
-          {
-           id: post.id,
-           title: post.title, 
-           image: post.image,
-           thumbnail: post.thumbnail,
-           heart_count: post.hearts.count,
-           file_type: file_type,
-           user: { 
-             name: post.user.name,
-             avatar: post.user.avatar,
-             id: post.user.id
-           },
-           bookmarks: current_user ? post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
-             { id: bookmark.id, user_id: bookmark.user_id } 
-           } : nil,
-           hearts: current_user ? post.hearts.where(user_id: @current_user.id).map { |heart| 
-            { id: heart.id, user_id: heart.user_id } 
-           } : nil,
-          } 
-      },total_pages:@post_all.total_pages}
-     else
-        render json: {status: false}
-     end
+    @posts = Post.includes(:user, :hearts)
+                 .left_joins(:hearts)
+                 .group(:id)
+                 .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
+                 .paginate(page: params[:page], per_page: 15)
+    if @posts.exists?
+      response_data = generate_response_data(@posts)
+      render json: response_data  
+    else
+      render json: {status: false}
+    end
   end
 
   def user_posts_index
-      @posts = Post.includes(:user).where(user_id: params[:id]).paginate(page: params[:page], per_page: 20)
+     @posts = Post.includes(:user).where(user_id: params[:id]).paginate(page: params[:page], per_page: 20)
      if @posts.exists?
-       render json: { 
-         status: true, 
-         post_all: @posts.map { |post|
-           file_extension = File.extname(post.image.path).downcase
-           if file_extension == ".mp4" || file_extension == ".webm"
-             file_type = "video"
-           else
-             file_type = "image"
-           end
-           {
-            id: post.id,
-            title: post.title, 
-            image: post.image,
-            thumbnail: post.thumbnail,
-            heart_count: post.hearts.count,
-            file_type: file_type,
-            user: { 
-              name: post.user.name,
-              avatar: post.user.avatar,
-              id: post.user.id
-            },
-            bookmarks: current_user ? post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
-              { id: bookmark.id, user_id: bookmark.user_id } 
-            } : nil,
-            hearts: current_user ? post.hearts.where(user_id: @current_user.id).map { |heart| 
-             { id: heart.id, user_id: heart.user_id } 
-            } : nil,
-           } 
-       },total_pages:@posts.total_pages}
-      else
-         render json: {status: false}
-      end
+      response_data = generate_response_data(@posts)
+      render json: response_data  
+     else
+      render json: {status: false}
+     end
   end
 
   def show
@@ -135,126 +79,41 @@ class PostsController < ApplicationController
 
   def bookmark 
     if current_user
-      @bookmark_posts = @current_user.bookmarks_posts.paginate(page: params[:page], per_page: 60)
-     if @bookmark_posts.exists?
-      render json: { 
-        status: true, 
-        post_all: @bookmark_posts.map { |post|
-          if post.image
-            file_extension = File.extname(post.image.path).downcase
-          end
-            if file_extension == ".mp4" || file_extension == ".webm"
-              file_type = "video"
-            else
-              file_type = "image"
-            end
-          {
-           id: post.id,
-           title: post.title, 
-           image: post.image,
-           thumbnail: post.thumbnail,
-           file_type: file_type,
-           heart_count: post.hearts.count,
-           user: { 
-             name: post.user.name,
-             avatar: post.user.avatar
-           },
-           bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
-             { id: bookmark.id, user_id: bookmark.user_id } 
-           },
-           hearts: post.hearts.map { |heart| 
-            { id: heart.id, user_id: heart.user_id } 
-           }
-          } 
-      },total_pages: @bookmark_posts.total_pages}
-     else
+      @posts = @current_user.bookmarks_posts.paginate(page: params[:page], per_page: 60)
+      if @posts.exists?
+        response_data = generate_response_data(@posts)
+        render json: response_data  
+      else
         render json: {status: false}
-     end
+      end
     end
   end
 
   def following
     if current_user
-      @following_posts = @current_user.following_posts.paginate(page: params[:page], per_page: 60)
-     if @following_posts.exists?
-      render json: { 
-        status: true, 
-        post_all: @following_posts.map { |post|
-          if post.image
-            file_extension = File.extname(post.image.path).downcase
-          end
-            if file_extension == ".mp4" || file_extension == ".webm"
-              file_type = "video"
-            else
-              file_type = "image"
-            end
-          {
-           id: post.id,
-           title: post.title, 
-           image: post.image,
-           thumbnail: post.thumbnail,
-           file_type: file_type,
-           heart_count: post.hearts.count,
-           user: { 
-             name: post.user.name,
-             avatar: post.user.avatar
-           },
-           bookmarks: post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
-             { id: bookmark.id, user_id: bookmark.user_id } 
-           },
-           hearts: post.hearts.map { |heart| 
-            { id: heart.id, user_id: heart.user_id } 
-           }
-          } 
-      },total_pages: @following_posts.total_pages}
-     else
+      @posts = @current_user.following_posts.paginate(page: params[:page], per_page: 60)
+      if @posts.exists?
+        response_data = generate_response_data(@posts)
+        render json: response_data  
+      else
         render json: {status: false}
-     end
+      end
     end
   end
 
   def search
       search_query = "%#{params[:query].downcase}%"
-      @post_all = Post.includes(:user, :hearts)
+      @posts = Post.includes(:user, :hearts)
                   .where("title LIKE ?", "%#{search_query}%")
                   .left_joins(:hearts)
                   .group(:id)
                   .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
                   .paginate(page: params[:page], per_page: 15)
-      if @post_all.exists?
-        render json: { 
-          status: true, 
-          post_all: @post_all.map { |post|
-            if post.image
-              file_extension = File.extname(post.image.path).downcase
-            end
-              if file_extension == ".mp4" || file_extension == ".webm"
-                file_type = "video"
-              else
-                file_type = "image"
-              end
-            {
-             id: post.id,
-             title: post.title, 
-             image: post.image,
-             thumbnail: post.thumbnail,
-             file_type: file_type,
-             heart_count: post.hearts.count,
-             user: { 
-               name: post.user.name,
-               avatar: post.user.avatar,
-               id: post.user.id
-             },
-             bookmarks: current_user ? post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
-               { id: bookmark.id, user_id: bookmark.user_id }
-             } : nil,
-             hearts: current_user ? post.hearts.where(user_id: @current_user.id).map { |heart| 
-              { id: heart.id, user_id: heart.user_id }
-             } : nil,
-            } 
-        },total_pages:@post_all.total_pages}
+      if @posts.exists?
+        response_data = generate_response_data(@posts)
+        render json: response_data  
       else
-          render json: {status: false}
+        render json: {status: false}
       end
   end
 
@@ -264,46 +123,17 @@ class PostsController < ApplicationController
      else
        category_query = params[:query]
      end
-     @post_all = Post.includes(:user, :hearts)
+     @posts = Post.includes(:user, :hearts)
                 .where("category LIKE ?", "%#{category_query}%")
                 .left_joins(:hearts)
                 .group(:id)
                 .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
                 .paginate(page: params[:page], per_page: 15)
-     if @post_all.exists?
-       render json: { 
-         status: true, 
-         post_all: @post_all.map { |post|
-         if post.image
-           file_extension = File.extname(post.image.path).downcase
-         end
-           if file_extension == ".mp4" || file_extension == ".webm"
-             file_type = "video"
-           else
-             file_type = "image"
-           end
-           {
-            id: post.id,
-            title: post.title, 
-            image: post.image,
-            thumbnail: post.thumbnail,
-            heart_count: post.hearts.count,
-            file_type: file_type,
-            user: { 
-              name: post.user.name,
-              avatar: post.user.avatar,
-              id: post.user.id
-            },
-            bookmarks: current_user ? post.bookmarks.where(user_id: @current_user.id).map { |bookmark| 
-              { id: bookmark.id, user_id: bookmark.user_id }
-            } : nil,
-            hearts: current_user ? post.hearts.where(user_id: @current_user.id).map { |heart| 
-             { id: heart.id, user_id: heart.user_id }
-            } : nil,
-           } 
-       },total_pages:@post_all.total_pages}
+     if @posts.exists?
+       response_data = generate_response_data(@posts)
+       render json: response_data  
      else
-         render json: {status: false}
+       render json: {status: false}
      end
   end
 
@@ -326,4 +156,73 @@ class PostsController < ApplicationController
       :amount_9,:amount_10,:amount_11,:amount_12,:amount_13,:amount_14,:amount_15,
       :process, :coment)
    end
+
+   def generate_response_data(posts)
+    if posts.present?
+      response_data = {
+        status: true,
+        post_all: posts.map do |post|
+          file_extension = File.extname(post.image.path).downcase
+          file_type = (file_extension == ".mp4" || file_extension == ".webm") ? "video" : "image"
+
+          {
+            id: post.id,
+            title: post.title, 
+            image: post.image,
+            thumbnail: post.thumbnail,
+            heart_count: post.hearts.count,
+            file_type: file_type,
+            user: { 
+              name: post.user.name,
+              avatar: post.user.avatar,
+              id: post.user.id
+            },
+            bookmarks: current_user ? post.bookmarks.where(user_id: current_user.id).map { |bookmark| 
+              { id: bookmark.id, user_id: bookmark.user_id } 
+            } : nil,
+            hearts: current_user ? post.hearts.where(user_id: current_user.id).map { |heart| 
+             { id: heart.id, user_id: heart.user_id } 
+            } : nil,
+          }
+        end,
+        total_pages: posts.total_pages
+      }
+    else
+      response_data = { status: false }
+    end
+    response_data
+  end
+
+  def generate_response_data_show(posts)
+    if posts.present?
+      response_data = { 
+        status: true, 
+        post: {
+          id: post.id,
+          title: post.title, 
+          image: post.image,
+          content: post.content,
+          time: post.time,
+          cost: post.cost,
+          materials: (1..15).map { |i| { :"material_#{i}" => post.send("material_#{i}") } }.reduce({}, :merge),
+          amounts: (1..15).map { |i| { :"amount_#{i}" => post.send("amount_#{i}") } }.reduce({}, :merge),
+          process: post.process,
+          coment: post.coment,
+          hearts_count: post.hearts.count,
+          file_type: file_type,
+          user: { 
+            name: post.user.name,
+            avatar: post.user.avatar,
+            id: post.user.id
+          },
+          bookmarked: bookmark ? true : false,
+          hearted: heart ? true : false,
+          relationship: relationship ? true : false
+        }
+      }
+    else
+      response_data = { status: false }
+    end
+    response_data
+  end
 end

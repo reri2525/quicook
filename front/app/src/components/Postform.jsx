@@ -25,6 +25,7 @@ function Postform(props) {
   const [time, setTime] = useState("")
   const [cost, setCost] = useState("")
   const [content, setContent] = useState("")
+  const [numberOfPeople, setNumberOfPeople] = useState("")
   const [materialCount, setMaterialCount] = useState(1)
   const [materialFields, setMaterialFields] = useState([
     { material: "", amount: "" }
@@ -115,6 +116,7 @@ function Postform(props) {
     formData.append('post[cost]', cost);
     formData.append('post[process]', process);
     formData.append('post[coment]', coment);
+    formData.append('post[number_of_people]', numberOfPeople);
     for (let i = 0; i < materialFields.length; i++) {
       formData.append(`post[material_${i + 1}]`, materialFields[i].material);
       formData.append(`post[amount_${i + 1}]`, materialFields[i].amount);
@@ -266,11 +268,11 @@ function Postform(props) {
                 <button type="button" className='content_button' onClick={() => setContent("")}>取り消し</button>
                 <label>時間　</label>
                 <input className='input_time'
-                    maxLength="1"
+                    maxLength="3"
                     type="text"
                     name="time"
                     value={time}
-                    onChange={event => setTime(event.target.value.replace(/[^0-9]/g, ""))}
+                    onChange={event => setTime(event.target.value)}
                 />　分
                 <label>　　　　　費用　</label>
                 <input className='input_cost'
@@ -278,11 +280,16 @@ function Postform(props) {
                     type="text"
                     name="cost"
                     value={cost} 
-                    onChange={event => setCost(event.target.value.replace(/[^0-9]/g, ""))}
+                    onChange={event => setCost(event.target.value)}
                 />　円<br/>
                 <button type='button' className='material_add' onClick={MaterialAdd}>＋　行を追加</button>
                 <button type='button' className='material_remove' onClick={materialRemove}>ー　行を削除</button>
                 {materialError && <a className='material_errors'>　{materialError}</a>}
+                <input className='input_number_of_people' 
+                    placeholder='何人分'
+                    onChange={event => setNumberOfPeople(event.target.value)}
+                />
+                <a style={{ fontSize: '12px', opacity: '0.6' }}> 例) 2人分</a>
                 <div className='material'>
                  {materialFields.map((field, index) => {
                   return (

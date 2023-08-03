@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!(name:  "クイクック公式",
     avatar: File.open(Rails.root.join('public', 'images', 'Q.jpeg')),
-    email: "0831yuuki@i.softbank.jp",
+    email: "quicook@mail.jp",
     password:              "111111",
     password_confirmation: "111111",
     introduction: "クイクック公式アカウントです。",
