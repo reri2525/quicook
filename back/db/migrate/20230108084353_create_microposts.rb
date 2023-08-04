@@ -6,8 +6,8 @@ class CreateMicroposts < ActiveRecord::Migration[6.1]
       t.text :content
       t.string :image
       t.string :thumbnail
-      t.integer :time
-      t.integer :cost
+      t.string :time
+      t.string :cost
       t.string :number_of_people
       t.string :material_1
       t.string :material_2
