@@ -3,6 +3,18 @@
 <img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1">
 <h2>クラウドアーキテクチャ</h2>
 <img src="back/public/images/クラウドアーキテクチャ.jpg" alt="cloud">
+<h2>機能一覧</h2>
+<ul>
+ <li>ユーザー登録・編集・削除</li>
+ <li>ログイン機能</li>
+ <li>フォロー機能</li>
+ <li>レシピ投稿、動画付きで投稿できる。</li>
+ <li>カテゴリ検索</li>
+ <li>レシピ名検索</li>
+ <li>ブックマーク、いいね機能</li>
+ <li>ページネーション機能</li>
+ <li>投稿の人気順表示</li>
+</ul>
 
 
 
