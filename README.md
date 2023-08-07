@@ -1,7 +1,7 @@
 <h1>Quicook</h1>
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
 <img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1">
-<p>🍔 テストユーザーでのログインもご用意しております！お気軽にお越し下さい！🍔</P>
+<p>🍔 テストユーザーでのログインもご用意しております!🍔</P>
 <h1>使用技術等</h1>
 <ul>
  <li>Ruby on Rails(バックエンド)</li>
@@ -12,6 +12,11 @@
  <li>ALBを使ってSSL通信を行なっている。</li>
  <li>Github ActionsでCI/CDを構築。</li>
 </ul>
+<h2>見ていただきたい点</h2>
+<ul>
+ <li>ReactとRailsを使用してSPA構成で構成されている。</li>
+ <li>UIにモーダルなどを使用している。</li>
+ <li>ECS/Fargateでを使用してサーバーレスでコンテナを実行している。</li>
 <h1>クラウドアーキテクチャ</h1>
 <img src="back/public/images/クラウドアーキテクチャ.jpg" alt="cloud">
 <h2>機能一覧</h2>
