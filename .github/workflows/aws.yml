@@ -56,6 +56,7 @@ jobs:
         run: |
           docker-compose build
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v2y9n7g3
+          docker images
           docker tag quicook-back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker tag quicook-front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
