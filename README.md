@@ -1,6 +1,7 @@
 <h1>Quicook</h1>
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
 <img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1">
+<p>🍔 テストユーザーでのログインもご用意しております！お気軽にお越し下さい！🍔</P>
 <h1>使用技術等</h1>
 <ul>
  <li>Ruby on Rails(バックエンド)</li>
