@@ -68,7 +68,7 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION_BACK }}
           container-name: ${{ env.CONTAINER_NAME_BACK }}
-          image: ${{ steps.build-image.outputs.image }}
+          image: quicook-front:latest
 
       - name: Deploy Amazon ECS task definition back
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
@@ -84,7 +84,7 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION_FRONT }}
           container-name: ${{ env.CONTAINER_NAME_FRONT}}
-          image: ${{ steps.build-image.outputs.image }}
+          image: quicook-back:latest
 
       - name: Deploy Amazon ECS task definition front
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
