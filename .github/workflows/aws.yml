@@ -68,12 +68,12 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION_BACK }}
           container-name: ${{ env.CONTAINER_NAME_BACK }}
-          image: quicook-front:latest
+          image: quicook-back:latest
 
       - name: Deploy Amazon ECS task definition back
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
         with:
-          task-definition: ${{ steps.task-def-back.outputs.task-definition-back }}
+          task-definition: ${{ steps.task-def-back.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE_BACK }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
@@ -84,12 +84,12 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION_FRONT }}
           container-name: ${{ env.CONTAINER_NAME_FRONT}}
-          image: quicook-back:latest
+          image: quicook-front:latest
 
       - name: Deploy Amazon ECS task definition front
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
         with:
-          task-definition: ${{ steps.task-def-front.outputs.task-definition-front }}
+          task-definition: ${{ steps.task-def-front.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE_FRONT }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
