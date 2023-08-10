@@ -46,7 +46,7 @@ jobs:
       - name: Wait for services to start
         run: |
           docker-compose build
-          sleep 30
+          sleep 60
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
