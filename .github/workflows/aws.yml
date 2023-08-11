@@ -58,7 +58,7 @@ jobs:
           docker-compose up -d
           sleep 100
           docker-compose run -d back bundle install 
-          docker-compose run front sh -c "cd app && yarn add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"
+          docker-compose run -d front sh -c "cd app && yarn add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v2y9n7g3
           docker tag quicook_back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
@@ -66,7 +66,9 @@ jobs:
           docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
           docker-compose down
           docker-compose run -d --rm front sh -c "mkdir -p /usr/src/app/app/node_modules/.cache"
+          sleep 60
           docker-compose run -d --rm front sh -c "chown -R node:node /usr/src/app/app/node_modules/.cache"
+          sleep 60
           docker-compose up
           docker-compose down
 
