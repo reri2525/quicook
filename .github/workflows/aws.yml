@@ -54,6 +54,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker images
+          docker pull mysql:8.0
           docker-compose run back bundle install
           docker-compose run front sh -c "cd app && yarn add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v2y9n7g3
