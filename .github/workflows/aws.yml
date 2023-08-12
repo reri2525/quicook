@@ -62,16 +62,16 @@ jobs:
           docker-compose run -d front sh -c "cd app && yarn add"
           docker-compose run -d front sh -c "cd app && yarn list"
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v2y9n7g3
-          docker tag quicook_back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest
-          docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
-          docker tag quicook_front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
-          docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
           docker-compose down
           docker-compose run -d --rm front sh -c "mkdir -p /usr/src/app/app/node_modules/.cache"
           sleep 60
           docker-compose run -d --rm front sh -c "chown -R node:node /usr/src/app/app/node_modules/.cache"
           sleep 60
-          docker-compose down
+          docker-compose down 
+          docker tag quicook_back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest
+          docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
+          docker tag quicook_front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
+          docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
 
       - name: Fill in the new image ID in the Amazon ECS task definition back
         id: task-def-back
