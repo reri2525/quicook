@@ -53,8 +53,8 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker images
           docker pull mysql:8.0
+          docker images
           docker-compose up -d
           sleep 100
           docker-compose run -d back bundle install 
