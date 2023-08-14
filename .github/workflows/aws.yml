@@ -50,8 +50,8 @@ jobs:
           docker-compose build
           docker-compose up -d
       
-       - name: Wait for services to start
-         run: sleep 200
+      - name: Wait for services to start
+        run: sleep 200
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
