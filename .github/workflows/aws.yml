@@ -43,9 +43,8 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
       
-      - name: Wait for services to start
+      - name: Mysql Image Pull
         run: |
-          docker-compose build
           docker pull mysql:8.0
           docker images
 
@@ -67,7 +66,6 @@ jobs:
           docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker tag quicook_front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
-          ls
           docker-compose up
 
       - name: Fill in the new image ID in the Amazon ECS task definition back
