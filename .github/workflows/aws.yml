@@ -55,6 +55,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          docker-compose build
           docker-compose up -d
           sleep 110
           docker-compose run -d back bundle install 
