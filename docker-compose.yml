@@ -32,6 +32,7 @@ services:
       DB_HOST: db
       DB_USERNAME: root
       TZ: Asia/Tokyo
+    command: bash -c "rails server -b 0.0.0.0 -p 3001 -e development"
   front:
     build:
       context: ./front/

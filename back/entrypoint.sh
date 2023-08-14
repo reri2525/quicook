@@ -9,7 +9,6 @@ elif [ "$RAILS_ENV" = "development" ]; then
     rails db:create RAILS_ENV=development
     rails db:migrate:reset RAILS_ENV=development
     rails db:seed RAILS_ENV=development
-    rails server -b 0.0.0.0 -p 3001 -e development
 else
     echo "Invalid RAILS_ENV value. Supported values: development, production."
     exit 1
