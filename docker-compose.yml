@@ -37,7 +37,7 @@ services:
     build:
       context: ./front/
       dockerfile: Dockerfile
-    user: root 
+    user: root
     volumes:
       - ./front:/usr/src/app
       - /usr/src/app/app/node_modules/.cache
