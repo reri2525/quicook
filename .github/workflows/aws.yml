@@ -48,6 +48,20 @@ jobs:
           docker pull mysql:8.0
           docker images
           docker-compose build
+      
+      - name: Mysql Image Pull
+        run: |
+          docker images
+          docker-compose up -d
+          sleep 60
+
+      - name: Mysql Image Pull
+        run: |
+          docker-compose run back bundle install 
+          docker-compose run front sh -c "cd app && yarn add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"
+          docker-compose run --rm front sh -c "rm -rf /usr/src/app/app/node_modules/.cache"
+          docker-compose run --rm front sh -c "mkdir -p /usr/src/app/app/node_modules/.cache"
+          docker-compose run --rm front sh -c "chown -R 777 /usr/src/app/app/node_modules/.cache"
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -55,24 +69,17 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker images
-          docker-compose up -d
-          sleep 60
-          ls
-          docker-compose run back bundle install 
-          docker-compose run front sh -c "cd app && yarn add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"
-          docker-compose run --rm front sh -c "rm -rf /usr/src/app/app/node_modules/.cache"
-          docker-compose run --rm front sh -c "mkdir -p /usr/src/app/app/node_modules/.cache"
-          docker-compose run --rm front sh -c "chown -R 777 /usr/src/app/app/node_modules/.cache"
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v2y9n7g3
           docker tag quicook_back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker tag quicook_front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
+
+      - name: upppp
+        run: |
           docker-compose down
           docker-compose up
           
-
       - name: Fill in the new image ID in the Amazon ECS task definition back
         id: task-def-back
         uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
