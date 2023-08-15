@@ -68,7 +68,6 @@ jobs:
           docker tag quicook_front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
           docker-compose down
-          docker-compose up
 
       - name: Fill in the new image ID in the Amazon ECS task definition back
         id: task-def-back
