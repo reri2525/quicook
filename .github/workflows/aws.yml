@@ -22,7 +22,6 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
       - name: Checkout
@@ -45,15 +44,7 @@ jobs:
       
       - name: Mysql Image Pull
         run: |
-          docker pull mysql:8.0
-          docker images
           docker-compose build
-      
-      - name: Mysql Image Pull
-        run: |
-          docker images
-          docker-compose up -d
-          sleep 60
 
       - name: library install
         run: |
