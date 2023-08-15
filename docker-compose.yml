@@ -39,6 +39,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./front:/usr/src/app
+      - /usr/src/app/app/node_modules/.cache
     ports:
       - "3000:3000"
     environment:
