@@ -6,9 +6,7 @@ rm -f /myapp/tmp/pids/server.pid
 if [ "$RAILS_ENV" = "production" ]; then
     bundle exec pumactl start
 elif [ "$RAILS_ENV" = "development" ]; then
-    rails db:create RAILS_ENV=development
-    rails db:migrate:reset RAILS_ENV=development
-    rails db:seed RAILS_ENV=development
+    
 else
     echo "Invalid RAILS_ENV value. Supported values: development, production."
     exit 1
