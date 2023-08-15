@@ -6,7 +6,7 @@ rm -f /myapp/tmp/pids/server.pid
 if [ "$RAILS_ENV" = "production" ]; then
     bundle exec pumactl start
 elif [ "$RAILS_ENV" = "development" ]; then
-    
+    ls
 else
     echo "Invalid RAILS_ENV value. Supported values: development, production."
     exit 1
