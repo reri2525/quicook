@@ -46,11 +46,11 @@ jobs:
         run: |
           docker-compose build
 
-      - name: Library Install
+      - name: Bundle Install
         run: |
           docker-compose run back bundle install 
-          
-      - name: Library Install
+
+      - name: Yarn Add
         run: |
           docker-compose run front sh -c "cd app && yarn add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"
 
@@ -58,7 +58,7 @@ jobs:
         run: |
           docker-compose run --rm front sh -c "mkdir -p /usr/src/app/app/node_modules/.cache"
           docker-compose run --rm front sh -c "chown -R 777 /usr/src/app/app/node_modules/.cache"
-
+          docker-compose up
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
