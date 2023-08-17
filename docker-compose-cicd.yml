@@ -37,7 +37,8 @@ services:
     build:
       context: ./front/
       dockerfile: Dockerfile
-    user: root
+    volumes:
+      - ./front:/usr/src/app
     ports:
       - "3000:3000"
     environment:
