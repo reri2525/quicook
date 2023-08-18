@@ -58,10 +58,8 @@ jobs:
       - name: Cache File
         run: |
           docker-compose -f docker-compose-cicd.yml run --rm front sh -c "mkdir -p /usr/src/app/app/node_modules/.cache"
-          docker-compose -f docker-compose.cicd.yml run --rm front sh -c "chmod -R 777 /usr/src/app/app/node_modules/.cache"
-
-
-          docker-compose -f docker-compose-cicd.yml up
+          docker-compose -f docker-compose-cicd.yml run --rm front sh -c "chmod -R 777 /usr/src/app/app/node_modules/.cache"
+          docker-compose up
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
