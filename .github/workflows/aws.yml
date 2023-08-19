@@ -60,9 +60,6 @@ jobs:
           docker-compose run --rm front sh -c "rm -rf /usr/src/app/app/node_modules/.cache"
           docker-compose run --rm front sh -c "mkdir -p /usr/src/app/app/node_modules/.cache"
           docker-compose run --rm front sh -c "chown -R node:node /usr/src/app/app/node_modules/.cache"
-          docker-compose down
-          sleep 30
-          docker-compose up --build
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
