@@ -63,7 +63,6 @@ jobs:
           docker-compose down
           sleep 30
           docker-compose up
-          ls
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
