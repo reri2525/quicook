@@ -60,7 +60,7 @@ jobs:
           docker-compose run --rm front sh -c "rm -rf /usr/src/app/app/node_modules/.cache"
           docker-compose run --rm front sh -c "mkdir -p /usr/src/app/app/node_modules/.cache"
           docker-compose run --rm front sh -c "chown -R node:node /usr/src/app/app/node_modules/.cache"
-          docker volume prune
+          docker volume prune -f
           sleep 30
           docker-compose up
           ls
