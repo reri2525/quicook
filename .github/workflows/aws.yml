@@ -60,7 +60,7 @@ jobs:
         run: |
           sudo rm -rf /front/app/node_modules/.cache
           sudo mkdir -p /front/app/node_modules/.cache
-          sudo chown -R node:node /front/app/node_modules/.cache
+          sudo chown -R 777 /front/app/node_modules/.cache
           docker-compose up
 
       - name: Build, tag, and push image to Amazon ECR
