@@ -58,9 +58,9 @@ jobs:
 
       - name: Cache File
         run: |
-          rm -rf /front/app/node_modules/.cache
-          mkdir -p /front/app/node_modules/.cache
-          chown -R /front/app/node_modules/.cache
+          sudo rm -rf /front/app/node_modules/.cache
+          sudo mkdir -p /front/app/node_modules/.cache
+          sudo chown -R /front/app/node_modules/.cache
           docker-compose up
 
       - name: Build, tag, and push image to Amazon ECR
