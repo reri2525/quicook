@@ -59,6 +59,7 @@ jobs:
       - name: Cache File
         run: |
           docker-compose up
+          ls
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
