@@ -80,7 +80,6 @@ jobs:
           docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker tag quicook_front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
-          docker-compose up
       
       - name: aaa
         run: |
