@@ -37,6 +37,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+      
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1 
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -73,6 +80,12 @@ jobs:
           docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker tag quicook_front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
+          docker-compose up
+      
+      - name: aaa
+        run: |
+          aws ecs describe-task-definition --task-definition quicook-back:21 > back-task.json
+          ls
 
       - name: Fill in the new image ID in the Amazon ECS task definition back
         id: task-def-back
