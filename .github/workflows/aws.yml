@@ -91,7 +91,7 @@ jobs:
         id: task-def-back
         uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
         with:
-          task-definition: back-task.json
+          task-definition: dsdsds.json
           container-name: ${{ env.CONTAINER_NAME_BACK }}
           image: quicook-back:latest
 
