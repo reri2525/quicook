@@ -13,7 +13,7 @@ env:
   ECS_SERVICE_FRONT: quicook-front      
   ECS_CLUSTER: quicook                
   ECS_TASK_DEFINITION_BACK: back-task.json    
-  ECS_TASK/DEFINITION_FRONT: front-task.json                           
+  ECS_TASK_DEFINITION_FRONT: front-task.json                           
   CONTAINER_NAME_BACK: quicook-back   
   CONTAINER_NAME_FRONT: quicook-front      
                                               
@@ -85,9 +85,9 @@ jobs:
         run: |
           aws ecs describe-task-definition --task-definition quicook-back:21 > back-task.json
           ls
-          ls
-          cat dsdsds.json
           cat back-task.json
+          ECS_TASK_DEFINITION_BACK=$(cat back-task.json)
+          echo "ECS_TASK_DEFINITION_BACK=$ECS_TASK_DEFINITION_BACK" >> $GITHUB_ENV
 
       - name: Fill in the new image ID in the Amazon ECS task definition back
         id: task-def-back
