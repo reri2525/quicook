@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "quicook-back",
-            "image": "public.ecr.aws/v2y9n7g3/quicook-back:latest",
+            "image": "quicook-back:latest",
             "cpu": 3072,
             "portMappings": [
                 {
@@ -21,34 +21,34 @@
                     "value": "production"
                 },
                 {
-                    "name": "DB_USERNAME",
-                    "value": "admin"
-                },
-                {
                     "name": "TZ",
                     "value": "Asia/Tokyo"
-                },
-                {
-                    "name": "S3_SECRET_ACCESS_KEY",
-                    "value": "Si2al1PfyM9PS/WugONYaBx+mGw/kZJvNiAUk6dr"
-                },
-                {
-                    "name": "S3_ACCESS_KEY",
-                    "value": "AKIAQSCWYPEFITRHDE4F"
-                },
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "secrets": [
                 {
                     "name": "DB_HOST",
-                    "value": "quicook-rds.cjmwbjjcqcoi.us-east-1.rds.amazonaws.com"
+                    "valueFrom": "db_host"
                 },
                 {
                     "name": "DB_PASSWORD",
-                    "value": "ARMSyuuki0831"
+                    "valueFrom": "db_password"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "valueFrom": "db_username"
+                },
+                {
+                    "name": "S3_ACCESS_KEY",
+                    "valueFrom": "access_key"
+                },
+                {
+                    "name": "S3_SECRET_ACCESS_KEY",
+                    "valueFrom": "secret_access_key"
                 }
             ],
-            "environmentFiles": [],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -56,7 +56,8 @@
                     "awslogs-group": "/ecs/quicook-task",
                     "awslogs-region": "us-east-1",
                     "awslogs-stream-prefix": "ecs"
-                }
+                },
+                "secretOptions": []
             }
         }
     ],

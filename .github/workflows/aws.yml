@@ -80,18 +80,12 @@ jobs:
           docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker tag quicook_front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
-      
-      - name: aaa
-        run: |
-          aws ecs describe-task-definition --task-definition quicook-back:21 > back-task.json
-          ls
-          cat back-task.json
 
       - name: Fill in the new image ID in the Amazon ECS task definition back
         id: task-def-back
         uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
         with:
-          task-definition: dsdsds.json
+          task-definition: ${{ env.ECS_TASK_DFINITION_BACK }}
           container-name: ${{ env.CONTAINER_NAME_BACK }}
           image: quicook-back:latest
 
