@@ -9,9 +9,7 @@ if [ "$RAILS_ENV" = "production" ]; then
     rails db:seed RAILS_ENV=production
     bundle exec pumactl start
 elif [ "$RAILS_ENV" = "development" ]; then
-    rails db:create RAILS_ENV=development
-    rails db:migrate:reset RAILS_ENV=development
-    rails db:seed RAILS_ENV=development
+    ls
 else
     echo "Invalid RAILS_ENV value. Supported values: development, production."
     exit 1
