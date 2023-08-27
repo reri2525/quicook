@@ -21,34 +21,32 @@
                     "value": "production"
                 },
                 {
+                    "name": "DB_USERNAME",
+                    "value": "admin"
+                },
+                {
                     "name": "TZ",
                     "value": "Asia/Tokyo"
+                },
+                {
+                    "name": "S3_SECRET_ACCESS_KEY",
+                    "value": "Si2al1PfyM9PS/WugONYaBx+mGw/kZJvNiAUk6dr"
+                },
+                {
+                    "name": "S3_ACCESS_KEY",
+                    "value": "AKIAQSCWYPEFITRHDE4F"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "quicook-rds.cjmwbjjcqcoi.us-east-1.rds.amazonaws.com"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "value": "ARMSyuuki0831"
                 }
             ],
             "mountPoints": [],
             "volumesFrom": [],
-            "secrets": [
-                {
-                    "name": "DB_HOST",
-                    "valueFrom": "db_host"
-                },
-                {
-                    "name": "DB_PASSWORD",
-                    "valueFrom": "db_password"
-                },
-                {
-                    "name": "DB_USERNAME",
-                    "valueFrom": "db_username"
-                },
-                {
-                    "name": "S3_ACCESS_KEY",
-                    "valueFrom": "access_key"
-                },
-                {
-                    "name": "S3_SECRET_ACCESS_KEY",
-                    "valueFrom": "secret_access_key"
-                }
-            ],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -56,8 +54,7 @@
                     "awslogs-group": "/ecs/quicook-task",
                     "awslogs-region": "us-east-1",
                     "awslogs-stream-prefix": "ecs"
-                },
-                "secretOptions": []
+                }
             }
         }
     ],
