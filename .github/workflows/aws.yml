@@ -68,7 +68,6 @@ jobs:
           sudo mkdir -p ./front/app/node_modules/.cache
           sudo chmod -R 777 ./front/app/node_modules/.cache
           docker-compose build
-          docker-compose up
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
