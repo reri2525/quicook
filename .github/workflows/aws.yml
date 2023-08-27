@@ -52,6 +52,7 @@ jobs:
       - name: Docker Build
         run: |
           docker-compose build
+          ls
 
       - name: Bundle Install
         run: |
