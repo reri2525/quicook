@@ -4,7 +4,7 @@
         {
             "name": "quicook-front",
             "image": "public.ecr.aws/v2y9n7g3/quicook-front:latest",
-            "cpu": 0,
+            "cpu": 4096,
             "portMappings": [
                 {
                     "name": "quicook-front-3000-tcp",
@@ -17,10 +17,6 @@
             "essential": true,
             "environment": [
                 {
-                    "name": "REACT_APP_API_URL",
-                    "value": "https://apiquicook.net"
-                },
-                {
                     "name": "REACT_APP_ENV",
                     "value": "production"
                 }
@@ -28,6 +24,12 @@
             "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "REACT_APP_API_URL",
+                    "valueFrom": "rails_api"
+                }
+            ],
             "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
@@ -36,7 +38,8 @@
                     "awslogs-group": "/ecs/quicook-task",
                     "awslogs-region": "us-east-1",
                     "awslogs-stream-prefix": "ecs"
-                }
+                },
+                "secretOptions": []
             }
         }
     ],
@@ -46,7 +49,7 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "8192",
+    "cpu": "4096",
     "memory": "24576",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
