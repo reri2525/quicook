@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "quicook-back",
-            "image": "quicook-back:latest",
+            "image": "public.ecr.aws/v2y9n7g3/quicook-back",
             "cpu": 3072,
             "portMappings": [
                 {
