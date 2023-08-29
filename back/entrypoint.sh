@@ -6,7 +6,7 @@ rm -f /myapp/tmp/pids/server.pid
 if [ "$RAILS_ENV" = "production" ]; then
     bundle exec pumactl start
 else
-    echo "実行コマンドなし"
+    echo "not command"
     exit 1
 fi
 
