@@ -59,8 +59,7 @@ jobs:
       
       - name: Create MasterKey
         run: |
-          cd back
-          bin/rails credentials:edit
+          docker-compose run back bin/rails credentials:edit
 
       - name: Yarn Add
         run: |
