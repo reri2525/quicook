@@ -57,6 +57,7 @@ jobs:
         run: |
           docker-compose run back bundle install 
           mkdir ./back/tmp/sockets
+          ls
       
       - name: Create MasterKey
         run: |
