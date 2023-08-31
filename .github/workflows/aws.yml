@@ -60,11 +60,12 @@ jobs:
       - name: Create MasterKey
         run: |
           rm -rf ./back/config/credentials.yml.enc
-          docker-compose run -e EDITOR=vim back bin/rails credentials:edit
-          docker-compose run back bin/rails credentials:edit
+          docker-compose run -e EDITOR=vim back bin/rails credentials:edit --environment --test
+          docker-compose run back bin/rails credentials:edit 
           cat ./back/config/credentials.yml.enc
           cd back/config
           ls
+          docker-compose build
 
       - name: Yarn Add
         run: |
