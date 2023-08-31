@@ -60,7 +60,10 @@ jobs:
       - name: Create MasterKey
         run: |
           rm -rf ./back/config/credentials.yml.enc
-          docker-compose run -e RAILS_MASTER_KEY=a423ed1c465a45529000dd2ec4a5293b -e EDITOR=vim back bin/rails credentials:edit
+          cd back/config
+          ls
+          cd ..
+          docker-compose run -e EDITOR=vim back bin/rails credentials:edit
           cat ./back/config/credentials.yml.enc
           cat ./back/config/master.key
           cd back/config
