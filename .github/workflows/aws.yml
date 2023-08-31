@@ -64,6 +64,7 @@ jobs:
           ls
           cd ..
           docker-compose run -e EDITOR=vim back bin/rails credentials:edit
+          sleep 30
           cat ./back/config/credentials.yml.enc
           cat ./back/config/master.key
           cd back/config
