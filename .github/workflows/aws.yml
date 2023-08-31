@@ -64,7 +64,6 @@ jobs:
           cat ./back/config/credentials.yml.enc
           sudo chmod -R 777 ./back/config/master.key
           cat ./back/config/master.key
-          docker-compose build
 
       - name: Yarn Add
         run: |
