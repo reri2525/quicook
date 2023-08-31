@@ -62,6 +62,7 @@ jobs:
           rm -rf ./back/config/credentials.yml.enc
           docker-compose run -e EDITOR=vim back bin/rails credentials:edit
           cat ./back/config/credentials.yml.enc
+          sudo chmod -R 777 ./back/config/master.key
           cat ./back/config/master.key
           docker-compose build
 
