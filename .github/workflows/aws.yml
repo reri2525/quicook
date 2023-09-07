@@ -29,7 +29,7 @@ jobs:
 
       - name: Tree Check
         run: |
-          docker -v
+          pwd
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
@@ -37,13 +37,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      
-      - name: Set up AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1 
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -57,7 +50,6 @@ jobs:
         run: |
           docker-compose run back bundle install 
           mkdir ./back/tmp/sockets
-          ls
       
       - name: Create MasterKey
         run: |
@@ -78,6 +70,12 @@ jobs:
           sudo mkdir -p ./front/app/node_modules/.cache
           sudo chmod -R 777 ./front/app/node_modules/.cache
           docker-compose build
+      
+      - name: Backend Test
+        run: |
+          docker-compose run back rake db:create
+          docker-compose run back rake db:migrate
+          docker-compose run back rspec
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
