@@ -10,7 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { url } from "../config";
 function Bookmark(props) {
   const { id } = useParams();
@@ -154,13 +154,15 @@ function Bookmark(props) {
                </div>
            </div>
            <div className='middle'>
-              { value.file_type === "image" ? <img src={value.image.url}></img> : <></> }
-              { value.file_type === "video" ? <video
-                                                       onMouseEnter={handleMouseEnter}
-                                                       onMouseLeave={handleMouseLeave}
-                                                       volume="0.5"
-                                                       src={value.image.url}>
-                                                     </video> : <></>}
+              { value.file_type === "image" ? <img src={value.thumbnail.url}></img> : <></> }
+              { value.file_type === "video" ? 
+                  <Fragment>
+                    <img src={value.thumbnail.url}></img>
+                    <PlayCircleOutlineIcon className='play_icon' style={{fontSize: '50px', color: 'white', fontWeight: '200'}}/> 
+                  </Fragment>
+                     : 
+                  <></> 
+              }
            </div>
            <div className='foot'>
              <a>{value.title}</a>

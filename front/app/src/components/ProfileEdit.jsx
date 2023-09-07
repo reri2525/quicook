@@ -111,12 +111,12 @@ function ProfileEdit(props) {
            value={email}
            onChange={event => setEmail(event.target.value)}
          /><br/>
-         <label>パスワード</label><br/>
+         <label>新規パスワード</label><br/>
          <input className='password'
            value={password}
            onChange={event => setPassword(event.target.value)}
          /><br/>
-         <label>パスワード確認</label><br/>
+         <label>新規パスワード確認</label><br/>
          <input className='password'
            value={passwordConfirmation}
            onChange={event => setPasswordConfirmation(event.target.value)}
