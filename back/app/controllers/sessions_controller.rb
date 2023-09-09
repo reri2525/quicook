@@ -3,8 +3,12 @@ class SessionsController < ApplicationController
         @user = User.find_by(email: session_params[:email])
 
         if @user && @user.authenticate(session_params[:password])
+          if @user.activated?
             login(@user)
             render json: { logged_in: true, user: @user }
+          else
+            render json: { status: 401, errors: "有効なアカウントを選択してください!"}
+          end
         else
             render json: { status: 401, errors: "認証に失敗しました。正しいメールアドレス・パスワードを入力し直すか、新規登録を行ってください!"}
         end

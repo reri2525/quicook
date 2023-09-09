@@ -28,6 +28,7 @@ services:
     ports:
       - "3001:3001"
     environment:
+      FRONT_URL: http://localhost:3000
       RAILS_ENV: development
       DB_HOST: db
       DB_USERNAME: root

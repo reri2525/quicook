@@ -41,7 +41,7 @@ function Newmodal(props) {
     ).then(response => {
         if (response.data.status === 'created') {
             props.handleLogin(response.data)
-            props.history.push("/home")
+            CloseModal()
         } else if (response.data.status === 'no') {
             
         }

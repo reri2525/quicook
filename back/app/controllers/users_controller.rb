@@ -3,7 +3,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         @user.avatar = File.open(Rails.root.join('public', 'images', '初期アイコン.jpeg'))
         if @user.save
-            login(@user)
+            UserMailer.account_activation(@user).deliver_now
             render json: { status: :created, user: @user }
         else
             render json: { status: :no, user: @user }

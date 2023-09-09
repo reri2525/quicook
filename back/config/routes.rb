@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/login', to: "sessions#logins"
   delete '/logout', to: "sessions#logout"
   resources :posts 
+  resources :account_activations, only: [:edit]
   resources :hearts, only: [:create, :destroy]
   resources :bookmarks, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]

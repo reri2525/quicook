@@ -11,6 +11,7 @@ User.create!(name:  "クイクック公式",
     password:              "111111",
     password_confirmation: "111111",
     introduction: "クイクック公式アカウントです。",
+    activated: false,
     )
 
 User.create!(name:  "gest user",
@@ -19,6 +20,8 @@ User.create!(name:  "gest user",
     password:              "111111",
     password_confirmation: "111111",
     introduction: "ゲストユーザーです",
+    activated: true,
+    activated_at: Time.zone.now
     )
 
 4.times do |m|

@@ -1,0 +1,6 @@
+アカウント有効化について
+
+<%= @user.name %>様、下記のリンクからアカウントを有効化できます。
+
+<%= link_to "アカウントを有効化する", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>
