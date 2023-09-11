@@ -7,6 +7,8 @@ import Footer from './Footer';
 import Logmodal from './Login';
 import Newmodal from './New';
 import PromptingAccountCreation from './PromptingAccountCreation';
+import CloseIcon from '@mui/icons-material/Close';
+import { getBottomNavigationUtilityClass } from '@mui/material';
 function Main(props) {
   const promptingAccountCreation = props.promptingAccountCreation
   const setPromptingAccountCreation = props.setPromptingAccountCreation
@@ -14,15 +16,26 @@ function Main(props) {
   const [postModal, setPostModal] = useState(false); 
   const [logModal, setLogModal] = useState(false);
   const [newModal, setNewModal] = useState(false);
+  const [passwordResetModal, setPasswordResetModal] = useState(false);
   const [modal, setModal] = useState(false);
+  const [flashMessage, setFlashMessage] = useState(null)
+
+  const CloseFlash = () => {
+    setFlashMessage(null)
+  }
     return (
       <Fragment>
       <body>
+       { flashMessage && 
+         <div>
+           <h2 className='flash_message'>{flashMessage}</h2> 
+           <div className='close' onClick={() => CloseFlash()}><a><CloseIcon /></a></div>
+         </div>
+       }
        <Header loggedInStatus={props.loggedInStatus} handleLogout={props.handleLogout} 
                                                         setPostModal={setPostModal}  user={props.user}
                                                         setLogModal={setLogModal} setNewModal={setNewModal} setModal={setModal} 
                                                         />
-     
         <List loggedInStatus={loggedInStatus}/>
         <div className='center'>
          <div className='center_inner'>
@@ -44,7 +57,7 @@ function Main(props) {
                       <></>
          }
          { newModal ? <Newmodal 
-                        handleLogin={props.handleLogin} newModal={newModal} 
+                        handleLogin={props.handleLogin} newModal={newModal} setFlashMessage={setFlashMessage}
                         setNewModal={setNewModal} setModal={setModal} loggedInStatus={props.loggedInStatus}
                       /> :
                       <></>

@@ -33,11 +33,14 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        @user.update(user_params)
-        if @user.save
-            render json: { status: :true, user: @user }
+        if @user.email == params[:email]
+           @user.update(user_params)
+           if @user.save
+               render json: { status: :true, user: @user }
+           else
+               render json: { status: :false}
+           end
         else
-            render json: { status: :false}
         end
     end
 
@@ -52,10 +55,19 @@ class UsersController < ApplicationController
         end
     end
 
+    def password_reset
+        @user = User.find_by(email: params[:sent_email])
+        if @user
+           UserMailer.password_reset(@user).deliver_now
+        else
+           
+        end
+    end
+
     private
 
         def user_params
             params.require(:user).permit(:name, :introduction, :avatar, :email, :password, 
-                :password_confirmation)
+                :password_confirmation, :sent_email)
         end
 end

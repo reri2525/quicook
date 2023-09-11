@@ -15,3 +15,30 @@
       border-right: #bbb 1px solid;
     }
 }
+
+.flash_message {
+  background-color: rgba(255, 0, 0, 0.527);
+  width: 90%;
+  justify-content: center;
+  text-align: center;
+  position: fixed;
+  top: 0px;
+  left: 80px;
+  z-index: 100;
+  border-radius: 10px 10px;
+  border: #bbb 1px solid;
+  padding: 5px 0px;
+  margin-top: 7px;
+}
+
+.close {
+  z-index: 100;
+  position: fixed;
+  top: 0px;
+  left: 1340px;
+  border-radius: 18px;
+  padding: 0px 1px;
+  &:hover {
+    background-color: rgba(187, 187, 187, 0.8);
+  }
+}

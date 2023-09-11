@@ -14,6 +14,8 @@ function Logmodal(props) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors_m, setErrors_m] = useState("")
+  const [passwordResetForm, setPasswordResetForm] = useState("")
+  const [sentEmail, setSentEmail] = useState("")
   const history = useHistory();
 
   const CloseModal = () => {
@@ -42,12 +44,20 @@ function Logmodal(props) {
     })
   }
 
+  const handleSentEmail = (event) => {
+    axios.get(`${url}/users/password_reset`, {params: {sent_email: sentEmail}})
+   }
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = 'auto';
     };
   },[])
+
+  const PasswordReset = () => {
+    setPasswordResetForm(true)
+  }
 
 if (props.loggedInStatus === "未ログイン") {
 return ( 
@@ -56,8 +66,7 @@ return (
         <div className="back_display2">
           
         </div>
-        <div className="form_modal">
-          
+        <div className="form_modal">   
          <form className="form" onSubmit={handleSubmit(onSubmit)}>
              <h1>入力してください</h1>
                 <label>メールアドレス</label><br></br>
@@ -76,10 +85,23 @@ return (
                     value={password}
                     onChange={event => setPassword(event.target.value)}
                 /><br></br>
-                <button className='btn' type="submit">送信</button><br></br>
+                <button className='btn' type="submit">送信</button><br/>
+                <a className='password_reset' onClick={() => PasswordReset()}>パスワードを忘れてしまった</a><br/>
                 <span>{errors_m}</span>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
+         </form>
+         { passwordResetForm &&
+            <form className="form_sent_email">
+             <label>送信用のメールアドレス</label><br></br>
+             <input className='input_sent_email'
+                type="email"
+                value={sentEmail}
+                onChange={event => setSentEmail(event.target.value)}
+             /><br></br>
+             <label>パスワードを再設定するためのメールを送ります。</label><br></br>
+             <button className='btn' type="button" onClick={ () => handleSentEmail()}>送信</button><br/>
             </form>
+         }
         </div>  
         
     </Fragment>

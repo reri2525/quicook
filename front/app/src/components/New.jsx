@@ -40,10 +40,8 @@ function Newmodal(props) {
         { withCredentials: true }
     ).then(response => {
         if (response.data.status === 'created') {
-            props.handleLogin(response.data)
             CloseModal()
-        } else if (response.data.status === 'no') {
-            
+            props.setFlashMessage("メールを確認してアカウントを有効にしてください。")
         }
     }).catch(error => {
         console.log("registration error", error)

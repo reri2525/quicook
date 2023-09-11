@@ -11,7 +11,8 @@ User.create!(name:  "クイクック公式",
     password:              "111111",
     password_confirmation: "111111",
     introduction: "クイクック公式アカウントです。",
-    activated: false,
+    activated: true,
+    activated_at: Time.zone.now
     )
 
 User.create!(name:  "gest user",
