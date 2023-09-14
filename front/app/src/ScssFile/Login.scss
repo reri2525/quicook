@@ -107,11 +107,14 @@
     }
 
     .form_sent_email {
-       position: fixed;
-       top: 490px;
-       left: 559px;
-       width: 320px;
-       z-index: 100;
+       position: absolute;
+       top: 2px;
+       left: 49px;
+       width: 300px;
+
+      h1 {
+        margin-left: 24px;
+      }
 
       .input_sent_email {
          border: 2px solid #bbb;
@@ -131,6 +134,26 @@
           background-color: yellow;
           transition: 0.2s;
           cursor: pointer;
+        }
+      }
+
+      .close { 
+        position: absolute;
+        top: 5px;
+        left: 290px;
+        border-radius: 30px;
+        padding: 15px 17px;
+        width: fit-content;
+        color: black;
+  
+        &:hover {
+          background-color: #bbb;
+        }
+  
+        a {
+          position: relative;
+          top: 1px;
+          left: 0px;
         }
       }
     }

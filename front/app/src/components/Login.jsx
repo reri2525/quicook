@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import '../ScssFile/Login.scss'
 import axios from 'axios'
 import CloseIcon from '@mui/icons-material/Close';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { url } from "../config";
@@ -67,7 +68,21 @@ return (
           
         </div>
         <div className="form_modal">   
-         <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        { passwordResetForm ?
+          <form className="form_sent_email">
+             <h1>入力してください</h1>
+             <label>送信用のメールアドレス</label><br></br>
+             <input className='input_sent_email'
+                type="email"
+                value={sentEmail}
+                onChange={event => setSentEmail(event.target.value)}
+             /><br></br>
+             <label>パスワードを再設定するためのメールを送ります。</label><br></br>
+             <button className='btn' type="button" onClick={ () => handleSentEmail()}>送信</button><br/>
+             <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
+          </form>
+           : 
+          <form className="form" onSubmit={handleSubmit(onSubmit)}>
              <h1>入力してください</h1>
                 <label>メールアドレス</label><br></br>
                 <input className='input'
@@ -89,19 +104,8 @@ return (
                 <a className='password_reset' onClick={() => PasswordReset()}>パスワードを忘れてしまった</a><br/>
                 <span>{errors_m}</span>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
-         </form>
-         { passwordResetForm &&
-            <form className="form_sent_email">
-             <label>送信用のメールアドレス</label><br></br>
-             <input className='input_sent_email'
-                type="email"
-                value={sentEmail}
-                onChange={event => setSentEmail(event.target.value)}
-             /><br></br>
-             <label>パスワードを再設定するためのメールを送ります。</label><br></br>
-             <button className='btn' type="button" onClick={ () => handleSentEmail()}>送信</button><br/>
-            </form>
-         }
+          </form>
+        }
         </div>  
         
     </Fragment>
