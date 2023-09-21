@@ -3,17 +3,19 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         @user.avatar = File.open(Rails.root.join('public', 'images', '初期アイコン.jpeg'))
         if @user.save
-            UserMailer.account_activation(@user).deliver_now
+            UserMailer.account_activation(@user).deliver_now 
             render json: { status: :created, user: @user }
         else
             render json: { status: :no, user: @user }
         end
     end
+
     def edit 
       if current_user
         render json: { user: @current_user }
       end
     end
+    
     def show 
         @user = User.find(params[:id])
         @posts_count = @user.posts.count
@@ -41,6 +43,8 @@ class UsersController < ApplicationController
                render json: { status: :false}
            end
         else
+           update_email_digest(@user)
+           UserMailer.update.email(@user).deliver_now 
         end
     end
 
@@ -52,15 +56,6 @@ class UsersController < ApplicationController
             render json: { status: :true}
         else
             render json: { status: :false}
-        end
-    end
-
-    def password_reset
-        @user = User.find_by(email: params[:sent_email])
-        if @user
-           UserMailer.password_reset(@user).deliver_now
-        else
-           
         end
     end
 

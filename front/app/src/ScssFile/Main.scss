@@ -17,7 +17,7 @@
 }
 
 .flash_message {
-  background-color: rgba(255, 0, 0, 0.527);
+  background-color: rgba(187, 187, 187, 0.8);
   width: 90%;
   justify-content: center;
   text-align: center;
@@ -31,7 +31,7 @@
   margin-top: 7px;
 }
 
-.close {
+.close_flash {
   z-index: 100;
   position: fixed;
   top: 0px;

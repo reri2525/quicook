@@ -29,7 +29,7 @@ function Main(props) {
        { flashMessage && 
          <div>
            <h2 className='flash_message'>{flashMessage}</h2> 
-           <div className='close' onClick={() => CloseFlash()}><a><CloseIcon /></a></div>
+           <div className='close_falsh' onClick={() => CloseFlash()}><a><CloseIcon /></a></div>
          </div>
        }
        <Header loggedInStatus={props.loggedInStatus} handleLogout={props.handleLogout} 
@@ -51,7 +51,7 @@ function Main(props) {
                        <></> 
          }
          { logModal ? <Logmodal 
-                        handleLogin={props.handleLogin} logModal={logModal} 
+                        handleLogin={props.handleLogin} logModal={logModal} setFlashMessage={setFlashMessage}
                         setLogModal={setLogModal} setModal={setModal} loggedInStatus={props.loggedInStatus}
                       /> : 
                       <></>

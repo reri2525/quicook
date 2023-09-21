@@ -15,6 +15,7 @@ function Logmodal(props) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors_m, setErrors_m] = useState("")
+  const [errors_m_sent, setErrors_m_sent] = useState("")
   const [passwordResetForm, setPasswordResetForm] = useState("")
   const [sentEmail, setSentEmail] = useState("")
   const history = useHistory();
@@ -46,7 +47,18 @@ function Logmodal(props) {
   }
 
   const handleSentEmail = (event) => {
-    axios.get(`${url}/users/password_reset`, {params: {sent_email: sentEmail}})
+    axios.post(`${url}/password_resets`, {params: {sent_email: sentEmail}}
+    ).then(response => {
+      if (response.data.status === true ) {
+        console.log(response.data.status)
+        CloseModal()
+        props.setFlashMessage("メールが送信されました。")
+      } else {
+        setErrors_m_sent(response.data.errors)
+      }
+    }).catch(error => {
+      console.log("error")
+    })
    }
 
   useEffect(() => {
@@ -69,16 +81,19 @@ return (
         </div>
         <div className="form_modal">   
         { passwordResetForm ?
-          <form className="form_sent_email">
+          <form className="form_sent_email" onSubmit={ () => handleSentEmail()}>
              <h1>入力してください</h1>
+             <ArrowBackIcon style={{float: 'right'}} onClick={ () => setPasswordResetForm(false)}/><br></br>
              <label>送信用のメールアドレス</label><br></br>
              <input className='input_sent_email'
                 type="email"
                 value={sentEmail}
                 onChange={event => setSentEmail(event.target.value)}
+                
              /><br></br>
              <label>パスワードを再設定するためのメールを送ります。</label><br></br>
-             <button className='btn' type="button" onClick={ () => handleSentEmail()}>送信</button><br/>
+             <button className='btn' type="button">送信</button><br/>
+             <span>{errors_m_sent}</span>
              <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
           </form>
            : 
@@ -100,7 +115,7 @@ return (
                     value={password}
                     onChange={event => setPassword(event.target.value)}
                 /><br></br>
-                <button className='btn' type="submit">送信</button><br/>
+                <button className='btn' type="button">送信</button><br/>
                 <a className='password_reset' onClick={() => PasswordReset()}>パスワードを忘れてしまった</a><br/>
                 <span>{errors_m}</span>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>

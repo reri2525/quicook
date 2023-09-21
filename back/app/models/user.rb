@@ -50,6 +50,19 @@ class User < ApplicationRecord
       update_attribute(:activated_at, Time.zone.now)
     end
 
+    # メールアドレスの変更
+    def update_email_digest(user)
+      user.email_token  = User.new_token
+      user.email_digest = User.digest(activation_token)
+    end
+
+    # パスワード再設定の属性を設定する
+    def create_reset_digest
+      self.reset_token = User.new_token
+      update_attribute(:reset_digest,  User.digest(reset_token))
+      update_attribute(:reset_sent_at, Time.zone.now)
+    end
+
      # 渡されたトークンがダイジェストと一致したらtrueを返す
     def authenticated?(attribute, token)
       digest = send("#{attribute}_digest")

@@ -25,6 +25,16 @@ User.create!(name:  "gest user",
     activated_at: Time.zone.now
     )
 
+User.create!(name:  "gest user",
+    avatar: File.open(Rails.root.join('public', 'images', '可愛い女の子1.jpeg')),
+    email: "08311221yuuki@gmail.com",
+    password:              "111111",
+    password_confirmation: "111111",
+    introduction: "ゲストユーザーです",
+    activated: true,
+    activated_at: Time.zone.now
+    )
+
 4.times do |m|
  5.times do |n|
   name = Faker::Japanese::Name.name[0, 10]
