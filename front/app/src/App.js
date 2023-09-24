@@ -12,6 +12,7 @@ import Category from './components/Category'
 import Profile from "./components/Profile";
 import ProfileEdit from "./components/ProfileEdit";
 import Following from './components/Following';
+import PasswordResetForm from './components/PasswordResetForm';
 import{
   BrowserRouter as Router,
   Switch,
@@ -149,7 +150,7 @@ function App(props) {
               props.history.push('/home/page/1')
             )}
           />  
-         <Route exact path={"/home/page/:id"}
+        <Route exact path={"/home/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
                                  user={user} handleLogout={handleLogout}   
@@ -237,6 +238,11 @@ function App(props) {
         <Route exact path={"/edit"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout} user={user} url={<ProfileEdit  user={user}/>}/>
+            )}
+          />  
+        <Route exact path={"/password/:id/reset"}
+             render={props => (
+              <PasswordResetForm { ...props} />
             )}
           />  
       </Switch>

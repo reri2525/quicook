@@ -7,11 +7,6 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { url } from "../config";
 function Logmodal(props) {
-  const {
-     register,
-     handleSubmit,
-     formState: { errors },
-  } = useForm();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors_m, setErrors_m] = useState("")
@@ -47,17 +42,16 @@ function Logmodal(props) {
   }
 
   const handleSentEmail = (event) => {
-    axios.post(`${url}/password_resets`, {params: {sent_email: sentEmail}}
+    axios.post(`${url}/password_resets`, {sent_email: sentEmail}
     ).then(response => {
-      if (response.data.status === true ) {
-        console.log(response.data.status)
+      if (response.data.status === "true" ) {
         CloseModal()
         props.setFlashMessage("メールが送信されました。")
       } else {
         setErrors_m_sent(response.data.errors)
       }
     }).catch(error => {
-      console.log("error")
+      setErrors_m_sent("aaaa")
     })
    }
 
@@ -81,23 +75,24 @@ return (
         </div>
         <div className="form_modal">   
         { passwordResetForm ?
-          <form className="form_sent_email" onSubmit={ () => handleSentEmail()}>
+          <form className="form_sent_email">
              <h1>入力してください</h1>
              <ArrowBackIcon style={{float: 'right'}} onClick={ () => setPasswordResetForm(false)}/><br></br>
              <label>送信用のメールアドレス</label><br></br>
              <input className='input_sent_email'
+                name="sent_email"
                 type="email"
                 value={sentEmail}
                 onChange={event => setSentEmail(event.target.value)}
-                
+                onKeyDown={e => e.key === 'Enter' && e.preventDefault()}
              /><br></br>
              <label>パスワードを再設定するためのメールを送ります。</label><br></br>
-             <button className='btn' type="button">送信</button><br/>
+             <button className='btn' type="button" onClick={ () => handleSentEmail()}>送信</button><br/>
              <span>{errors_m_sent}</span>
              <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
           </form>
            : 
-          <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          <form className="form">
              <h1>入力してください</h1>
                 <label>メールアドレス</label><br></br>
                 <input className='input'
@@ -115,7 +110,7 @@ return (
                     value={password}
                     onChange={event => setPassword(event.target.value)}
                 /><br></br>
-                <button className='btn' type="button">送信</button><br/>
+                <button className='btn' type="button" onClick={ () => onSubmit()}>送信</button><br/>
                 <a className='password_reset' onClick={() => PasswordReset()}>パスワードを忘れてしまった</a><br/>
                 <span>{errors_m}</span>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>

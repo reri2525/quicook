@@ -27,7 +27,7 @@ User.create!(name:  "gest user",
 
 User.create!(name:  "gest user",
     avatar: File.open(Rails.root.join('public', 'images', '可愛い女の子1.jpeg')),
-    email: "08311221yuuki@gmail.com",
+    email: "yuuki08311221@gmail.com",
     password:              "111111",
     password_confirmation: "111111",
     introduction: "ゲストユーザーです",

@@ -63,7 +63,12 @@ class User < ApplicationRecord
       update_attribute(:reset_sent_at, Time.zone.now)
     end
 
-     # 渡されたトークンがダイジェストと一致したらtrueを返す
+    # パスワード再設定の期限が切れている場合はtrueを返す
+    def password_reset_expired?
+     reset_sent_at < 2.hours.ago
+    end
+
+    # 渡されたトークンがダイジェストと一致したらtrueを返す
     def authenticated?(attribute, token)
       digest = send("#{attribute}_digest")
       return false if digest.nil?
