@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    attr_accessor :remember_token, :activation_token, :reset_token
+    attr_accessor :remember_token, :activation_token, :reset_token, :email_token
     before_save   :downcase_email
     before_create :create_activation_digest
     has_many :posts, dependent: :destroy
@@ -50,12 +50,6 @@ class User < ApplicationRecord
       update_attribute(:activated_at, Time.zone.now)
     end
 
-    # メールアドレスの変更
-    def update_email_digest(user)
-      user.email_token  = User.new_token
-      user.email_digest = User.digest(activation_token)
-    end
-
     # パスワード再設定の属性を設定する
     def create_reset_digest
       self.reset_token = User.new_token
@@ -66,6 +60,13 @@ class User < ApplicationRecord
     # パスワード再設定の期限が切れている場合はtrueを返す
     def password_reset_expired?
      reset_sent_at < 2.hours.ago
+    end
+
+    # メールアドレスの変更
+    def update_email_digest
+      self.email_token  = User.new_token
+      update_attribute(:email_digest, User.digest(email_token))
+      update_attribute(:email_sent_at, Time.zone.now)
     end
 
     # 渡されたトークンがダイジェストと一致したらtrueを返す

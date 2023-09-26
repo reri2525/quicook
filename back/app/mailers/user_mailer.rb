@@ -4,9 +4,9 @@ class UserMailer < ApplicationMailer
         mail to: @user.email, subject: "アカウント認証"
     end
 
-    def update_password(user)
+    def update_email(user)
         @user = user
-        mail to: @user.email, subject: "パスワード再設定"
+        mail to: @user.email, subject: "メールアドレス変更"
     end
 
     def password_reset(user)

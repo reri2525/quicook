@@ -28,7 +28,8 @@ class PasswordResetsController < ApplicationController
       @user = User.find_by(email: params[:email])
       unless (@user && @user.activated? &&
         @user.authenticated?(:reset, params[:id]))
-        render ENV['FRONT_URL']
+        redirect_to ENV['FRONT_URL']
+        return
       end
       redirect_to "#{ENV['FRONT_URL']}/password/#{params[:email]}/reset"
     end

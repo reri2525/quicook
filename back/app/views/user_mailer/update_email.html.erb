@@ -1,0 +1,6 @@
+<h2>メールアドレス変更について</h2>
+
+<p><%= @user.name %>様でよろしければ秋のリンクから変更を確定させてください。</p>
+
+<p><%= link_to "変更を確定する", edit_update_email_url(@user.email_token,
+                                                    email: @user.email) %></p>

@@ -14,7 +14,7 @@
 </ul>
 <h2>見ていただきたい点</h2>
 <ul>
- <li>ReactとRailsを使用してSPA構成で構成されている。</li>
+ <li>ReactとRailsを使用してSPAで構成されている。</li>
  <li>UIにモーダルなどを使用している。</li>
  <li>ECS/Fargateでコンテナを使用してサーバーレスでコンテナを実行している。</li>
 </ul>

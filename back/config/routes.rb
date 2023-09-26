@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :posts 
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :update_email, only: [:edit]
+  resources :update_emails, only: [:edit, :update]
   resources :hearts, only: [:create, :destroy]
   resources :bookmarks, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]

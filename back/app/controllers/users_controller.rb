@@ -35,16 +35,22 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        if @user.email == params[:email]
+        puts @user.email
+        puts params[:user][:email]
+        if @user.email == params[:user][:email]
            @user.update(user_params)
            if @user.save
-               render json: { status: :true, user: @user }
+               render json: { status: true, user: @user }
            else
-               render json: { status: :false}
+               render json: { status: false}
            end
         else
-           update_email_digest(@user)
-           UserMailer.update.email(@user).deliver_now 
+           @user.update_email_digest
+           if UserMailer.update_email(@user).deliver_now 
+              render json: { status: "update_email", user: @user }
+           else
+              render json: { status: false}
+           end
         end
     end
 
@@ -65,4 +71,5 @@ class UsersController < ApplicationController
             params.require(:user).permit(:name, :introduction, :avatar, :email, :password, 
                 :password_confirmation, :sent_email)
         end
+
 end

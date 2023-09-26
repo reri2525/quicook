@@ -5,7 +5,7 @@ import axios from 'axios'
 import { url } from "../config";
 function ProfileEdit(props) {
  const user = props.user
- const [update, setUpdate] = useState(false)
+ const [update, setUpdate] = useState(null)
  const [errors, setErrors] = useState(null)
  const [name, setName] = useState(user.name)
  const [nameChange, setNameChange]= useState(user.name)
@@ -29,7 +29,7 @@ function ProfileEdit(props) {
   formData.append('user[password_confirmation]', passwordConfirmation);
   axios.put(`${url}/users/${user.id}`, formData)
     .then(response => {
-      if (response.data.status) {
+      if (response.data.status === true) {
         const data = response.data
         user.name = data.user.name
         user.introduction = data.user.introduction
@@ -37,20 +37,19 @@ function ProfileEdit(props) {
         user.avatar = data.user.avatar
         setNameChange(data.user.name)
         setErrors(false)
-        setUpdate(true)
-        setTimeout(function() {
-          setUpdate(false);
-        }, 8000);
+        setUpdate("変更されました。")
+        window.scrollTo(0, 0);
+      } else if (response.data.status === "update_email") {
+        setErrors(false)
+        setUpdate("メールを確認して承認してください。")
         window.scrollTo(0, 0);
       } else {
-        console.log("error")
-        setErrors(true)
+        setErrors("変更されませんでした。")
         setUpdate(false)
         window.scrollTo(0, 0);
       }
       }).catch(error => {
-        console.log("error")
-        setErrors(true)
+        setErrors("変更されませんでした。")
         setUpdate(false)
         window.scrollTo(0, 0);
       })
@@ -78,8 +77,8 @@ function ProfileEdit(props) {
     <div className='edit'>
       <div className='edit_container'>
         <form onSubmit={onSubmit}>
-         { update ? <h3 className='update'>変更されました。</h3> : <></> }
-         { errors ? <h3 className='errors'></h3> : <></> }
+         { update && <h3 className='update'>{update}</h3> }
+         { errors && <h3 className='errors'>{errors}</h3> }
          <div className='icon'>
          <img className='image'
            src={avatarPreview}>
