@@ -4,6 +4,8 @@ set -e
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /myapp/tmp/pids/server.pid
 if [ "$RAILS_ENV" = "production" ]; then
+    rails db:migrate:reset ENV=production
+    rails db:seed ENV=production
     bundle exec pumactl start
 else
     ls

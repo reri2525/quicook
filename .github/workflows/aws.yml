@@ -58,7 +58,6 @@ jobs:
           cat ./back/config/credentials.yml.enc
           sudo chmod -R 777 ./back/config/master.key
           cat ./back/config/master.key
-          ls
 
       - name: Yarn Add
         run: |
@@ -96,7 +95,7 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION_BACK }}
           container-name: ${{ env.CONTAINER_NAME_BACK }}
-          image: quicook-back:latest
+          image: public.ecr.aws/v2y9n7g3/quicook-back:latest
 
       - name: Deploy Amazon ECS task definition back
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
@@ -112,7 +111,7 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION_FRONT }}
           container-name: ${{ env.CONTAINER_NAME_FRONT}}
-          image: quicook-front:latest
+          image: public.ecr.aws/v2y9n7g3/quicook-front:latest
 
       - name: Deploy Amazon ECS task definition front
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
