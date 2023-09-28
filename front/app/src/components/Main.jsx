@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import '../ScssFile/Main.scss'
 import Header from './Header';
-import Postform from './Postform';
+import PostForm from './PostForm';
 import List from './List';
 import Footer from './Footer';
 import Logmodal from './Login';
@@ -44,7 +44,7 @@ function Main(props) {
           </div>
          </div>
         </div>
-         { postModal ? <Postform 
+         { postModal ? <PostForm 
                         setPostmodal={setPostModal} user={props.user}
                         postAllGet={props.postAllGet}
                        /> : 

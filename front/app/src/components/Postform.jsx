@@ -9,7 +9,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import { url } from "../config";
-function Postform(props) {   
+function PostForm(props) {   
   const history = useHistory();
   const [posted, setPosted] = useState(false)
   const [title, setTitle] = useState("")
@@ -351,4 +351,4 @@ function Postform(props) {
    )
 }
 
-export default Postform
+export default PostForm
