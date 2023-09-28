@@ -35,6 +35,7 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
+        @update_email = params[:user][:email]
         puts @user.email
         puts params[:user][:email]
         if @user.email == params[:user][:email]
@@ -46,7 +47,7 @@ class UsersController < ApplicationController
            end
         else
            @user.update_email_digest
-           if UserMailer.update_email(@user).deliver_now 
+           if UserMailer.update_email(@user, @update_email).deliver_now 
               render json: { status: "update_email", user: @user }
            else
               render json: { status: false}

@@ -246,7 +246,7 @@ function App(props) {
               <PasswordResetForm { ...props} />
             )}
           />  
-        <Route exact path={"/update/:id/email"}
+        <Route exact path={"/update/:newEmail/email/:id"}
              render={props => (
               <UpdateEmail { ...props} />
             )}

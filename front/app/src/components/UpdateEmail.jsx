@@ -16,13 +16,13 @@ function UpdateEmail(props) {
   const password = watch('password', '')
   const passwordConfirmation = watch('passwordConfirmation', '')
   const { id } = useParams();
+  const { newEmail } = useParams();
   const onSubmit = (event) => {
-    axios.put(`${url}/password_resets/1`,{user: {password: password, password_confirmation: passwordConfirmation, email: id}},{ withCredentials: true }
+    axios.put(`${url}/update_emails/1`,{user: {email: newEmail, id: id}},{ withCredentials: true }
     ).then(response => {
         if (response.data.status === true) {
           window.location.pathname = "/";
-        } else {
-        }
+        } 
     }).catch(error => {
        console.log()
     })

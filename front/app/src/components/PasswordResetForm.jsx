@@ -21,10 +21,7 @@ function PasswordResetForm(props) {
     ).then(response => {
         if (response.data.status === true) {
           window.location.pathname = "/";
-        } else {
         }
-    }).catch(error => {
-       console.log()
     })
   }
   return (

@@ -17,7 +17,6 @@ class PasswordResetsController < ApplicationController
       user = User.find_by(email: email)
       if user.update(user_params)
          login(user)
-         puts session[:user_id]
          render json: { status: true } 
       else
          render json: { status: false }

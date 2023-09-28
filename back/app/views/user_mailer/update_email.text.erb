@@ -1,0 +1,6 @@
+メールアドレス変更について
+
+<%= @user.name %>様でよろしければ下記のリンクから変更を確定させてください.
+
+<%= link_to "変更を確定する", edit_update_email_url(@user.email_token,
+                                                    email: @update_email, id: @user.id) %>
