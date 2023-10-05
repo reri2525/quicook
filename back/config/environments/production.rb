@@ -7,6 +7,7 @@ Rails.application.configure do
   config.active_storage.service = :local
   config.cache_classes = true
   config.force_ssl = false
+  config.action_dispatch.cookies_same_site_protection = nil
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers

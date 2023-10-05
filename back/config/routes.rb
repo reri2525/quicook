@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts 
   resources :account_activations, only: [:edit]
-  resources :password_resets, only: [:edit, :update]
+  resources :password_resets, only: [:create, :edit, :update]
   resources :update_emails, only: [:edit, :update]
   resources :hearts, only: [:create, :destroy]
   resources :bookmarks, only: [:create, :destroy]
