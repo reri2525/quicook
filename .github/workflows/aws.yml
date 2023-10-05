@@ -27,10 +27,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Tree Check
-        run: |
-          pwd
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
         with:
@@ -55,9 +51,7 @@ jobs:
         run: |
           rm -rf ./back/config/credentials.yml.enc
           docker-compose run -e EDITOR=vim back bin/rails credentials:edit
-          cat ./back/config/credentials.yml.enc
           sudo chmod -R 777 ./back/config/master.key
-          cat ./back/config/master.key
 
       - name: Yarn Add
         run: |

@@ -21,7 +21,6 @@
                     "value": "production"
                 }
             ],
-            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
             "secrets": [
@@ -30,7 +29,6 @@
                     "valueFrom": "rails_api"
                 }
             ],
-            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -50,7 +48,7 @@
         "FARGATE"
     ],
     "cpu": "4096",
-    "memory": "24576",
+    "memory": "12288",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
