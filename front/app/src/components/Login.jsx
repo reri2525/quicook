@@ -47,6 +47,9 @@ function Logmodal(props) {
       if (response.data.status === "true" ) {
         CloseModal()
         props.setFlashMessage("メールが送信されました。")
+        setTimeout(() => {
+          props.setFlashMessage(null);
+        }, 5000);
       } else {
         setErrors_m_sent(response.data.errors)
       }

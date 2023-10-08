@@ -42,6 +42,9 @@ function Newmodal(props) {
         if (response.data.status === 'created') {
             CloseModal()
             props.setFlashMessage("メールを確認してアカウントを有効にしてください。")
+            setTimeout(() => {
+              props.setFlashMessage(null);
+            }, 5000);
         }
     }).catch(error => {
         console.log("registration error", error)

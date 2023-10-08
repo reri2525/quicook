@@ -5,6 +5,7 @@
 <h1>使用技術等</h1>
 <ul>
  <li>Ruby on Rails(バックエンド)</li>
+ <li>Rspec</li>
  <li>React(フロントエンド)</li>
  <li>AWS(インフラ)</li>
  <li>Docker</li>
@@ -17,6 +18,7 @@
  <li>ReactとRailsを使用してSPAで構成されている。</li>
  <li>UIにモーダルなどを使用している。</li>
  <li>ECS/Fargateでコンテナを使用してサーバーレスでコンテナを実行している。</li>
+ <li>
 </ul>
 <h1>クラウドアーキテクチャ</h1>
 <img src="back/public/images/クラウドアーキテクチャ.jpg" alt="cloud">
@@ -31,6 +33,7 @@
  <li>ブックマーク、いいね機能</li>
  <li>ページネーション機能</li>
  <li>投稿の人気順表示</li>
+ <li>パスワードの再設定機能</li>
 </ul>
 
 
@@ -38,12 +41,12 @@
 
 
 環境構築手順:<br />
-1: git clone git@github.com:reri2525/Quicook_private.git<br />
-2: docker-compose build<br />
-3: docker-compose run back bundle install<br />
-4: docker-compose run front sh -c "cd app && yarn add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"<br />
-5: docker-compose run back rails db:create<br />
-6: docker-compose run back rails db:create RAILS_ENV=test<br />
-7: docker-compose run back rails db:migrate<br />
+1: git clone git@github.com:reri2525/Quicook.gitでローカルにクローン<br />
+2: docker-compose buildでimage構築<br />
+3: docker-compose run back bundle installでgemのインストール<br />
+4: docker-compose run front sh -c "cd app && yarn add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"でライブラリインストール<br />
+5: docker-compose run back rails db:createでデータベース作成<br />
+6: docker-compose run back rails db:create RAILS_ENV=testでテスト環境のデータベース作成<br />
+7: docker-compose run back rails db:migrateでマイグレーション<br />
 8: touch front/app/src/config.js<br />
-9: docker-compose up<br />
+9: docker-compose upでコンテナを起動<br />

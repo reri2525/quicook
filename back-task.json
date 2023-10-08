@@ -17,12 +17,16 @@
             "essential": true,
             "environment": [
                 {
-                    "name": "DB_USERNAME",
-                    "value": "admin"
+                    "name": "FRONT_URL",
+                    "value": "https://quicook.online"
                 },
                 {
                     "name": "RAILS_ENV",
                     "value": "production"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "value": "admin"
                 },
                 {
                     "name": "TZ",

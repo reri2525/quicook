@@ -113,16 +113,20 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
-  credentials = Aws::Credentials.new(ENV['S3_ACCESS_KEY'], ENV['S3_SECRET_ACCESS_KEY'])
-  Aws::Rails.add_action_mailer_delivery_method(
-    :ses, 
-    credentials:, # Ruby 3.1の文法
-    region: 'us-east-1'
-  )
-
-  config.action_mailer.default_url_options = { host: 'apiquicook.net' }
-  config.action_mailer.delivery_method = :ses
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.perform_caching = false
   config.action_mailer.raise_delivery_errors = true
+  
+  config.action_mailer.default_url_options = { host: 'apiquicook.net', protocol: 'http' }
+
+  config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                  587,
+    domain:               'gmail.com',
+    user_name:            'yuuki08311221@gmail.com',
+    password:             'cwcccvyqpohsiyse',
+    authentication:       'plain',
+    enable_starttls_auto:  true
+   }
 end
