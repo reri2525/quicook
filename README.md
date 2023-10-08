@@ -18,7 +18,6 @@
  <li>ReactとRailsを使用してSPAで構成されている。</li>
  <li>UIにモーダルなどを使用している。</li>
  <li>ECS/Fargateでコンテナを使用してサーバーレスでコンテナを実行している。</li>
- <li>
 </ul>
 <h1>クラウドアーキテクチャ</h1>
 <img src="back/public/images/クラウドアーキテクチャ.jpg" alt="cloud">
