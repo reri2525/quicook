@@ -20,16 +20,12 @@ function Main(props) {
   const [modal, setModal] = useState(false);
   const [flashMessage, setFlashMessage] = useState(null)
 
-  const CloseFlash = () => {
-    setFlashMessage(null)
-  }
     return (
       <Fragment>
       <body>
        { flashMessage && 
          <div>
            <h2 className='flash_message'>{flashMessage}</h2> 
-           <div className='close_falsh' onClick={() => CloseFlash()}><a><CloseIcon /></a></div>
          </div>
        }
        <Header loggedInStatus={props.loggedInStatus} handleLogout={props.handleLogout} 

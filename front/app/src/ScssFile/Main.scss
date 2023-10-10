@@ -30,15 +30,3 @@
   padding: 5px 0px;
   margin-top: 7px;
 }
-
-.close_flash {
-  z-index: 100;
-  position: fixed;
-  top: 0px;
-  left: 1340px;
-  border-radius: 18px;
-  padding: 0px 1px;
-  &:hover {
-    background-color: rgba(187, 187, 187, 0.8);
-  }
-}

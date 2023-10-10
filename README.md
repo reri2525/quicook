@@ -24,6 +24,8 @@
 <h2>機能一覧</h2>
 <ul>
  <li>ユーザー登録・編集・削除</li>
+ <li>プロフィール閲覧機能</li>
+ <li>フォロー、フォロワー閲覧機能<li>
  <li>ログイン機能</li>
  <li>フォロー機能</li>
  <li>レシピ投稿、動画付きで投稿できる。</li>
@@ -39,13 +41,3 @@
 
 
 
-環境構築手順:<br />
-1: git clone git@github.com:reri2525/Quicook.gitでローカルにクローン<br />
-2: docker-compose buildでimage構築<br />
-3: docker-compose run back bundle installでgemのインストール<br />
-4: docker-compose run front sh -c "cd app && yarn add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"でライブラリインストール<br />
-5: docker-compose run back rails db:createでデータベース作成<br />
-6: docker-compose run back rails db:create RAILS_ENV=testでテスト環境のデータベース作成<br />
-7: docker-compose run back rails db:migrateでマイグレーション<br />
-8: touch front/app/src/config.js<br />
-9: docker-compose upでコンテナを起動<br />
