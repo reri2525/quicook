@@ -124,16 +124,6 @@ function Home(props) {
       }
     });
   }
-  const handleMouseEnter = (event) => {
-    event.target.play();
-    event.target.controls = true;
-  };
-
-  const handleMouseLeave = (event) => {
-    event.target.pause();
-    event.target.currentTime = 0;
-    event.target.controls = false;
-  };
   return (
     <Fragment> 
       { postExist ? 

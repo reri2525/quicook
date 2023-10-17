@@ -25,16 +25,6 @@ User.create!(name:  "gest user",
     activated_at: Time.zone.now
     )
 
-User.create!(name:  "gest user",
-    avatar: File.open(Rails.root.join('public', 'images', '可愛い女の子1.jpeg')),
-    email: "yuuki08311221@gmail.com",
-    password:              "111111",
-    password_confirmation: "111111",
-    introduction: "ゲストユーザーです",
-    activated: true,
-    activated_at: Time.zone.now
-    )
-
 4.times do |m|
  5.times do |n|
   name = Faker::Japanese::Name.name[0, 10]
@@ -136,8 +126,9 @@ coments = [
   "自家製ポテト！",
   "パスタにオリーブオイルを掛けておくと麺がくっつきません。"
 ]
-60.times do
- 5.times do |n|
+
+60.times do 
+ 4.times do |n|
   user.posts.create!(title: titles[n], category: categories[n], image: files[n], 
                      thumbnail: files[n], content: contents[n], time: times[n], number_of_people: number_of_people[n],
                      material_1: material_1[n], material_2: material_2[n], material_3: material_3[n], 
@@ -152,8 +143,8 @@ end
 
  
 
-90.times do |m|
- 14.times do |n|
+240.times do |m|
+ 20.times do |n|
     Heart.create!(user_id:  n+1, post_id: m+1)
  end
 end
