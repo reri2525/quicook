@@ -1,7 +1,7 @@
 <h1>Quicook</h1>
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
+<h2>*現在はまだ公開しておりません!</h2>
 <img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1">
-<h2>現在はまだ公開しておりません!</h2>
 <p>🍔ゲストユーザーでのログインもご用意しております!</P>
 <h1>使用技術等</h1>
 <ul>
