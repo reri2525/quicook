@@ -4,7 +4,7 @@ RSpec.describe PostsController, type: :controller do
     describe "POST #create" do
       context "with valid attributes" do
         before(:each) do
-          @user = User.create(name: "Test User1", email: "testuseru@example.com", password: "password")
+          @user = User.create(name: "Test User1", email: "testuser@example.com", password: "password")
         end
 
         it "creates a new post" do
