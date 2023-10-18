@@ -48,10 +48,12 @@ image_rice = Rails.root.join('public', 'images', '悪魔のおにぎり.jpg')
 image_chicken = Rails.root.join('public', 'images', '唐揚げくん.jpg')
 image_vegetable = Rails.root.join('public', 'images', 'サラダ.webp')
 image_spaghetti = Rails.root.join('public', 'images', 'スパゲッティ.jpg')
+image_potate = Rails.root.join('public', 'images', 'ポテト.jpg')
 file1 = File.open(image_beef)
 file2 = File.open(image_rice)
 file3 = File.open(image_chicken)
-file4 = File.open(image_spaghetti)
+file4 = File.open(image_potate)
+file5 = File.open(image_spaghetti)
 users = User.order(:created_at).take(4)
 user = User.find(1)
 titles = [
@@ -65,12 +67,12 @@ files = [
   file1,
   file2,
   file3,
-  file3,
-  file4
+  file4,
+  file5
 ]
 categories = [
   "お肉／牛肉",
-  "魚介／干物",
+  "ご飯もの／おにぎり"
   "お肉／鶏肉",
   "なし",
   "麺／パスタ"
@@ -128,7 +130,7 @@ coments = [
 ]
 
 60.times do 
- 4.times do |n|
+ 5.times do |n|
   user.posts.create!(title: titles[n], category: categories[n], image: files[n], 
                      thumbnail: files[n], content: contents[n], time: times[n], number_of_people: number_of_people[n],
                      material_1: material_1[n], material_2: material_2[n], material_3: material_3[n], 
@@ -141,9 +143,40 @@ coments = [
  end
 end
 
+user.posts.create!(
+  title: titles[4],
+  category: categories[4],
+  image: files[4], 
+  thumbnail: files[4], 
+  content: contents[4], 
+  time: times[4], 
+  number_of_people: number_of_people[4],
+  material_1: material_1[4], 
+  material_2: material_2[4], 
+  material_3: material_3[4], 
+  material_4: material_4[4], 
+  material_5: material_5[4], 
+  material_6: material_6[4], 
+  material_7: material_7[4], 
+  material_8: material_8[4], 
+  material_9: material_9[4],
+  amount_1: amount_1[4], 
+  amount_2: amount_2[4], 
+  amount_3: amount_3[4],
+  amount_4: amount_4[4], 
+  amount_5: amount_5[4], 
+  amount_6: amount_6[4],
+  amount_7: amount_7[4], 
+  amount_8: amount_8[4], 
+  cost: costs[4], 
+  process: process[4], 
+  coment: coments[4]
+)
+
+
  
 
-240.times do |m|
+300.times do |m|
  20.times do |n|
     Heart.create!(user_id:  n+1, post_id: m+1)
  end
