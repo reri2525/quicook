@@ -49,11 +49,20 @@ image_chicken = Rails.root.join('public', 'images', '唐揚げくん.jpg')
 image_vegetable = Rails.root.join('public', 'images', 'サラダ.webp')
 image_spaghetti = Rails.root.join('public', 'images', 'スパゲッティ.jpg')
 image_potate = Rails.root.join('public', 'images', 'ポテト.jpg')
-file1 = File.open(image_beef)
-file2 = File.open(image_rice)
-file3 = File.open(image_chicken)
-file4 = File.open(image_potate)
-file5 = File.open(image_spaghetti)
+image_sausage = Rails.root.join('public', 'images', 'ウインナー丼.jpg')
+video1 = Rails.root.join('public', 'videos', 'ウインナー丼.mp4')
+thumbnail_file1 = File.open(image_beef)
+contents_file1 = File.open(image_beef)
+thumbnail_file2 = File.open(image_rice)
+contents_file2 = File.open(image_rice)
+thumbnail_file3 = File.open(image_chicken)
+contents_file3 = File.open(image_chicken)
+thumbnail_file4 = File.open(image_potate)
+contents_file4 = File.open(image_potate)
+thumbnail_file5 = File.open(image_spaghetti)
+contents_file5 = File.open(image_spaghetti)
+thumbnail_file6 = File.open(image_sausage)
+contents_file6 = File.open(video1)
 users = User.order(:created_at).take(4)
 user = User.find(1)
 titles = [
@@ -61,48 +70,61 @@ titles = [
   "ローソンの悪魔のおにぎり再現!",
   "ローソン風唐揚げ",
   "フライドポテト",  
-  "ミートソースパスタ"
+  "ミートソースパスタ",
+  "卵かけウインナー丼"
 ]
-files = [
-  file1,
-  file2,
-  file3,
-  file4,
-  file5
+thumbnail_files = [
+  thumbnail_file1,
+  thumbnail_file2,
+  thumbnail_file3,
+  thumbnail_file4,
+  thumbnail_file5,
+  thumbnail_file6
+]
+contents_files = [
+  contents_file1,
+  contents_file2,
+  contents_file3,
+  contents_file4,
+  contents_file5,
+  contents_file6
 ]
 categories = [
   "お肉／牛肉",
   "ご飯もの／おにぎり",
   "お肉／鶏肉",
   "なし",
-  "麺／パスタ"
+  "麺／パスタ",
+  "お肉／豚肉"
 ]
 contents = [
   "スタミナ料理です。",
   "ローソン100の悪魔の具を再現しました。",
   "唐揚げくん作った!",
   "フライドポテト作ってみました。",
-  "作り置きしておくとすぐできます。"
+  "作り置きしておくとすぐできます。",
+  "簡単ウインナー丼!"
 ]
-times = ["約7", 3, 5, 5]
-costs = ["約1000", "約500", "約500", "約500"]
+times = ["約7", 3, 5, 5, 3, 3]
+costs = ["約1000", "約500", "約500", "約500", "約500", "約500"]
 number_of_people = [
   "1~2人分",
   "1個",
   "25個",
   "じゃがいも4個分",
-  "2人前"
+  "2人前",
+  "一人分"
 ]
-material_1 = [ "玉葱2Lサイズ", "ご飯", "鶏胸肉", "サラダ油", "湯" ]
-amount_1 = [ "1/4個", "100g", "1枚（300g程", "フライパンに3〜4㎝", "1リットル"]
-material_2 = [ "牛バラ薄切り肉", '塩', "塩麹", "★じゃがいも(くし切り・8等分)", "塩" ]
-amount_2 = [ "200g", "小さじ1/4", "20g", "4個", "小さじ2"]
-material_3 = [ "○醤油", "海苔", "醤油", "塩", "パスタ"]
-amount_3 = [ "大さじ1", "一枚", "小さじ1", "少々", "200〜250g"]
-material_4 = [ "○みりん", "天かす", "生姜", "オリーブオイル" ]
-amount_4 = [ "大さじ1", "大さじ1", "1かけ", "大さじ1" ]
-material_5 = [ "○酒", "麺つゆ(3倍濃縮)", "卵" ]
-amount_5 = [ "大さじ1", "小さじ1", "1個" ]
+material_1 = [ "玉葱2Lサイズ", "ご飯", "鶏胸肉", "サラダ油", "湯", "ご飯" ]
+amount_1 = [ "1/4個", "100g", "1枚（300g程", "フライパンに3〜4㎝", "1リットル", "1人前"]
+material_2 = [ "牛バラ薄切り肉", '塩', "塩麹", "★じゃがいも(くし切り・8等分)", "塩", "ウインナー" ]
+amount_2 = [ "200g", "小さじ1/4", "20g", "4個", "小さじ2", "1袋"]
+material_3 = [ "○醤油", "海苔", "醤油", "塩", "パスタ", "バター"]
+amount_3 = [ "大さじ1", "一枚", "小さじ1", "少々", "200〜250g", "少量"]
+material_4 = [ "○みりん", "天かす", "生姜", "オリーブオイル", "", "醤油" ]
+amount_4 = [ "大さじ1", "大さじ1", "1かけ", "大さじ1", "", "適量" ]
+material_5 = [ "○酒", "麺つゆ(3倍濃縮)", "卵", "", "", "卵" ]
+amount_5 = [ "大さじ1", "小さじ1", "1個", "", "", "1個" ]
 material_6 = [ "○コチュジャン", "アオサ", "薄力粉" ]
 amount_6 = [ "小さじ1/2", "小さじ1/4", "大さじ1" ]
 material_7 = [ "○砂糖", "鰹節、紅生姜、胡麻油" ]
@@ -119,20 +141,22 @@ process = [
   "1,天かす、麺つゆ、アオサ、鰹節、紅生姜、胡麻油を合わせてよく混ぜる。ご飯に塩をよく混ぜて1と詰めて、握って、海苔を巻く。",
   "1,鶏胸肉を1センチ幅程度に切り、ナイロン袋に入れて塩麹を20g入れ軽くもんで冷蔵庫で1時間～1晩寝かす。2,フードプロセッサーに肉を入れミンチにする。3,卵と薄力粉、醤油、生姜を追加で入れてさらに回す。4,油を180度で予熱して、スプーン2つを油に浸してからからあげ君の大きさ程度に丸めて油に落とす。5,スプーンは都度油につっこんでくださいね！きれいにまとまります！両面きれいに焼色がついたら完成です！。",
   "1,(★)じゃがいもの皮を剥きくし切りにする。キッチンペーパーで水気をしっかり拭き取る。2,サラダ油で揚げる。2,両面こんがりして来たら出来上がり。キッチンペーパーで油を切る。",
-  "1,湯1ℓに塩を入れ、パスタを茹でる。2,茹で上がったら、パスタをザルにあけ、オリーブオイルを混ぜる。3,皿に盛り、温めたミートソースを掛けて完成。"
+  "1,湯1ℓに塩を入れ、パスタを茹でる。2,茹で上がったら、パスタをザルにあけ、オリーブオイルを混ぜる。3,皿に盛り、温めたミートソースを掛けて完成。",
+  "1,バターをフライパンに挽いて切ったソーセージを入れる\n2,"
 ]
 coments = [
   "肉に火を通し過ぎないように、7割程度火が通った時点でタレを投入する。",
   "「イカ入り天かす」使用。ヤマサ「昆布つゆ」使用。かつおと昆布のめんつゆで再現性アップ。",
   "フードプロセッサーで手も汚れず簡単にできます！",
   "自家製ポテト！",
-  "パスタにオリーブオイルを掛けておくと麺がくっつきません。"
+  "パスタにオリーブオイルを掛けておくと麺がくっつきません。",
+  "本当にすぐにできます。"
 ]
 
-60.times do 
- 5.times do |n|
-  user.posts.create!(title: titles[n], category: categories[n], image: files[n], 
-                     thumbnail: files[n], content: contents[n], time: times[n], number_of_people: number_of_people[n],
+3.times do 
+ 6.times do |n|
+  user.posts.create!(title: titles[n], category: categories[n], image: contents_files[n], 
+                     thumbnail: thumbnail_files[n], content: contents[n], time: times[n], number_of_people: number_of_people[n],
                      material_1: material_1[n], material_2: material_2[n], material_3: material_3[n], 
                      material_4: material_4[n], material_5: material_5[n], material_6: material_6[n], 
                      material_7: material_7[n], material_8: material_8[n], material_9: material_9[n],
@@ -146,8 +170,8 @@ end
 user.posts.create!(
   title: titles[4],
   category: categories[4],
-  image: files[4], 
-  thumbnail: files[4], 
+  image: contents_files[4], 
+  thumbnail: thumbnail_files[4], 
   content: contents[4], 
   time: times[4], 
   number_of_people: number_of_people[4],
@@ -176,7 +200,7 @@ user.posts.create!(
 
  
 
-300.times do |m|
+18.times do |m|
  20.times do |n|
     Heart.create!(user_id:  n+1, post_id: m+1)
  end

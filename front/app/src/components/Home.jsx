@@ -194,7 +194,7 @@ function Home(props) {
       : <></> }
       { postall.length === 0 && postExist ? 
                <div className='post_skeleton_container'>
-                 {[...Array(20).keys()].map(i =>
+                 {[...Array(6).keys()].map(i =>
                     <div className='post_skeleton'></div>
                  )}
                </div> :

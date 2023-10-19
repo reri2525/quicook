@@ -7,8 +7,6 @@ import Footer from './Footer';
 import Logmodal from './Login';
 import Newmodal from './New';
 import PromptingAccountCreation from './PromptingAccountCreation';
-import CloseIcon from '@mui/icons-material/Close';
-import { getBottomNavigationUtilityClass } from '@mui/material';
 function Main(props) {
   const promptingAccountCreation = props.promptingAccountCreation
   const setPromptingAccountCreation = props.setPromptingAccountCreation
