@@ -7,7 +7,7 @@
 <h2>3</h2>
 <img src="back/public/images/サムネ2.png" alt="UNADJUSTEDNONRAW_thumb_1">
 <h2>4</h2>
-<video src="back/public/images/サムネ3.png" alt="UNADJUSTEDNONRAW_thumb_1">
+<img src="back/public/images/サムネ3.png" alt="UNADJUSTEDNONRAW_thumb_1">
 <p>*現在はまだ公開しておりません!</p>
 <h1>使用技術等</h1>
 <ul>
