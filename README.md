@@ -1,6 +1,6 @@
 <h1>Quicook</h1>
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
-(https://github.com/reri2525/Quicook/assets/110535369/6ba8d8db-2c83-4272-860b-b5c5e4a1f8cc)
+[screen-recording (1).webm](https://github.com/reri2525/Quicook/assets/110535369/38e0da8d-1144-41e2-911d-a9f0c27d0f8e)
 <p>*現在はまだ公開しておりません!</p>
 <h1>使用技術等</h1>
 <ul>
