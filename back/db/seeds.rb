@@ -142,7 +142,7 @@ process = [
   "1,鶏胸肉を1センチ幅程度に切り、ナイロン袋に入れて塩麹を20g入れ軽くもんで冷蔵庫で1時間～1晩寝かす。2,フードプロセッサーに肉を入れミンチにする。3,卵と薄力粉、醤油、生姜を追加で入れてさらに回す。4,油を180度で予熱して、スプーン2つを油に浸してからからあげ君の大きさ程度に丸めて油に落とす。5,スプーンは都度油につっこんでくださいね！きれいにまとまります！両面きれいに焼色がついたら完成です！。",
   "1,(★)じゃがいもの皮を剥きくし切りにする。キッチンペーパーで水気をしっかり拭き取る。2,サラダ油で揚げる。2,両面こんがりして来たら出来上がり。キッチンペーパーで油を切る。",
   "1,湯1ℓに塩を入れ、パスタを茹でる。2,茹で上がったら、パスタをザルにあけ、オリーブオイルを混ぜる。3,皿に盛り、温めたミートソースを掛けて完成。",
-  "1,バターをフライパンに挽いて切ったソーセージを入れる\n2,"
+  "バターをフライパンに挽いて切ったソーセージを入れと醤油を入れて炒める,ご飯に盛り付けて生卵をかけたら完成!"
 ]
 coments = [
   "肉に火を通し過ぎないように、7割程度火が通った時点でタレを投入する。",
@@ -150,10 +150,10 @@ coments = [
   "フードプロセッサーで手も汚れず簡単にできます！",
   "自家製ポテト！",
   "パスタにオリーブオイルを掛けておくと麺がくっつきません。",
-  "本当にすぐにできます。"
+  "動画の撮り方下手ですみませんw"
 ]
 
-3.times do 
+18.times do 
  6.times do |n|
   user.posts.create!(title: titles[n], category: categories[n], image: contents_files[n], 
                      thumbnail: thumbnail_files[n], content: contents[n], time: times[n], number_of_people: number_of_people[n],
@@ -167,43 +167,15 @@ coments = [
  end
 end
 
-user.posts.create!(
-  title: titles[4],
-  category: categories[4],
-  image: contents_files[4], 
-  thumbnail: thumbnail_files[4], 
-  content: contents[4], 
-  time: times[4], 
-  number_of_people: number_of_people[4],
-  material_1: material_1[4], 
-  material_2: material_2[4], 
-  material_3: material_3[4], 
-  material_4: material_4[4], 
-  material_5: material_5[4], 
-  material_6: material_6[4], 
-  material_7: material_7[4], 
-  material_8: material_8[4], 
-  material_9: material_9[4],
-  amount_1: amount_1[4], 
-  amount_2: amount_2[4], 
-  amount_3: amount_3[4],
-  amount_4: amount_4[4], 
-  amount_5: amount_5[4], 
-  amount_6: amount_6[4],
-  amount_7: amount_7[4], 
-  amount_8: amount_8[4], 
-  cost: costs[4], 
-  process: process[4], 
-  coment: coments[4]
-)
-
-
- 
-
-18.times do |m|
- 20.times do |n|
+107.times do |m|
+ 10.times do |n|
     Heart.create!(user_id:  n+1, post_id: m+1)
  end
+end
+
+ 
+18.times do |n|
+  Heart.create!(user_id:  n+1, post_id: 108)
 end
 
 
