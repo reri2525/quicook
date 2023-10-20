@@ -3,7 +3,6 @@
 <img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1">
 <h2>デモ動画</h2>
 (https://github.com/reri2525/Quicook/assets/110535369/38e0da8d-1144-41e2-911d-a9f0c27d0f8e)
-<p>同じレシピ沢山ありますけど許してくださいw</p>
 <p>*現在はまだ公開しておりません!</p>
 <h1>使用技術等</h1>
 <ul>
