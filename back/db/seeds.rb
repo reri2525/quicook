@@ -153,9 +153,9 @@ coments = [
   "動画の撮り方下手ですみませんw"
 ]
 
-18.times do 
- 6.times do |n|
-  user.posts.create!(title: titles[n], category: categories[n], image: contents_files[n], 
+
+6.times do |n|
+ user.posts.create!(title: titles[n], category: categories[n], image: contents_files[n], 
                      thumbnail: thumbnail_files[n], content: contents[n], time: times[n], number_of_people: number_of_people[n],
                      material_1: material_1[n], material_2: material_2[n], material_3: material_3[n], 
                      material_4: material_4[n], material_5: material_5[n], material_6: material_6[n], 
@@ -164,19 +164,19 @@ coments = [
                      amount_4: amount_4[n], amount_5: amount_5[n], amount_6: amount_6[n],
                      amount_7: amount_7[n], amount_8: amount_8[n], 
                      cost: costs[n], process: process[n], coment: coments[n])
- end
 end
 
-107.times do |m|
- 10.times do |n|
-    Heart.create!(user_id:  n+1, post_id: m+1)
- end
+5.times do |m|
+  10.times do |n|
+     Heart.create!(user_id:  n+1, post_id: m+1)
+  end
 end
 
  
 18.times do |n|
-  Heart.create!(user_id:  n+1, post_id: 108)
+  Heart.create!(user_id:  n+1, post_id: 6)
 end
+
 
 
 users = User.all
