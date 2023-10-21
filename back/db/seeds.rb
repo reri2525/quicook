@@ -47,10 +47,11 @@ image_beef = Rails.root.join('public', 'images', '牛丼.jpg')
 image_rice = Rails.root.join('public', 'images', '悪魔のおにぎり.jpg')
 image_chicken = Rails.root.join('public', 'images', '唐揚げくん.jpg')
 image_vegetable = Rails.root.join('public', 'images', 'サラダ.webp')
-image_spaghetti = Rails.root.join('public', 'images', 'スパゲッティ.jpg')
-image_potate = Rails.root.join('public', 'images', 'ポテト.jpg')
+image_spaghetti = Rails.root.join('public', 'images', 'ミートソース.jpeg')
+image_potate = Rails.root.join('public', 'images', 'フライドポテト.jpeg')
 image_sausage = Rails.root.join('public', 'images', 'ウインナー丼.jpg')
-video1 = Rails.root.join('public', 'videos', 'ウインナー丼.mp4')
+video_sausage = Rails.root.join('public', 'videos', 'ウインナー丼.mp4')
+image_fish = Rails.root.join('public', 'images', '鯵の干物.jpeg')
 thumbnail_file1 = File.open(image_beef)
 contents_file1 = File.open(image_beef)
 thumbnail_file2 = File.open(image_rice)
@@ -62,7 +63,12 @@ contents_file4 = File.open(image_potate)
 thumbnail_file5 = File.open(image_spaghetti)
 contents_file5 = File.open(image_spaghetti)
 thumbnail_file6 = File.open(image_sausage)
-contents_file6 = File.open(video1)
+contents_file6 = File.open(video_sausage)
+thumbnail_file7 = File.open(image_fish)
+contents_file7 = File.open(image_fish)
+thumbnail_file8 = File.open(image_vegetable)
+contents_file8 = File.open(image_vegetable)
+
 users = User.order(:created_at).take(4)
 user = User.find(1)
 titles = [
@@ -71,7 +77,9 @@ titles = [
   "ローソン風唐揚げ",
   "フライドポテト",  
   "ミートソースパスタ",
-  "卵かけウインナー丼"
+  "卵かけウインナー丼",
+  "美味しい鯵の干物!",
+  "野菜サラダ"
 ]
 thumbnail_files = [
   thumbnail_file1,
@@ -79,7 +87,9 @@ thumbnail_files = [
   thumbnail_file3,
   thumbnail_file4,
   thumbnail_file5,
-  thumbnail_file6
+  thumbnail_file6,
+  thumbnail_file7,
+  thumbnail_file8
 ]
 contents_files = [
   contents_file1,
@@ -87,7 +97,9 @@ contents_files = [
   contents_file3,
   contents_file4,
   contents_file5,
-  contents_file6
+  contents_file6,
+  contents_file7,
+  contents_file8
 ]
 categories = [
   "お肉／牛肉",
@@ -95,7 +107,9 @@ categories = [
   "お肉／鶏肉",
   "なし",
   "麺／パスタ",
-  "お肉／豚肉"
+  "お肉／豚肉",
+  "なし",
+  "野菜／サラダ"
 ]
 contents = [
   "スタミナ料理です。",
@@ -154,7 +168,7 @@ coments = [
 ]
 
 
-6.times do |n|
+8.times do |n|
  user.posts.create!(title: titles[n], category: categories[n], image: contents_files[n], 
                      thumbnail: thumbnail_files[n], content: contents[n], time: times[n], number_of_people: number_of_people[n],
                      material_1: material_1[n], material_2: material_2[n], material_3: material_3[n], 
@@ -166,18 +180,33 @@ coments = [
                      cost: costs[n], process: process[n], coment: coments[n])
 end
 
-5.times do |m|
+2.times do |m|
   10.times do |n|
      Heart.create!(user_id:  n+1, post_id: m+1)
   end
 end
 
- 
-18.times do |n|
-  Heart.create!(user_id:  n+1, post_id: 6)
+5.times do |n|
+  Heart.create!(user_id:  n+1, post_id: 3)
 end
 
+2.times do |m|
+  10.times do |n|
+     Heart.create!(user_id:  n+1, post_id: m+4)
+  end
+end
 
+18.times do |n|
+  Heart.create!(user_id: n+1, post_id: 6)
+end
+
+15.times do |n|
+  Heart.create!(user_id: n+1, post_id: 7)
+end
+
+13.times do |n|
+  Heart.create!(user_id: n+1, post_id: 8)
+end
 
 users = User.all
 user  = users.first
