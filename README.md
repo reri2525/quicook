@@ -2,6 +2,7 @@
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
 <img src="back/public/images/app.png" alt="UNADJUSTEDNONRAW_thumb_1">
 <h2>デモ動画</h2>
+https://photos.app.goo.gl/uf3gMtxiipMSi4bG8
 (https://github.com/reri2525/Quicook/assets/110535369/2e318ed2-6f3b-447c-ae9d-bb6dd800f45b)
 <p>*現在はまだ公開しておりません!</p>
 <h1>使用技術等</h1>
