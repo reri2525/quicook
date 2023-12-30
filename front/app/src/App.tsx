@@ -20,11 +20,11 @@ import{
   Route,
 } from "react-router-dom";
 import { url } from "./config";
-function App(props) {
+function App() {
   const [loggedInStatus, setLoggedInStatus] = useState({})
   const [user, setUser] = useState({})
   const [promptingAccountCreation, setPromptingAccountCreation] = useState(false)
-  const handleLogin = (data) => {
+  const handleLogin = () => {
     window.location.pathname = "/";
   }
   const handleLogout = () => {
@@ -58,7 +58,7 @@ function App(props) {
     checkLoginStatus()
   }, [])
   
-  const bookmarkCreate = (post) =>{
+  const bookmarkCreate = (post: any) =>{
    if (loggedInStatus === "ログインなう") {
     axios.post(`${url}/bookmarks`,  { post_id: post.id }, { withCredentials: true })
     .then(response => {
@@ -73,7 +73,7 @@ function App(props) {
     setPromptingAccountCreation(true)
    }
   }
-  const bookmarkDestroy = (post) =>{
+  const bookmarkDestroy = (post: any) =>{
     axios.delete(`${url}/bookmarks/${post.id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -85,7 +85,7 @@ function App(props) {
    })
   }
 
-  const heartCreate = (post) =>{
+  const heartCreate = (post: any) =>{
    if (loggedInStatus === "ログインなう") {
     axios.post(`${url}/hearts`,  { post_id: post.id },  { withCredentials: true })
     .then(response => {
@@ -100,7 +100,7 @@ function App(props) {
     setPromptingAccountCreation(true)
    }
   }
-  const heartDestroy = (post) =>{
+  const heartDestroy = (post: any) =>{
     axios.delete(`${url}/hearts/${post.id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -111,7 +111,7 @@ function App(props) {
       console.log("いいね削除エラー", error)
    })
   }
-  const relationshipCreate = (id) => {
+  const relationshipCreate = (id: any) => {
    if (loggedInStatus === "ログインなう") {
     axios.post(`${url}/relationships`,  { user_id: id },  { withCredentials: true })
     .then(response => {
@@ -126,7 +126,7 @@ function App(props) {
     setPromptingAccountCreation(true)
    }
   }
-  const relationshipDestroy = (id) => {
+  const relationshipDestroy = (id: any) => {
     axios.delete(`${url}/relationships/${id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -140,17 +140,12 @@ function App(props) {
   return (
      <Router>
       <Switch>
-        <Route exact path={"/top"}
-             render={props => (
-              <Top { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                user={user} handleLogout={handleLogout}/>
-            )}
-          />  
-        <Route exact path={"/"}
-             render={props => (
-              props.history.push('/home/page/1')
-            )}
-          />  
+        <Route exact path="/"
+             render={({ history }) => {
+             history.push('/home/page/1');
+             return <Home to="/home/page/1" />;
+         }}
+        />
         <Route exact path={"/home/page/:id"}
              render={props => (
               <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}

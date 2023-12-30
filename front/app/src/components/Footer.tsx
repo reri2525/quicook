@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import '../ScssFile/Footer.scss'
-function Footer(props) {
+function Footer(props: any) {
    const ShowLogModal = () => {
     props.setLogModal(true)
    }

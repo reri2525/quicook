@@ -12,7 +12,8 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import WarnModal from './WarnModal'
 import { url } from "../config";
-function PostShow(props) {
+
+const PostShow = (props: any) => {
  const ref = useRef(null);
  const history = useHistory();
  const currentUser = props.user
@@ -23,19 +24,19 @@ function PostShow(props) {
  const heartCreate = props.heartCreate
  const heartDestroy = props.heartDestroy
  const loggedInStatus = props.loggedInStatus
- const [post, setPost] = useState([])
+ const [post, setPost] = useState<any>([])
  const [bookmarked, setBookmarked] = useState(false)
  const [hearted, setHearted] = useState(false)
  const [relationship, setRelationship] = useState(false)
  const [warnModal, setWarnModal] = useState(false)
  const [warnType, setWarnType] = useState("postDestroy")
- const { id } = useParams();
+ const { id } = useParams<{id: string}>();
 
  useEffect(() => {
   openPostShow(id)
  }, [id])
 
- const openPostShow = (id) => {
+ const openPostShow = (id: string) => {
    axios.get(`${url}/posts/${id}`, { withCredentials: true })
    .then(response => {
     if (response.data.post) {
@@ -51,7 +52,7 @@ function PostShow(props) {
     console.log("b")
    })
  }
- const handleBookmark = (post) => {
+ const handleBookmark = (post: any) => {
    console.log("ハンドルブックマーク")
    if (bookmarked) {
       setBookmarked(false)
@@ -63,7 +64,7 @@ function PostShow(props) {
       bookmarkCreate(post)
    }
  }
- const handleHeart = (post) => {
+ const handleHeart = (post: any) => {
    console.log("ハンドルハート")
    if (hearted) {
     setHearted(false)
@@ -77,7 +78,7 @@ function PostShow(props) {
     }
    }
  }
- const handleRelationship = (id) => {
+ const handleRelationship = (id: string) => {
    if (relationship) {
     setRelationship(false)
     relationshipDestroy(id)
@@ -88,78 +89,77 @@ function PostShow(props) {
     relationshipCreate(id)
    }
  }
- if (post.image) {
-  return (
-   <Fragment>
+ return (
+  <Fragment>
     <div className='back_display2'></div>
+    { post.user && (
     <div className='post_show_container' ref={ref}>
-     <div className='head'>
-       <div className='icon'>
-         <img src={post.user.avatar.url}></img>
-       </div>
-       <Link to={`/profile/${post.user.id}/page/1`}>{post.user.name}</Link>
-       { currentUser.id === post.user.id ?
-          <></> 
-           :
+      <div className='head'>
+        <div className='icon'>
+          <img src={post.user.avatar.url} alt="user-avatar"></img>
+        </div>
+        <Link to={`/profile/${post.user.id}/page/1`}>{post.user.name}</Link>
+        {currentUser.id === post.user.id ?
+          <></>
+          :
           relationship ?
-           <div className="unfollow" onClick={() => handleRelationship(post.user.id)}>フォロー中</div>
+            <div className="unfollow" onClick={() => handleRelationship(post.user.id)}>フォロー中</div>
             :
-           <div className="follow" onClick={() => handleRelationship(post.user.id)}>フォローする</div>
-       }
-     </div>
-     <div className='middle'>
+            <div className="follow" onClick={() => handleRelationship(post.user.id)}>フォローする</div>
+        }
+      </div>
+      <div className='middle'>
         <div className='post_display'>
           <div className='post_image_display'>
-            { post.file_type === "image" ? <img src={post.image.url} ></img> : <></> }
-            { post.file_type === "video" ? <video autoPlay controls src={post.image.url} volume="0.1"></video> : <></>}
+            {post.file_type === "image" ? <img src={post.image.url} alt="post-image"></img> : <></>}
+            {post.file_type === "video" ? <video autoPlay controls src={post.image.url}></video> : <></>}
           </div>
           <div className='favorite_container'>
-            <div className='bookmark' onClick={ () => handleBookmark(post)}>
-              { bookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon /> }
+            <div className='bookmark' onClick={() => handleBookmark(post)}>
+              {bookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
               <a>保存する</a>
             </div>
-            <div className='heart' onClick={ () => handleHeart(post)}>
-              { hearted ? <FavoriteIcon style={{ color: 'red' }}/> : <FavoriteBorder /> }
+            <div className='heart' onClick={() => handleHeart(post)}>
+              {hearted ? <FavoriteIcon style={{ color: 'red' }} /> : <FavoriteBorder />}
               <a>{post.hearts_count}</a>
             </div>
           </div>
         </div>
         <div className='post_detail'>
-         <div className='post_detail_content'>
+          <div className='post_detail_content'>
             <h2>{post.title}</h2>
-            <a>{post.content}</a><br/>
+            <a>{post.content}</a><br />
             <p>時間:　{post.time}分</p>
-            <p>費用:　{post.cost}円</p>  
+            <p>費用:　{post.cost}円</p>
             <h3>材料:</h3>
-            <p  style={{ fontSize: '16px', opacity: '0.8' }}>({post.number_of_people})</p>
+            <p style={{ fontSize: '16px', opacity: '0.8' }}>({post.number_of_people})</p>
             {[...Array(15)].map((_, i) => (
               post.materials[`material_${i + 1}`] && post.amounts[`amount_${i + 1}`] ?
-               <div key={`material_${i + 1}`} className="material">
-                 <a>{post.materials[`material_${i + 1}`]}</a>
-                 <a className='amount_detail'>{post.amounts[`amount_${i + 1}`]}</a>
-               </div>
-                : 
-              <></>
+                <div key={`material_${i + 1}`} className="material">
+                  <a>{post.materials[`material_${i + 1}`]}</a>
+                  <a className='amount_detail'>{post.amounts[`amount_${i + 1}`]}</a>
+                </div>
+                :
+                <></>
             ))}
             <h3>作り方:</h3>
             <a>{post.process}</a>
             <h3>ひとこと:</h3>
             <a>{post.coment}</a>
-         </div>
+          </div>
         </div>
-     </div>
-     { currentUser.id === post.user.id ?
-       <div className='delete' onClick={() => setWarnModal(true)}><DeleteIcon style={{ fontSize: '30px', cursor: 'pointer' }} /></div>
-         : 
-       <></> 
-     }
-     <div className='close' onClick={() => history.goBack()}><a><ArrowBackIcon /></a></div>
+      </div>
+      {currentUser.id === post.user.id ?
+        <div className='delete' onClick={() => setWarnModal(true)}><DeleteIcon style={{ fontSize: '30px', cursor: 'pointer' }} /></div>
+        :
+        <></>
+      }
+      <div className='close' onClick={() => history.goBack()}><a><ArrowBackIcon /></a></div>
     </div>
-    { warnModal ? <WarnModal setWarnModal={setWarnModal} warnType={warnType} post={post} 
-                             /> : <></> }
+     )}
+    {warnModal ? <WarnModal setWarnModal={setWarnModal} warnType={warnType} post={post} /> : <></>}
   </Fragment>
   )
  }
-}
 
 export default PostShow
