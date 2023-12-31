@@ -1,12 +1,14 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, useContext } from 'react';
+import { MainContext } from '../App';
 import '../ScssFile/Login.scss'
 import axios from 'axios'
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { url } from "../config";
 function Logmodal(props) {
+  const context = useContext(MainContext)
+  const loggedInStatus = context.loggedInStatus
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors_m, setErrors_m] = useState("")
@@ -69,7 +71,7 @@ function Logmodal(props) {
     setPasswordResetForm(true)
   }
 
-if (props.loggedInStatus === "未ログイン") {
+if (loggedInStatus === "未ログイン") {
 return ( 
   <>{props.logModal ? (
     <Fragment>

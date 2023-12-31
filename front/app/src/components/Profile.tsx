@@ -1,4 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect, useContext, Fragment } from 'react';
+import { MainContext } from '../App';
 import '../ScssFile/Profile.scss'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
@@ -16,10 +17,12 @@ import FollowingIndex from './FollowingIndex';
 import FollowersIndex from './FollowersIndex';
 import { url } from "../config";
 function Profile(props: any) {
-  const loggedInStatus = props.loggedInStatus
-  const relationshipCreate = props.relationshipCreate
-  const relationshipDestroy = props.relationshipDestroy
-  const setPromptingAccountCreation = props.setPromptingAccountCreation
+  const context = useContext(MainContext)
+  const loggedInStatus = context.loggedInStatus
+  const relationshipCreate = context.relationshipCreate
+  const relationshipDestroy = context.relationshipDestroy
+  const setPromptingAccountCreation = context.setPromptingAccountCreation
+  const currentUser = context.user
   const [user, setUser] = useState<any>([])
   const [relationship, setRelationship] = useState(false)
   const [follow, setFollow] = useState(0)
@@ -171,14 +174,14 @@ function Profile(props: any) {
   }
   return (
    <Fragment>
-    {user && user.avatar && (
+    {user && user.id && (
     <div className='profile_container'>
       <div className='icon'>
         <img className='image' src={user.avatar.url} alt="User Avatar" />
       </div>
       <div className='explanation'>
         <a className='user_name'>{user.name}</a>
-        { user.id === props.user.id ? 
+        { user.id === currentUser.id ? 
           <Link to="/edit" style={{ textDecoration: 'none', cursor: 'pointer' }}>
             <a className='edit_profile'>プロフィール編集</a>
           </Link> 

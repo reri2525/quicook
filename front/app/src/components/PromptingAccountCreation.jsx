@@ -1,8 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useContext} from 'react'
 import '../ScssFile/PromptingAccountCreation.scss'
 import CloseIcon from '@mui/icons-material/Close';
+import { MainContext } from '../App';
 function PromptingAccountCreation(props) {
-  const setPromptingAccountCreation = props.setPromptingAccountCreation
+  const context = useContext(MainContext)
+  const setPromptingAccountCreation = context.setPromptingAccountCreation
   const setLogModal = props.setLogModal
   const setNewModal = props.setNewModal
   const openLogModal = () => {

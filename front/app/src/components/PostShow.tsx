@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { Fragment, useEffect, useState, useRef, useContext } from 'react';
+import { MainContext } from '../App';
 import '../ScssFile/PostShow.scss'
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -14,16 +15,17 @@ import WarnModal from './WarnModal'
 import { url } from "../config";
 
 const PostShow = (props: any) => {
+ const context = useContext(MainContext)
  const ref = useRef(null);
  const history = useHistory();
- const currentUser = props.user
- const relationshipCreate = props.relationshipCreate
- const relationshipDestroy = props.relationshipDestroy
- const bookmarkCreate = props.bookmarkCreate
- const bookmarkDestroy = props.bookmarkDestroy
- const heartCreate = props.heartCreate
- const heartDestroy = props.heartDestroy
- const loggedInStatus = props.loggedInStatus
+ const currentUser = context.user
+ const relationshipCreate = context.relationshipCreate
+ const relationshipDestroy = context.relationshipDestroy
+ const bookmarkCreate = context.bookmarkCreate
+ const bookmarkDestroy = context.bookmarkDestroy
+ const heartCreate = context.heartCreate
+ const heartDestroy = context.heartDestroy
+ const loggedInStatus = context.loggedInStatus
  const [post, setPost] = useState<any>([])
  const [bookmarked, setBookmarked] = useState(false)
  const [hearted, setHearted] = useState(false)

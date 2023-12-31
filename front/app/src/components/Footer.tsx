@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import '../ScssFile/Footer.scss'
 function Footer(props: any) {
    const ShowLogModal = () => {

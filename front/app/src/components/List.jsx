@@ -1,17 +1,17 @@
-import React, { Fragment, useState } from 'react';
+import { Fragment, useState,useContext } from 'react';
+import { MainContext } from '../App';
 import '../ScssFile/List.scss'
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
-import Header from './Header';
 import { ListData1 } from './ListData';
 import { ListData2 } from './ListData';
 import { CategoryData } from './ListData';
 import { DishData } from './ListData';
-import { ListData3 } from './ListData';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
-function List(props) {
- const loggedInStatus = props.loggedInStatus
+function List() {
+ const context = useContext(MainContext)
+ const loggedInStatus = context.loggedInStatus
  const history = useHistory();
  const [categoryExpand, setCategoryExpand] = useState(false)
  const [dishExpand, setDishExpand] = useState([])

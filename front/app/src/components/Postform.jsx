@@ -16,7 +16,6 @@ function PostForm(props) {
   const titlelength = 30 - title.length
   const [category, setCategory] = useState("なし")
   const [categoryModal, setCategoryModal] = useState(false)
-  const [categoryExpand, setCategoryExpand] = useState(false)
   const [dishExpand, setDishExpand] = useState([])
   const [imageOrVideo, setImageOrVideo] = useState("")
   const [imageOrVideoPreview, setImageOrVideoPreview] = useState("")

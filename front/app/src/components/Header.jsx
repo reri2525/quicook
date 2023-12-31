@@ -1,11 +1,14 @@
-import React, { Fragment, useState } from 'react';
+import { useState, useContext } from 'react';
+import { MainContext } from '../App';
 import '../ScssFile/Header.scss'
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 function Header(props) {
- const user = props.user
+ const context = useContext(MainContext)
+ const loggedInStatus = context.loggedInStatus
+ const user = context.user
  const [searchQuery, setSearchQuery] = useState("")
  const history = useHistory();
  const ShowLogModal = () => {
@@ -19,7 +22,7 @@ function Header(props) {
  const ShowPostModal = () => {
   props.setPostModal(true)
  }
-if (props.loggedInStatus === '未ログイン') {
+if (loggedInStatus === '未ログイン') {
 return (
     <header>
         <Link to="/" className="main_title title_link">Quicook</Link>
@@ -38,7 +41,7 @@ return (
       
     </header>
     );
-} else if (props.loggedInStatus === 'ログインなう') {
+} else if (loggedInStatus === 'ログインなう') {
 return (
     <header className="header_login">
       <Link to="/home/page/1" className="main_title title_link">Quicook</Link>

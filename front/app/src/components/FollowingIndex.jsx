@@ -1,15 +1,17 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useContext } from 'react'
+import { MainContext } from '../App';
 import '../ScssFile/FollowingIndex.scss'
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 import { url } from "../config";
 function FollowingIndex(props) {
-  const loggedInStatus = props.loggedInStatus
-  const user = props.user
-  const currentUser = props.currentUser
-  const setFollowingIndexModal = props.setFollowingIndexModal
-  const setPromptingAccountCreation = props.setPromptingAccountCreation
+  const context = useContext(MainContext)
+  const loggedInStatus = context.loggedInStatus
+  const user = context.user
+  const currentUser = context.currentUser
+  const setFollowingIndexModal = context.setFollowingIndexModal
+  const setPromptingAccountCreation = context.setPromptingAccountCreation
   const [following, setFollowing] = useState([])
   useEffect(() => {
     openFollowModal(user.id)

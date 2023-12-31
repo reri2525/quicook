@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useContext } from 'react'
+import { MainContext } from '../App';
 import '../ScssFile/Home.scss'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -16,7 +17,12 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { amber, grey, brown } from '@mui/material/colors';
 import { url } from "../config";
 function Home(props: any) {
-  const loggedInStatus = props.loggedInStatus
+  const context = useContext(MainContext)
+  const loggedInStatus = context.loggedInStatus
+  const bookmarkCreate = context.bookmarkCreate
+  const bookmarkDestroy = context.bookmarkDestroy
+  const heartCreate = context.heartCreate
+  const heartDestroy = context.heartDestroy
   const { id } = useParams<{id: string}>();
   const numericId = parseInt(id);
   const history = useHistory();
@@ -26,7 +32,6 @@ function Home(props: any) {
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
   const [bookmarkedPosts, setBookmarkedPosts] = useState<number[]>([]);
   const [heartedPosts, setHeartedPosts] = useState<number[]>([]);
-  const [heartcount, setHeartcount] = useState(0)
   const [postExist, setPostExist] = useState(true)
 
   useEffect(() => {
@@ -38,6 +43,7 @@ function Home(props: any) {
   const postShow = (id: string) => {
     history.push(`/posts/${id}`)
   }
+
   const postAllGet = () =>{
      axios.get(`${url}/posts`, { params: { page: currentPage }, withCredentials: true })
     .then(response => {
@@ -63,11 +69,13 @@ function Home(props: any) {
       console.log("投稿取得エラー", error)
     })
   }
+
   const postAdd = (page: number) => {
     setCurrentPage(page)
     history.push(`/home/page/${page}`)
     window.scrollTo(0, 0);
   }
+
   const postBack = (currentPage: number) => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1)
@@ -75,6 +83,7 @@ function Home(props: any) {
       }
     window.scrollTo(0, 0);
   }
+
   const postGo = (currentPage: number) => {
     if (currentPage !== pagecount) {
       setCurrentPage(currentPage + 1)
@@ -82,17 +91,19 @@ function Home(props: any) {
     }
     window.scrollTo(0, 0);
   }
+
   const handleBookmark = (post: any) => {
    if  (bookmarkedPosts.includes(post.id)) {
-    props.bookmarkDestroy(post)
+    bookmarkDestroy(post)
     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
    } else {
-    props.bookmarkCreate(post)
+    bookmarkCreate(post)
     if (loggedInStatus === "ログインなう") {
      setBookmarkedPosts([...bookmarkedPosts, post.id]);
     }
    }
   }
+
   const bookmarkExist = (post: any) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
       if (post.bookmarks && post.bookmarks[0]) {
@@ -102,19 +113,21 @@ function Home(props: any) {
       }
     });
   }
+
   const handleHeart = (post: any) => {
     if  (heartedPosts.includes(post.id)) {
-     props.heartDestroy(post)
+     heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
     } else {
-     props.heartCreate(post)
+     heartCreate(post)
      if (loggedInStatus === "ログインなう") {
       setHeartedPosts([...heartedPosts, post.id]);
       post.heart_count = post.heart_count + 1
      }
     }
   }
+
   const heartExist = (post: any) => {
     setHeartedPosts((prevHeartedPosts) => {
       if (post.hearts && post.hearts[0]) {
@@ -124,6 +137,7 @@ function Home(props: any) {
       }
     });
   }
+
   return (
     <Fragment> 
       { postExist ? 
