@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, createContext, Fragment } from 'react';
 import './ScssFile/Share.scss'
 import axios from'axios';
-import { useHistory } from 'react-router-dom';
-import Top from './components/Top'
 import Main from "./components/Main";
 import Home from "./components/Home";
 import PostShow from "./components/PostShow";
@@ -20,8 +18,9 @@ import{
   Route,
 } from "react-router-dom";
 import { url } from "./config";
+export const MainContext = createContext<any>(null);
 function App() {
-  const [loggedInStatus, setLoggedInStatus] = useState({})
+  const [loggedInStatus, setLoggedInStatus] = useState<string>()
   const [user, setUser] = useState({})
   const [promptingAccountCreation, setPromptingAccountCreation] = useState(false)
   const handleLogin = () => {
@@ -137,7 +136,22 @@ function App() {
       console.log("フォロー解除エラー", error)
    })
   }
+  const contextValue = {
+    loggedInStatus,
+    handleLogin,
+    user,
+    handleLogout,                      
+    promptingAccountCreation,                             
+    setPromptingAccountCreation,
+    bookmarkCreate,
+    bookmarkDestroy,                        
+    heartCreate,
+    heartDestroy,                           
+    relationshipCreate,
+    relationshipDestroy
+  };
   return (
+  <MainContext.Provider value={contextValue}>
      <Router>
       <Switch>
         <Route exact path="/"
@@ -146,89 +160,41 @@ function App() {
              return <Home to="/home/page/1" />;
          }}
         />
-        <Route exact path={"/home/page/:id"}
+          <Route exact path={"/home/page/:id"}
              render={props => (
-              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} handleLogout={handleLogout}   
-                                 promptingAccountCreation={promptingAccountCreation}
-                                 setPromptingAccountCreation={setPromptingAccountCreation}
-                                 url={<Home loggedInStatus={loggedInStatus} 
-                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
-                                 />}/>
+                <Main { ...props } url={<Home />}/>
             )}
           />  
           <Route exact path={"/posts/:id"}
              render={props => (
-              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} handleLogout={handleLogout}   
-                                 promptingAccountCreation={promptingAccountCreation}
-                                 setPromptingAccountCreation={setPromptingAccountCreation}
-                                 url={<PostShow user={user} relationshipCreate={relationshipCreate} 
-                                                relationshipDestroy={relationshipDestroy}  bookmarkCreate={bookmarkCreate} 
-                                                bookmarkDestroy={bookmarkDestroy} heartCreate={heartCreate} 
-                                                heartDestroy={heartDestroy} loggedInStatus={loggedInStatus}
-                                                />}/>
+              <Main { ...props } url={<PostShow />}/>
             )}
           />  
           <Route exact path={"/following/page/:id"}
              render={props => (
-              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} handleLogout={handleLogout}      
-                                 url={<Following bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                                 user={user} 
-                                                 />}/>
+              <Main { ...props } url={<Following />}/>
             )}
           />  
           <Route exact path={"/bookmark/page/:id"}
              render={props => (
-              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} handleLogout={handleLogout}             
-                                 url={<Bookmark bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                                heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                                />}/>
+              <Main { ...props } url={<Bookmark />}/>
+              
             )}
           />  
           <Route exact path={"/category/:query/page/:id"}
              render={props => (
-              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} handleLogout={handleLogout}   
-                                 promptingAccountCreation={promptingAccountCreation}
-                                 setPromptingAccountCreation={setPromptingAccountCreation}
-                                 url={<Category loggedInStatus={loggedInStatus} 
-                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
-                                 />}/>
+              <Main { ...props } url={<Category />}/>
+              
             )}
           />  
           <Route exact path={"/search/:query/page/:id"}
              render={props => (
-              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus}
-                                 user={user} handleLogout={handleLogout}   
-                                 promptingAccountCreation={promptingAccountCreation}
-                                 setPromptingAccountCreation={setPromptingAccountCreation}
-                                 url={<Search loggedInStatus={loggedInStatus} 
-                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
-                                 />}/>
+              <Main { ...props } url={<Search />}/>
             )}
           />  
         <Route exact path={"/profile/:id/page/:number"}
              render={props => (
-              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} 
-                                 handleLogout={handleLogout} user={user} 
-                                 promptingAccountCreation={promptingAccountCreation}
-                                 setPromptingAccountCreation={setPromptingAccountCreation}
-                                 url={<Profile loggedInStatus={loggedInStatus} 
-                                 bookmarkCreate={bookmarkCreate} bookmarkDestroy={bookmarkDestroy}
-                                 heartCreate={heartCreate} heartDestroy={heartDestroy}
-                                 setPromptingAccountCreation={setPromptingAccountCreation}
-                                 user={user} relationshipCreate={relationshipCreate} relationshipDestroy={relationshipDestroy}
-                                 />}/>
+              <Main { ...props } url={<Profile />}/>
             )}
           />  
         <Route exact path={"/edit"}
@@ -248,6 +214,7 @@ function App() {
           />  
       </Switch>
     </Router>
+  </MainContext.Provider>
   );
 }
 

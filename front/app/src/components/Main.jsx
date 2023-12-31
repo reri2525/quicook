@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext} from 'react';
+import { MainContext } from '../App';
 import '../ScssFile/Main.scss'
 import Header from './Header';
 import PostForm from './Postform';
@@ -8,9 +9,12 @@ import Logmodal from './Login';
 import Newmodal from './New';
 import PromptingAccountCreation from './PromptingAccountCreation';
 function Main(props) {
-  const promptingAccountCreation = props.promptingAccountCreation
-  const setPromptingAccountCreation = props.setPromptingAccountCreation
-  const loggedInStatus = props.loggedInStatus
+  const context = useContext(MainContext)
+  const promptingAccountCreation = context.promptingAccountCreation
+  const setPromptingAccountCreation = context.setPromptingAccountCreation
+  const loggedInStatus = context.loggedInStatus
+  const handleLogout = context.handleLogout
+  const user = context.user
   const [postModal, setPostModal] = useState(false); 
   const [logModal, setLogModal] = useState(false);
   const [newModal, setNewModal] = useState(false);
@@ -26,8 +30,8 @@ function Main(props) {
            <h2 className='flash_message'>{flashMessage}</h2> 
          </div>
        }
-       <Header loggedInStatus={props.loggedInStatus} handleLogout={props.handleLogout} 
-                                                        setPostModal={setPostModal}  user={props.user}
+       <Header loggedInStatus={loggedInStatus} handleLogout={handleLogout} 
+                                                        setPostModal={setPostModal}  user={user}
                                                         setLogModal={setLogModal} setNewModal={setNewModal} setModal={setModal} 
                                                         />
         <List loggedInStatus={loggedInStatus}/>
