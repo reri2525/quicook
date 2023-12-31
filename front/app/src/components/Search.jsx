@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useContext } from 'react'
 import '../ScssFile/Home.scss'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -15,8 +15,10 @@ import StarIcon from '@mui/icons-material/Star';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { amber, grey, brown } from '@mui/material/colors';
 import { url } from "../config";
+import { MainContext } from '../App';
 function Search(props) {
-  const loggedInStatus = props.loggedInStatus
+  const context = useContext(MainContext)
+  const loggedInStatus = context.loggedInStatus
   const { id } = useParams();
   const { query } = useParams();
   const numericId = parseInt(id);

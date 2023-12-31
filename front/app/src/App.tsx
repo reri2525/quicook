@@ -199,7 +199,7 @@ function App() {
           />  
         <Route exact path={"/edit"}
              render={props => (
-              <Main { ...props } handleLogin={handleLogin} loggedInStatus={loggedInStatus} handleLogout={handleLogout} user={user} url={<ProfileEdit  user={user}/>}/>
+              <Main { ...props } url={<ProfileEdit />}/>
             )}
           />  
         <Route exact path={"/password/:id/reset"}

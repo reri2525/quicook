@@ -9,6 +9,7 @@ import { url } from "../config";
 function Logmodal(props) {
   const context = useContext(MainContext)
   const loggedInStatus = context.loggedInStatus
+  const handleLogin = context.handleLogin
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors_m, setErrors_m] = useState("")
@@ -31,7 +32,7 @@ function Logmodal(props) {
         { withCredentials: true }
     ).then(response => {
         if (response.data.logged_in) {
-            props.handleLogin(response.data)
+            handleLogin(response.data)
             history.push("/home/page/1")
         } else if (response.data.status === 401) {
             setErrors_m(response.data.errors)

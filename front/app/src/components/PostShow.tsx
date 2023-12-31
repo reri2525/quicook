@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useRef, useContext } from 'react';
+import { Fragment, useEffect, useState, useRef, useContext } from 'react';
 import { MainContext } from '../App';
 import '../ScssFile/PostShow.scss'
 import axios from 'axios';
@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import WarnModal from './WarnModal'
 import { url } from "../config";
 
-const PostShow = (props: any) => {
+const PostShow = () => {
  const context = useContext(MainContext)
  const ref = useRef(null);
  const history = useHistory();

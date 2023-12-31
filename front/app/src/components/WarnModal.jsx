@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState} from 'react';
+import { Fragment, useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import '../ScssFile/WarnModal.scss'
 import axios from 'axios'

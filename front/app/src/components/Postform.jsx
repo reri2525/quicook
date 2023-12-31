@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import '../ScssFile/PostForm.scss'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';

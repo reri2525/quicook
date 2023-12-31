@@ -9,6 +9,7 @@ function Header(props) {
  const context = useContext(MainContext)
  const loggedInStatus = context.loggedInStatus
  const user = context.user
+ const handleLogout = context.handleLogout
  const [searchQuery, setSearchQuery] = useState("")
  const history = useHistory();
  const ShowLogModal = () => {
@@ -60,7 +61,7 @@ return (
         <a onClick={() => setSearchQuery("")}><CloseIcon /></a>
         <button className='sarch_btn' onClick={() => searchQuery !== '' && history.push(`/search/${searchQuery}/page/1`)}><SearchIcon /></button>
       </form>
-      <a className="log" onClick={() => props.handleLogout()}>ログアウト</a>
+      <a className="log" onClick={() => handleLogout()}>ログアウト</a>
       <a className='post_button' onClick={() => ShowPostModal()}>投稿する</a>
     </header>
 );

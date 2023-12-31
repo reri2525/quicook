@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useContext } from 'react'
+import { MainContext } from '../App';
 import '../ScssFile/Home.scss'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -13,6 +14,12 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { url } from "../config";
 function Bookmark(props) {
+  const context = useContext(MainContext)
+  const loggedInStatus = context.loggedInStatus
+  const bookmarkCreate = context.bookmarkCreate
+  const bookmarkDestroy = context.bookmarkDestroy
+  const heartCreate = context.heartCreate
+  const heartDestroy = context.heartDestroy
   const { id } = useParams();
   const numericId = parseInt(id);
   const history = useHistory();
@@ -78,10 +85,10 @@ function Bookmark(props) {
   }
   const handleBookmark = (post) => {
    if  (bookmarkedPosts.includes(post.id)) {
-    props.bookmarkDestroy(post)
+    bookmarkDestroy(post)
     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
    } else {
-    props.bookmarkCreate(post)
+    bookmarkCreate(post)
     setBookmarkedPosts([...bookmarkedPosts, post.id]);
    }
   }
@@ -96,11 +103,11 @@ function Bookmark(props) {
   }
   const handleHeart = (post) => {
     if  (heartedPosts.includes(post.id)) {
-     props.heartDestroy(post)
+     heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
     } else {
-     props.heartCreate(post)
+     heartCreate(post)
      setHeartedPosts([...heartedPosts, post.id]);
      post.heart_count = post.heart_count + 1
     }
@@ -114,16 +121,6 @@ function Bookmark(props) {
       }
     });
   }
-  const handleMouseEnter = (event) => {
-    event.target.play();
-    event.target.controls = true;
-  };
-
-  const handleMouseLeave = (event) => {
-    event.target.pause();
-    event.target.currentTime = 0;
-    event.target.controls = false;
-  };
   return (
     <Fragment> 
       { postExist ? 

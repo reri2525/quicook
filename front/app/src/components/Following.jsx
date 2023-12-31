@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import '../ScssFile/Home.scss'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';

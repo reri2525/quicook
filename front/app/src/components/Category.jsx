@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useContext } from 'react'
 import '../ScssFile/Home.scss'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -15,8 +15,14 @@ import StarIcon from '@mui/icons-material/Star';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { amber, grey, brown } from '@mui/material/colors';
 import { url } from "../config";
+import { MainContext } from '../App';
 function Category(props) {
-  const loggedInStatus = props.loggedInStatus
+  const context = useContext(MainContext)
+  const loggedInStatus = context.loggedInStatus
+  const bookmarkCreate = context.bookmarkCreate
+  const bookmarkDestroy = context.bookmarkDestroy
+  const heartCreate = context.heartCreate
+  const heartDestroy = context.heartDestroy
   const { id } = useParams();
   const { query } = useParams();
   const numericId = parseInt(id);
@@ -94,10 +100,10 @@ function Category(props) {
   }
   const handleBookmark = (post) => {
     if  (bookmarkedPosts.includes(post.id)) {
-     props.bookmarkDestroy(post)
+     bookmarkDestroy(post)
      setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
     } else {
-     props.bookmarkCreate(post)
+     bookmarkCreate(post)
      if (loggedInStatus === "ログインなう") {
       setBookmarkedPosts([...bookmarkedPosts, post.id]);
      }
@@ -114,7 +120,7 @@ function Category(props) {
   }
   const handleHeart = (post) => {
     if  (heartedPosts.includes(post.id)) {
-     props.heartDestroy(post)
+     heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
     } else {
@@ -134,16 +140,6 @@ function Category(props) {
       }
     });
   }
-  const handleMouseEnter = (event) => {
-    event.target.play();
-    event.target.controls = true;
-  };
-
-  const handleMouseLeave = (event) => {
-    event.target.pause();
-    event.target.currentTime = 0;
-    event.target.controls = false;
-  };
   return (
     <Fragment>  
       { postExist ? 

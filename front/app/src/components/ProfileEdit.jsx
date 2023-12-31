@@ -1,10 +1,12 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import { useState, useEffect, Fragment, useContext } from 'react'
 import '../ScssFile/ProfileEdit.scss'
 import WarnModal from './WarnModal'
 import axios from 'axios'
 import { url } from "../config";
-function ProfileEdit(props) {
- const user = props.user
+import { MainContext } from '../App';
+function ProfileEdit() {
+ const context = useContext(MainContext)
+ const user = context.user
  const [update, setUpdate] = useState(null)
  const [errors, setErrors] = useState(null)
  const [name, setName] = useState(user.name)
