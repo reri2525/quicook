@@ -157,7 +157,7 @@ function App() {
         <Route exact path="/"
              render={({ history }) => {
              history.push('/home/page/1');
-             return <Home to="/home/page/1" />;
+             return <Home />;
          }}
         />
           <Route exact path={"/home/page/:id"}

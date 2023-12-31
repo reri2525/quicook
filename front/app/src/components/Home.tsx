@@ -2,9 +2,7 @@ import { Fragment, useEffect, useState, useContext } from 'react'
 import { MainContext } from '../App';
 import '../ScssFile/Home.scss'
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { Link } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { useHistory, Link, useParams } from 'react-router-dom';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -16,7 +14,7 @@ import StarIcon from '@mui/icons-material/Star';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { amber, grey, brown } from '@mui/material/colors';
 import { url } from "../config";
-function Home(props: any) {
+function Home() {
   const context = useContext(MainContext)
   const loggedInStatus = context.loggedInStatus
   const bookmarkCreate = context.bookmarkCreate
@@ -26,7 +24,7 @@ function Home(props: any) {
   const { id } = useParams<{id: string}>();
   const numericId = parseInt(id);
   const history = useHistory();
-  const [postall, setPostall] = useState<any>([])
+  const [postall, setPostall] = useState<any[]>([])
   const [pagecount, setPagecount] = useState(1)
   const [currentPage, setCurrentPage] = useState(numericId)
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
