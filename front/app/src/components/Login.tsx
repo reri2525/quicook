@@ -6,7 +6,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useHistory } from 'react-router-dom';
 import { url } from "../config";
-function Logmodal(props) {
+type LoginProps = {
+  logModal: boolean,
+  setFlashMessage: React.Dispatch<React.SetStateAction<string>>,
+  setLogModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+function Logmodal(props: LoginProps) {
   const context = useContext(MainContext)
   const loggedInStatus = context.loggedInStatus
   const handleLogin = context.handleLogin
@@ -14,7 +20,7 @@ function Logmodal(props) {
   const [password, setPassword] = useState("")
   const [errors_m, setErrors_m] = useState("")
   const [errors_m_sent, setErrors_m_sent] = useState("")
-  const [passwordResetForm, setPasswordResetForm] = useState("")
+  const [passwordResetForm, setPasswordResetForm] = useState(false)
   const [sentEmail, setSentEmail] = useState("")
   const history = useHistory();
 
@@ -24,7 +30,7 @@ function Logmodal(props) {
     setErrors_m("")
   }
 
-  const onSubmit = (event) => {
+  const onSubmit = (event: any) => {
     const formData = new FormData();
     formData.append('user[email]', email);
     formData.append('user[password]', password);
@@ -44,14 +50,14 @@ function Logmodal(props) {
     })
   }
 
-  const handleSentEmail = (event) => {
+  const handleSentEmail = () => {
     axios.post(`${url}/password_resets`, {sent_email: sentEmail}
     ).then(response => {
       if (response.data.status === "true" ) {
         CloseModal()
         props.setFlashMessage("メールが送信されました。")
         setTimeout(() => {
-          props.setFlashMessage(null);
+          props.setFlashMessage("");
         }, 5000);
       } else {
         setErrors_m_sent(response.data.errors)
@@ -116,7 +122,7 @@ return (
                     value={password}
                     onChange={event => setPassword(event.target.value)}
                 /><br></br>
-                <button className='btn' type="button" onClick={ () => onSubmit()}>送信</button><br/>
+                <button className='btn' type="button" onClick={ event => onSubmit(event)}>送信</button><br/>
                 <a className='password_reset' onClick={() => PasswordReset()}>パスワードを忘れてしまった</a><br/>
                 <span>{errors_m}</span>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
@@ -130,8 +136,10 @@ return (
 )}
 </>
 )
-} else if (props.loggedInStatus === "ログインなう") {
-    history.push("/loginwarn")
+} else {
+  return (
+    <></>
+  )
 }
 }
 

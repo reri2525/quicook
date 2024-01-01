@@ -24,23 +24,44 @@ function Home() {
   const { id } = useParams<{id: string}>();
   const numericId = parseInt(id);
   const history = useHistory();
-  const [postall, setPostall] = useState<any[]>([])
-  const [pagecount, setPagecount] = useState(1)
-  const [currentPage, setCurrentPage] = useState(numericId)
+  type PostAll = {
+    id: number,
+    title: string,
+    image: {
+      url: string
+    },
+    thumbnail: {
+      url: string
+    },
+    heart_count: number,
+    hearts: { id: number, user_id: bigint}[] | null,
+    bookmarks: { id: number, user_id: bigint }[] | null,
+    file_type: string,
+    user: { 
+      name: string,
+      avatar: {
+        url: string
+      },
+      id: number
+    },
+  }
+  const [postall, setPostall] = useState<PostAll[]>([]);
+  const [pagecount, setPagecount] = useState(1);
+  const [currentPage, setCurrentPage] = useState(numericId);
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
   const [bookmarkedPosts, setBookmarkedPosts] = useState<number[]>([]);
   const [heartedPosts, setHeartedPosts] = useState<number[]>([]);
-  const [postExist, setPostExist] = useState(true)
+  const [postExist, setPostExist] = useState(true);
 
   useEffect(() => {
     setPostall([])
     window.scrollTo(0, 0);
     postAllGet();
-  }, [id])
+  }, [id]);
 
-  const postShow = (id: string) => {
+  const postShow = (id: number) => {
     history.push(`/posts/${id}`)
-  }
+  };
 
   const postAllGet = () =>{
      axios.get(`${url}/posts`, { params: { page: currentPage }, withCredentials: true })
@@ -66,13 +87,13 @@ function Home() {
     .catch(error => {
       console.log("投稿取得エラー", error)
     })
-  }
+  };
 
   const postAdd = (page: number) => {
     setCurrentPage(page)
     history.push(`/home/page/${page}`)
     window.scrollTo(0, 0);
-  }
+  };
 
   const postBack = (currentPage: number) => {
     if (currentPage !== 1) {
@@ -80,7 +101,7 @@ function Home() {
       history.push(`/home/page/${currentPage - 1}`)
       }
     window.scrollTo(0, 0);
-  }
+  };
 
   const postGo = (currentPage: number) => {
     if (currentPage !== pagecount) {
@@ -88,9 +109,9 @@ function Home() {
       history.push(`/home/page/${currentPage + 1}`)
     }
     window.scrollTo(0, 0);
-  }
+  };
 
-  const handleBookmark = (post: any) => {
+  const handleBookmark = (post: PostAll) => {
    if  (bookmarkedPosts.includes(post.id)) {
     bookmarkDestroy(post)
     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
@@ -100,9 +121,9 @@ function Home() {
      setBookmarkedPosts([...bookmarkedPosts, post.id]);
     }
    }
-  }
+  };
 
-  const bookmarkExist = (post: any) => {
+  const bookmarkExist = (post: PostAll) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
       if (post.bookmarks && post.bookmarks[0]) {
         return [...prevBookmarkedPosts, post.id];
@@ -110,9 +131,9 @@ function Home() {
         return prevBookmarkedPosts.filter(id => id !== post.id);
       }
     });
-  }
+  };
 
-  const handleHeart = (post: any) => {
+  const handleHeart = (post: PostAll) => {
     if  (heartedPosts.includes(post.id)) {
      heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
@@ -124,9 +145,9 @@ function Home() {
       post.heart_count = post.heart_count + 1
      }
     }
-  }
+  };
 
-  const heartExist = (post: any) => {
+  const heartExist = (post: PostAll) => {
     setHeartedPosts((prevHeartedPosts) => {
       if (post.hearts && post.hearts[0]) {
         return [...prevHeartedPosts, post.id];
@@ -134,7 +155,7 @@ function Home() {
         return prevHeartedPosts.filter(id => id !== post.id);
       }
     });
-  }
+  };
 
   return (
     <Fragment> 
@@ -150,7 +171,7 @@ function Home() {
       } 
       { postall[0] ? 
       <div className='post_container'>
-       {postall.map((value: any, key: number) => {
+       {postall.map((value: PostAll, key: number) => {
          let iconColor;
 
          if (key === 0) {

@@ -1,11 +1,16 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import '../ScssFile/New.scss'
 import axios from 'axios'
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { url } from "../config";
-function Newmodal(props) {
+type NewProps = {
+  newModal: boolean,
+  setFlashMessage: React.Dispatch<React.SetStateAction<string>>,
+  setNewModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+function Newmodal(props: NewProps) {
   const {
       register,
       reset,
@@ -27,7 +32,7 @@ function Newmodal(props) {
     reset();
   }
 
-  const onSubmit = (event) => {
+  const onSubmit = (event: any) => {
     axios.post(`${url}/users`,
         {
             user: {
@@ -43,7 +48,7 @@ function Newmodal(props) {
             CloseModal()
             props.setFlashMessage("メールを確認してアカウントを有効にしてください。")
             setTimeout(() => {
-              props.setFlashMessage(null);
+              props.setFlashMessage("");
             }, 5000);
         }
     }).catch(error => {
@@ -120,7 +125,7 @@ return (
                   <div className='errors'>※パスワードが一致しません</div>
                 )}
                 <button className='btn' type="button" onClick={handleSubmit(onSubmit)}>送信</button><br></br>
-                <c>パスワードは英文字または数字で6桁以上入力してください</c><br></br>
+                <a className='password-warn'>パスワードは英文字または数字で6桁以上入力してください</a><br></br>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
             </form>
         </div>

@@ -8,7 +8,10 @@ import Footer from './Footer';
 import Logmodal from './Login';
 import Newmodal from './New';
 import PromptingAccountCreation from './PromptingAccountCreation';
-function Main(props) {
+type MainProps = {
+  url: JSX.Element
+}
+const Main = (props: MainProps) => {
   const context = useContext(MainContext)
   const promptingAccountCreation = context.promptingAccountCreation
   const loggedInStatus = context.loggedInStatus
@@ -16,7 +19,7 @@ function Main(props) {
   const [logModal, setLogModal] = useState(false);
   const [newModal, setNewModal] = useState(false);
   const [modal, setModal] = useState(false);
-  const [flashMessage, setFlashMessage] = useState(null)
+  const [flashMessage, setFlashMessage] = useState("")
 
     return (
       <Fragment>

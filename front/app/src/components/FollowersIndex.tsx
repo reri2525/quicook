@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import '../ScssFile/FollowersIndex.scss'
 import axios from 'axios';
 import { Link } from "react-router-dom";

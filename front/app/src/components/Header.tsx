@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-function Header(props) {
+function Header(props: any) {
  const context = useContext(MainContext)
  const loggedInStatus = context.loggedInStatus
  const user = context.user
@@ -65,6 +65,10 @@ return (
       <a className='post_button' onClick={() => ShowPostModal()}>投稿する</a>
     </header>
 );
+} else {
+  return (
+    <></>
+  )
 }
 
 }
