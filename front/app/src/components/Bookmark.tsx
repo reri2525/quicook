@@ -15,7 +15,6 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { url } from "../config";
 function Bookmark() {
   const context = useContext(MainContext)
-  const loggedInStatus = context.loggedInStatus
   const bookmarkCreate = context.bookmarkCreate
   const bookmarkDestroy = context.bookmarkDestroy
   const heartCreate = context.heartCreate

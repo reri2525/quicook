@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useContext } from 'react'
 import '../ScssFile/Home.scss'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -14,17 +14,44 @@ import StarIcon from '@mui/icons-material/Star';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { amber, grey, brown } from '@mui/material/colors';
 import { url } from "../config";
-function Following(props) {
-  const { id } = useParams();
+import { MainContext } from '../App';
+function Following() {
+  const context = useContext(MainContext)
+  const bookmarkCreate = context.bookmarkCreate
+  const bookmarkDestroy = context.bookmarkDestroy
+  const heartCreate = context.heartCreate
+  const heartDestroy = context.heartDestroy
+  const { id } = useParams<{id: string}>();
   const numericId = parseInt(id);
   const history = useHistory();
-  const [postall, setPostall] = useState([])
-  const [pagecount, setPagecount] = useState()
-  const [currentPage, setCurrentPage] = useState(numericId)
+  type PostAll = {
+    id: number,
+    title: string,
+    image: {
+      url: string
+    },
+    thumbnail: {
+      url: string
+    },
+    heart_count: number,
+    hearts: { id: number, user_id: bigint}[] | null,
+    bookmarks: { id: number, user_id: bigint }[] | null,
+    file_type: string,
+    user: { 
+      name: string,
+      avatar: {
+        url: string
+      },
+      id: number
+    },
+  }
+  const [postall, setPostall] = useState<PostAll[]>([]);
+  const [pagecount, setPagecount] = useState(1);
+  const [currentPage, setCurrentPage] = useState(numericId);
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
-  const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
-  const [heartedPosts, setHeartedPosts] = useState([]);
-  const [postExist, setPostExist] = useState(true)
+  const [bookmarkedPosts, setBookmarkedPosts] = useState<number[]>([]);
+  const [heartedPosts, setHeartedPosts] = useState<number[]>([]);
+  const [postExist, setPostExist] = useState(true);
 
   useEffect(() => {
     setPostall([])
@@ -32,7 +59,7 @@ function Following(props) {
     postAllGet();
   }, [id])
 
-  const postShow = (id) => {
+  const postShow = (id: number) => {
     history.push(`/posts/${id}`)
   }
   const postAllGet = () =>{
@@ -59,75 +86,66 @@ function Following(props) {
       console.log("投稿取得エラー", error)
     })
   }
-  const postAdd = (page) => {
+  const postAdd = (page: number) => {
     setCurrentPage(page)
     history.push(`/following/page/${page}`)
     window.scrollTo(0, 0);
   }
-  const postBack = (currentPage) => {
+  const postBack = (currentPage: number) => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1)
       history.push(`/following/page/${currentPage - 1}`)
       }
     window.scrollTo(0, 0);
   }
-  const postGo = (currentPage) => {
+  const postGo = (currentPage: number) => {
     if (currentPage !== pagecount) {
       setCurrentPage(currentPage + 1)
       history.push(`/following/page/${currentPage + 1}`)
     }
     window.scrollTo(0, 0);
   }
-  const handleBookmark = (post) => {
+  const handleBookmark = (post: PostAll) => {
    if  (bookmarkedPosts.includes(post.id)) {
-    props.bookmarkDestroy(post)
+    bookmarkDestroy(post)
     setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
     console.log(bookmarkedPosts)
    } else {
-    props.bookmarkCreate(post)
+    bookmarkCreate(post)
     setBookmarkedPosts([...bookmarkedPosts, post.id]);
    }
   }
-  const bookmarkExist = (post) => {
+  const bookmarkExist = (post: PostAll) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
-      if (post.bookmarks[0]) {
+      if (post.bookmarks && post.bookmarks[0]) {
         return [...prevBookmarkedPosts, post.id];
       } else {
         return prevBookmarkedPosts.filter(id => id !== post.id);
       }
     });
   }
-  const handleHeart = (post) => {
+  const handleHeart = (post: PostAll) => {
     if  (heartedPosts.includes(post.id)) {
-     props.heartDestroy(post)
+     heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
      console.log(heartedPosts)
     } else {
-     props.heartCreate(post)
+     heartCreate(post)
      setHeartedPosts([...heartedPosts, post.id]);
      post.heart_count = post.heart_count + 1
     }
    }
-  const heartExist = (post) => {
+  const heartExist = (post: PostAll) => {
     setHeartedPosts((prevHeartedPosts) => {
-      if (post.hearts[0]) {
+      if (post.hearts && post.hearts[0]) {
         return [...prevHeartedPosts, post.id];
       } else {
         return prevHeartedPosts.filter(id => id !== post.id);
       }
     });
   }
-  const handleMouseEnter = (event) => {
-    event.target.play();
-    event.target.controls = true;
-  };
 
-  const handleMouseLeave = (event) => {
-    event.target.pause();
-    event.target.currentTime = 0;
-    event.target.controls = false;
-  };
   return (
     <Fragment> 
       { postExist ? 
@@ -142,7 +160,7 @@ function Following(props) {
       } 
       { postall[0] ? 
       <div className='post_container'>
-       {postall.map((value, key) => {
+       {postall.map((value: PostAll, key: number) => {
          let iconColor;
 
          if (key === 0) {

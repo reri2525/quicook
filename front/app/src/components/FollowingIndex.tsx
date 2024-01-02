@@ -5,18 +5,26 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 import { url } from "../config";
-function FollowingIndex(props) {
+function FollowingIndex(props: any) {
   const context = useContext(MainContext)
   const loggedInStatus = context.loggedInStatus
-  const user = context.user
-  const currentUser = context.currentUser
-  const setFollowingIndexModal = context.setFollowingIndexModal
+  const user = props.user
+  const currentUser = context.user
+  const setFollowingIndexModal = props.setFollowingIndexModal
   const setPromptingAccountCreation = context.setPromptingAccountCreation
-  const [following, setFollowing] = useState([])
+  type Following = {
+    id: number,
+    name: string,
+    avatar: {
+      url: string
+    },
+    following: boolean
+  }
+  const [following, setFollowing] = useState<Following[]>([])
   useEffect(() => {
     openFollowModal(user.id)
   }, [])
-  const openFollowModal = (id) => {
+  const openFollowModal = (id: number) => {
     axios.get(`${url}/following/${id}`, { withCredentials: true })
     .then(response => {
       const data = response.data
@@ -26,15 +34,15 @@ function FollowingIndex(props) {
     })
   }
 
-  const handleRelationship = (value, key) => {
+  const handleRelationship = (value: Following) => {
     if (value.following) {
-     relationshipDestroy(value.id, key)
+     relationshipDestroy(value.id)
     } else {
-     relationshipCreate(value.id, key)
+     relationshipCreate(value.id)
     }
   }
 
-  const relationshipCreate = (id, key) => {
+  const relationshipCreate = (id: number) => {
    if (loggedInStatus === "ログインなう") {
     axios.post("http://localhost:3001/relationships",  { user_id: id },  { withCredentials: true })
     .then(response => {
@@ -50,7 +58,7 @@ function FollowingIndex(props) {
     setPromptingAccountCreation(true)
    }
   }
-  const relationshipDestroy = (id, key) => {
+  const relationshipDestroy = (id: number) => {
     axios.delete(`http://localhost:3001/relationships/${id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -70,32 +78,34 @@ function FollowingIndex(props) {
   return (
    <Fragment>
     <div className='back_display2'></div>
+    {  user.id && (
     <div className='following_index_modal'>
       <h3>フォロー中</h3>
       <div className='following_innner'>
-          {following.map((value, key) => {
-            return (
+        {following.map((value: Following, key:  number) => {
+           return (
              <Fragment>
-               <div className='following_content'>
-                <div className='icon'>
+              <div className='following_content'>
+               <div className='icon'>
                  <img src={value.avatar.url}></img>
                 </div>
-                <Link to={`/profile/${value.id}/page/1`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link>
-                { currentUser.id === value.id ? 
+                <Link to={`/profile/${value.id}/page/1`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link>      
+                { currentUser.id && currentUser.id === value.id ? 
                   <></>
                   : 
                   value.following && currentUser.id ?
-                    <a className="unfollow" onClick={() => handleRelationship(value, key)}>フォロー中</a>
+                    <a className="unfollow" onClick={() => handleRelationship(value)}>フォロー中</a>
                       :
-                    <a className="follow" onClick={() => handleRelationship(value, key)}>フォローする</a>
+                    <a className="follow" onClick={() => handleRelationship(value)}>フォローする</a>
                 }
-               </div>
+              </div>
              </Fragment>
-            )
-          })}
+           )
+        })}
       </div>
       <div className='close' onClick={() => closeModal()}><a><CloseIcon /></a></div>
     </div>
+    )}
    </Fragment>
   )
 }

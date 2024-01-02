@@ -80,7 +80,7 @@ const PostShow = () => {
     }
    }
  }
- const handleRelationship = (id: string) => {
+ const handleRelationship = (id: number) => {
    if (relationship) {
     setRelationship(false)
     relationshipDestroy(id)

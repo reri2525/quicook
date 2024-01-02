@@ -16,7 +16,7 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { amber, grey, brown } from '@mui/material/colors';
 import { url } from "../config";
 import { MainContext } from '../App';
-function Category(props: any) {
+function Category() {
   const context = useContext(MainContext);
   const loggedInStatus = context.loggedInStatus;
   const bookmarkCreate = context.bookmarkCreate;

@@ -67,7 +67,7 @@ function Profile(props: any) {
     .catch(error => console.log("ユーザーいない"))
   }
 
-  const handleRelationship = (id: string) => {
+  const handleRelationship = (id: number) => {
     if (relationship) {
      setRelationship(false)
      setFollower(follower - 1)
@@ -174,7 +174,7 @@ function Profile(props: any) {
   }
   return (
    <Fragment>
-    {user && user.id && (
+    {user  && user.id && (
     <div className='profile_container'>
       <div className='icon'>
         <img className='image' src={user.avatar.url} alt="User Avatar" />
@@ -289,12 +289,7 @@ function Profile(props: any) {
         <nav className='next'>next</nav>
        </div> : <></> }
       </div>}
-    { followingIndexModal ? <FollowingIndex user={user} currentUser={props.user} setFollowingIndexModal={setFollowingIndexModal} 
-                                            setPromptingAccountCreation={setPromptingAccountCreation}
-                                            loggedInStatus={loggedInStatus}/>
-                                             : 
-                                            <></>
-    }
+    { followingIndexModal ? <FollowingIndex user={user} setFollowingIndexModal={setFollowingIndexModal} /> : <></> }
     { followersIndexModal ? <FollowersIndex user={user} currentUser={props.user} setFollowersIndexModal={setFollowersIndexModal} 
                                             setPromptingAccountCreation={setPromptingAccountCreation}
                                             loggedInStatus={loggedInStatus}/>

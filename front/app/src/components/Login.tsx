@@ -38,7 +38,7 @@ function Logmodal(props: LoginProps) {
         { withCredentials: true }
     ).then(response => {
         if (response.data.logged_in) {
-            handleLogin(response.data)
+            handleLogin()
             history.push("/home/page/1")
         } else if (response.data.status === 401) {
             setErrors_m(response.data.errors)
