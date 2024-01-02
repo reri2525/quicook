@@ -1,20 +1,30 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useContext } from 'react'
+import { MainContext } from '../App';
 import '../ScssFile/FollowersIndex.scss'
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 import { url } from "../config";
-function FollowersIndex(props) {
-  const loggedInStatus = props.loggedInStatus
+function FollowersIndex(props: any) {
+  const context = useContext(MainContext)
+  const loggedInStatus = context.loggedInStatus
   const user = props.user
-  const currentUser = props.currentUser
+  const currentUser = context.user
   const setFollowersIndexModal = props.setFollowersIndexModal
-  const setPromptingAccountCreation = props.setPromptingAccountCreation
-  const [followers, setFollowers] = useState([])
+  const setPromptingAccountCreation = context.setPromptingAccountCreation
+  type Followers = {
+    id: number,
+    name: string,
+    avatar: {
+      url: string
+    },
+    following: boolean
+  }
+  const [followers, setFollowers] = useState<Followers[]>([])
   useEffect(() => {
     openFollowModal(user.id)
   }, [])
-  const openFollowModal = (id) => {
+  const openFollowModal = (id: number) => {
     axios.get(`${url}/followers/${id}`, { withCredentials: true })
     .then(response => {
       const data = response.data
@@ -24,16 +34,16 @@ function FollowersIndex(props) {
     })
   }
 
-  const handleRelationship = (value, key) => {
+  const handleRelationship = (value: Followers, key: number) => {
     if (value.following) {
-     relationshipDestroy(value.id, key)
+     relationshipDestroy(value.id)
     } else {
-     relationshipCreate(value.id, key)
+     relationshipCreate(value.id)
     }
   }
 
 
-  const relationshipCreate = (id, key) => {
+  const relationshipCreate = (id: number) => {
    if (loggedInStatus === "ログインなう") {
     axios.post("http://localhost:3001/relationships",  { user_id: id },  { withCredentials: true })
     .then(response => {
@@ -53,7 +63,7 @@ function FollowersIndex(props) {
    }
   }
 
-  const relationshipDestroy = (id, key) => {
+  const relationshipDestroy = (id: number) => {
     axios.delete(`http://localhost:3001/relationships/${id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -76,18 +86,19 @@ function FollowersIndex(props) {
   return (
    <Fragment>
     <div className='back_display2'></div>
+    { user.id && (
     <div className='followers_index_modal'>
       <h3>フォロワー</h3>
       <div className='followers_innner'>
-          {followers.map((value, key) => {
+          {followers.map((value: Followers, key: number) => {
             return (
              <Fragment>
                <div className='followers_content'>
                 <div className='icon'>
-                 <img src={value.avatar.url}></img>
+                { value.avatar.url && <img src={value.avatar.url}></img> }
                 </div>
-                <Link to={`/profile/${value.id}/page/1`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link>
-                { currentUser.id === value.id ? 
+                { value.id && <Link to={`/profile/${value.id}/page/1`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link> }
+                { currentUser.id && currentUser.id === value.id ? 
                   <></>
                   : 
                   value.following && currentUser.id ?
@@ -102,6 +113,7 @@ function FollowersIndex(props) {
       </div>
       <div className='close' onClick={() => closeModal()}><a><CloseIcon /></a></div>
     </div>
+    )}
    </Fragment>
   )
 }

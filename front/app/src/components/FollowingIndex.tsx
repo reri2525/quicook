@@ -78,7 +78,7 @@ function FollowingIndex(props: any) {
   return (
    <Fragment>
     <div className='back_display2'></div>
-    {  user.id && (
+    { user.id && (
     <div className='following_index_modal'>
       <h3>フォロー中</h3>
       <div className='following_innner'>

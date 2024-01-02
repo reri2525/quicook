@@ -290,12 +290,7 @@ function Profile(props: any) {
        </div> : <></> }
       </div>}
     { followingIndexModal ? <FollowingIndex user={user} setFollowingIndexModal={setFollowingIndexModal} /> : <></> }
-    { followersIndexModal ? <FollowersIndex user={user} currentUser={props.user} setFollowersIndexModal={setFollowersIndexModal} 
-                                            setPromptingAccountCreation={setPromptingAccountCreation}
-                                            loggedInStatus={loggedInStatus}/>
-                                             :
-                                            <></>
-    }
+    { followersIndexModal ? <FollowersIndex user={user} setFollowersIndexModal={setFollowersIndexModal} /> : <></> }
    </Fragment>
   )
 }
