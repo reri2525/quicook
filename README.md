@@ -13,6 +13,7 @@
  <li>Ruby on Rails(バックエンド)</li>
  <li>Rspec</li>
  <li>React(フロントエンド)</li>
+ <li>TypeScript</li>
  <li>AWS(インフラ)</li>
  <li>Docker</li>
  <li>ECS/Fargateでコンテナを実行。</li>
