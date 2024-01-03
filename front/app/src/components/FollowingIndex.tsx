@@ -5,24 +5,21 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 import { url } from "../config";
-function FollowingIndex(props: any) {
+import { TypeFollowing, TypeUser } from '../TypeDefinition/Type';
+type Props = {
+  user: TypeUser | undefined;
+  setFollowingIndexModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+function FollowingIndex(props: Props) {
   const context = useContext(MainContext)
   const loggedInStatus = context.loggedInStatus
   const user = props.user
   const currentUser = context.user
   const setFollowingIndexModal = props.setFollowingIndexModal
   const setPromptingAccountCreation = context.setPromptingAccountCreation
-  type Following = {
-    id: number,
-    name: string,
-    avatar: {
-      url: string
-    },
-    following: boolean
-  }
-  const [following, setFollowing] = useState<Following[]>([])
+  const [following, setFollowing] = useState<TypeFollowing[]>([])
   useEffect(() => {
-    openFollowModal(user.id)
+    user && openFollowModal(user.id)
   }, [])
   const openFollowModal = (id: number) => {
     axios.get(`${url}/following/${id}`, { withCredentials: true })
@@ -34,7 +31,7 @@ function FollowingIndex(props: any) {
     })
   }
 
-  const handleRelationship = (value: Following) => {
+  const handleRelationship = (value: TypeFollowing) => {
     if (value.following) {
      relationshipDestroy(value.id)
     } else {
@@ -48,7 +45,7 @@ function FollowingIndex(props: any) {
     .then(response => {
       if (response.data.status) {
         console.log("フォロー")
-        openFollowModal(user.id)
+        user && openFollowModal(user.id)
       }
     })
     .catch(error => {
@@ -63,7 +60,7 @@ function FollowingIndex(props: any) {
     .then(response => {
       if (response.data.status) {
         console.log("フォロー解除")
-        openFollowModal(user.id)
+        user && openFollowModal(user.id)
       }
     })
     .catch(error => {
@@ -78,11 +75,11 @@ function FollowingIndex(props: any) {
   return (
    <Fragment>
     <div className='back_display2'></div>
-    { user.id && (
+    { user && user.id && (
     <div className='following_index_modal'>
       <h3>フォロー中</h3>
       <div className='following_innner'>
-        {following.map((value: Following, key:  number) => {
+        {following.map((value: TypeFollowing, key:  number) => {
            return (
              <Fragment>
               <div className='following_content'>
@@ -90,10 +87,10 @@ function FollowingIndex(props: any) {
                  <img src={value.avatar.url}></img>
                 </div>
                 <Link to={`/profile/${value.id}/page/1`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link>      
-                { currentUser.id && currentUser.id === value.id ? 
+                { currentUser && currentUser.id === value.id ? 
                   <></>
                   : 
-                  value.following && currentUser.id ?
+                  currentUser && value.following && currentUser.id ?
                     <a className="unfollow" onClick={() => handleRelationship(value)}>フォロー中</a>
                       :
                     <a className="follow" onClick={() => handleRelationship(value)}>フォローする</a>

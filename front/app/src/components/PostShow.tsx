@@ -13,6 +13,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import WarnModal from './WarnModal'
 import { url } from "../config";
+import { TypePostShow, TypePostAmounts, TypePostMaterials } from '../TypeDefinition/Type';
 
 const PostShow = () => {
  const context = useContext(MainContext)
@@ -26,7 +27,7 @@ const PostShow = () => {
  const heartCreate = context.heartCreate
  const heartDestroy = context.heartDestroy
  const loggedInStatus = context.loggedInStatus
- const [post, setPost] = useState<any>([])
+ const [post, setPost] = useState<TypePostShow | undefined>(undefined)
  const [bookmarked, setBookmarked] = useState(false)
  const [hearted, setHearted] = useState(false)
  const [relationship, setRelationship] = useState(false)
@@ -54,7 +55,7 @@ const PostShow = () => {
     console.log("b")
    })
  }
- const handleBookmark = (post: any) => {
+ const handleBookmark = (post: TypePostShow) => {
    console.log("ハンドルブックマーク")
    if (bookmarked) {
       setBookmarked(false)
@@ -66,7 +67,7 @@ const PostShow = () => {
       bookmarkCreate(post)
    }
  }
- const handleHeart = (post: any) => {
+ const handleHeart = (post: TypePostShow) => {
    console.log("ハンドルハート")
    if (hearted) {
     setHearted(false)
@@ -94,14 +95,14 @@ const PostShow = () => {
  return (
   <Fragment>
     <div className='back_display2'></div>
-    { post.user && (
+    { post && post.user.id && (
     <div className='post_show_container' ref={ref}>
       <div className='head'>
         <div className='icon'>
           <img src={post.user.avatar.url} alt="user-avatar"></img>
         </div>
         <Link to={`/profile/${post.user.id}/page/1`}>{post.user.name}</Link>
-        {currentUser.id === post.user.id ?
+        { currentUser && currentUser.id === post.user.id ?
           <></>
           :
           relationship ?
@@ -136,13 +137,13 @@ const PostShow = () => {
             <h3>材料:</h3>
             <p style={{ fontSize: '16px', opacity: '0.8' }}>({post.number_of_people})</p>
             {[...Array(15)].map((_, i) => (
-              post.materials[`material_${i + 1}`] && post.amounts[`amount_${i + 1}`] ?
-                <div key={`material_${i + 1}`} className="material">
-                  <a>{post.materials[`material_${i + 1}`]}</a>
-                  <a className='amount_detail'>{post.amounts[`amount_${i + 1}`]}</a>
-                </div>
-                :
-                <></>
+              post.materials[`material_${i + 1}` as keyof TypePostMaterials] && post.amounts[`amount_${i + 1}` as keyof TypePostAmounts] ?
+               <div key={`material_${i + 1}`} className="material">
+                 <a>{post.materials[`material_${i + 1}` as keyof TypePostMaterials]}</a>
+                 <a className='amount_detail'>{post.amounts[`amount_${i + 1}` as keyof TypePostAmounts]}</a>
+               </div>
+                  :
+               <Fragment key={`material_${i + 1}`} />
             ))}
             <h3>作り方:</h3>
             <a>{post.process}</a>
@@ -151,7 +152,7 @@ const PostShow = () => {
           </div>
         </div>
       </div>
-      {currentUser.id === post.user.id ?
+      {currentUser && currentUser.id === post.user.id ?
         <div className='delete' onClick={() => setWarnModal(true)}><DeleteIcon style={{ fontSize: '30px', cursor: 'pointer' }} /></div>
         :
         <></>

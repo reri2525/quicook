@@ -5,24 +5,21 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 import { url } from "../config";
-function FollowersIndex(props: any) {
+import { TypeFollowers, TypeUser } from '../TypeDefinition/Type';
+type Props = {
+  user: TypeUser | undefined;
+  setFollowersIndexModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+function FollowersIndex(props: Props) {
   const context = useContext(MainContext)
   const loggedInStatus = context.loggedInStatus
   const user = props.user
   const currentUser = context.user
   const setFollowersIndexModal = props.setFollowersIndexModal
   const setPromptingAccountCreation = context.setPromptingAccountCreation
-  type Followers = {
-    id: number,
-    name: string,
-    avatar: {
-      url: string
-    },
-    following: boolean
-  }
-  const [followers, setFollowers] = useState<Followers[]>([])
+  const [followers, setFollowers] = useState<TypeFollowers[]>([])
   useEffect(() => {
-    openFollowModal(user.id)
+    user && openFollowModal(user.id)
   }, [])
   const openFollowModal = (id: number) => {
     axios.get(`${url}/followers/${id}`, { withCredentials: true })
@@ -34,7 +31,7 @@ function FollowersIndex(props: any) {
     })
   }
 
-  const handleRelationship = (value: Followers, key: number) => {
+  const handleRelationship = (value: TypeFollowers, key: number) => {
     if (value.following) {
      relationshipDestroy(value.id)
     } else {
@@ -49,7 +46,7 @@ function FollowersIndex(props: any) {
     .then(response => {
       if (response.data.status) {
         console.log("フォロー")
-        openFollowModal(user.id)
+        user && openFollowModal(user.id)
         setTimeout(() => {
           console.log(followers);
         }, 6000);
@@ -68,7 +65,7 @@ function FollowersIndex(props: any) {
     .then(response => {
       if (response.data.status) {
         console.log(response.data.post)
-        openFollowModal(user.id)
+        user && openFollowModal(user.id)
         setTimeout(() => {
           console.log(followers);
         }, 6000);
@@ -86,11 +83,11 @@ function FollowersIndex(props: any) {
   return (
    <Fragment>
     <div className='back_display2'></div>
-    { user.id && (
+    { user && user.id && (
     <div className='followers_index_modal'>
       <h3>フォロワー</h3>
       <div className='followers_innner'>
-          {followers.map((value: Followers, key: number) => {
+          {followers.map((value: TypeFollowers, key: number) => {
             return (
              <Fragment>
                <div className='followers_content'>
@@ -98,10 +95,10 @@ function FollowersIndex(props: any) {
                 { value.avatar.url && <img src={value.avatar.url}></img> }
                 </div>
                 { value.id && <Link to={`/profile/${value.id}/page/1`} onClick={() => closeModal()} className='user_name'><a>{value.name}</a></Link> }
-                { currentUser.id && currentUser.id === value.id ? 
+                { currentUser && currentUser.id === value.id ? 
                   <></>
                   : 
-                  value.following && currentUser.id ?
+                  currentUser && value.following && currentUser.id ?
                     <a className="unfollow" onClick={() => handleRelationship(value, key)}>フォロー中</a>
                       :
                     <a className="follow" onClick={() => handleRelationship(value, key)}>フォローする</a>

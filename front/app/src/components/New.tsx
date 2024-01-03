@@ -24,7 +24,6 @@ function Newmodal(props: NewProps) {
   const email = watch('email', '')
   const password = watch('password', '')
   const passwordConfirmation = watch('passwordConfirmation', '')
-  const ref = document.referrer
 
   const CloseModal = () => {
     props.setNewModal(false)

@@ -16,6 +16,7 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { amber, grey, brown } from '@mui/material/colors';
 import { url } from "../config";
 import { MainContext } from '../App';
+import { TypePost } from '../TypeDefinition/Type';
 function Category() {
   const context = useContext(MainContext);
   const loggedInStatus = context.loggedInStatus;
@@ -27,28 +28,7 @@ function Category() {
   const { query } = useParams<{query: string}>();
   const numericId = parseInt(id);
   const history = useHistory();
-  type PostAll = {
-    id: number,
-    title: string,
-    image: {
-      url: string
-    },
-    thumbnail: {
-      url: string
-    },
-    heart_count: number,
-    hearts: { id: number, user_id: bigint}[] | null,
-    bookmarks: { id: number, user_id: bigint }[] | null,
-    file_type: string,
-    user: { 
-      name: string,
-      avatar: {
-        url: string
-      },
-      id: number
-    },
-  };
-  const [postall, setPostall] = useState<PostAll[]>([]);
+  const [postall, setPostall] = useState<TypePost[]>([]);
   const [pagecount, setPagecount] = useState(1);
   const [currentPage, setCurrentPage] = useState(numericId);
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
@@ -124,7 +104,7 @@ function Category() {
     window.scrollTo(0, 0);
   };
 
-  const handleBookmark = (post: PostAll) => {
+  const handleBookmark = (post: TypePost) => {
     if  (bookmarkedPosts.includes(post.id)) {
      bookmarkDestroy(post)
      setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
@@ -136,7 +116,7 @@ function Category() {
     }
   };
 
-  const bookmarkExist = (post: PostAll) => {
+  const bookmarkExist = (post: TypePost) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
       if (post.bookmarks && post.bookmarks[0]) {
         return [...prevBookmarkedPosts, post.id];
@@ -146,7 +126,7 @@ function Category() {
     });
   };
 
-  const handleHeart = (post: PostAll) => {
+  const handleHeart = (post: TypePost) => {
     if  (heartedPosts.includes(post.id)) {
      heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
@@ -160,7 +140,7 @@ function Category() {
     }
   };
 
-  const heartExist = (post: PostAll) => {
+  const heartExist = (post: TypePost) => {
     setHeartedPosts((prevHeartedPosts) => {
       if (post.hearts && post.hearts[0]) {
         return [...prevHeartedPosts, post.id];
@@ -186,7 +166,7 @@ function Category() {
       <Fragment>
       <h2 className='saerch_or_category_query'>カテゴリ「{query}」</h2>
       <div className='post_container'>
-       {postall.map((value: PostAll, key: number) => {
+       {postall.map((value: TypePost, key: number) => {
          let iconColor;
 
          if (key === 0) {

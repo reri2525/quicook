@@ -16,14 +16,14 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import FollowingIndex from './FollowingIndex';
 import FollowersIndex from './FollowersIndex';
 import { url } from "../config";
+import { TypeUserProfile, TypePost } from '../TypeDefinition/Type';
 function Profile(props: any) {
   const context = useContext(MainContext)
   const loggedInStatus = context.loggedInStatus
   const relationshipCreate = context.relationshipCreate
   const relationshipDestroy = context.relationshipDestroy
-  const setPromptingAccountCreation = context.setPromptingAccountCreation
   const currentUser = context.user
-  const [user, setUser] = useState<any>([])
+  const [user, setUser] = useState<TypeUserProfile>()
   const [relationship, setRelationship] = useState(false)
   const [follow, setFollow] = useState(0)
   const [follower, setFollower] = useState(0)
@@ -35,7 +35,7 @@ function Profile(props: any) {
   const number = params.number
   const numericNumber = parseInt(id);
   const history = useHistory();
-  const [postall, setPostall] = useState<any>([])
+  const [postall, setPostall] = useState<TypePost[]>([])
   const [pagecount, setPagecount] = useState(0)
   const [currentPage, setCurrentPage] = useState(numericNumber)
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
@@ -56,7 +56,7 @@ function Profile(props: any) {
   const openPlofile = (id: string) => {
     axios.get(`${url}/users/${id}`, { withCredentials: true })
     .then(response => {
-        const data: any = response.data
+        const data = response.data
         setUser(data.user)
         setFollow(data.followed_count)
         setFollower(data.follower_count)
@@ -81,7 +81,7 @@ function Profile(props: any) {
     }
   }
 
-  const postShow = (id: string) => {
+  const postShow = (id: number) => {
     history.push(`/posts/${id}`)
   }
 
@@ -130,7 +130,7 @@ function Profile(props: any) {
     }
     window.scrollTo(0, 0);
   }
-  const handleBookmark = (post: any) => {
+  const handleBookmark = (post: TypePost) => {
     if  (bookmarkedPosts.includes(post.id)) {
      props.bookmarkDestroy(post)
      setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
@@ -141,7 +141,7 @@ function Profile(props: any) {
      }
     }
    }
-  const bookmarkExist = (post: any) => {
+  const bookmarkExist = (post: TypePost) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
       if (post.bookmarks && post.bookmarks[0]) {
         return [...prevBookmarkedPosts, post.id];
@@ -150,7 +150,7 @@ function Profile(props: any) {
       }
     });
   }
-  const handleHeart = (post: any) => {
+  const handleHeart = (post: TypePost) => {
     if  (heartedPosts.includes(post.id)) {
      props.heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
@@ -163,7 +163,7 @@ function Profile(props: any) {
      }
     }
   }
-  const heartExist = (post: any) => {
+  const heartExist = (post: TypePost) => {
     setHeartedPosts((prevHeartedPosts) => {
       if (post.hearts && post.hearts[0]) {
         return [...prevHeartedPosts, post.id];
@@ -181,7 +181,7 @@ function Profile(props: any) {
       </div>
       <div className='explanation'>
         <a className='user_name'>{user.name}</a>
-        { user.id === currentUser.id ? 
+        { currentUser && user.id === currentUser.id ? 
           <Link to="/edit" style={{ textDecoration: 'none', cursor: 'pointer' }}>
             <a className='edit_profile'>プロフィール編集</a>
           </Link> 

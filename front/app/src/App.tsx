@@ -18,52 +18,11 @@ import{
   Route,
 } from "react-router-dom";
 import { url } from "./config";
-interface MainContextType {
-  handleLogin: () => void;
-  loggedInStatus: string;
-  user: any
-  handleLogout: () => void;                    
-  promptingAccountCreation: boolean                            
-  setPromptingAccountCreation: React.Dispatch<React.SetStateAction<boolean>>
-  bookmarkCreate: (post: Post) => void; 
-  bookmarkDestroy: (post: Post) => void;                       
-  heartCreate: (post: Post) => void; 
-  heartDestroy: (post: Post) => void;                           
-  relationshipCreate: (id: number) => void;
-  relationshipDestroy: (id: number) => void;
-}
-type Post = {
-  id: number,
-  title: string,
-  image: {
-    url: string
-  },
-  thumbnail: {
-    url: string
-  },
-  heart_count: number,
-  hearts: { id: number, user_id: bigint}[] | null,
-  bookmarks: { id: number, user_id: bigint }[] | null,
-  file_type: string,
-  user: { 
-    name: string,
-    avatar: {
-      url: string
-    },
-    id: number
-  },
-}
-type User = {
-  name: string,
-  id: number,
-  avatar: {
-    url: string
-  }
-}
-export const MainContext = createContext<MainContextType>({
+import { TypePost, TypePostShow, TypeUser, TypeMainContext } from './TypeDefinition/Type';
+export const MainContext = createContext<TypeMainContext>({
   handleLogin: () => {},
   loggedInStatus: "",
-  user: {},
+  user: undefined,
   handleLogout: () => {},                    
   promptingAccountCreation: false,                         
   setPromptingAccountCreation: () => {},
@@ -76,7 +35,7 @@ export const MainContext = createContext<MainContextType>({
 });
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState<string>("")
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<TypeUser>()
   const [promptingAccountCreation, setPromptingAccountCreation] = useState(false)
   const handleLogin = () => {
     window.location.pathname = "/";
@@ -100,7 +59,7 @@ function App() {
       } else if (!response.data.logged_in) {
         setLoggedInStatus("未ログイン")
         console.log("未ログイン")
-        setUser(null)
+        setUser(undefined)
       }
     })
 
@@ -113,7 +72,7 @@ function App() {
     checkLoginStatus()
   }, [])
   
-  const bookmarkCreate = (post: Post) =>{
+  const bookmarkCreate = (post: TypePost | TypePostShow) =>{
    if (loggedInStatus === "ログインなう") {
     axios.post(`${url}/bookmarks`,  { post_id: post.id }, { withCredentials: true })
     .then(response => {
@@ -128,7 +87,7 @@ function App() {
     setPromptingAccountCreation(true)
    }
   }
-  const bookmarkDestroy = (post: Post) =>{
+  const bookmarkDestroy = (post: TypePost | TypePostShow) =>{
     axios.delete(`${url}/bookmarks/${post.id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {
@@ -140,7 +99,7 @@ function App() {
    })
   }
 
-  const heartCreate = (post: Post) =>{
+  const heartCreate = (post: TypePost | TypePostShow) =>{
    if (loggedInStatus === "ログインなう") {
     axios.post(`${url}/hearts`,  { post_id: post.id },  { withCredentials: true })
     .then(response => {
@@ -155,7 +114,7 @@ function App() {
     setPromptingAccountCreation(true)
    }
   }
-  const heartDestroy = (post: Post) =>{
+  const heartDestroy = (post: TypePost | TypePostShow) =>{
     axios.delete(`${url}/hearts/${post.id}`, { withCredentials: true })
     .then(response => {
       if (response.data.status) {

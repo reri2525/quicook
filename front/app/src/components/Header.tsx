@@ -29,7 +29,7 @@ return (
         <Link to="/" className="main_title title_link">Quicook</Link>
         <form className='search' onSubmit={event => event.preventDefault()}>
          <input  
-           placeholder="レシピを探す"
+           placeholder="料理名でレシピを探す。"
            value={searchQuery}
            onChange={event => setSearchQuery(event.target.value)}
          >
@@ -46,14 +46,14 @@ return (
 return (
     <header className="header_login">
       <Link to="/home/page/1" className="main_title title_link">Quicook</Link>
-      <Link to={`/profile/${user.id}/page/1`} className={window.location.pathname == `/profile/${user.id}/page/1` ? 'onprofile' : 'profile'}>
+      <Link to={`/profile/${user && user.id}/page/1`} className={window.location.pathname == `/profile/${user && user.id}/page/1` ? 'onprofile' : 'profile'}>
       <img className='image'
-        src={user.avatar.url}>
+        src={user && user.avatar.url}>
       </img>
         プロフィール</Link>
       <form className='search' onSubmit={event => event.preventDefault()}>
         <input  
-           placeholder="レシピを探す"
+           placeholder="料理名でレシピを探す。"
            value={searchQuery}
            onChange={event => setSearchQuery(event.target.value)}
         >

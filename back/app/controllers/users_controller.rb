@@ -18,6 +18,14 @@ class UsersController < ApplicationController
     
     def show 
         @user = User.find(params[:id])
+        @user_json = { 
+            name: @user.name,
+            id: @user.id,
+            introduction: @user.introduction,
+            avatar: {
+                url: @user.avatar.url
+            }
+        }
         @posts_count = @user.posts.count
         @followed_count = @user.following.count
         @follower_count = @user.followers.count
@@ -25,10 +33,10 @@ class UsersController < ApplicationController
          relationship = Relationship.find_by(followed_id: @user.id, follower_id: @current_user.id)
         end
          if @current_user
-             render json: { status: :true, user: @user, relationship: relationship ? true : false,
+             render json: { status: :true, user: @user_json, relationship: relationship ? true : false,
                             followed_count: @followed_count, follower_count: @follower_count, posts_count: @posts_count }
          else
-             render json: { status: :false, user: @user, followed_count: @followed_count, 
+             render json: { status: :false, user: @user_json, followed_count: @followed_count, 
                             follower_count: @follower_count, posts_count: @posts_count  }
          end
     end
