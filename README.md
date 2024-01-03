@@ -1,6 +1,6 @@
 <h1>Quicook</h1>
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
-<img src="back/public/images/アプリ.png" alt="UNADJUSTEDNONRAW_thumb_1">
+<img src="back/public/images/quicook.png" alt="UNADJUSTEDNONRAW_thumb_1">
 <h2>デモ動画</h2>
 (https://github.com/reri2525/Quicook/assets/110535369/50ec87f6-2e51-4df1-a5f0-b06725448bbe)
 <p>*現在はまだ資金の問題で公開しておりません!公開可能な状態には作り上げています。</p>
