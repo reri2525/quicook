@@ -29,7 +29,7 @@
  <li>useContextを使っている。any型をなるべく使わないようにしている。(現在TypeScript導入中なのでまだ完全にできてない。)
 </ul>
 <h2>クラウドアーキテクチャ</h2>
-<img src="back/public/images/クラウドアーキテクチャ.jpg" alt="cloud">
+<img src="back/public/images/クラウド.jpg" alt="cloud">
 <h2>このインフラ構成にした理由</h2>
 <ul>
  <li>大規模なサービスのインフラとして多く使われてる構成であるため勉強すること、構築することに価値があると感じたからです。</li>
