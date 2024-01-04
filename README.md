@@ -26,7 +26,7 @@
  <li>ReactとRailsを使用してSPAで構成されている。</li>
  <li>UIにモーダルなどを使用している。</li>
  <li>ECS/Fargateでコンテナを使用してサーバーレスでコンテナを実行している。</li>
- <li>useContextを使用している。any型をなるべく使わないように徹底している。(現在TypeScript導入中なのでまだ完全にできてない。)
+ <li>any型をなるべく使わないようにしている。(現在TypeScript導入中なのでまだ完全にできてない。)
 </ul>
 <h2>クラウドアーキテクチャ</h2>
 <img src="back/public/images/クラウドアーキテクチャ.jpg" alt="cloud">
