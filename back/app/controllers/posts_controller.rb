@@ -15,7 +15,7 @@ class PostsController < ApplicationController
                  .left_joins(:hearts)
                  .group(:id)
                  .reorder('COUNT(hearts.id) DESC, MAX(hearts.created_at) DESC')
-                 .paginate(page: params[:page], per_page: 6)
+                 .paginate(page: params[:page], per_page: 27)
     if @posts.exists?
       response_data = generate_response_data(@posts)
       render json: response_data  

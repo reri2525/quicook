@@ -207,7 +207,7 @@ function Home() {
       : <></> }
       { postall.length === 0 && postExist ? 
                <div className='post_skeleton_container'>
-                 {[...Array(6).keys()].map(i =>
+                 {[...Array(27).keys()].map(i =>
                     <div className='post_skeleton'></div>
                  )}
                </div> :
