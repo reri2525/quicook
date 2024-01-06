@@ -213,7 +213,7 @@ function Home() {
                </div> :
       <div className='pagenate_container'>
        {pagecount > 1 ? 
-       <div className='pagenate'><nav className='back'>back</nav>
+       <div className='pagenate'>
         <button className='page_move' onClick={() => postBack(currentPage)}><NavigateBeforeIcon/></button>
         { currentPage === 1 ? "" :
          <button 
@@ -240,7 +240,6 @@ function Home() {
            onClick={() => postGo(currentPage)}>
             <NavigateNextIcon/>
         </button>
-        <nav className='next'>next</nav>
        </div> : <></> }
       </div>}
    </Fragment>

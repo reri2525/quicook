@@ -58,32 +58,20 @@ header {
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: 2;
+  z-index: 3;
   border-bottom: 2px solid #bbb;
-
   .search {
-    position: absolute;
-    top: 13px;
-    left: 525px;
+    position: relative;
+    bottom: 35px;
+    left: 28%;
     height: 30px;
-
     input {
       height: 32px;
-      width: 330px;
+      width: 20%;
       border-radius: 20px 0 0 20px;
       border: solid 1px #bbb;
-      padding-left: 10px;
+      padding-left: 1%;
     }
-
-    select {
-      height: 36px;
-      border: solid 1px #bbb;
-
-      &:hover {
-        background-color: rgba(248, 255, 255, 1);
-      }
-    }
-
     a {
       width: 30px;
       height: 30px;
@@ -92,20 +80,17 @@ header {
       position: relative;
       top: 7px;
       border-radius: 26px;
-
       &:hover {
         background-color: #bbb;
         opacity: 0.6;
       }
     }
-
     button {
       position: absolute;
       top: 2px;
       border-radius: 0 20px 20px 0;
       height: 36px;
       border: solid 1px #bbb;
-
       &:hover {
         background-color: rgba(248, 255, 255, 1);
       }
@@ -115,7 +100,7 @@ header {
   .profile {
     position: relative;
     top: 10px;
-    left: 200px;
+    left: 10%;
     text-decoration: none;
     font-size: 20px;
     color: black;
@@ -125,7 +110,6 @@ header {
       border-radius: 10px;
       transition: 0.3s;
     }
-
     .image {
       height: 30px;
       width: 30px;
@@ -163,8 +147,8 @@ header {
     background-color: hsl(186, 95%, 68%);
     float: right;
     position: relative;
-    top: 10px;
-    right: 20px;
+    bottom: 68px;
+    right: 15%;
     padding: 10px 50px 10px 50px;
     text-align: center;
     border-radius: 20px;
@@ -196,6 +180,20 @@ header {
   padding: 0px 15px 0px 10px;
   line-height: 60px;
   margin-top: -39px;
+  text-decoration: none;
+  &:hover {
+    background-color: rgb(248, 248, 255);
+  }
+}
+
+.log2 {
+  float: right;
+  color: black;
+  float: right;
+  font-size: 20px;
+  padding: 0px 15px 0px 10px;
+  line-height: 60px;
+  margin-top: -77px;
   text-decoration: none;
   &:hover {
     background-color: rgb(248, 248, 255);
