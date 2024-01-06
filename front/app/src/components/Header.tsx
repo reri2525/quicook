@@ -55,7 +55,7 @@ return (
       <img className='image'
         src={user && user.avatar.url}>
       </img>
-        プロフィール</Link>
+      </Link>
       <form className='search' onSubmit={event => event.preventDefault()}>
         <input  
            placeholder="料理名でレシピを探す。"

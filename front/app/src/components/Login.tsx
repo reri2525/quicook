@@ -85,7 +85,7 @@ return (
         <div className="back_display2">
           
         </div>
-        <div className="form_modal">   
+        <div className="form_modal_login">   
         { passwordResetForm ?
           <form className="form_sent_email">
              <h1>パスワード再設定</h1>

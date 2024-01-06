@@ -37,6 +37,10 @@ const PostShow = () => {
 
  useEffect(() => {
   openPostShow(id)
+  document.body.style.overflow = 'hidden';
+  return () => {
+    document.body.style.overflow = 'auto';
+  };
  }, [id])
 
  const openPostShow = (id: string) => {

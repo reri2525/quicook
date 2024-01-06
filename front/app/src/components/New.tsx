@@ -68,7 +68,7 @@ return (
         <div className="back_display2">
           
         </div>
-        <div className="form_modal">
+        <div className="form_modal_new">
          <form className="form_new">
              <h1>アカウント作成</h1>
                 <label>名前</label><br></br>

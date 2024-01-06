@@ -1,18 +1,12 @@
 .center {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    height: calc(100vh);
-    width: calc(100vw - 19px);
+    height: calc(100vh - 80px);
+    width: calc(100vw - 100px);
     z-index: 1;
     .center_inner {
      min-height: calc(100vh - 60px);
     }
     .center_container{
-      width: calc(100vw - 19px);
-      position: absolute;
-      top: 0px;
-      left: 0px;
+      width: calc(100vw - 35px);
       background-color: #fafafa;
       min-height: calc(100vh - 60px);
       z-index: 1;

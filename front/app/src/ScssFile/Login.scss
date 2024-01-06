@@ -1,8 +1,8 @@
-.form_modal {
+.form_modal_login {
     z-index: 100;
     background-color: white;
     width: 400px;
-    height: 550px;
+    height: 500px;
     position: fixed; 
     top: 50%;
     left: 50%;
@@ -22,7 +22,7 @@
       .input {
         border: 2px solid #bbb;
         width: 300px;
-        margin-bottom: 30px;
+        margin-bottom: 5%;
         float: bottom;
         border-radius: 5px;
       }
@@ -30,7 +30,7 @@
       .input_sent_email {
         border: 2px solid #bbb;
         width: 300px;
-        margin-bottom: 30px;
+        margin-bottom: 5%;
         float: bottom;
         border-radius: 5px;
       }
