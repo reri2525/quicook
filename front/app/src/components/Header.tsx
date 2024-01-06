@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import CreateIcon from '@mui/icons-material/Create';
 type Props = {
   setPostModal: React.Dispatch<React.SetStateAction<boolean>>;
   setLogModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -67,7 +68,7 @@ return (
         <button className='sarch_btn' onClick={() => searchQuery !== '' && history.push(`/search/${searchQuery}/page/1`)}><SearchIcon /></button>
       </form>
       <a className="log2" onClick={() => handleLogout()}>ログアウト</a>
-      <a className='post_button' onClick={() => ShowPostModal()}>投稿する</a>
+      <a className='post_create' onClick={() => ShowPostModal()}><a><CreateIcon /></a></a>
     </header>
 );
 } else {
