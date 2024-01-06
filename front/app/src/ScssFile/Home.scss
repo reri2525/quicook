@@ -163,15 +163,14 @@
  }
 }
 .pagenate_container {
-  margin-left: -248px;
-  width: calc(100vw);
   display: flex;
-  justify-content: center;
-  padding-bottom: 50px;
+  justify-content: center; 
   margin-top: 50px;
+  margin-left: 100px;
   .pagenate {
+    width: 390px;
     display: flex;
-    position: relative;
+    justify-content: center; 
     padding-bottom: 60px;
     .page_move {
       text-align: center;

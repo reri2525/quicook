@@ -169,7 +169,7 @@ coments = [
                      cost: costs[n], process: process[n], coment: coments[n])
 end
 
-25.times do |n|
+360.times do |n|
  user.posts.create!(title: "ページネーションテスト", image: test_file,
                                              thumbnail: test_file,
                                              content: "なし", time: "なし", number_of_people: "1人分", material_1: "なし", amount_1: "なし",
