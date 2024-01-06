@@ -9,16 +9,16 @@ header {
   border-bottom: 2px solid #bbb;
   border-right: 1px solid #bbb;
   .search {
-    position: absolute;
-    top: 13px;
-    left: 525px;
+    position: relative;
+    left: 28%;
+    margin-top: 10px;
     height: 30px;
     input {
       height: 32px;
-      width: 330px;
+      width: 20%;
       border-radius: 20px 0 0 20px;
       border: solid 1px #bbb;
-      padding-left: 10px;
+      padding-left: 1%;
     }
     a {
       width: 30px;
@@ -34,13 +34,8 @@ header {
         opacity: 0.6;
       }
     }
-    select {
-      height: 36px;
-      border: solid 1px #bbb;
-
-      &:hover {
-        background-color: rgba(248, 255, 255, 1);
-      }
+    .search_button {
+  
     }
     button {
       position: absolute;
@@ -197,13 +192,13 @@ header {
 }
 
 .log {
+  float: right;
   color: black;
   float: right;
   font-size: 20px;
   padding: 0px 15px 0px 10px;
   line-height: 60px;
-  margin-right: 10px;
-  margin-left: -10px;
+  margin-top: -39px;
   text-decoration: none;
   &:hover {
     background-color: rgb(248, 248, 255);

@@ -1,5 +1,4 @@
 footer {
-    position: relative;
     position: fixed;
     left: 0px;
     bottom: 0px;
@@ -38,13 +37,14 @@ footer {
       }
     }
     .login {
-      position: absolute;
-      top: 20px;
-      left: 1150px;
+      float: right;
+      position: relative;
+      bottom: 53px;
       font-size: 20px;
       border: white 1px solid;
       border-radius: 20px;
       padding: 5px 20px 5px 20px;
+      margin-right: 10px;
       &:hover {
         cursor: pointer;
         background-color: rgb(187, 187, 187, 0.8);
@@ -52,14 +52,15 @@ footer {
       }
     }
     .new {
-      position: absolute;
-      top: 20px;
-      left: 1000px;
+      float: right;
+      position: relative;
+      bottom: 53px;
       font-size: 20px;
       border: white 1px solid;
       background-color: white;
       border-radius: 20px;
       padding: 5px 20px 5px 20px;
+      margin-right: 10px;
       &:hover {
         background-color: rgba(187, 187, 187, 0.8);
         transition: 0.3s;

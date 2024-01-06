@@ -41,11 +41,10 @@ return (
          >
          </input>
          <a onClick={() => setSearchQuery("")}><CloseIcon /></a>
-         <button className='sarch_btn' onClick={() => searchQuery !== '' && history.push(`/search/${searchQuery}/page/1`)}><SearchIcon /></button>
+         <button className='search_button' onClick={() => searchQuery !== '' && history.push(`/search/${searchQuery}/page/1`)}><SearchIcon /></button>
         </form>
         <a className="log" onClick={() => ShowLogModal()}>ログイン</a>
         <a className="log" onClick={() => ShowNewModal()}>新規登録</a>
-      
     </header>
     );
 } else if (loggedInStatus === 'ログインなう') {
