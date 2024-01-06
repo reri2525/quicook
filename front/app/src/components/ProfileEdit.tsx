@@ -91,7 +91,6 @@ function ProfileEdit() {
           </img>
          }
          </div>
-         <h3>{nameChange}</h3>
          <label className='icon_edit'>
            プロフィール写真の編集
            <input type='file' 
@@ -117,17 +116,8 @@ function ProfileEdit() {
            value={email}
            onChange={event => setEmail(event.target.value)}
          /><br/>
-         <label>新規パスワード</label><br/>
-         <input className='password'
-           value={password}
-           onChange={event => setPassword(event.target.value)}
-         /><br/>
-         <label>新規パスワード確認</label><br/>
-         <input className='password'
-           value={passwordConfirmation}
-           onChange={event => setPasswordConfirmation(event.target.value)}
-         /><br/>
-         <button type='submit' className='save_button'>保存する</button>
+         <button type='submit' className='update_button'>更新する</button>
+         <button type='button' className='password_reset_button' onClick={() => handleDestroy()}>パスワード再設定</button>
          <button type='button' className='acount_destroy_button' onClick={() => handleDestroy()}>アカウント削除</button>
         </form>
       </div>

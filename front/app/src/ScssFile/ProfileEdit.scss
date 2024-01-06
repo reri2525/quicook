@@ -1,16 +1,17 @@
 .edit {
-  position: relative;
-  top: 30px;
-  margin-left: 220px;
-  border-radius: 10px;
-  width: 500px;
-  min-height: 800px;
-  background-color: white;
   .edit_container {
-    position: relative;
-    top: 30px; 
+    padding-top: 30px;
+    padding-bottom: 10px;
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 390px;
+    min-height: 300px;
+    background-color: white;
+    border: #bbb 1px solid;
     form {
-      width: 335px;
+      width: 330px;
       margin: 0 auto;
       .update {
         background-color: rgba(187, 187, 187, 0.286);
@@ -20,6 +21,7 @@
         line-height: 30px;
         border: #bbb 1px solid;
         border-radius: 10px;
+        margin-top: -20px;
       }
       .errors {
         background-color: rgba(255, 0, 0, 0.237);
@@ -29,28 +31,71 @@
         line-height: 30px;
         border: #bbb 1px solid;
         border-radius: 10px;
+        margin-top: -20px;
       }
-      .save_button {
+      .update_button {
+        background-color: rgb(33,123,215);
+        width: calc(100% + 8px);
+        padding: 6px 0px;
+        border-radius: 10px;
+        color: white;
+        margin-bottom: 14px;
         &:hover {
           transition: 0.3s;
-          border-radius: 10px;
-          background-color: #bbb;
+          background-color: rgb(33, 94, 215);
         }
       }
       .acount_destroy_button {
+        margin-right: -8px;
         float: right;
         width: 120px;
         height: 30px;
-        border: #bbb 1px solid;
+        border: rgba(250, 0, 0) 1px solid;
         border-radius: 10px;
-        color: white;
-        position: relative;
-        left: 9px;
-        background-color: rgba(250, 0, 0);
+        color: rgba(250, 0, 0);
+        background-color: white;
         &:hover {
           transition: 0.3s;
           cursor: pointer;
-          background-color: rgba(200, 0, 0);
+          background-color: rgba(250, 0, 0);
+          color: white;
+        }
+      }
+      .password_reset_button {
+        margin-left: -8px;
+        float: left;
+        font-size: 13px;
+        width: 120px;
+        height: 30px;
+        border: rgb(33,123,215) 1px solid;
+        border-radius: 10px;
+        color: rgb(33,123,215);
+        position: relative;
+        left: 9px;
+        background-color: white;
+        &:hover {
+          transition: 0.3s;
+          cursor: pointer;
+          background-color: rgb(33,123,215);
+          color: white;
+        }
+      }
+      .email_update_button {
+        float: right;
+        font-size: 13px;
+        width: 150px;
+        height: 30px;
+        border: greenyellow 1px solid;
+        border-radius: 10px;
+        color: green;
+        position: relative;
+        left: 9px;
+        background-color: white;
+        &:hover {
+          transition: 0.3s;
+          cursor: pointer;
+          background-color: green;
+          color: white;
         }
       }
       .icon {
@@ -58,6 +103,7 @@
         left: 118px;
         width: 100px;
         height: 100px;
+        margin-bottom: 20px;
        .image {
          width: 100%;
          height: 100%;
