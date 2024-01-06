@@ -69,8 +69,8 @@ return (
           
         </div>
         <div className="form_modal">
-         <form className="form">
-             <h1>入力してください</h1>
+         <form className="form_new">
+             <h1>アカウント作成</h1>
                 <label>名前</label><br></br>
                 <input className={errors.name ? 'input_errors' : 'input'}
                     type="name"
@@ -123,7 +123,7 @@ return (
                 {errors.passwordConfirmation?.type === 'validate' && (
                   <div className='errors'>※パスワードが一致しません</div>
                 )}
-                <button className='btn' type="button" onClick={handleSubmit(onSubmit)}>送信</button><br></br>
+                <button className='btn' type="button" onClick={handleSubmit(onSubmit)}>アカウントを作成</button><br></br>
                 <a className='password-warn'>パスワードは英文字または数字で6桁以上入力してください</a><br></br>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
             </form>

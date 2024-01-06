@@ -8,14 +8,14 @@
     left: 510px;
     border-radius: 13px;
   
-    .form {
+    .form_login {
       position: absolute;
       top: 2px;
       left: 49px;
       width: 300px;
   
       h1 {
-        margin-left: 24px;
+        margin-left: 90px;
       }
   
       .input {
@@ -55,14 +55,17 @@
       }
   
       .btn {
-        width: 100px;
+        width: calc(100% + 8px);
         font-size: 15px;
-        background-color: khaki;
+        padding: 5px 0px 5px 0px;
+        background-color: rgb(33,123,215);
         margin-bottom: 10px;
+        border-radius: 5px;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: white;
   
         &:hover {
-          background-color: yellow;
+          background-color: rgb(33, 94, 215);
           transition: 0.2s;
           cursor: pointer;
         }
@@ -128,14 +131,17 @@
       }
 
       .btn {
-        width: 100px;
+        width: calc(100% + 8px);
         font-size: 15px;
-        background-color: khaki;
+        padding: 5px 0px 5px 0px;
+        background-color: rgb(33,123,215);
         margin-bottom: 10px;
+        border-radius: 5px;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: white;
   
         &:hover {
-          background-color: yellow;
+          background-color: rgb(33, 94, 215);
           transition: 0.2s;
           cursor: pointer;
         }

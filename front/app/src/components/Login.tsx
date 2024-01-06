@@ -88,7 +88,7 @@ return (
         <div className="form_modal">   
         { passwordResetForm ?
           <form className="form_sent_email">
-             <h1>入力してください</h1>
+             <h1>パスワード再設定</h1>
              <ArrowBackIcon style={{float: 'right'}} onClick={ () => setPasswordResetForm(false)}/><br></br>
              <label>送信用のメールアドレス</label><br></br>
              <input className='input_sent_email'
@@ -99,13 +99,13 @@ return (
                 onKeyDown={e => e.key === 'Enter' && e.preventDefault()}
              /><br></br>
              <label>パスワードを再設定するためのメールを送ります。</label><br></br>
-             <button className='btn' type="button" onClick={ () => handleSentEmail()}>送信</button><br/>
+             <button className='btn' type="button" onClick={ () => handleSentEmail()}>メールを送信</button><br/>
              <span>{errors_m_sent}</span>
              <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
           </form>
            : 
-          <form className="form">
-             <h1>入力してください</h1>
+          <form className="form_login">
+             <h1>ログイン</h1>
                 <label>メールアドレス</label><br></br>
                 <input className='input'
                     type="email"
@@ -122,7 +122,7 @@ return (
                     value={password}
                     onChange={event => setPassword(event.target.value)}
                 /><br></br>
-                <button className='btn' type="button" onClick={ event => onSubmit(event)}>送信</button><br/>
+                <button className='btn' type="button" onClick={ event => onSubmit(event)}>ログイン</button><br/>
                 <a className='password_reset' onClick={() => PasswordReset()}>パスワードを忘れてしまった</a><br/>
                 <span>{errors_m}</span>
                <div className='close' onClick={() => CloseModal()}><a><CloseIcon /></a></div>
