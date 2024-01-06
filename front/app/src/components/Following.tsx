@@ -134,7 +134,7 @@ function Following() {
          <Fragment>
            <div className='post_not_exist'>
              <h1>好きなユーザーをフォローしましょう!</h1>
-             <img className='highlight_off_icon' src='/パンダ.png'/>
+             <img className='highlight_off_icon' src='https://assets.st-note.com/img/1689656664988-phTXkWUO83.png?width=800'/>
            </div>
          </Fragment>
       } 

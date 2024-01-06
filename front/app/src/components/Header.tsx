@@ -5,7 +5,13 @@ import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-function Header(props: any) {
+type Props = {
+  setPostModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setLogModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+function Header(props: Props) {
  const context = useContext(MainContext)
  const loggedInStatus = context.loggedInStatus
  const user = context.user

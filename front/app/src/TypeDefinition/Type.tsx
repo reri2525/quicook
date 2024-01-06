@@ -96,6 +96,15 @@
       url: string
     }
   }
+  export type TypeUserProfileEdit = {
+    name: string,
+    id: number,
+    introduction: string,
+    email: string,
+    avatar: {
+      url: string
+    }
+  }
   export type TypeMainContext = {
     handleLogin: () => void;
     loggedInStatus: string;
@@ -125,4 +134,12 @@
       url: string
     },
     following: boolean
+  }
+  export type TypeDishExpand = {
+    [key: number]: boolean;
+  }; 
+  
+  export interface TypeFileDetails extends File {
+    lastModifiedDate?: Date;
+    webkitRelativePath: string;
   }

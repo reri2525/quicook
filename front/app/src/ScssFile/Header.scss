@@ -170,9 +170,9 @@ header {
   .post_button {
     background-color: hsl(186, 95%, 68%);
     float: right;
-    position: absolute;
+    position: relative;
     top: 10px;
-    left: 1000px;
+    right: 20px;
     padding: 10px 50px 10px 50px;
     text-align: center;
     border-radius: 20px;

@@ -2,7 +2,7 @@ import { Fragment, useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import '../ScssFile/WarnModal.scss'
 import axios from 'axios'
-function WarnModal(props) {
+function WarnModal(props: any) {
   const setWarnModal = props.setWarnModal
   const warnType = props.warnType
   const user = props.user

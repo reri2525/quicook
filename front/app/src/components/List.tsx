@@ -1,12 +1,9 @@
 import { Fragment, useState,useContext } from 'react';
 import { MainContext } from '../App';
 import '../ScssFile/List.scss'
-import { Link } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
-import { ListData1 } from './ListData';
-import { ListData2 } from './ListData';
-import { CategoryData } from './ListData';
-import { DishData } from './ListData';
+import { Link, useHistory } from "react-router-dom";
+import { ListData1, ListData2, CategoryData, DishData } from './ListData';
+import { TypeDishExpand } from '../TypeDefinition/Type';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 function List() {
@@ -14,7 +11,16 @@ function List() {
  const loggedInStatus = context.loggedInStatus
  const history = useHistory();
  const [categoryExpand, setCategoryExpand] = useState(false)
- const [dishExpand, setDishExpand] = useState([])
+ const [dishExpand, setDishExpand] = useState<TypeDishExpand>({
+   0: false,
+   1: false,
+   2: false,
+   3: false,
+   4: false,
+   5: false,
+   6: false,
+   7: false,
+ });
  return (
  <Fragment>
     <div className="list_area">
@@ -82,7 +88,7 @@ function List() {
             <img src={value.icon}></img>
             <a onClick={() => history.push(`/category/${value.title}/page/1`)}>{value.title}</a>
             { dishExpand[key] ?
-             <Fragment>
+             <>
               <ExpandLess
                style={{ position: 'relative', top: '7px', left: '6px', cursor: 'pointer' }} 
                onClick={() =>
@@ -93,13 +99,12 @@ function List() {
                   dish ? <li className='dish' onClick={() => history.push(`/category/${value.title}／${dish}/page/1`)}>{dish}</li> : null
                 ))}
                </ul> 
-             </Fragment> :
+              </> :
               <ExpandMore 
                style={{ position: 'relative', top: '7px', left: '6px', cursor: 'pointer' }} 
                onClick={() =>
                setDishExpand(prevState => ({ ...prevState, [key]: true }))} 
               /> }
-              {console.log()}
            </li>
            )
           })

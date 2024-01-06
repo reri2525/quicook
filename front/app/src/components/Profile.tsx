@@ -20,6 +20,10 @@ import { TypeUserProfile, TypePost } from '../TypeDefinition/Type';
 function Profile(props: any) {
   const context = useContext(MainContext)
   const loggedInStatus = context.loggedInStatus
+  const bookmarkCreate = context.bookmarkCreate
+  const bookmarkDestroy = context.bookmarkDestroy
+  const heartCreate = context.heartCreate
+  const heartDestroy = context.heartDestroy
   const relationshipCreate = context.relationshipCreate
   const relationshipDestroy = context.relationshipDestroy
   const currentUser = context.user
@@ -132,10 +136,10 @@ function Profile(props: any) {
   }
   const handleBookmark = (post: TypePost) => {
     if  (bookmarkedPosts.includes(post.id)) {
-     props.bookmarkDestroy(post)
+     bookmarkDestroy(post)
      setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
     } else {
-     props.bookmarkCreate(post)
+     bookmarkCreate(post)
      if (loggedInStatus === "ログインなう") {
       setBookmarkedPosts([...bookmarkedPosts, post.id]);
      }
@@ -152,11 +156,11 @@ function Profile(props: any) {
   }
   const handleHeart = (post: TypePost) => {
     if  (heartedPosts.includes(post.id)) {
-     props.heartDestroy(post)
+     heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
     } else {
-     props.heartCreate(post)
+     heartCreate(post)
      if (loggedInStatus === "ログインなう") {
       setHeartedPosts([...heartedPosts, post.id]);
       post.heart_count = post.heart_count + 1
@@ -205,8 +209,8 @@ function Profile(props: any) {
            : 
          <Fragment>
            <div className='post_not_exist'>
-             <h1>おっとこのユーザーにはコンテンツがありません...</h1>
-             <HighlightOffIcon className='highlight_off_icon' style={{fontSize: '60px'}}/>
+           {user && currentUser && user.id === currentUser.id ? <h1>レシピを投稿してみよう!</h1> : user && <h1>このユーザーはまだ投稿をしていません。</h1>}
+           {user && <HighlightOffIcon className='highlight_off_icon' style={{fontSize: '60px'}}/>}
            </div>
          </Fragment>
     } 

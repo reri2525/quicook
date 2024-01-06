@@ -1,10 +1,12 @@
-import React, { Fragment, useState } from 'react';
+import { Fragment, useState, useContext } from 'react';
 import Header from './Header';
 import '../ScssFile/Top.scss'
 import Footer from './Footer';
 import Logmodal from './Login';
 import Newmodal from './New';
-function Top(props) {
+import { MainContext } from '../App';
+function Top(props: any) {
+  const context = useContext(MainContext)
   const [logmodal, setLogmodal] = useState(false);
   const [newmodal, setNewmodal] = useState(false);
   const [modal, setModal] = useState(false);
@@ -12,11 +14,10 @@ function Top(props) {
   const [scroll, setScroll] = useState(false); 
 
 
-  if (props.loggedInStatus === '未ログイン') {
+  if (context.loggedInStatus === '未ログイン') {
  return (
   <Fragment>
   <body>
-  <Header loggedInStatus={props.loggedInStatus} setLogmodal={setLogmodal} setNewmodal={setNewmodal} setModal={setModal} />
     <div className='top'>
      <div className='container'>
       <h1>Quicook..</h1>
@@ -25,13 +26,10 @@ function Top(props) {
      </div>
     </div>
   </body>
-  <Logmodal handleLogin={props.handleLogin} logmodal={logmodal} setLogmodal={setLogmodal} setModal={setModal} loggedInStatus={props.loggedInStatus}/>
-  <Newmodal handleLogin={props.handleLogin} newmodal={newmodal} setNewmodal={setNewmodal} setModal={setModal} loggedInStatus={props.loggedInStatus}/>
-  <Footer />
  </Fragment>
   );
- } else if (props.loggedInStatus === 'ログインなう') {
-  props.history.push("/home/page/1")
+ } else if (context.loggedInStatus === 'ログインなう') {
+
  }
 }
  export default Top;

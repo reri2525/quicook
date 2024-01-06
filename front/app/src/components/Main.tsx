@@ -38,7 +38,7 @@ const Main = (props: MainProps) => {
           </div>
          </div>
         </div>
-         { postModal ? <PostForm setPostmodal={setPostModal} /> : <></> }
+         { postModal ? <PostForm setPostModal={setPostModal} /> : <></> }
          { logModal ? <Logmodal logModal={logModal} setFlashMessage={setFlashMessage} setLogModal={setLogModal} setModal={setModal} /> : <></> }
          { newModal ? <Newmodal newModal={newModal} setFlashMessage={setFlashMessage} setNewModal={setNewModal} setModal={setModal} /> : <></> }
          { promptingAccountCreation ? <PromptingAccountCreation setLogModal={setLogModal} setNewModal={setNewModal} /> : <></> } 

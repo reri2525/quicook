@@ -16,42 +16,54 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { amber, grey, brown } from '@mui/material/colors';
 import { url } from "../config";
 import { MainContext } from '../App';
-function Search(props) {
-  const context = useContext(MainContext)
-  const loggedInStatus = context.loggedInStatus
-  const { id } = useParams();
-  const { query } = useParams();
+import { TypePost } from '../TypeDefinition/Type';
+function Search() {
+  const context = useContext(MainContext);
+  const loggedInStatus = context.loggedInStatus;
+  const bookmarkCreate = context.bookmarkCreate;
+  const bookmarkDestroy = context.bookmarkDestroy;
+  const heartCreate = context.heartCreate;
+  const heartDestroy = context.heartDestroy;
+  const { id } = useParams<{id: string}>();
+  const { query } = useParams<{query: string}>();
   const numericId = parseInt(id);
   const history = useHistory();
-  const [postall, setPostall] = useState([])
-  const [pagecount, setPagecount] = useState()
-  const [currentPage, setCurrentPage] = useState(numericId)
+  const [postall, setPostall] = useState<TypePost[]>([]);
+  const [pagecount, setPagecount] = useState(1);
+  const [currentPage, setCurrentPage] = useState(numericId);
   const page = [...Array(pagecount).keys()].map((i) => i + 1);
-  const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
-  const [heartedPosts, setHeartedPosts] = useState([]);
-  const [heartcount, setHeartcount] = useState(0)
-  const [postExist, setPostExist] = useState(true)
+  const [bookmarkedPosts, setBookmarkedPosts] = useState<number[]>([]);
+  const [heartedPosts, setHeartedPosts] = useState<number[]>([]);
+  const [postExist, setPostExist] = useState(true);
 
   useEffect(() => {
-    setPostall([])
     setPostExist(true)
+    setPostall([])
+    postAllGet();
+  }, [id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setPostExist(true)
+    setPostall([])
     setPagecount(1)
     setCurrentPage(1)
-    window.scrollTo(0, 0);
     postAllGet();
-  }, [id, query])
+    setCurrentPage(numericId)
+  }, [query]);
 
-  const postShow = (id) => {
+  const postShow = (id: number) => {
     history.push(`/posts/${id}`)
-  }
+  };
+
   const postAllGet = () =>{
-    axios.get(`${url}/search/${query}`, { params: { page: currentPage}, withCredentials: true})
+     axios.get(`${url}/search/${query}`, { params: { page: currentPage }, withCredentials: true })
     .then(response => {
       if (response.data.status) {
         const data = response.data.post_all
         setPostall(data)
         setPagecount(response.data.total_pages)
-        console.log(data)
+        console.log("投稿取得成功")
         for (let i = 0; i < data.length; i++) {
           bookmarkExist(data[i]);
         }
@@ -60,42 +72,51 @@ function Search(props) {
         }
         setPostExist(true)
       } else {
+        setPagecount(0)
         setPostExist(false)
-        console.log("失敗")
+        console.log("投稿なし")
       }
     })
-  }
-  const postAdd = (page) => {
+    .catch(error => {
+      console.log("投稿取得エラー", error)
+    })
+  };
+
+  const postAdd = (page: number) => {
     setCurrentPage(page)
     history.push(`/search/${query}/page/${page}`)
     window.scrollTo(0, 0);
-  }
-  const postBack = (currentPage) => {
+  };
+
+  const postBack = (currentPage: number) => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1)
-      history.push(`/search/${query}/${currentPage - 1}`)
+      history.push(`/search/${query}/page/${currentPage - 1}`)
       }
     window.scrollTo(0, 0);
-  }
-  const postGo = (currentPage) => {
+  };
+
+  const postGo = (currentPage: number) => {
     if (currentPage !== pagecount) {
       setCurrentPage(currentPage + 1)
-      history.push(`/search/${query}/${currentPage + 1}`)
+      history.push(`/search/${query}/page/${currentPage + 1}`)
     }
     window.scrollTo(0, 0);
-  }
-  const handleBookmark = (post) => {
+  };
+
+  const handleBookmark = (post: TypePost) => {
     if  (bookmarkedPosts.includes(post.id)) {
-     props.bookmarkDestroy(post)
+     bookmarkDestroy(post)
      setBookmarkedPosts(bookmarkedPosts.filter(id => id !== post.id));
     } else {
-     props.bookmarkCreate(post)
+     bookmarkCreate(post)
      if (loggedInStatus === "ログインなう") {
       setBookmarkedPosts([...bookmarkedPosts, post.id]);
      }
     }
-   }
-  const bookmarkExist = (post) => {
+  };
+
+  const bookmarkExist = (post: TypePost) => {
     setBookmarkedPosts((prevBookmarkedPosts) => {
       if (post.bookmarks && post.bookmarks[0]) {
         return [...prevBookmarkedPosts, post.id];
@@ -103,21 +124,23 @@ function Search(props) {
         return prevBookmarkedPosts.filter(id => id !== post.id);
       }
     });
-  }
-  const handleHeart = (post) => {
+  };
+
+  const handleHeart = (post: TypePost) => {
     if  (heartedPosts.includes(post.id)) {
-     props.heartDestroy(post)
+     heartDestroy(post)
      setHeartedPosts(heartedPosts.filter(id => id !== post.id));
      post.heart_count = post.heart_count - 1
     } else {
-     props.heartCreate(post)
+     heartCreate(post)
      if (loggedInStatus === "ログインなう") {
       setHeartedPosts([...heartedPosts, post.id]);
       post.heart_count = post.heart_count + 1
      }
     }
-  }
-  const heartExist = (post) => {
+  };
+
+  const heartExist = (post: TypePost) => {
     setHeartedPosts((prevHeartedPosts) => {
       if (post.hearts && post.hearts[0]) {
         return [...prevHeartedPosts, post.id];
@@ -125,7 +148,7 @@ function Search(props) {
         return prevHeartedPosts.filter(id => id !== post.id);
       }
     });
-  }
+  };
   return (
     <Fragment> 
       { postExist ? 

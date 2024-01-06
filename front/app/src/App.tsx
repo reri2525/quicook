@@ -12,6 +12,7 @@ import ProfileEdit from "./components/ProfileEdit";
 import Following from './components/Following';
 import PasswordResetForm from './components/PasswordResetForm';
 import UpdateEmail from './components/UpdateEmail';
+import Top from './components/Top';
 import{
   BrowserRouter as Router,
   Switch,
@@ -219,12 +220,12 @@ function App() {
           />  
         <Route exact path={"/password/:id/reset"}
              render={props => (
-              <PasswordResetForm { ...props} />
+              <PasswordResetForm />
             )}
           />  
         <Route exact path={"/update/:newEmail/email/:id"}
              render={props => (
-              <UpdateEmail { ...props} />
+              <UpdateEmail />
             )}
           />  
       </Switch>

@@ -9,82 +9,94 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import { url } from "../config";
-function PostForm(props) {   
+import { TypeDishExpand, TypeFileDetails } from '../TypeDefinition/Type';
+type Props = {
+  setPostModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+function PostForm(props: Props) {   
   const history = useHistory();
   const [posted, setPosted] = useState(false)
   const [title, setTitle] = useState("")
   const titlelength = 30 - title.length
   const [category, setCategory] = useState("なし")
   const [categoryModal, setCategoryModal] = useState(false)
-  const [dishExpand, setDishExpand] = useState([])
-  const [imageOrVideo, setImageOrVideo] = useState("")
-  const [imageOrVideoPreview, setImageOrVideoPreview] = useState("")
-  const [thumbnail, setThumbnail] = useState("")
-  const [thumbnailPreview, setThumbnailPreview] = useState("")
+  const [dishExpand, setDishExpand] = useState<TypeDishExpand>({
+    0: false,
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+    7: false,
+  });
+  const [imageOrVideo, setImageOrVideo] = useState<TypeFileDetails>()
+  const [imageOrVideoPreview, setImageOrVideoPreview] = useState<string | ArrayBuffer | null>(null)
+  const [thumbnail, setThumbnail] = useState<TypeFileDetails>()
+  const [thumbnailPreview, setThumbnailPreview] = useState<string | ArrayBuffer | null>(null)
   const [time, setTime] = useState("")
   const [cost, setCost] = useState("")
   const [content, setContent] = useState("")
   const [numberOfPeople, setNumberOfPeople] = useState("")
   const [materialCount, setMaterialCount] = useState(1)
-  const [materialFields, setMaterialFields] = useState([
+  const [materialFields, setMaterialFields] = useState<{material: string, amount: string}[]>([
     { material: "", amount: "" }
   ]);
   const [materialError, setMaterialError] = useState('')
   const [process, setProcess] = useState("")
   const [coment, setComent] = useState("")
-  const imageOrVideoFile = (event) => {
-    let file = event.target.files[0]
-    setImageOrVideo(file)
-    console.log(file)
+  const imageOrVideoFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.files && setImageOrVideo(event.target.files[0])
     const reader = new FileReader()
-         reader.onload = (event) => {
-             setImageOrVideoPreview(event.target.result)
+         reader.onload = (event: ProgressEvent<FileReader>) => {
+             event.target && setImageOrVideoPreview(event.target.result)
          };
-         reader.readAsDataURL(event.target.files[0])
+         event.target.files && reader.readAsDataURL(event.target.files[0])
   }
-  const thumbnailFile = (event) => {
-    let file = event.target.files[0]
-    setThumbnail(file)
-    console.log(file)
+  const thumbnailFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.files && setThumbnail(event.target.files[0])
     const reader = new FileReader()
-         reader.onload = (event) => {
-             setThumbnailPreview(event.target.result)
+         reader.onload = (event: ProgressEvent<FileReader>) => {
+             event.target && setThumbnailPreview(event.target.result)
+             event.target && console.log(event.target.result)
          };
-         reader.readAsDataURL(event.target.files[0])
+         event.target.files && reader.readAsDataURL(event.target.files[0])
   }
-  const materialChange = (e, index) => {
+  const materialChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newFields = [...materialFields];
     newFields[index].material = e.target.value;
     setMaterialFields(newFields);
   };
-  const amountChange = (e, index) => {
+  const amountChange = (e:  React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newFields = [...materialFields];
     newFields[index].amount = e.target.value;
     setMaterialFields(newFields);
   };
-  const materialRemove = (e) => {
+  const materialRemove = () => {
    if (materialCount > 1) {
    const newMaterialFields = [...materialFields];
    newMaterialFields.pop();
    setMaterialFields(newMaterialFields);
    setMaterialCount(materialCount - 1)
-   setMaterialError(null);
+   setMaterialError("");
    }
   };
   const MaterialAdd = () => {
     if (materialCount < 15){
      setMaterialCount(materialCount + 1)
-     setMaterialFields([...materialFields, { value: "" }]);
+     setMaterialFields([...materialFields, { material: "", amount: "" }]);
+     console.log(materialFields)
     } else {
      setMaterialError('※これ以上追加できません')
     }
   }
   const CloseModal = () => {
-    props.setPostmodal(false)
+    props.setPostModal(false)
     setTitle("")
     setCategory("なし")
-    setImageOrVideo("")
-    setImageOrVideoPreview("")
+    setImageOrVideo(undefined)
+    setImageOrVideoPreview(null)
+    setThumbnailPreview(null)
     setContent("")
     setCost("")
     setTime("")
@@ -102,14 +114,14 @@ function PostForm(props) {
     } 
     return title&&imageOrVideo&&imageOrVideoPreview&&content&&time&&cost&&process&&coment&&materialFields[0].material&&materialFields[0].amount;
   }
-  const onSubmit = (event) => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setPosted(true)
     const formData = new FormData();
     formData.append('post[title]', title);
     formData.append('post[category]', category);
-    formData.append('post[image]', imageOrVideo);
-    formData.append('post[thumbnail]', thumbnail);
+    imageOrVideo && formData.append('post[image]', imageOrVideo);
+    thumbnail && formData.append('post[thumbnail]', thumbnail);
     formData.append('post[content]', content);
     formData.append('post[time]', time);
     formData.append('post[cost]', cost);
@@ -150,7 +162,7 @@ function PostForm(props) {
             <div className='postform_modal_inner'>
              <div className='postform_modal_content'>
              <h1>レシピ投稿:</h1>
-             <form className="form_post" onSubmit={onSubmit}>
+             <form className="form_post" onSubmit={event => onSubmit(event)}>
              <div className='image_container'>
              {thumbnail ? (
                 <></>
@@ -171,9 +183,9 @@ function PostForm(props) {
              </div>
              )}
                {thumbnail && thumbnail.type && typeof thumbnail.type === 'string' && thumbnail.type.startsWith("video/") ? (
-                  <video controls src={thumbnailPreview} className='thumbnail_display'></video>
+                  thumbnailPreview && !(thumbnailPreview instanceof ArrayBuffer) && <video controls src={thumbnailPreview} className='thumbnail_display'></video>
                ) : thumbnail && thumbnail.type && typeof thumbnail.type === 'string' && thumbnail.type.startsWith("image/") ? (
-                  <img src={thumbnailPreview} className='thumbnail_display'></img>
+                  thumbnailPreview && !(thumbnailPreview instanceof ArrayBuffer) && <img src={thumbnailPreview} className='thumbnail_display'></img>
                ) : (
                  <></>
                )}
@@ -186,16 +198,16 @@ function PostForm(props) {
                     accept='video/*, image/*'
                     capture="environment"
                     name="image"
-                    onChange={imageOrVideoFile}
+                    onChange={event => imageOrVideoFile(event)}
                   />
                   <h3>コンテンツ</h3>
                 </label>
                </div>
                }
                 {imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("video/") ? (
-                 <video controls src={imageOrVideoPreview} className='image_display'></video>
+                 imageOrVideoPreview && !(imageOrVideoPreview instanceof ArrayBuffer) && <video controls src={imageOrVideoPreview} className='image_display'></video>
                  ) : imageOrVideo && imageOrVideo.type && typeof imageOrVideo.type === 'string' && imageOrVideo.type.startsWith("image/") ? (
-                 <img src={imageOrVideoPreview} className='image_display'></img>
+                 imageOrVideoPreview && !(imageOrVideoPreview instanceof ArrayBuffer) && <img src={imageOrVideoPreview} className='image_display'></img>
                  ) : (
                  <></>
                  )}
@@ -248,7 +260,7 @@ function PostForm(props) {
                 <button type='button' className='category_button' onClick={() => setCategoryModal(true)}>カテゴリ:　{category}</button>
                 <br></br>
                 <input className='title'
-                    maxLength='30'
+                    maxLength={30}
                     type="text"
                     placeholder='料理名'
                     value={title}
@@ -256,10 +268,8 @@ function PostForm(props) {
                 /><br></br>
                 <label>料理概要:</label><br/>
                 <textarea className='content'
-                    maxLength="300"
-                    type="text"
-                    name="content"
-                
+                    maxLength={300}
+                    name="content"        
                     placeholder='料理概要'
                     value={content}
                     onChange={event => setContent(event.target.value)}       
@@ -267,7 +277,7 @@ function PostForm(props) {
                 <button type="button" className='content_button' onClick={() => setContent("")}>取り消し</button>
                 <label>時間　</label>
                 <input className='input_time'
-                    maxLength="3"
+                    maxLength={3}
                     type="text"
                     name="time"
                     value={time}
@@ -275,7 +285,7 @@ function PostForm(props) {
                 />　分
                 <label>　　　　　費用　</label>
                 <input className='input_cost'
-                    maxLength="5"
+                    maxLength={5}
                     type="text"
                     name="cost"
                     value={cost} 
@@ -288,9 +298,9 @@ function PostForm(props) {
                     placeholder='何人分'
                     onChange={event => setNumberOfPeople(event.target.value)}
                 />
-                <a style={{ fontSize: '12px', opacity: '0.6' }}> 例) 2人分</a>
+                <a style={{ fontSize: '12px', opacity: '0.6' }}> 例） 2人分</a>
                 <div className='material'>
-                 {materialFields.map((field, index) => {
+                 {materialFields.map((field: any, index: number) => {
                   return (
                    <div>
                     <label>材料:</label>
@@ -298,15 +308,13 @@ function PostForm(props) {
                      className='material_input'
                      key={index}
                      type="text"
-                     
                      value={field.material}
                      onChange={(e) => materialChange(e, index)}
                     />
                     <label className='amount_label'>分量:</label>
                     <input
                      className='material_input'
-                     key={index}
-                     
+                     key={index}  
                      type="text"
                      value={field.amount}
                      onChange={(e) => amountChange(e, index)}
@@ -317,20 +325,16 @@ function PostForm(props) {
                 </div>
                  <label>作業工程:</label><br/>
                  <textarea className='process'
-                    maxLength="300"
-                    type="text"
-                    name="process"
-             
+                    maxLength={300}
+                    name="process"        
                     placeholder='作業工程'
                     value={process}
                     onChange={event => setProcess(event.target.value)}       
                  /><br/>
                   <label>ひとこと:</label><br/>
                  <textarea className='coment'
-                    maxLength="200"
-                    type="text"
-                    name="coment"
-              
+                    maxLength={200}
+                    name="coment"           
                     placeholder='ひとこと'
                     value={coment}
                     onChange={event => setComent(event.target.value)}       

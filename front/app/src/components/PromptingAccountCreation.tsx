@@ -2,7 +2,11 @@ import { Fragment, useEffect, useContext} from 'react'
 import '../ScssFile/PromptingAccountCreation.scss'
 import CloseIcon from '@mui/icons-material/Close';
 import { MainContext } from '../App';
-function PromptingAccountCreation(props) {
+type Props = {
+  setLogModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setNewModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+function PromptingAccountCreation(props: Props) {
   const context = useContext(MainContext)
   const setPromptingAccountCreation = context.setPromptingAccountCreation
   const setLogModal = props.setLogModal

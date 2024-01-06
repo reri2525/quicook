@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { url } from "../config";
 import '../ScssFile/PasswordResetForm.scss'
-function UpdateEmail(props) {
+function PasswordResetForm() {
   const {
     register,
     watch,
@@ -14,16 +14,13 @@ function UpdateEmail(props) {
   });
   const password = watch('password', '')
   const passwordConfirmation = watch('passwordConfirmation', '')
-  const { id } = useParams();
-  const { newEmail } = useParams();
-  const onSubmit = (event) => {
-    axios.put(`${url}/update_emails/1`,{user: {email: newEmail, id: id}},{ withCredentials: true }
+  const { id } = useParams<{id: string}>();
+  const onSubmit = () => {
+    axios.put(`${url}/password_resets/1`,{user: {password: password, password_confirmation: passwordConfirmation, email: id}},{ withCredentials: true }
     ).then(response => {
         if (response.data.status === true) {
           window.location.pathname = "/";
-        } 
-    }).catch(error => {
-       console.log()
+        }
     })
   }
   return (
@@ -60,11 +57,11 @@ function UpdateEmail(props) {
                 {errors.passwordConfirmation?.type === 'validate' && (
                   <div className='errors'>※パスワードが一致しません</div>
                 )}
-                <button className='btn' type="button" onClick={handleSubmit(onSubmit)}>送信</button><br></br>
-                <c>パスワードは英文字または数字で6桁以上入力してください</c><br></br>
+                <button className='btn' type="button" onClick={event => handleSubmit(onSubmit)}>送信</button><br></br>
+                <a className='password-warn'>パスワードは英文字または数字で6桁以上入力してください</a><br></br>
         </form>
     </div>
   )
 }
 
-export default UpdateEmail
+export default PasswordResetForm
