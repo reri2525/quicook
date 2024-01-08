@@ -4,8 +4,7 @@
   background-color: rgb(250,250,250);
   border-bottom: #bbb 1px solid;
   min-height: 175px;
-  margin-left: 30px;
-  width: calc(100% - 30px);
+  width: 100%;
   .icon {
     position: relative;
     top: 30px;
@@ -100,7 +99,7 @@
         font-size: 15px;
         margin-top: 15px;
         margin-bottom: -30px;
-        width: 300px;
+        width: 400px;
         white-space: normal;
         overflow-wrap: break-word;
       }
@@ -109,9 +108,11 @@
 }
 
 .post_container_profile {
-  width: calc(100vw - 300px);
+  width: calc(100vw - 30%);
   display: flex;
   flex-wrap: wrap;
+  margin-top: 60px;
+  margin-left: 20%;
   h1 {
     position: fixed;
     left: 400px;
@@ -120,7 +121,7 @@
   }
   .post {
     background-color: white;
-    margin: 50px 15px 0px 120px;
+    margin: 50px 15px 0px 10%;
     height: 350px;
     width: 300px;
     border-radius: 8px;
