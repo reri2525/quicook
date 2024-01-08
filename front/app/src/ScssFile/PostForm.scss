@@ -1,18 +1,19 @@
 .postform_modal {
     background-color: white;
-    position: fixed;
-    top: 80px;
-    left: calc(100vw / 5 + 40px);
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     height: 80%;
     width: 800px;
     z-index: 100;
     border-radius: 12px;
     padding: 10px 10px 10px 10px;
     .close { 
+      float: right;
+      position: relative;
+      bottom: 520px;
       z-index: 100;
-      position: fixed;
-      top: 90px;
-      left: 1050px;
       border-radius: 30px;
       border: none;
       background-color: none;
