@@ -1,10 +1,15 @@
-.profile_container {
+.profile {
   position: relative;
   z-index: 1;
   background-color: rgb(250,250,250);
   border-bottom: #bbb 1px solid;
   min-height: 175px;
   width: 100%;
+  .profile_container {
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-top: 40px;
+    margin-left: 15%;
   .icon {
     position: relative;
     top: 30px;
@@ -84,7 +89,7 @@
     .user_data {
       margin-top: 10px;
       a {
-        margin-right: 30px;
+        margin-right: 5%;
       }
       .follow_modal {
         &:hover {
@@ -105,6 +110,7 @@
       }
     }
   }
+ }
 }
 
 .post_container_profile {
@@ -234,9 +240,11 @@
 }
 
 .post_skeleton_container_profile {
-  width: calc(100vw - 300px);
+  width: calc(100vw - 40%);
   display: flex;
   flex-wrap: wrap;
+  margin-top: 60px;
+  margin-left: 20%;
   .post_skeleton {
     background-color: rgba(187, 187, 187, 0.574);
     margin: 50px 15px 0px 120px;

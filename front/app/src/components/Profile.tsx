@@ -179,7 +179,8 @@ function Profile(props: any) {
   return (
    <Fragment>
     {user  && user.id && (
-    <div className='profile_container'>
+    <div className='profile'>
+     <div className='profile_container'>
       <div className='icon'>
         <img className='image' src={user.avatar.url} alt="User Avatar" />
       </div>
@@ -202,6 +203,7 @@ function Profile(props: any) {
          <pre>{user.introduction}</pre>
         </div>
       </div>
+     </div>
     </div>
     )}
     { postExist ? 
