@@ -101,7 +101,8 @@
         margin-top: 15px;
         margin-bottom: -30px;
         width: 800px;
-        word-wrap: break-word;
+        white-space: normal;
+        overflow-wrap: break-word;
       }
     }
   }
