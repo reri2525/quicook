@@ -1,10 +1,10 @@
 FROM ruby:3.1.0
 
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+WORKDIR /rails
+COPY Gemfile /rails/Gemfile
+COPY Gemfile.lock /rails/Gemfile.lock
 RUN bundle install
-COPY . /myapp
+COPY . /rails
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/

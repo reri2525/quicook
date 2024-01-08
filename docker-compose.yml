@@ -21,7 +21,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ./back:/myapp
+      - ./back:/rails
       - bundle:/usr/local/bundle
     depends_on:
       - db
@@ -39,7 +39,7 @@ services:
       context: ./front/
       dockerfile: Dockerfile
     volumes:
-      - ./front:/usr/src/app
+      - ./front:/react
     ports:
       - "3000:3000"
     environment:
