@@ -8,14 +8,10 @@ on:
 env:
   AWS_REGION: us-east-1                   
   ECR_REPOSITORY_BACK: quicook-back
-  ECR_REPOSITORY_FRONT: quicook-front
-  ECS_SERVICE_BACK: quicook-back      
-  ECS_SERVICE_FRONT: quicook-front      
+  ECS_SERVICE_BACK: quicook-back           
   ECS_CLUSTER: quicook                
-  ECS_TASK_DEFINITION_BACK: back-task.json    
-  ECS_TASK_DEFINITION_FRONT: front-task.json                           
-  CONTAINER_NAME_BACK: quicook-back   
-  CONTAINER_NAME_FRONT: quicook-front      
+  ECS_TASK_DEFINITION_BACK: back-task.json                             
+  CONTAINER_NAME_BACK: quicook-back      
                                               
 
 jobs:
@@ -25,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
@@ -52,18 +48,6 @@ jobs:
           rm -rf ./back/config/credentials.yml.enc
           docker-compose run -e EDITOR=vim back bin/rails credentials:edit
           sudo chmod -R 777 ./back/config/master.key
-
-      - name: Yarn Add
-        run: |
-          docker-compose run front sh -c "cd app && yarn --cache-folder /usr/src/app/app/.yarn_cache add @emotion/react@^11.10.5 @emotion/styled@^11.10.5 @mui/icons-material@^5.11.0 @mui/material@^5.11.3 axios@^1.2.2 react-hook-form@^7.43.0 react-router-dom@5 sass@^1.57.1"
-          docker-compose down
-
-      - name: Cache File
-        run: |
-          sudo rm -rf ./front/app/node_modules/.cache
-          sudo mkdir -p ./front/app/node_modules/.cache
-          sudo chmod -R 777 ./front/app/node_modules/.cache
-          docker-compose build
       
       - name: Backend Test
         run: |
@@ -79,8 +63,6 @@ jobs:
         run: |
           docker tag quicook_back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
-          docker tag quicook_front:latest public.ecr.aws/v2y9n7g3/quicook-front:latest
-          docker push public.ecr.aws/v2y9n7g3/quicook-front:latest
 
       - name: Fill in the new image ID in the Amazon ECS task definition back
         id: task-def-back
@@ -98,18 +80,4 @@ jobs:
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
 
-      - name: Fill in the new image ID in the Amazon ECS task definition front
-        id: task-def-front
-        uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
-        with:
-          task-definition: ${{ env.ECS_TASK_DEFINITION_FRONT }}
-          container-name: ${{ env.CONTAINER_NAME_FRONT}}
-          image: public.ecr.aws/v2y9n7g3/quicook-front:latest
-
-      - name: Deploy Amazon ECS task definition front
-        uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
-        with:
-          task-definition: ${{ steps.task-def-front.outputs.task-definition }}
-          service: ${{ env.ECS_SERVICE_FRONT }}
-          cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
+   
