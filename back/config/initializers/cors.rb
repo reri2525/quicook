@@ -15,7 +15,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
    end
 
    allow do
-     origins 'https://quicook.online'
+     origins 'https://quicook-com.vercel.app'
 
      resource '*',
        headers: :any,
