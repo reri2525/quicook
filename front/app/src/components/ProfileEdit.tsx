@@ -11,7 +11,7 @@ function ProfileEdit() {
  const [update, setUpdate] = useState<string | null>(null)
  const [errors, setErrors] = useState<string | null>(null)
  const [name, setName] = useState(user && user.name)
- const [nameChange, setNameChange]= useState(user && user.name)
+ const [nameChange, setNameChange]= useState("")
  const [introduction, setIntroduction] = useState(user && user.introduction)
  const [email, setEmail] = useState(user && user.email)
  const [avatar, setAvatar] = useState<TypeFileDetails>()
@@ -76,6 +76,7 @@ function ProfileEdit() {
    }
    setEmail(user && user.email)
  }, [warnModal])
+
  return (
   <Fragment>
    { user && (
@@ -88,6 +89,11 @@ function ProfileEdit() {
          {avatarPreview && !(avatarPreview instanceof ArrayBuffer) && 
           <img className='image'
             src={avatarPreview}>
+          </img>
+         }
+         {user && !(avatarPreview) &&
+          <img className='image'
+            src={user.avatar.url}>
           </img>
          }
          </div>

@@ -17,7 +17,7 @@ import FollowingIndex from './FollowingIndex';
 import FollowersIndex from './FollowersIndex';
 import { url } from "../config";
 import { TypeUserProfile, TypePost } from '../TypeDefinition/Type';
-function Profile(props: any) {
+function Profile() {
   const context = useContext(MainContext)
   const loggedInStatus = context.loggedInStatus
   const bookmarkCreate = context.bookmarkCreate

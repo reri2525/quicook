@@ -44,9 +44,7 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         @update_email = params[:user][:email]
-        puts @user.email
-        puts params[:user][:email]
-        if @user.email == params[:user][:email]
+        if @user.email == @update_email
            @user.update(user_params)
            if @user.save
                render json: { status: true, user: @user }

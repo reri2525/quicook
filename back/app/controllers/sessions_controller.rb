@@ -25,6 +25,8 @@ class SessionsController < ApplicationController
             user: {
                 name: current_user.name,
                 id: current_user.id,
+                introduction: current_user.introduction,
+                email: current_user.email,
                 avatar: {
                     url: current_user.avatar.url
                 }
