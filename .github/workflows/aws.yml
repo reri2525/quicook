@@ -36,14 +36,10 @@ jobs:
 
       - name: Vercel Deploy
         run: | 
-          cd front/app
           git config --global user.email "actions@example.com"
           git config --global user.name "Actions" 
           git clone git@github.com:reri2525/quicook.com.git
           git remote -v
-          git add .
-          git commit -m "Deploy"
-          git pull --no-rebase origin main
           git add .
           git commit -m "Deploy"
           git push -u origin main
