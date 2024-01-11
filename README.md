@@ -1,7 +1,7 @@
 <h1>Quicook</h1>
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
 <img src="back/public/images/quicook.png" alt="UNADJUSTEDNONRAW_thumb_1">
-https://quicook-com.vercel.app
+<a href="https://quicook-com.vercel.app" target="blank">
 <ul>
  <li>こちらurlになります!</li>
  <li>メールアドレス(gest123@gest.jp)パスワード(gestuser)でゲストユーザーにログインできます。</li>
