@@ -44,7 +44,7 @@ jobs:
           git remote -v
           git add .
           git commit -m "Deploy"
-          git pull origin main
+          git pull --no-rebase origin main
           git add .
           git commit -m "Deploy"
           git push -u origin main
