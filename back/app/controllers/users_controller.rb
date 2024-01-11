@@ -15,6 +15,18 @@ class UsersController < ApplicationController
         render json: { user: @current_user }
       end
     end
+
+    def profile_edit
+        if current_user
+            @user = @current_user
+            render json: { user: {
+                name: @user.name,
+                introduction: @user.introduction,
+                email: @user.email
+             }
+            }
+        end
+    end
     
     def show 
         @user = User.find(params[:id])

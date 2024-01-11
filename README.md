@@ -1,9 +1,8 @@
 <h1>Quicook</h1>
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
 <img src="back/public/images/quicook.png" alt="UNADJUSTEDNONRAW_thumb_1">
-<h2>デモ動画</h2>
-(https://github.com/reri2525/Quicook/assets/110535369/50ec87f6-2e51-4df1-a5f0-b06725448bbe)
-<p>*現在はまだ公開していません。</p>
+https://quicook-com.vercel.app/
+<p>こちらurlになります!メールアドレス(gest123@gest.jp)パスワード(gestuser)でゲストユーザーにログインできます。<p>
 <h2>なぜこのアプリを作ったのか</h2>
 <p>通勤通学前などで料理をしたくても時間がなくて大変なことが多いですが時短で美味しく作れる料理レシピというのはそういったタイミングで大きく需要があると考えたからです。
    自分自身も時間がかかるのが嫌で料理を作らないことが多いのでこういったサービスはありなのではないかと考えました。このサービスを元に自ら料理をする人を増やして多くの人が
@@ -16,7 +15,8 @@
  <li>TypeScript(フロントエンド)</li>
  <li>AWS(インフラ)</li>
  <li>Docker</li>
- <li>ECS/Fargateでコンテナを実行。</li>
+ <li>Vercelでフロントエンドをデプロイ。</li>
+ <li>ECS/Fargateでバックエンドコンテナを実行。</li>
  <li>ALBを使ってSSL通信を行なっている。</li>
  <li>Github ActionsでCI/CDを構築。</li>
  <li>ドメインをバックエンドとフロントエンドでそれぞれ取得している。</li>
@@ -27,12 +27,6 @@
  <li>UIにモーダルなどを使用している。</li>
  <li>ECS/Fargateでコンテナを使用してサーバーレスでコンテナを実行している。</li>
  <li>useContextを使っている。any型をなるべく使わないようにしている。(現在TypeScript導入中なのでまだ完全にできてない。)
-</ul>
-<h2>クラウドアーキテクチャ</h2>
-<img src="back/public/images/クラウド.jpg" alt="cloud">
-<h2>このインフラ構成にした理由</h2>
-<ul>
- <li>大規模なサービスのインフラとして多く使われてる構成であるため勉強すること、構築することに価値があると感じたからです。</li>
 </ul>
 <h2>機能一覧</h2>
 <ul>

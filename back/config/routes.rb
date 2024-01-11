@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/following', to: "posts#following" 
   get '/search/:query' , to: "posts#search"
   get '/category/:query', to: "posts#category"
+  get '/user/profile/edit', to: "users#profile_edit"
   resources :users
   resources :posts 
   resources :account_activations, only: [:edit]
