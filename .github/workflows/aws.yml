@@ -28,10 +28,7 @@ jobs:
           cd front/app
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name" 
-          git init
-          git checkout -b main
-          git merge master
-          git branch -d master
+          git init -b main
           git remote add origin git@github.com:reri2525/quicook.com.git
           git remote -v
           git add .
