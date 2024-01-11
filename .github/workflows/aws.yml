@@ -23,6 +23,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Vercel Deploy
+        run: | 
+          cd front/app
+          git remote -v
+          git add .
+          git commit -m "Deploy"
+          git push -u origin main
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
