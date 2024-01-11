@@ -23,11 +23,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Authenticate SSH
+      env:
+        PRIVATE_KEY: ${{ secrets.REACT_APP_DEPLOY_PRIVATE_KEY }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+        chmod 700 ~/.ssh/id_rsa
+        eval $(ssh-agent -s)
+        ssh-add ~/.ssh/id_rsa
+        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
       - name: Vercel Deploy
         run: | 
           cd front/app
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name" 
+          git config --global user.email "actions@example.com"
+          git config --global user.name "Actions" 
           git init -b main
           git remote add origin git@github.com:reri2525/quicook.com.git
           git remote -v
