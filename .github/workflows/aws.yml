@@ -25,7 +25,7 @@ jobs:
 
       - name: Vercel Deploy
         run: | 
-          cd front/app && git remote -v
+          cd front/app && ls -a
           git add .
           git commit -m "Deploy"
           git push -u origin main
