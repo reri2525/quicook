@@ -30,9 +30,6 @@ jobs:
           mkdir -p ~/.ssh
           echo "$PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          eval $(ssh-agent -s)
-          ssh-add - <<< "$PRIVATE_KEY"
-          echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
       - name: Vercel Deploy
         run: | 
