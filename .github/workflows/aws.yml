@@ -42,6 +42,8 @@ jobs:
           git init -b main
           git remote add origin git@github.com:reri2525/quicook.com.git
           git remote -v
+          git add .
+          git commit -m "Deploy"
           git pull origin main
           git add .
           git commit -m "Deploy"
