@@ -47,9 +47,14 @@ jobs:
           cd quicook.com
           ls
           git remote -v
-          git add .
-          git commit -m "Deploy"
-          git push -u origin main
+          git add -N .
+          if git diff --cached --quiet; then
+            echo "No changes to commit. Skipping push."
+          else
+            git add .
+            git commit -m "Deploy"
+            git push -u origin main
+          fi
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3

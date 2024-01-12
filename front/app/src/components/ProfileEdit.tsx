@@ -76,7 +76,7 @@ function ProfileEdit() {
     console.log(response.data.user)
   }).catch(error => {
     console.log(error)
-    setErrors("エラーが発生しました。")
+    setErrors("エラーが発生しました.")
   })
  }
  useEffect(() => {
