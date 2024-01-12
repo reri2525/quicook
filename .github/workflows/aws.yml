@@ -42,7 +42,7 @@ jobs:
           cd quicook.com
           git remote -v
           git branch
-          mv quicook.com/* front/app/
+          mv quicook.com front/app
           git add .
           git commit -m "Deploy"
           git push -u origin main
