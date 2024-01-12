@@ -44,7 +44,10 @@ jobs:
           mv quicook.com front/app
           git remote -v
           cd quicook.com
+          ls
           git remote -v
+          git remote remove origin 
+          git remote add origin git@github.com:reri2525/quicook.com.git
           if git diff --cached --quiet; then
             echo "No changes to commit. Skipping push."
           else
