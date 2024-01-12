@@ -41,7 +41,6 @@ jobs:
           git clone git@github.com:reri2525/quicook.com.git
           cd quicook.com
           cd .. 
-          ls
           cp -r front/app/* quicook.com/
           git remote -v
           cd quicook.com
