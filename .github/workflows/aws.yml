@@ -39,6 +39,9 @@ jobs:
           git config --global user.email "actions@example.com"
           git config --global user.name "Actions" 
           git clone git@github.com:reri2525/quicook.com.git
+          cd app
+          git remote remove origin
+          git remote add git@github.com:reri2525/quicook.com.git
           git remote -v
           git add .
           git commit -m "Deploy"
