@@ -46,6 +46,9 @@ jobs:
           git remote -v
           cd quicook.com
           git remote -v
+          git add .
+            git commit -m "Deploy"
+            git push -u origin main
           if git diff --cached --quiet; then
             echo "No changes to commit. Skipping push."
           else
