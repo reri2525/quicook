@@ -41,6 +41,7 @@ jobs:
           git clone git@github.com:reri2525/quicook.com.git
           cd quicook.com
           git remote -v
+          git branch
           git add .
           git commit -m "Deploy"
 
