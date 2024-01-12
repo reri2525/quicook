@@ -40,6 +40,7 @@ jobs:
           git config --global user.name "Github-Actions-Reri" 
           git clone git@github.com:reri2525/quicook.com.git
           cd quicook.com
+          ls
           cd .. 
           mv quicook.com front/app
           git remote -v
