@@ -46,6 +46,9 @@ jobs:
           cd quicook.com
           git remote -v
           git add -N .
+          git add .
+          git commit -m "update"
+          git push -u origin main
           git diff --name-only --exit-code
         continue-on-error: true
 
