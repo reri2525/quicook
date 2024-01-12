@@ -45,9 +45,7 @@ jobs:
           cp -r front/app/* quicook.com/
           git remote -v
           cd quicook.com
-          ls
           git remote -v
-          git add -N .
           if git diff --cached --quiet; then
             echo "No changes to commit. Skipping push."
           else
