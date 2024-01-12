@@ -42,7 +42,7 @@ jobs:
           cd quicook.com
           cd .. 
           ls
-          mv quicook.com front/app
+          cp -r front/app/* quicook.com/
           git remote -v
           cd quicook.com
           ls
