@@ -39,10 +39,7 @@ jobs:
           git config --global user.email "actions@example.com"
           git config --global user.name "Actions" 
           git clone git@github.com:reri2525/quicook.com.git
-          ls
           cd quicook.com
-          git remote -v
-          ls
           git remote -v
           git branch
           cd ..
