@@ -45,6 +45,7 @@ jobs:
           ls
           git remote -v
           git branch
+          cd ..
           mv quicook.com front/app
           git add .
           git commit -m "Deploy"
