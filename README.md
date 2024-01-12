@@ -23,7 +23,7 @@
  <li>Vercelでフロントエンドをデプロイ。</li>
  <li>ECS/Fargateでバックエンドコンテナを実行。</li>
  <li>ALBを使ってSSL通信を行なっている。</li>
- <li>Github ActionsでCI/CDを構築。</li>
+ <li>Github ActionsでCI/CDを構築。(Vercelへのデプロイもしてる。)</li>
  <li>ドメインをバックエンドとフロントエンドでそれぞれ取得している。</li>
 </ul>
 <h2>見ていただきたい点</h2>
@@ -65,6 +65,10 @@
 <ul>
  <li>JavaScript開発では必須になってきている。</li>
  <li>型定義をすることでstateなどの中身に入るオブジェクトなどの型がコードで確認できてチーム開発がしやすい。</li>
+</ul>
+<h3>Vercel</h3>
+<ul>
+ <li>コスト削減のためです。</li>
 </ul>
 <h3>AWS(ECS)</h3>
 <ul>
