@@ -69,9 +69,11 @@ function ProfileEdit() {
   axios.post(`${url}/password_resets`, { withCredentials: true })
   .then(response => {
     setPasswordReset("メールを確認してください。")
+    setUpdate(null)
     console.log(response.data.user)
+    console.log(response.data.errors)
   }).catch(error => {
-    console.log(error)
+    console.log(error.data.errors)
     setErrors("エラーが発生しました.")
   })
  }
@@ -81,7 +83,10 @@ function ProfileEdit() {
    } else {
      document.body.style.overflow = 'auto';
    }
-   axios.get(`${url}/user/profile/edit`, { withCredentials: true })
+ }, [warnModal])
+
+ useEffect(() => {
+    axios.get(`${url}/user/profile/edit`, { withCredentials: true })
     .then(response => {
       let user = response.data.user
       console.log(user)
@@ -91,7 +96,9 @@ function ProfileEdit() {
     }).catch(error => {
       console.log(error)
     })
- }, [warnModal])
+ }, [])
+
+
 
  return (
   <Fragment>
@@ -101,6 +108,7 @@ function ProfileEdit() {
         <form onSubmit={event => onSubmit(event)}>
          { update && <h3 className='update'>{update}</h3> }
          { errors && <h3 className='errors'>{errors}</h3> }
+         { passwordReset && <h3 className='password_reset'>{passwordReset}</h3> }
          <div className='icon'>
          {avatarPreview && !(avatarPreview instanceof ArrayBuffer) && 
           <img className='image'

@@ -1,15 +1,16 @@
 class PasswordResetsController < ApplicationController
-
-    def create     
+    def create
       if current_user
         @user = @current_user
         if @user
           @user.create_reset_digest
           UserMailer.password_reset(@user).deliver_now
-          render json: { status: :true , user: @user }          
+          render json: { status: :true, user: @user }
         else
           render json: { status: :false, errors: "メールアドレスが正しくないか登録されてません。" }
         end
+      else
+        render json: { status: :false, errors: "ログインしていません。" }
       end
     end
 
@@ -38,7 +39,7 @@ class PasswordResetsController < ApplicationController
     private
 
      def user_params
-       params.require(:user).permit(:password, :password_confirmation, :email)
+       params.require(:user).permit(:email)
      end
 
 end
