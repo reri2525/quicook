@@ -34,7 +34,8 @@ jobs:
           ssh-add ~/.ssh/id_rsa
           ssh-keyscan -H github.com >> ~/.ssh/known_host
 
-      - name: Vercel Deploy
+      - name: Git Set Up
+        id: diff
         run: | 
           git config --global user.email "actions@example.com"
           git config --global user.name "Github-Actions-Reri" 
@@ -49,16 +50,13 @@ jobs:
           git diff --name-only --exit-code
         continue-on-error: true
 
-      - name: Commit & Push
+      - name: Vercel Deploy
         run: |
-          if [ $? -eq 1 ]; then
-           cd quicook.com
-           git add .
-           git commit -m "update"
-           git push -u origin main
-          else
-           echo "No changes to commit. Skipping push."
-          fi
+          cd quicook.com
+          git add .
+          git commit -m "update"
+          git push -u origin main
+        if: steps.diff.outcome == 'failure'
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
