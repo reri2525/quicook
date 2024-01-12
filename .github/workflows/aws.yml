@@ -42,6 +42,9 @@ jobs:
           cd quicook.com
           cd .. 
           mv quicook.com front/app
+          git remote -v
+          cd quicook.com
+          git remote -v
           if git diff --cached --quiet; then
             echo "No changes to commit. Skipping push."
           else
