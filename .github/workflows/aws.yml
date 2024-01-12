@@ -52,7 +52,7 @@ jobs:
 
       - name: Commit & Push
         run: |
-          set -x
+          cd quicook.com
           git add .
           git commit -m "update"
           git push -u origin main
