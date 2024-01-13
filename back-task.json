@@ -18,7 +18,7 @@
             "environment": [
                 {
                     "name": "FRONT_URL",
-                    "value": "https://quicook.online"
+                    "value": "https://quicook-com.vercel.app"
                 },
                 {
                     "name": "RAILS_ENV",
@@ -72,7 +72,7 @@
         "FARGATE"
     ],
     "cpu": "2048",
-    "memory": "16384",
+    "memory": "4096",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
