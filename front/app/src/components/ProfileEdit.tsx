@@ -17,9 +17,10 @@ function ProfileEdit() {
  const [avatar, setAvatar] = useState<TypeFileDetails>()
  const [avatarPreview, setAvatarPreview] = useState<string | ArrayBuffer | null | undefined>(user && user.avatar.url)
  const [warnModal, setWarnModal] = useState(false)
+ const [disabled, setDisabled] = useState(true)
  const warnType = "acountDestroy"
  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  console.log(user && user.id)
+  setDisabled(false)
   event.preventDefault()
   const formData = new FormData();
   name && formData.append('user[name]', name);
@@ -32,14 +33,17 @@ function ProfileEdit() {
         setPasswordReset(null)
         setErrors(null)
         setUpdate("変更されました。")
+        setDisabled(true)
       } else {
         setErrors("変更されませんでした。")
         setUpdate(null)
+        setDisabled(true)
       }
       }).catch(error => {
         console.log(error)
         setErrors("変更されませんでした。")
         setUpdate(null)
+        setDisabled(true)
       })
  }
  const filechange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,13 +58,16 @@ function ProfileEdit() {
   setWarnModal(true)
  }
  const handlePasswordReset = () => {
+  setDisabled(false)
   axios.post(`${url}/password_resets`, { email: user.email })
   .then(response => {
     setPasswordReset("メールを確認してください。")
     setUpdate(null)
+    setDisabled(true)
   }).catch(error => {
     console.log(error)
     setErrors("エラーが発生しました.")
+    setDisabled(true)
   })
  }
  useEffect(() => {
@@ -132,8 +139,8 @@ function ProfileEdit() {
            value={email}
            onChange={event => setEmail(event.target.value)}
          /><br/>
-         <button type='submit' className='update_button'>更新する</button>
-         <button type='button' className='password_reset_button' onClick={() => handlePasswordReset()}>パスワード再設定</button>
+         <button type='submit' className='update_button' disabled={!disabled}>更新する</button>
+         <button type='button' className='password_reset_button' onClick={() => handlePasswordReset()} disabled={!disabled}>パスワード再設定</button>
          <button type='button' className='acount_destroy_button' onClick={() => handleDestroy()}>アカウント削除</button>
         </form>
       </div>
