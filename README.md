@@ -3,7 +3,7 @@
 <img src="back/public/images/quicook.png" alt="UNADJUSTEDNONRAW_thumb_1">
 (https://github.com/reri2525/quicook/assets/110535369/ad32139b-a0a0-4b62-adf5-0edbcd21c8cc)</br>
 <a>↑</a></br>
-<a>デモ動画</a></br>
+<p>デモ動画</p>
 <a href="https://quicook-com.vercel.app/">こちらアプリケーションのurlになります!</a>
 <p>※現在まだレスポンシブ対応ができてないないのでpcから閲覧していただけると幸いです。</p>
 <ul>
