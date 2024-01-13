@@ -99,8 +99,8 @@ jobs:
         run: |
           docker images
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v2y9n7g3
-          docker tag quicook-back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest
-          docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
+          docker tag quicook_back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest
+          docker push public.ecr.aws/v2y9n7g3/quicook_back:latest
 
       - name: Fill in the new image ID in the Amazon ECS task definition back
         id: task-def-back
