@@ -2,8 +2,9 @@
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
 <img src="back/public/images/quicook.png" alt="UNADJUSTEDNONRAW_thumb_1">
 (https://github.com/reri2525/quicook/assets/110535369/ad32139b-a0a0-4b62-adf5-0edbcd21c8cc)
+<p>↑</p>
 <p>デモ動画</p>
-<a href="https://quicook-com.vercel.app/">こちらurlになります!</a>
+<a href="https://quicook-com.vercel.app/">こちらアプリケーションのurlになります!</a>
 <p>※現在まだレスポンシブ対応ができてないないのでpcから閲覧していただけると幸いです。</p>
 <ul>
  <li>メールアドレス(gest123@gest.jp)パスワード(gestuser)でゲストユーザーにログインできます。</li>
