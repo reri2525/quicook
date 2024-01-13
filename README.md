@@ -1,7 +1,7 @@
 <h1>Quicook</h1>
 <p>３分で作れるお手軽料理が動画付きで見れて共有できるアプリケーションです!</p>
 <img src="back/public/images/quicook.png" alt="UNADJUSTEDNONRAW_thumb_1">
-(https://github.com/reri2525/quicook/assets/110535369/ad32139b-a0a0-4b62-adf5-0edbcd21c8cc)
+(https://github.com/reri2525/quicook/assets/110535369/ad32139b-a0a0-4b62-adf5-0edbcd21c8cc)</br>
 <a>↑</a></br>
 <a>デモ動画</a></br>
 <a href="https://quicook-com.vercel.app/">こちらアプリケーションのurlになります!</a>
