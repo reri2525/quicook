@@ -97,6 +97,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v2y9n7g3
           docker tag quicook_back:latest public.ecr.aws/v2y9n7g3/quicook-back:latest
           docker push public.ecr.aws/v2y9n7g3/quicook-back:latest
 
