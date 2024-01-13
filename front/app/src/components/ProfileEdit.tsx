@@ -12,7 +12,6 @@ function ProfileEdit() {
  const [errors, setErrors] = useState<string | null>(null)
  const [passwordReset, setPasswordReset] = useState<string | null>(null)
  const [name, setName] = useState(user && user.name)
- const [nameChange, setNameChange]= useState("")
  const [introduction, setIntroduction] = useState(user && user.introduction)
  const [email, setEmail] = useState(user && user.email)
  const [avatar, setAvatar] = useState<TypeFileDetails>()
@@ -27,31 +26,20 @@ function ProfileEdit() {
   if (avatar) {formData.append('user[avatar]', avatar)}
   introduction && formData.append('user[introduction]', introduction);
   email && formData.append('user[email]', email);
-  axios.put(`${url}/users/${user && user.id}`, formData)
+  axios.put(`${url}/users/${user.id}`, formData)
     .then(response => {
       if (response.data.status === true) {
-        const data = response.data
-        user && (user.name = data.user.name)
-        user && (user.introduction = data.user.introduction)
-        user && (user.email = data.user.email)
-        user && (user.avatar = data.user.avatar)
-        setNameChange(data.user.name)
+        setPasswordReset(null)
         setErrors(null)
         setUpdate("変更されました。")
-        window.scrollTo(0, 0);
-      } else if (response.data.status === "update_email") {
-        setErrors(null)
-        setUpdate("メールを確認して承認してください。")
-        window.scrollTo(0, 0);
       } else {
         setErrors("変更されませんでした。")
         setUpdate(null)
-        window.scrollTo(0, 0);
       }
       }).catch(error => {
+        console.log(error)
         setErrors("変更されませんでした。")
         setUpdate(null)
-        window.scrollTo(0, 0);
       })
  }
  const filechange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,14 +54,12 @@ function ProfileEdit() {
   setWarnModal(true)
  }
  const handlePasswordReset = () => {
-  axios.post(`${url}/password_resets`, { withCredentials: true })
+  axios.post(`${url}/password_resets`, { email: user.email })
   .then(response => {
     setPasswordReset("メールを確認してください。")
     setUpdate(null)
-    console.log(response.data.user)
-    console.log(response.data.errors)
   }).catch(error => {
-    console.log(error.data.errors)
+    console.log(error)
     setErrors("エラーが発生しました.")
   })
  }

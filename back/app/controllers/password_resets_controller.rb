@@ -1,7 +1,6 @@
 class PasswordResetsController < ApplicationController
     def create
-      if current_user
-        @user = @current_user
+        @user = User.find_by(email: params[:email])
         if @user
           @user.create_reset_digest
           UserMailer.password_reset(@user).deliver_now
@@ -9,9 +8,6 @@ class PasswordResetsController < ApplicationController
         else
           render json: { status: :false, errors: "メールアドレスが正しくないか登録されてません。" }
         end
-      else
-        render json: { status: :false, errors: "ログインしていません。" }
-      end
     end
 
     def update
