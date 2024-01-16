@@ -2,7 +2,7 @@ import { Fragment, useState,useContext } from 'react';
 import { MainContext } from '../App';
 import '../ScssFile/List.scss'
 import { Link, useHistory } from "react-router-dom";
-import { ListData1, ListData2, CategoryData, DishData } from './ListData';
+import { ListData1, ListData2, ListData3, CategoryData, DishData } from './ListData';
 import { TypeDishExpand } from '../TypeDefinition/Type';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -109,6 +109,29 @@ function List() {
            )
           })
           : <></> }
+      </ul>
+      <ul>
+      {ListData3.map((value, key) => {
+        return (
+         <Link to={value.link} className="list_link">
+         <li key={key} className = {window.location.pathname === value.link 
+                                     || 
+                                    window.location.pathname.startsWith("/home/page") && value.link.startsWith("/home/page")
+                                      ? 
+                                      "list_active" 
+                                       : 
+                                      "list"
+                                    }>
+            <a className='icon'> 
+               {value.icon}
+            </a>
+            <a className='list_title'> 
+               {value.title}
+            </a>
+         </li>
+         </Link>
+        )
+      })}
       </ul>
       </div>
     </div>
