@@ -88,7 +88,7 @@ function List() {
             <img src={value.icon}></img>
             <a onClick={() => history.push(`/category/${value.title}/page/1`)}>{value.title}</a>
             { dishExpand[key] ?
-             <>
+             <> 
               <ExpandLess
                style={{ position: 'relative', top: '7px', left: '6px', cursor: 'pointer' }} 
                onClick={() =>
