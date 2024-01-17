@@ -136,7 +136,7 @@ function Home() {
       }
     });
   };
-
+  console.log(bookmarkedPosts)
   return (
     <Fragment> 
       { postExist ? 
