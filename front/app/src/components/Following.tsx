@@ -198,13 +198,13 @@ function Following() {
       : <></> }
       { postall.length === 0 && postExist ? 
                <div className='post_skeleton_container'>
-                 {[...Array(20).keys()].map(i =>
+                 {[...Array(27).keys()].map(i =>
                     <div className='post_skeleton'></div>
                  )}
                </div> :
       <div className='pagenate_container'>
        {pagecount > 1 ? 
-       <div className='pagenate'><nav className='back'>back</nav>
+       <div className='pagenate'>
         <button className='page_move' onClick={() => postBack(currentPage)}><NavigateBeforeIcon/></button>
         { currentPage === 1 ? "" :
          <button 
@@ -231,7 +231,6 @@ function Following() {
            onClick={() => postGo(currentPage)}>
             <NavigateNextIcon/>
         </button>
-        <nav className='next'>next</nav>
        </div> : <></> }
       </div>}
    </Fragment>

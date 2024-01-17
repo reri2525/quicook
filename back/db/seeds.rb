@@ -144,6 +144,12 @@ coments = [
                      cost: costs[n], process: process[n], coment: coments[n])
 end
 
+360.times do |n|
+  user.posts.create!(title: "a", category: "a", image: thumbnail_file4, 
+                      thumbnail: thumbnail_file4, content: "", time: "", number_of_people: "",
+                      cost: "", process: "", coment: "")
+ end
+
 
 18.times do |n|
   Heart.create!(user_id: n+1, post_id: 1)

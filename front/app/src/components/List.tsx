@@ -32,7 +32,7 @@ function List() {
          <Link to={value.link} className="list_link">
          <li key={key} className = {window.location.pathname === value.link 
                                      || 
-                                    window.location.pathname.startsWith("/home/page") && value.link.startsWith("/home/page")
+                                    window.location.pathname.slice(0, 5) === value.link.slice(0, 5)
                                       ? 
                                       "list_active" 
                                        : 
@@ -52,7 +52,7 @@ function List() {
        <Link to={ListData1[0].link} className="list_link">
          <li className = {window.location.pathname === ListData1[0].link 
                                      || 
-                                    window.location.pathname.startsWith("/home/page") && ListData1[0].link.startsWith("/home/page")
+                                    window.location.pathname.slice(0, 5) === ListData1[0].link.slice(0, 5)
                                       ? 
                                       "list_active" 
                                        : 
@@ -115,8 +115,6 @@ function List() {
         return (
          <Link to={value.link} className="list_link">
          <li key={key} className = {window.location.pathname === value.link 
-                                     || 
-                                    window.location.pathname.startsWith("/home/page") && value.link.startsWith("/home/page")
                                       ? 
                                       "list_active" 
                                        : 
