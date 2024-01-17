@@ -36,15 +36,23 @@ if (loggedInStatus === '未ログイン') {
 return (
     <header>
         <Link to="/home/page/1" className="main_title title_link">Quicook</Link>
-        <form className='search' onSubmit={event => event.preventDefault()}>        
-         <input  
-           placeholder="料理名でレシピを探す。"
-           value={searchQuery}
-           onChange={event => setSearchQuery(event.target.value)}
-         >
-         </input>
-         <a onClick={() => setSearchQuery("")}><CloseIcon /></a>
-         <button className='search_button' onClick={() => searchQuery !== '' && history.push(`/search/${searchQuery}/page/1`)}><SearchIcon /></button>
+        <form className='search' onSubmit={event => event.preventDefault()}>    
+        { isWide ?  
+         <>  
+          <input  
+            placeholder="料理名でレシピを探す。"
+            value={searchQuery}
+            onChange={event => setSearchQuery(event.target.value)}
+          >
+          </input>
+          <a onClick={() => setSearchQuery("")}><CloseIcon /></a>
+          <button className='search_button' onClick={() => searchQuery !== '' && history.push(`/search/${searchQuery}/page/1`)}><SearchIcon /></button>
+         </>
+         :
+         <>
+          <button className='search_filed'><SearchIcon /></button>
+         </>
+        }
         </form>
         <a className="log" onClick={() => ShowLogModal()}>ログイン</a>
         <a className="log" onClick={() => ShowNewModal()}>新規登録</a>

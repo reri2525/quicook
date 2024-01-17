@@ -34,13 +34,21 @@ header {
         opacity: 0.6;
       }
     }
-    button {
+    .search_button {
       position: absolute;
       top: 2px;
       border-radius: 0 20px 20px 0;
       height: 36px;
       border: solid 1px #bbb;
-
+      &:hover {
+        background-color: rgba(248, 255, 255, 1);
+      }
+    }
+    .search_filed {
+      margin-left: -30px;
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
       &:hover {
         background-color: rgba(248, 255, 255, 1);
       }
