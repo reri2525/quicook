@@ -1,14 +1,23 @@
 import { useState,useContext } from 'react';
 import { MainContext } from '../App';
-import '../ScssFile/ListDialog.scss'
+import '../ScssFile/ListSubstance.scss'
 import { Link, useHistory } from "react-router-dom";
 import { ListData1, ListData2, ListData3, CategoryData, DishData } from './ListData';
 import { TypeDishExpand } from '../TypeDefinition/Type';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
-function ListDialog() {
+import CloseIcon from '@mui/icons-material/Close';
+type Props = {
+   dialog: boolean;
+   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
+   isWide: boolean;
+}
+function ListSubstance(props: Props) {
  const context = useContext(MainContext)
  const loggedInStatus = context.loggedInStatus
+ const dialog = props.dialog
+ const setDialog = props.setDialog
+ const isWide = props.isWide
  const history = useHistory();
  const [categoryExpand, setCategoryExpand] = useState(false)
  const [dishExpand, setDishExpand] = useState<TypeDishExpand>({
@@ -24,6 +33,7 @@ function ListDialog() {
   return (
     <>
     <div className="list_area">
+      {!isWide && dialog && <div className='close' onClick={() => setDialog(false)}><CloseIcon /></div>}
       <div className='list_inner'>
       <ul>
       { loggedInStatus === "ログインなう" ?
@@ -133,4 +143,4 @@ function ListDialog() {
   )
 }
 
-export default ListDialog
+export default ListSubstance

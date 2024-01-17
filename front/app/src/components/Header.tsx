@@ -20,6 +20,7 @@ function Header(props: Props) {
  const handleLogout = context.handleLogout
  const [searchQuery, setSearchQuery] = useState("")
  const history = useHistory();
+ const isWide = useMedia({minWidth: '1000px'});
  const ShowLogModal = () => {
   props.setLogModal(true)
   props.setModal(true)
@@ -34,8 +35,8 @@ function Header(props: Props) {
 if (loggedInStatus === '未ログイン') {
 return (
     <header>
-        <Link to="/" className="main_title title_link">Quicook</Link>
-        <form className='search' onSubmit={event => event.preventDefault()}>
+        <Link to="/home/page/1" className="main_title title_link">Quicook</Link>
+        <form className='search' onSubmit={event => event.preventDefault()}>        
          <input  
            placeholder="料理名でレシピを探す。"
            value={searchQuery}
