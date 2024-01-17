@@ -10,9 +10,8 @@ footer {
     background-color: khaki;
     border-right: 1px solid #bbb;
     .footer_title {
-      display: flex;
       position: absolute;
-      left: 30%;
+      left: 35%;
        h2 {
          position: absolute;
          top: -33px;
@@ -35,7 +34,7 @@ footer {
     h3 {
       position: relative;
       top: 20px;
-      left: 30%;
+      left: 32%;
       &:first-letter {
         color: red;
         font-size: 24px;
