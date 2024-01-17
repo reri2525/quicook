@@ -2,6 +2,7 @@ import { Fragment, useState,useContext } from 'react';
 import { MainContext } from '../App';
 import '../ScssFile/List.scss'
 import { Link, useHistory } from "react-router-dom";
+import useMedia from 'use-media';
 import { ListData1, ListData2, ListData3, CategoryData, DishData } from './ListData';
 import { TypeDishExpand } from '../TypeDefinition/Type';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -21,8 +22,11 @@ function List() {
    6: false,
    7: false,
  });
+ const isWide = useMedia({minWidth: '1000px'});
+ const [dialog, setDialog] = useState(false)
  return (
  <Fragment>
+    { isWide ? 
     <div className="list_area">
       <div className='list_inner'>
       <ul>
@@ -30,9 +34,7 @@ function List() {
         ListData1.map((value, key) => {
         return (
          <Link to={value.link} className="list_link">
-         <li key={key} className = {window.location.pathname === value.link 
-                                     || 
-                                    window.location.pathname.slice(0, 5) === value.link.slice(0, 5)
+         <li key={key} className = {window.location.pathname.slice(0, 5) === value.link.slice(0, 5)
                                       ? 
                                       "list_active" 
                                        : 
@@ -50,14 +52,12 @@ function List() {
        })
        : 
        <Link to={ListData1[0].link} className="list_link">
-         <li className = {window.location.pathname === ListData1[0].link 
-                                     || 
-                                    window.location.pathname.slice(0, 5) === ListData1[0].link.slice(0, 5)
-                                      ? 
-                                      "list_active" 
-                                       : 
-                                      "list"
-                                    }>
+         <li className = {window.location.pathname.slice(0, 5) === ListData1[0].link.slice(0, 5)
+                              ? 
+                         "list_active" 
+                              : 
+                            "list"
+                         }>
             <a className='icon'> 
                {window.location.pathname === ListData1[0].link  && ListData1[0].icon2 ? ListData1[0].icon2 : ListData1[0].icon}
             </a>
@@ -132,7 +132,125 @@ function List() {
       })}
       </ul>
       </div>
-    </div>
+    </div> 
+    :
+    dialog ?
+    <>
+    <div className='back_display'></div>
+     <div className="list_area">
+      <div className='list_inner'>
+      <ul>
+      { loggedInStatus === "ログインなう" ?
+        ListData1.map((value, key) => {
+        return (
+         <Link to={value.link} className="list_link">
+         <li key={key} className = {window.location.pathname.slice(0, 5) === value.link.slice(0, 5)
+                                      ? 
+                                      "list_active" 
+                                       : 
+                                      "list"
+                                    }>
+            <a className='icon'> 
+               {window.location.pathname === value.link  && value.icon2 ? value.icon2 : value.icon}
+            </a>
+            <a className='list_title'> 
+               {value.title}
+            </a>
+         </li>
+         </Link>
+        )
+       })
+       : 
+       <Link to={ListData1[0].link} className="list_link">
+         <li className = {window.location.pathname.slice(0, 5) === ListData1[0].link.slice(0, 5)
+                              ? 
+                          "list_active" 
+                              : 
+                          "list"          
+                         }>          
+            <a className='icon'> 
+               {window.location.pathname === ListData1[0].link  && ListData1[0].icon2 ? ListData1[0].icon2 : ListData1[0].icon}
+            </a>
+            <a className='list_title'> 
+               {ListData1[0].title}
+            </a>
+         </li>
+       </Link>
+      }
+      </ul>
+      <ul>
+         <li  className="list2">
+            <a className='icon'> 
+               {ListData2[0].icon}
+            </a>
+            <a className='list_title'>
+               {ListData2[0].title}
+            </a><br/>
+            <a className='category_expand' onClick={() => 
+                                           categoryExpand ?  setCategoryExpand(false) : setCategoryExpand(true)}
+             >{ categoryExpand ? ListData2[1].icon2 : ListData2[1].icon }
+            </a>
+         </li>
+         { categoryExpand ? 
+          CategoryData.map((value, key) => {
+          return (
+           <li className='category'>
+            <img src={value.icon}></img>
+            <a onClick={() => history.push(`/category/${value.title}/page/1`)}>{value.title}</a>
+            { dishExpand[key] ?
+             <> 
+              <ExpandLess
+               style={{ position: 'relative', top: '7px', left: '6px', cursor: 'pointer' }} 
+               onClick={() =>
+               setDishExpand(prevState => ({ ...prevState, [key]: false }))} 
+              />
+               <ul>
+                {Object.values(DishData[key]).map((dish) => (
+                  dish ? <li className='dish' onClick={() => history.push(`/category/${value.title}／${dish}/page/1`)}>{dish}</li> : null
+                ))}
+               </ul> 
+              </> :
+              <ExpandMore 
+               style={{ position: 'relative', top: '7px', left: '6px', cursor: 'pointer' }} 
+               onClick={() =>
+               setDishExpand(prevState => ({ ...prevState, [key]: true }))} 
+              /> }
+           </li>
+           )
+          })
+          : <></> }
+      </ul>
+      <ul>
+      {ListData3.map((value, key) => {
+        return (
+         <Link to={value.link} className="list_link">
+         <li key={key} className = {window.location.pathname === value.link 
+                                      ? 
+                                      "list_active" 
+                                       : 
+                                      "list"
+                                    }>
+            <a className='icon'> 
+               {value.icon}
+            </a>
+            <a className='list_title'> 
+               {value.title}
+            </a>
+         </li>
+         </Link>
+        )
+      })}
+      </ul>
+      </div>
+     </div>
+    </>
+    : 
+    <>
+      <div className='dialog'>
+         <button className='dialog_button' onClick={() => setDialog(true)}>=</button>
+      </div>
+    </>
+    }
   </Fragment> 
  );
 }

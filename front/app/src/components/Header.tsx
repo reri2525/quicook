@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useMedia } from 'use-media';
 import { MainContext } from '../App';
 import '../ScssFile/Header.scss'
 import { Link } from "react-router-dom";
