@@ -18,6 +18,7 @@ footer {
          font-family: cursive;
          font-size: 30px;
          color: rgba(0, 0, 0, 0.7);
+         text-align: center;
          &:first-letter {
            color: rgba(0, 0, 0);
            font-size: 40px;
@@ -43,6 +44,7 @@ footer {
     .login {
       float: right;
       position: relative;
+      right: 200px;
       bottom: 53px;
       font-size: 20px;
       border: white 1px solid;
@@ -58,6 +60,7 @@ footer {
     .new {
       float: right;
       position: relative;
+      right: 200px;
       bottom: 53px;
       font-size: 20px;
       border: white 1px solid;

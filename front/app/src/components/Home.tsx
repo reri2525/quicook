@@ -149,7 +149,7 @@ function Home() {
            </div>
          </Fragment>
       } 
-      { postall[0] ? 
+      { postall[0] && postall[0].thumbnail.url ? 
       <div className='post_container'>
        {postall.map((value: TypePost, index: number) => {
          let iconColor;
